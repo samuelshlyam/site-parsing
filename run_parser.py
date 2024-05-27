@@ -1,5 +1,5 @@
 import os
-from brand_parser import BottegaVenetaParser,GucciParser
+from brand_parser import BottegaVenetaParser,GucciParser,FendiParser
 #Folder name for output
 output_directory_path = "parser-output"
 directory_path = 'brands_html/bottega_veneta'
@@ -14,7 +14,7 @@ category = os.path.splitext(input_file_path)[0]  # Use the filename as the categ
 
 ##MULTIPLE FILE RUN, PASS DIRECTORY PATH
 ##Comment to run single file##
-bottega_parser.parse_directory(directory_path)
+# bottega_parser.parse_directory(directory_path)
 
 
 #GUCCI PRODUCT FETCH METHOD 2##
@@ -26,3 +26,9 @@ gucci_categories_mens = ['men-bags', 'men-bags-luggage','men-readytowear','men-s
 combined_gucci_categories = ['men-bags', 'men-bags-luggage','men-readytowear','men-shoes','men-accessories-wallets','men-accessories-hats-and-gloves','men-accessories-belts','men-eyewear','jewelry-watches-watches-men','men-accessories','women-shoes','women-handbags','women-accessories-lifestyle-bags-and-luggage','women-readytowear','women-accessories-wallets','women-accessories','jewelry-watches-watches-women', 'women-accessories-belts','women-accessories-silks-and-scarves','women-accessories-hats-and-gloves'] 
 ##UNCOMMENT TO RUN, COMMENT OTHER PARSERS, to avoid multi run##
 #gucci_parser.process_categories(combined_gucci_categories)
+
+
+##START FENDI PARSER##
+directory_path = 'internal_html/fendi'
+fendi_parser = FendiParser(output_directory_path)
+fendi_parser.parse_directory(directory_path)

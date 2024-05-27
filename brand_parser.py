@@ -11,6 +11,7 @@ import datetime
 from main_parser import WebsiteParser
 
 class BottegaVenetaParser(WebsiteParser):
+    #COMPLETE
     
     ## This class parses the HTML files from the Bottega Veneta website. 
     ## website: https://www.bottegaveneta.com
@@ -129,6 +130,7 @@ class BottegaVenetaParser(WebsiteParser):
         return all_data
 
 class GucciParser():
+    ##COMPLETE
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
         self.base_url = "https://www.gucci.com/us/en/c/productgrid?categoryCode={category}&show=Page&page={page}"
@@ -228,3 +230,80 @@ class GucciParser():
         filename = f'parser-output/gucci_output_{current_date}.csv'
         self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
         print("Complete data saved to 'output_gucci_5_27_24.csv'")
+class FendiParser(WebsiteParser):
+    ## This class parses the HTML files from the Fendi website. 
+    ## website: https://www.fendi.com
+    def __init__(self, directory):
+        self.brand = 'fendi'  
+        self.directory = directory
+        
+    def parse_website(self, source, category):
+        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+          'product_id','category', 'product_name', 'description', 'price', 'main_image_url',
+            'additional_image_url', 'product_details_url','filename'
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('div', class_='product')
+        for block in product_blocks:
+            try:
+                product_id=block.get('data-pid')
+                product_name = block.find('a', class_='link').text.strip() if block.find('a', class_='link') else ''
+                description = block.find('p', class_='c-tiles__tile-body-type').text.strip() if block.find('p',
+                                                                                                           'c-tiles__tile-body-type') else ''
+                price = block.find('span', class_='value').text.strip() if block.find('span', class_='value') else ''
+                images = block.find_all('img', class_='c-lazyload__image')
+
+                main_image_url = images[0].get('src') or images[0].get('data-src') if images else None
+                additional_image_url = images[1].get('src') or images[1].get('data-src') if len(images) > 1 else None
+                product_details_url = block.find('a')['href'] if block.find('a') else ''
+
+                product_data_list = [
+                    product_id, category, product_name, description, price,
+                    main_image_url, additional_image_url, product_details_url
+                ]
+                parsed_data.append(product_data_list)
+            except Exception as e:
+                print(f"Error parsing block: {e}")
+
+        return parsed_data
+    def parse_directory(self, directory_path):
+        all_data = []
+        header_added = False
+        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt') or f.endswith('.html')])
+        processed_files = 0
+
+        print(f"Found {total_files} HTML files in the directory.")
+        print("Processing files...")
+
+        for filename in os.listdir(directory_path):
+            if filename.endswith('.txt')  or filename.endswith('.html'):
+                file_path = os.path.join(directory_path, filename)
+                category = os.path.splitext(filename)[0]  # Use the filename as the category
+
+                tsv_output = self.parse_website(file_path, category)
+
+                if not header_added:
+                    all_data.append(tsv_output[0])  # Add the header row only once
+                    header_added = True
+
+                # Add the filename as a new column to the parsed data
+                for row in tsv_output[1:]:
+                    row.append(filename)
+                    all_data.append(row)
+
+                processed_files += 1
+                progress = (processed_files / total_files) * 100
+                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
+
+        print("Writing data to CSV file...")
+        # self.write_to_tsv(output_file, all_data)
+        self.write_to_csv(all_data)
+
+        print(f"Parsing completed. CSV file saved as: {self.directory}")
+
+        return all_data
