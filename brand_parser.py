@@ -329,11 +329,11 @@ class GivenchyProductParser(WebsiteParser):
             product_name = tile.find('h2', class_='product-name').text.strip() if tile.find('h2', class_='product-name') else ''
             price_element = tile.find('span', class_='price-sales')
             price = price_element.text.strip() if price_element else ''
-            
+
             # Extract all image URLs
             image_elements = tile.find_all('img', class_='thumb-img')
             image_urls = [img.get('data-srcset').split()[0] for img in image_elements if img.get('data-srcset')]
-            
+
             availability=tile.get('data-availability','')
             currency_meta = tile.find('meta', itemprop='priceCurrency')
             currency=''
@@ -396,6 +396,11 @@ class GivenchyProductParser(WebsiteParser):
 
         return all_data
 class CanadaGooseProductParser(WebsiteParser):
+    ## This class parses the HTML files from the Bottega Veneta website.
+    ## website: https://www.canadagoose.com/us/en
+    def __init__(self, directory):
+        self.brand = 'canada_goose'  # Replace spaces with underscores
+        self.directory = directory
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
@@ -417,7 +422,7 @@ class CanadaGooseProductParser(WebsiteParser):
             price = price_element.find('span', class_='value').text.strip() if price_element else 'No Price'
             
             images = block.find_all('img', class_='lazy')
-            image_urls = [img['data-src'] for img in images if 'data-src' in img.attrs] or ['No images']
+            image_urls = [img.get('data-src', img.get('src', 'No images')) for img in images if 'data-src' in img.attrs] or ['No images']
 
             # Extract color options
             color_options = []
@@ -442,17 +447,17 @@ class CanadaGooseProductParser(WebsiteParser):
     def parse_website(self, source, category):
         return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
 
-    def parse_directory(self, directory_path, output_file):
+    def parse_directory(self, directory_path):
         all_data = []
         header_added = False
-        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt')])
+        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt') or f.endswith('.html')])
         processed_files = 0
 
         print(f"Found {total_files} HTML files in the directory.")
         print("Processing files...")
 
         for filename in os.listdir(directory_path):
-            if filename.endswith('.txt'):
+            if filename.endswith('.txt') or filename.endswith('.html'):
                 file_path = os.path.join(directory_path, filename)
                 category = os.path.splitext(filename)[0]  # Use the filename as the category
 
@@ -473,9 +478,7 @@ class CanadaGooseProductParser(WebsiteParser):
                 print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
 
         print("Writing data to CSV file...")
-        self.write_to_csv(output_file, all_data)
-
-        print(f"Parsing completed. CSV file saved as: {output_file}")
+        self.write_to_csv(all_data)
 
         return all_data
 
@@ -910,3 +913,110 @@ class BallyParser():
         filename = f'parser-output/bally_output_{current_date}.csv'
         self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
         print("Complete data saved")
+
+
+class IsabelMarantParser(WebsiteParser):
+    ## This class parses the HTML files from the Bottega Veneta website.
+    ## website: https://www.givenchy.com/us/en-US
+    def __init__(self, directory):
+        self.brand = 'isabel_marant'  # Replace spaces with underscores
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+            'user_category', 'product_url', 'product_name', 'price', 'original_price', 'image_urls', 'sizes',
+            'availability', 'label'
+        ]
+        parsed_data.append(column_names)
+
+        product_items = soup.find_all('product-item', class_='product-item')
+
+        for item in product_items:
+            product_url = item.find('a', class_='product-item__aspect-ratio')['href'] if item.find('a',class_='product-item__aspect-ratio') else ''
+            product_name = item.find('a', class_='product-item-meta__title').text.strip() if item.find('a',class_='product-item-meta__title') else ''
+
+            price_element = item.find('span', class_='price--highlight')
+            price = price_element.text.strip() if price_element else ''
+
+            original_price_element = item.find('span', class_='price--compare')
+            original_price = original_price_element.text.strip() if original_price_element else ''
+
+            # Extract all image URLs
+            image_elements = item.find_all('img')
+            image_urls = [img.get('src') for img in image_elements if img.get('src')]
+
+            # Extract sizes and availability
+            sizes_list = item.find('ul', class_='plp-sizes-list')
+            sizes = []
+            availability = []
+            if sizes_list:
+                for li in sizes_list.find_all('li'):
+                    sizes.append(li.text.strip())
+                    availability.append('available' if 'not-available' not in li.get('class', []) else 'not available')
+
+            # Extract labels
+            label_elements = item.find_all('span', class_='label label--custom')
+            labels = [label.text.strip() for label in label_elements if label.text.strip()]
+
+            product_data = [
+                category,
+                product_url,
+                product_name,
+                price,
+                original_price,
+                ', '.join(image_urls),
+                ', '.join(sizes),
+                ', '.join(availability),
+                ', '.join(labels)
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+    def parse_website(self, source, category):
+        with open(source, 'r', encoding='utf-8') as file:
+            content = file.read()
+        soup = BeautifulSoup(content, 'html.parser')
+        return self.parse_product_blocks(soup, category)
+
+    def parse_website(self, source, category):
+        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
+
+    def parse_directory(self, directory_path):
+        all_data = []
+        header_added = False
+        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt') or f.endswith('.html')])
+        processed_files = 0
+
+        print(f"Found {total_files} HTML files in the directory.")
+        print("Processing files...")
+
+        for filename in os.listdir(directory_path):
+            if filename.endswith('.txt') or filename.endswith('.html'):
+                file_path = os.path.join(directory_path, filename)
+                category = os.path.splitext(filename)[0]  # Use the filename as the category
+
+                tsv_output = self.parse_website(file_path, category)
+
+                if not header_added:
+                    tsv_output[0].append('filename')  # Add the new column name for filename
+                    all_data.append(tsv_output[0])  # Add the header row only once
+                    header_added = True
+
+                # Add the filename as a new column to the parsed data
+                for row in tsv_output[1:]:
+                    row.append(filename)
+                    all_data.append(row)
+
+                processed_files += 1
+                progress = (processed_files / total_files) * 100
+                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
+
+        print("Writing data to CSV file...")
+        self.write_to_csv(all_data)
+
+        return all_data
+
+
+

@@ -1,5 +1,7 @@
 import os
-from brand_parser import BottegaVenetaParser,GucciParser,FendiParser,BallyParser,StellaProductParser,GivenchyProductParser
+from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyParser, StellaProductParser, \
+    GivenchyProductParser, CanadaGooseProductParser, IsabelMarantParser
+
 #Folder name for output
 output_directory_path = "parser-output"
 #directory_path = 'brands_html/bottega_veneta'
@@ -49,7 +51,26 @@ stella_parser = StellaProductParser(output_directory_path)
 #stella end
 
 #givenchy START
-givenchy_parser = GivenchyProductParser(output_directory_path)
+#givenchy_parser = GivenchyProductParser(output_directory_path)
 ##Comment to run single file##
-directory_path = r'C:\Users\NikPopov\Desktop\msrp_html\utilities\site-parsing\internal_html\givenchy'
-givenchy_parser.parse_directory(directory_path)
+#directory_path = r'C:\Users\NikPopov\Desktop\msrp_html\utilities\site-parsing\internal_html\givenchy'
+#givenchy_parser.parse_directory(directory_path)
+#givenchy END
+
+
+
+
+#Canada Goose Start
+#canada_goose_parser = CanadaGooseProductParser(output_directory_path)
+##Comment to run single file##
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\canada_goose'
+#canada_goose_parser.parse_directory(directory_path)
+
+#Canada Goose END
+
+
+#Isabel Marant Start
+Isabel_Marant_Parser = IsabelMarantParser(output_directory_path)
+##Comment to run single file##
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\isabel_marant'
+Isabel_Marant_Parser.parse_directory(directory_path)
