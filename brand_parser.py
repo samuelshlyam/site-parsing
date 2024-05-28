@@ -121,11 +121,11 @@ class BottegaVenetaParser(WebsiteParser):
         # # Add the 'filename' column name to the header row
         # all_data[0].append('filename')
 
-        print("Writing data to TSV file...")
+        print("Writing data to CSV file...")
         #self.write_to_tsv(output_file, all_data)
         self.write_to_csv(all_data)
 
-        print(f"Parsing completed. TSV file saved as: {self.directory}")
+        print(f"Parsing completed. CSV file saved as: {self.directory}")
 
         return all_data
 
@@ -224,7 +224,7 @@ class GucciParser():
             category_data = self.fetch_data(category, self.base_url)
             self.data = pd.concat([self.data, category_data], ignore_index=True)
 
-        # Save the complete DataFrame to a TSV file
+        # Save the complete DataFrame to a CSV file
         #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
         current_date = datetime.datetime.now().strftime("%m_%d_%Y")
         filename = f'parser-output/gucci_output_{current_date}.csv'
@@ -307,3 +307,500 @@ class FendiParser(WebsiteParser):
         print(f"Parsing completed. CSV file saved as: {self.directory}")
 
         return all_data
+
+class GivenchyProductParser(WebsiteParser):
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+            'product_id', 'product_url', 'product_name', 'price', 'image_urls','availability','currency','label'
+        ]
+        parsed_data.append(column_names)
+
+        product_tiles = soup.find_all('div', class_='product-tile')
+
+        for tile in product_tiles:
+            product_id = tile.get('data-itemid', '')
+            product_url = tile.find('a', class_='thumb-link')['href'] if tile.find('a', class_='thumb-link') else ''
+            product_name = tile.find('h2', class_='product-name').text.strip() if tile.find('h2', class_='product-name') else ''
+            price_element = tile.find('span', class_='price-sales')
+            price = price_element.text.strip() if price_element else ''
+            
+            # Extract all image URLs
+            image_elements = tile.find_all('img', class_='thumb-img')
+            image_urls = [img.get('data-srcset').split()[0] for img in image_elements if img.get('data-srcset')]
+            
+            availability=tile.get('data-availability','')
+            currency_meta = tile.find('meta', itemprop='priceCurrency')
+            currency=''
+            if currency_meta:
+                currency = currency_meta.get('content','')
+            label_element = soup.find('span', class_='tile-label')
+            label = label_element.text.strip() if label_element else ''
+
+            product_data = [
+                product_id,
+                product_url,
+                product_name,
+                price,
+                ', '.join(image_urls),
+                availability,
+                currency,
+                label
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+    
+    def parse_website(self, source, category):
+        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
+
+    def parse_directory(self, directory_path, output_file):
+        all_data = []
+        header_added = False
+        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt')])
+        processed_files = 0
+
+        print(f"Found {total_files} HTML files in the directory.")
+        print("Processing files...")
+
+        for filename in os.listdir(directory_path):
+            if filename.endswith('.txt'):
+                file_path = os.path.join(directory_path, filename)
+                category = os.path.splitext(filename)[0]  # Use the filename as the category
+
+                tsv_output = self.parse_website(file_path, category)
+
+                if not header_added:
+                    tsv_output[0].append('filename')  # Add the new column name for filename
+                    all_data.append(tsv_output[0])  # Add the header row only once
+                    header_added = True
+
+                # Add the filename as a new column to the parsed data
+                for row in tsv_output[1:]:
+                    row.append(filename)
+                    all_data.append(row)
+
+                processed_files += 1
+                progress = (processed_files / total_files) * 100
+                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
+
+        print("Writing data to CSV file...")
+        self.write_to_csv(output_file, all_data)
+
+        print(f"Parsing completed. CSV file saved as: {output_file}")
+
+        return all_data
+class CanadaGooseProductParser(WebsiteParser):
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+            'product_id', 'product_url', 'product_name', 'price', 'image_urls', 'color_options'
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('div', class_='grid-tile')
+
+        for block in product_blocks:
+            #The product id is not being grabbed properly here and
+            needs to be fixed
+            product_id = block.get('data-pid', 'No ID')
+            product_link = block.find('a', class_='thumb-link')
+            product_url = product_link['href'] if product_link else 'No URL'
+            product_name = block.find('div', class_='product-name').text.strip() if block.find('div', class_='product-name') else 'No Name'
+            
+            price_element = block.find('span', class_='price-sales')
+            price = price_element.find('span', class_='value').text.strip() if price_element else 'No Price'
+            
+            images = block.find_all('img', class_='lazy')
+            image_urls = [img['data-src'] for img in images if 'data-src' in img.attrs] or ['No images']
+
+            # Extract color options
+            color_options = []
+            color_links = block.find_all('a', class_='swatch')
+            for link in color_links:
+                color = link.get('title', 'No Color')
+                color_image = link.find('img').get('data-src') if link.find('img') else 'No Color Image'
+                color_options.append({'color': color, 'image': color_image})
+
+            product_data = [
+                product_id,
+                f"https://www.canadagoose.com{product_url}",
+                product_name,
+                price,
+                ', '.join(image_urls),
+                json.dumps(color_options)  # Store color options as JSON string for simplicity
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+    
+    def parse_website(self, source, category):
+        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
+
+    def parse_directory(self, directory_path, output_file):
+        all_data = []
+        header_added = False
+        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt')])
+        processed_files = 0
+
+        print(f"Found {total_files} HTML files in the directory.")
+        print("Processing files...")
+
+        for filename in os.listdir(directory_path):
+            if filename.endswith('.txt'):
+                file_path = os.path.join(directory_path, filename)
+                category = os.path.splitext(filename)[0]  # Use the filename as the category
+
+                tsv_output = self.parse_website(file_path, category)
+
+                if not header_added:
+                    tsv_output[0].append('filename')  # Add the new column name for filename
+                    all_data.append(tsv_output[0])  # Add the header row only once
+                    header_added = True
+
+                # Add the filename as a new column to the parsed data
+                for row in tsv_output[1:]:
+                    row.append(filename)
+                    all_data.append(row)
+
+                processed_files += 1
+                progress = (processed_files / total_files) * 100
+                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
+
+        print("Writing data to CSV file...")
+        self.write_to_csv(output_file, all_data)
+
+        print(f"Parsing completed. CSV file saved as: {output_file}")
+
+        return all_data
+
+class VejaProductParser(WebsiteParser):
+    def parse_website(self, source, category):
+        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+            'category', 'product_name', 'price', 'main_image_url', 'additional_image_url',
+            'product_details_url'
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('div', class_='product-item-info')
+
+        for block in product_blocks:
+            product_name = block.find('strong', class_='product name product-item-name').find('a').text.strip()
+            price = block.find('span', class_='price').text.strip()
+            product_details_url = block.find('a', class_='product-item-link')['href']
+            
+            images = block.find_all('img', alt=product_name)
+            main_image_url = images[0]['src'] if images else 'No image available'
+            additional_image_url = images[1]['src'] if len(images) > 1 else 'No additional image available'
+
+            product_data_list = [
+                category,
+                product_name,
+                price,
+                main_image_url,
+                additional_image_url,
+                product_details_url
+            ]
+
+            parsed_data.append(product_data_list)
+
+        return parsed_data
+
+    def parse_directory(self, directory_path, output_file):
+        all_data = []
+        header_added = False
+        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt')])
+        processed_files = 0
+
+        print(f"Found {total_files} HTML files in the directory.")
+        print("Processing files...")
+
+        for filename in os.listdir(directory_path):
+            if filename.endswith('.txt'):
+                file_path = os.path.join(directory_path, filename)
+                category = os.path.splitext(filename)[0]  # Use the filename as the category
+
+                tsv_output = self.parse_website(file_path, category)
+
+                if not header_added:
+                    tsv_output[0].append('filename')  # Add the new column name for filename
+                    all_data.append(tsv_output[0])  # Add the header row only once
+                    header_added = True
+
+                # Add the filename as a new column to the parsed data
+                for row in tsv_output[1:]:
+                    row.append(filename)
+                    all_data.append(row)
+
+                processed_files += 1
+                progress = (processed_files / total_files) * 100
+                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
+
+        print("Writing data to CSV file...")
+        self.write_to_csv(output_file, all_data)
+
+        print(f"Parsing completed. CSV file saved as: {output_file}")
+
+        return all_data
+    
+class StellaProductParser(WebsiteParser):
+    def parse_website(self, source, category):
+        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+            'product_id', 'category', 'product_name', 'price', 'main_image_url', 'additional_image_url',
+            'product_details_url', 'product_color', 'product_tags'
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('div', class_='product')
+
+        for block in product_blocks:
+            product_id = block.get('data-pid', '')
+            product_name = block.get('data-name', '')
+            price_element = block.find('span', class_='value')
+            price = price_element.text.strip() if price_element else ''
+            link_element = block.find('a', class_='lazy__link')
+            product_details_url = link_element['href'] if link_element else ''
+            
+            # Handling images
+            images_data = block.get('data-product-images', '[]')  # Use '[]' as default to ensure JSON parsing does not fail
+            try:
+                images = json.loads(images_data)
+                main_image_url = images[0]['url'] if images else ''
+                additional_image_url = images[1]['url'] if len(images) > 1 else ''
+            except json.JSONDecodeError:
+                main_image_url = ''
+                additional_image_url = ''
+
+            # Handling color options from buttons
+            color_buttons = block.find_all('button', class_='more')
+            colors = [btn.get('aria-label').split(' ')[-1] for btn in color_buttons if btn.get('aria-label')]
+
+            # Handling tags
+            tags_div = block.find('div', class_='product-tile__body__tags')
+            tags = [tag.text for tag in tags_div.find_all('div')] if tags_div else ['']
+            tags=[tag.replace('\n','').strip() for tag in tags]
+            product_data_list = [
+                product_id, category, product_name, price, main_image_url, additional_image_url,
+                f"https://www.stellamccartney.com{product_details_url}", ', '.join(colors), ', '.join(tags)
+            ]
+
+            parsed_data.append(product_data_list)
+
+        return parsed_data
+
+    def parse_directory(self, directory_path, output_file):
+        all_data = []
+        header_added = False
+        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt')])
+        processed_files = 0
+
+        print(f"Found {total_files} HTML files in the directory.")
+        print("Processing files...")
+
+        for filename in os.listdir(directory_path):
+            if filename.endswith('.txt'):
+                file_path = os.path.join(directory_path, filename)
+                category = os.path.splitext(filename)[0]  # Use the filename as the category
+
+                tsv_output = self.parse_website(file_path, category)
+
+                if not header_added:
+                    tsv_output[0].append('filename')  # Add the new column name for filename
+                    all_data.append(tsv_output[0])  # Add the header row only once
+                    header_added = True
+
+                # Add the filename as a new column to the parsed data
+                for row in tsv_output[1:]:
+                    row.append(filename)
+                    all_data.append(row)
+
+                processed_files += 1
+                progress = (processed_files / total_files) * 100
+                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
+
+        print("Writing data to CSV file...")
+        self.write_to_csv(output_file, all_data)
+
+        print(f"Parsing completed. CSV file saved as: {output_file}")
+
+        return all_data
+    
+class TomFordProductParser(WebsiteParser):
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+            'product_id', 'product_name', 'product_url', 'price', 'images', 'quick_view_url','variation_count'
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('div', class_='product')
+
+        for block in product_blocks:
+            product_id = block.get('data-pid', '')
+            product_name = block.find('a', class_='link').text.strip() if block.find('a', class_='link') else ''
+            product_url = block.find('a', class_='tile-image-container')['href'] if block.find('a', class_='tile-image-container') else ''
+            
+            price_element = block.find('span', class_='value')
+            price = price_element.text.strip() if price_element else ''
+            
+            image_elements = block.find_all('img', class_='loaded')
+            images = [img['srcset'] for img in image_elements]
+            
+            quick_view_link = block.find('a', class_='quickview')
+            quick_view_url = quick_view_link['href'] if quick_view_link else ''
+            
+            variation_element = block.find('div', class_='variation-count')
+            variation_count = variation_element.text.strip() if variation_element else ''
+            product_data = [
+                product_id,
+                product_name,
+                product_url,
+                price,
+                ', '.join(images),
+                quick_view_url,
+                variation_count
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+    
+    def parse_website(self, source, category):
+        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
+    def parse_directory(self, directory_path, output_file):
+        all_data = []
+        header_added = False
+        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt')])
+        processed_files = 0
+
+        print(f"Found {total_files} HTML files in the directory.")
+        print("Processing files...")
+
+        for filename in os.listdir(directory_path):
+            if filename.endswith('.txt'):
+                file_path = os.path.join(directory_path, filename)
+                category = os.path.splitext(filename)[0]  # Use the filename as the category
+
+                tsv_output = self.parse_website(file_path, category)
+
+                if not header_added:
+                    tsv_output[0].append('filename')  # Add the new column name for filename
+                    all_data.append(tsv_output[0])  # Add the header row only once
+                    header_added = True
+
+                # Add the filename as a new column to the parsed data
+                for row in tsv_output[1:]:
+                    row.append(filename)
+                    all_data.append(row)
+
+                processed_files += 1
+                progress = (processed_files / total_files) * 100
+                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
+
+        print("Writing data to CSV file...")
+        self.write_to_csv(output_file, all_data)
+
+        print(f"Parsing completed. CSV file saved as: {output_file}")
+
+        return all_data
+    
+class OffWhiteProductParser(WebsiteParser):
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+            'product_id', 'product_url', 'product_name', 'base_price', 'discount_rate', 'sale_price', 'image_urls', 'alt_text'
+        ]
+        parsed_data.append(column_names)
+
+        product_items = soup.find_all('li')
+
+        for item in product_items:
+            div = item.find('div')
+            product_id = div.get('data-insights-object-id', '') if div else ''
+            product_url = item.find('a', class_='css-dpg8v2')['href'] if item.find('a', class_='css-dpg8v2') else ''
+            product_name = item.find('p', class_='css-1dw89jd').text.strip() if item.find('p', class_='css-1dw89jd') else ''
+            base_price=''
+            discount_rate=''
+            sale_price=''
+            # Price details
+            normal_price_span = item.find('span', class_='css-bks3r1') or item.find('span', class_='css-1go0pru')
+            if normal_price_span:
+                base_price = normal_price_span.text.strip()
+            
+            # Extract discount rate if present
+            discount_rate_span = item.find('span', class_='css-f5f5h3')
+            if discount_rate_span:
+                discount_rate = discount_rate_span.text.strip()
+            
+            # Extract sale price if present
+            sale_price_span = item.find('span', class_='css-uqjroe')
+            if sale_price_span:
+                sale_price = sale_price_span.text.strip()
+        
+            
+            
+            # Image URLs and alt text
+            images = item.find_all('img')
+            image_urls = [img['src'] for img in images if 'src' in img.attrs]
+            alt_texts = [img['alt'] for img in images if 'alt' in img.attrs]
+
+            product_data = [
+                product_id,
+                product_url,
+                product_name,
+                base_price,
+                discount_rate,
+                sale_price,
+                ', '.join(image_urls),
+                ', '.join(alt_texts)
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+    def parse_website(self, source, category):
+        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
+    
+    def parse_directory(self, directory_path, output_file):
+        all_data = []
+        header_added = False
+        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt')])
+        processed_files = 0
+
+        print(f"Found {total_files} HTML files in the directory.")
+        print("Processing files...")
+
+        for filename in os.listdir(directory_path):
+            if filename.endswith('.txt'):
+                file_path = os.path.join(directory_path, filename)
+                category = os.path.splitext(filename)[0]  # Use the filename as the category
+
+                tsv_output = self.parse_website(file_path, category)
+
+                if not header_added:
+                    tsv_output[0].append('filename')  # Add the new column name for filename
+                    all_data.append(tsv_output[0])  # Add the header row only once
+                    header_added = True
+
+                # Add the filename as a new column to the parsed data
+                for row in tsv_output[1:]:
+                    row.append(filename)
+                    all_data.append(row)
+
+                processed_files += 1
+                progress = (processed_files / total_files) * 100
+                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
+
+        print("Writing data to TSV file...")
+        self.write_to_csv(output_file, all_data)
+
+        print(f"Parsing completed. TSV file saved as: {output_file}")
+
+        return all_data
+    
