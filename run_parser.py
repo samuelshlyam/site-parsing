@@ -1,8 +1,8 @@
 import os
-from brand_parser import BottegaVenetaParser,GucciParser,FendiParser
+from brand_parser import BottegaVenetaParser,GucciParser,FendiParser,BallyParser,StellaProductParser,GivenchyProductParser
 #Folder name for output
 output_directory_path = "parser-output"
-directory_path = 'brands_html/bottega_veneta'
+#directory_path = 'brands_html/bottega_veneta'
 ##Bottega Veneta Parser METHOD 1##
 bottega_parser = BottegaVenetaParser(output_directory_path)
 ##SINGLE FILE RUN##
@@ -29,6 +29,27 @@ combined_gucci_categories = ['men-bags', 'men-bags-luggage','men-readytowear','m
 
 
 ##START FENDI PARSER##
-directory_path = 'internal_html/fendi'
+# directory_path = 'internal_html/fendi'
 fendi_parser = FendiParser(output_directory_path)
-fendi_parser.parse_directory(directory_path)
+# fendi_parser.parse_directory(directory_path)
+
+
+###BALLY START
+bally_parser = BallyParser()
+category_list = ['men-sale.json?', 'women-sale.json?', 'men.json?', 'women.json?']
+# bally_parser.process_categories(category_list)
+
+#BALLY END
+
+#STELLA START
+stella_parser = StellaProductParser(output_directory_path)
+##Comment to run single file##
+#directory_path = r'C:\Users\NikPopov\Desktop\msrp_html\utilities\site-parsing\internal_html\stella_mccartney'
+#stella_parser.parse_directory(directory_path)
+#stella end
+
+#givenchy START
+givenchy_parser = GivenchyProductParser(output_directory_path)
+##Comment to run single file##
+directory_path = r'C:\Users\NikPopov\Desktop\msrp_html\utilities\site-parsing\internal_html\givenchy'
+givenchy_parser.parse_directory(directory_path)

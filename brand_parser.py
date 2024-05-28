@@ -142,7 +142,6 @@ class GucciParser():
     def safe_strip(self,value):
         """ Helper function to strip strings safely """
         return value.strip() if isinstance(value, str) else value
-
     def fetch_data(self,category, base_url):
         session = requests.Session()
         # Setup retry strategy
@@ -309,10 +308,16 @@ class FendiParser(WebsiteParser):
         return all_data
 
 class GivenchyProductParser(WebsiteParser):
+    ## This class parses the HTML files from the Bottega Veneta website.
+    ## website: https://www.givenchy.com/us/en-US
+    def __init__(self, directory):
+        self.brand = 'givenchy'  # Replace spaces with underscores
+        self.directory = directory
+
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
-            'product_id', 'product_url', 'product_name', 'price', 'image_urls','availability','currency','label'
+            'user_category','product_id', 'product_url', 'product_name', 'price', 'image_urls','availability','currency','label'
         ]
         parsed_data.append(column_names)
 
@@ -338,6 +343,7 @@ class GivenchyProductParser(WebsiteParser):
             label = label_element.text.strip() if label_element else ''
 
             product_data = [
+                category,
                 product_id,
                 product_url,
                 product_name,
@@ -354,17 +360,17 @@ class GivenchyProductParser(WebsiteParser):
     def parse_website(self, source, category):
         return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
 
-    def parse_directory(self, directory_path, output_file):
+    def parse_directory(self, directory_path):
         all_data = []
         header_added = False
-        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt')])
+        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt') or f.endswith('.html')])
         processed_files = 0
 
         print(f"Found {total_files} HTML files in the directory.")
         print("Processing files...")
 
         for filename in os.listdir(directory_path):
-            if filename.endswith('.txt'):
+            if filename.endswith('.txt') or filename.endswith('.html'):
                 file_path = os.path.join(directory_path, filename)
                 category = os.path.splitext(filename)[0]  # Use the filename as the category
 
@@ -385,9 +391,8 @@ class GivenchyProductParser(WebsiteParser):
                 print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
 
         print("Writing data to CSV file...")
-        self.write_to_csv(output_file, all_data)
+        self.write_to_csv(all_data)
 
-        print(f"Parsing completed. CSV file saved as: {output_file}")
 
         return all_data
 class CanadaGooseProductParser(WebsiteParser):
@@ -402,7 +407,7 @@ class CanadaGooseProductParser(WebsiteParser):
 
         for block in product_blocks:
             #The product id is not being grabbed properly here and
-            needs to be fixed
+            #needs to be fixed
             product_id = block.get('data-pid', 'No ID')
             product_link = block.find('a', class_='thumb-link')
             product_url = product_link['href'] if product_link else 'No URL'
@@ -547,6 +552,13 @@ class VejaProductParser(WebsiteParser):
         return all_data
     
 class StellaProductParser(WebsiteParser):
+
+    ## This class parses the HTML files from the Bottega Veneta website.
+    ## website: https://www.stellamccartney.com
+    def __init__(self, directory):
+        self.brand = 'stella_mccartney'  # Replace spaces with underscores
+        self.directory = directory
+
     def parse_website(self, source, category):
         return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
 
@@ -567,13 +579,18 @@ class StellaProductParser(WebsiteParser):
             price = price_element.text.strip() if price_element else ''
             link_element = block.find('a', class_='lazy__link')
             product_details_url = link_element['href'] if link_element else ''
-            
+            #product-tile__plp-images-stack
             # Handling images
-            images_data = block.get('data-product-images', '[]')  # Use '[]' as default to ensure JSON parsing does not fail
+            images_data = block.find('div', class_='product-tile__plp-images-stack')
+            product_images_list = images_data.get('data-product-images',[]).strip()
+            product_images_list = json.loads(product_images_list)
+
+
+
             try:
-                images = json.loads(images_data)
-                main_image_url = images[0]['url'] if images else ''
-                additional_image_url = images[1]['url'] if len(images) > 1 else ''
+                main_image_url = product_images_list[0].get('url','') if product_images_list else ''
+                additional_image_url = " , ".join([s.get('url') for s in product_images_list ])
+
             except json.JSONDecodeError:
                 main_image_url = ''
                 additional_image_url = ''
@@ -595,17 +612,17 @@ class StellaProductParser(WebsiteParser):
 
         return parsed_data
 
-    def parse_directory(self, directory_path, output_file):
+    def parse_directory(self, directory_path):
         all_data = []
         header_added = False
-        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt')])
+        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt') or f.endswith('.html')])
         processed_files = 0
 
         print(f"Found {total_files} HTML files in the directory.")
         print("Processing files...")
 
         for filename in os.listdir(directory_path):
-            if filename.endswith('.txt'):
+            if filename.endswith('.txt') or filename.endswith('.html'):
                 file_path = os.path.join(directory_path, filename)
                 category = os.path.splitext(filename)[0]  # Use the filename as the category
 
@@ -626,9 +643,9 @@ class StellaProductParser(WebsiteParser):
                 print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
 
         print("Writing data to CSV file...")
-        self.write_to_csv(output_file, all_data)
+        self.write_to_csv(all_data)
 
-        print(f"Parsing completed. CSV file saved as: {output_file}")
+        print(f"Parsing completed. CSV file saved as: {self.directory}")
 
         return all_data
     
@@ -804,3 +821,92 @@ class OffWhiteProductParser(WebsiteParser):
 
         return all_data
     
+class BallyParser():
+    ##COMPLETE
+    def __init__(self):
+
+
+
+        #https://www.bally.com/_next/data/kHhMfjaaFfoBfxbp7icbW/en/category/men-sale.json
+        #https://www.bally.com/_next/data/kHhMfjaaFfoBfxbp7icbW/en/category/women-sale.json
+        #https://www.bally.com/_next/data/kHhMfjaaFfoBfxbp7icbW/en/category/men.json
+        #https://www.bally.com/_next/data/kHhMfjaaFfoBfxbp7icbW/en/category/women.json
+        # Initialize with common base URL and empty DataFrame to accumulate results
+        self.base_url = "https://www.bally.com/_next/data/kHhMfjaaFfoBfxbp7icbW/en/category/{category}p={page}"
+        self.data = pd.DataFrame()
+    def format_url(self,url):
+        """ Helper function to format URLs correctly """
+        return f"https:{url}" if url else ''
+
+    def safe_strip(self,value):
+        """ Helper function to strip strings safely """
+        return value.strip() if isinstance(value, str) else value
+
+
+    def fetch_data(self,category, base_url):
+        session = requests.Session()
+        # Setup retry strategy
+        retries = Retry(
+            total=5,
+            backoff_factor=1,
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
+        )
+        session.mount("https://", HTTPAdapter(max_retries=retries))
+
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3'}
+        all_products = []  # Use a list to store product dictionaries
+        try:
+            response = session.get(base_url.format(category=category, page=1), headers=headers)
+            response.raise_for_status()
+            json_data = response.json()
+            json_data = json_data.get('pageProps',"")
+            total_pages = json_data.get('maxPage',None)
+            if not total_pages:
+                raise ValueError
+            print(f"Category: {category}, Total Pages: {total_pages}")
+
+            #for page in range(1,total_pages):
+            response = session.get(base_url.format(category=category, page=total_pages), headers=headers)
+            response.raise_for_status()
+            json_data = response.json()
+            json_data = json_data.get('pageProps', "")
+            items = json_data.get('category', {}).get('products', [])
+            site_category = json_data.get('handle', '')
+            if items:
+
+                for product in items:
+                    product_info = {
+                        'user_defined_categories': category,
+                        'category' : site_category ,
+                        'title': self.safe_strip(product.get('title', '')).replace('\n', ' ').replace('\r', ''),
+                        'price': self.safe_strip(product.get('price', '').get('amount','')),
+                        'currency': self.safe_strip(product.get('price', '').get('currencyCode','')),
+                        'originalPrice':  self.safe_strip(product.get('originalPrice', '').get('amount','')),
+                        'productLink': "https://www.bally.com/en/products/" + self.safe_strip(product.get('handle', '')),
+                        'primaryImage': product.get('media', [])[0].get('url', ''),
+                        'alternateGalleryImages': " , ".join(
+                            [img.get('url', '') for img in product.get('media', [])]),
+                        'categoryDescription' : product.get('ClassDescription', {}).get('value',''),
+                        'subclass': product.get('SubclassDescription', {}).get('value', '')
+
+                    }
+                    all_products.append(product_info)
+               # print(f"Processed {len(items)} products on Page: {page + 1}/{total_pages} for Category: {category}")
+
+            return pd.DataFrame(all_products)
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+            return pd.DataFrame()
+
+    def process_categories(self, categories):
+        for category in categories:
+            category_data = self.fetch_data(category, self.base_url)
+            self.data = pd.concat([self.data, category_data], ignore_index=True)
+
+        # Save the complete DataFrame to a CSV file
+        #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
+        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+        filename = f'parser-output/bally_output_{current_date}.csv'
+        self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
+        print("Complete data saved")
