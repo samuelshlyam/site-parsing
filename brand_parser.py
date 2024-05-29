@@ -629,7 +629,6 @@ class IsabelMarantParser(WebsiteParser):
         self.brand = 'isabel_marant'  # Replace spaces with underscores
         self.directory = directory
 
-
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
@@ -683,5 +682,62 @@ class IsabelMarantParser(WebsiteParser):
         return parsed_data
 
 
+class Chloe_Parser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'chloe'  # Replace spaces with underscores
+        self.directory = directory
 
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+            'user_category', 'product_url', 'product_name', 'price', 'original_price', 'image_urls', 'sizes',
+            'availability', 'label'
+        ]
+        all_products = []
+        parsed_data.append(column_names)
+        articlesChloe = soup.find_all('article', {'class': 'item'})
+
+        for articleChloe in articlesChloe:
+
+            product_data = []
+            imgSource = articleChloe.find('img')
+            if imgSource:
+                imgSource = imgSource['src']
+
+            data_pid = articleChloe['data-ytos-track-product-data']
+
+            a_url = articleChloe.find('a')
+            if a_url:
+                a_url = a_url['href']
+
+            product_info = json.loads(data_pid)
+
+            product_data.append(product_info['product_cod10'])
+            product_data.append(product_info['product_title'])
+            product_data.append(product_info['product_price'])
+            product_data.append(product_info['product_position'])
+            product_data.append(product_info['product_category'])
+            product_data.append(product_info['product_macro_category'])
+            product_data.append(product_info['product_micro_category'])
+
+            product_data.append(product_info['product_macro_category_id'])
+            product_data.append(product_info['product_micro_category_id'])
+            product_data.append(product_info['product_color'])
+            product_data.append(product_info['product_color_id'])
+            product_data.append(product_info['product_price'])
+            product_data.append(product_info['product_discountedPrice'])
+
+            product_data.append(product_info['product_price_tf'])
+            product_data.append(product_info['product_discountedPrice_tf'])
+            product_data.append(product_info['product_quantity'])
+            product_data.append(product_info['product_coupon'])
+            product_data.append(product_info['product_is_in_stock'])
+            product_data.append(product_info['list'])
+
+            product_data.append(a_url)
+
+            product_data.append(imgSource)
+            product_data.append(category)
+            all_products.append(product_data)
+        return all_products
 

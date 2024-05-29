@@ -10,8 +10,9 @@ import pandas as pd
 import datetime
 from main_parser import WebsiteParser, WebSiteScrape
 
+
 class BottegaVenetaParser(WebsiteParser):
-    
+
     ## This class parses the HTML files from the Bottega Veneta website. 
     ## website: https://www.bottegaveneta.com
     def __init__(self, directory):
@@ -26,7 +27,7 @@ class BottegaVenetaParser(WebsiteParser):
         parsed_data = []
 
         column_names = [
-            'filename','data_pid', 'id', 'name', 'collection', 'productSMC', 'material', 'customization',
+            'filename', 'data_pid', 'id', 'name', 'collection', 'productSMC', 'material', 'customization',
             'packshotType', 'brand', 'color', 'colorId', 'size', 'price', 'discountPrice',
             'coupon', 'subCategory', 'category', 'topCategory', 'productCategory', 'macroCategory',
             'microCategory', 'superMicroCategory', 'list', 'stock', 'productGlobalSMC', 'images', 'product_url'
@@ -88,8 +89,7 @@ class BottegaVenetaParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
-    
-    
+
     def parse_directory(self, directory_path):
         all_data = []
         header_added = False
@@ -130,20 +130,22 @@ class BottegaVenetaParser(WebsiteParser):
 
         return all_data
 
+
 class GucciParser():
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
         self.base_url = "https://www.gucci.com/us/en/c/productgrid?categoryCode={category}&show=Page&page={page}"
         self.data = pd.DataFrame()
-    def format_url(self,url):
+
+    def format_url(self, url):
         """ Helper function to format URLs correctly """
         return f"https:{url}" if url else ''
 
-    def safe_strip(self,value):
+    def safe_strip(self, value):
         """ Helper function to strip strings safely """
         return value.strip() if isinstance(value, str) else value
 
-    def fetch_data(self,category, base_url):
+    def fetch_data(self, category, base_url):
         session = requests.Session()
         # Setup retry strategy
         retries = Retry(
@@ -154,7 +156,8 @@ class GucciParser():
         )
         session.mount("https://", HTTPAdapter(max_retries=retries))
 
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3'}
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3'}
         all_products = []  # Use a list to store product dictionaries
         try:
             response = session.get(base_url.format(category=category, page=0), headers=headers)
@@ -181,7 +184,8 @@ class GucciParser():
                         'rawPrice': self.safe_strip(product.get('rawPrice', '')),
                         'productLink': "https://www.gucci.com/us/en" + self.safe_strip(product.get('productLink', '')),
                         'primaryImage': self.format_url(product.get('primaryImage', {}).get('src', '')),
-                        'alternateGalleryImages': " | ".join([self.format_url(img.get('src', '')) for img in product.get('alternateGalleryImages', [])]),
+                        'alternateGalleryImages': " | ".join(
+                            [self.format_url(img.get('src', '')) for img in product.get('alternateGalleryImages', [])]),
                         'alternateImage': self.format_url(product.get('alternateImage', {}).get('src', '')),
                         'isFavorite': str(product.get('isFavorite', False)).lower(),
                         'isOnlineExclusive': str(product.get('isOnlineExclusive', False)).lower(),
@@ -207,7 +211,8 @@ class GucciParser():
                         'inStoreStockEntry': str(product.get('inStoreStockEntry', False)).lower(),
                         'inStoreStockRegionalEntry': str(product.get('inStoreStockRegionalEntry', False)).lower(),
                         'visibleWithoutStock': str(product.get('visibleWithoutStock', False)).lower(),
-                        'showAvailableInStoreOnlyLabel': str(product.get('showAvailableInStoreOnlyLabel', False)).lower(),
+                        'showAvailableInStoreOnlyLabel': str(
+                            product.get('showAvailableInStoreOnlyLabel', False)).lower(),
                         'showOutOfStockLabel': str(product.get('showOutOfStockLabel', False)).lower(),
                     }
                     all_products.append(product_info)
@@ -218,7 +223,6 @@ class GucciParser():
             print(f"An error occurred: {e}")
             return pd.DataFrame()
 
-
     def process_categories(self, categories):
         for category in categories:
             category_data = self.fetch_data(category, self.base_url)
@@ -228,11 +232,16 @@ class GucciParser():
         #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
         current_date = datetime.datetime.now().strftime("%m_%d_%Y")
         filename = f'parser-output/gucci_output_{current_date}.csv'
-        self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
+        self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
         print("Complete data saved to 'output_gucci_5_27_24.csv'")
 
-class Chloe(WebSiteScrape):       
-    def scrape_chloe(directory_path):
+
+class Chloe_Parser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'chloe'  # Replace spaces with underscores
+        self.directory = directory
+    @staticmethod
+    def parse_product_blocks(directory_path):
         html_files = WebSiteScrape.search_files_directory(directory_path)
         all_products = []
         for filename in html_files:
@@ -240,27 +249,24 @@ class Chloe(WebSiteScrape):
             with open(file_path, 'r', encoding='utf-8') as file:
                 content = file.read()
                 soup = BeautifulSoup(content, 'html.parser')
-                
-                
+
                 articlesChloe = soup.find_all('article', {'class': 'item'})
-                
+
                 for articleChloe in articlesChloe:
-                    
+
                     product_data = []
                     imgSource = articleChloe.find('img')
                     if imgSource:
                         imgSource = imgSource['src']
-                    
+
                     data_pid = articleChloe['data-ytos-track-product-data']
-                    
+
                     a_url = articleChloe.find('a')
                     if a_url:
                         a_url = a_url['href']
-                    
+
                     product_info = json.loads(data_pid)
-                    
-                    
-                    
+
                     product_data.append(product_info['product_cod10'])
                     product_data.append(product_info['product_title'])
                     product_data.append(product_info['product_price'])
@@ -268,37 +274,33 @@ class Chloe(WebSiteScrape):
                     product_data.append(product_info['product_category'])
                     product_data.append(product_info['product_macro_category'])
                     product_data.append(product_info['product_micro_category'])
-                    
+
                     product_data.append(product_info['product_macro_category_id'])
                     product_data.append(product_info['product_micro_category_id'])
                     product_data.append(product_info['product_color'])
                     product_data.append(product_info['product_color_id'])
                     product_data.append(product_info['product_price'])
                     product_data.append(product_info['product_discountedPrice'])
-                    
+
                     product_data.append(product_info['product_price_tf'])
                     product_data.append(product_info['product_discountedPrice_tf'])
                     product_data.append(product_info['product_quantity'])
                     product_data.append(product_info['product_coupon'])
                     product_data.append(product_info['product_is_in_stock'])
                     product_data.append(product_info['list'])
-                    
+
                     product_data.append(a_url)
-                    
+
                     product_data.append(imgSource)
                     product_data.append(filename)
                     all_products.append(product_data)
-                    
 
-                    
-
-            df = pd.DataFrame(all_products, columns=['Cod10', 'Title', 'Price', 'position', 'category', 'macro_category', 'micro_category', 'macro_category_id', 'micro_category_id', 'color', 'color_id', 'product_price', 'discountedPrice', 'price_tf', 'discountedPrice_tf', 'quantity', 'coupon', 'is_in_stock', 'list', 'url', 'img_src', 'filename'  ])
+            df = pd.DataFrame(all_products,
+                              columns=['Cod10', 'Title', 'Price', 'position', 'category', 'macro_category',
+                                       'micro_category', 'macro_category_id', 'micro_category_id', 'color', 'color_id',
+                                       'product_price', 'discountedPrice', 'price_tf', 'discountedPrice_tf', 'quantity',
+                                       'coupon', 'is_in_stock', 'list', 'url', 'img_src', 'filename'])
             current_date = datetime.datetime.now().strftime("%m_%d_%Y")
             filename = f'parser-output/chloe_{current_date}.csv'
-            df.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
+            df.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
             print("Complete data saved to 'chloe.csv'")
-            
-    
-    
-
-   

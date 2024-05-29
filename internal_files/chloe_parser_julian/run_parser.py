@@ -1,10 +1,10 @@
 import os
-from brand_parser import BottegaVenetaParser,GucciParser, Chloe
+from brand_parser import BottegaVenetaParser,GucciParser, Chloe_Parser
 #Folder name for output
 output_directory_path = "parser-output"
 directory_path = 'brands_html/bottega_veneta'
 ##Bottega Veneta Parser METHOD 1##
-bottega_parser = BottegaVenetaParser(output_directory_path)
+#bottega_parser = BottegaVenetaParser(output_directory_path)
 ##SINGLE FILE RUN##
 input_file_path = 'brands_html/bottega_veneta/women_bags.html'
 category = os.path.splitext(input_file_path)[0]  # Use the filename as the category  
@@ -14,7 +14,7 @@ category = os.path.splitext(input_file_path)[0]  # Use the filename as the categ
 
 ##MULTIPLE FILE RUN, PASS DIRECTORY PATH
 ##Comment to run single file##
-bottega_parser.parse_directory(directory_path)
+#bottega_parser.parse_directory(directory_path)
 
 
 #GUCCI PRODUCT FETCH METHOD 2##
@@ -29,5 +29,6 @@ combined_gucci_categories = ['men-bags', 'men-bags-luggage','men-readytowear','m
 
 
 #CHLOE PRODUCT SCRAPE 3##
-directory_path = 'brands_html/chloe'
-Chloe.scrape_chloe(directory_path)
+Chloe_parser=Chloe_Parser
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_files\chloe_parser_julian\brands_html\chloe'
+Chloe_parser.parse_product_blocks(directory_path)
