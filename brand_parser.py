@@ -783,3 +783,61 @@ class MCM_Parser(WebsiteParser):
             ]
             parsed_data.append(product_data)
         return parsed_data
+
+class CultGaiaProductParser(WebsiteParser):
+    ## This class parses the HTML files from the Cult Gaia website.
+    ## website: https://www.cultgaia.com
+    def __init__(self, directory):
+        self.brand = 'cultgaia'  # Replace spaces with underscores
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+            'user_category', 'product_url', 'product_name', 'price', 'discounted_price', 'image_urls', 'tag'
+        ]
+        parsed_data.append(column_names)
+
+        product_tiles = soup.find_all('div', class_='products__listing-details')
+
+        for tile in product_tiles:
+            product_url = tile.find('a')['href'] if tile.find('a') else ''
+            product_name_element = tile.find('p', class_='s upper')
+            product_name = product_name_element.contents[0].strip() if product_name_element else ''
+            price = tile.find('p', class_='s upper').text.strip().split('$')[-1] if tile.find('p',
+                                                                                              class_='s upper') else ''
+            discounted_price = ''
+
+            # Check for discounted price
+            compare_price = tile.find('s', {'data-compare-price': ''})
+            if compare_price and compare_price.previous_sibling:
+                discounted_price = compare_price.previous_sibling.strip()
+
+            # Extract all image URLs
+            image_urls = []
+            gallery = tile.find_previous_sibling('div', class_='products__listing-image')
+            if gallery:
+                image_elements = gallery.find_all('img')
+                for img in image_elements:
+                    srcset = img.get('srcset', '').split(',')
+                    for src in srcset:
+                        url = src.strip().split(' ')[0]
+                        if url:
+                            image_urls.append(url)
+
+            # Extract tag
+            tag = tile.find('p', class_='tag').text.strip() if tile.find('p', class_='tag') else ''
+
+            product_data = [
+                category,
+                product_url,
+                product_name,
+                price,
+                discounted_price,
+                ', '.join(image_urls),
+                tag
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+

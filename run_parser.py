@@ -1,6 +1,6 @@
 import os
 from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyParser, StellaProductParser, Chloe_Parser, \
-    GivenchyProductParser, CanadaGooseProductParser, IsabelMarantParser, MCM_Parser
+    GivenchyProductParser, CanadaGooseProductParser, IsabelMarantParser, MCM_Parser, CultGaiaProductParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -84,6 +84,13 @@ category_list = ['men-sale.json?', 'women-sale.json?', 'men.json?', 'women.json?
 #Chloe End
 
 #MCM start
-mcm_parser=MCM_Parser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\mcm'
-mcm_parser.parse_directory(directory_path)
+#mcm_parser=MCM_Parser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\mcm'
+#mcm_parser.parse_directory(directory_path)
+#MCM End
+
+#Cult Gaia Start
+cult_gaia_parser=CultGaiaProductParser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\cult_gaia'
+cult_gaia_parser.parse_directory(directory_path)
+#Cult Gaia end
