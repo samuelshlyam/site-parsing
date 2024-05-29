@@ -1,6 +1,6 @@
 import os
-from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyParser, StellaProductParser,Chloe_Parser, \
-    GivenchyProductParser, CanadaGooseProductParser, IsabelMarantParser
+from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyParser, StellaProductParser, Chloe_Parser, \
+    GivenchyProductParser, CanadaGooseProductParser, IsabelMarantParser, MCM_Parser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -78,6 +78,12 @@ category_list = ['men-sale.json?', 'women-sale.json?', 'men.json?', 'women.json?
 #Isabel Marant End
 
 #Chloe Start
-Chloe_parser=Chloe_Parser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_files\chloe_parser_julian\brands_html\chloe'
-Chloe_parser.parse_directory(directory_path)
+#Chloe_parser=Chloe_Parser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_files\chloe_parser_julian\brands_html\chloe'
+#Chloe_parser.parse_directory(directory_path)
+#Chloe End
+
+#MCM start
+mcm_parser=MCM_Parser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\mcm'
+mcm_parser.parse_directory(directory_path)

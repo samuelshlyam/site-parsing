@@ -693,7 +693,6 @@ class Chloe_Parser(WebsiteParser):
             'user_category', 'product_url', 'product_name', 'price', 'original_price', 'image_urls', 'sizes',
             'availability', 'label'
         ]
-        all_products = []
         parsed_data.append(column_names)
         articlesChloe = soup.find_all('article', {'class': 'item'})
 
@@ -738,6 +737,49 @@ class Chloe_Parser(WebsiteParser):
 
             product_data.append(imgSource)
             product_data.append(category)
-            all_products.append(product_data)
-        return all_products
+            parsed_data.append(product_data)
+        return parsed_data
+class MCM_Parser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'mcm'  # Replace spaces with underscores
+        self.directory = directory
 
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+            'user_category', 'product_id', 'product_url', 'product_name', 'price', 'discounted_price', 'image_urls',
+            'availability'
+        ]
+        parsed_data.append(column_names)
+
+        product_tiles = soup.find_all('a', class_='product-tile')
+
+        for tile in product_tiles:
+            product_id = tile.get('data-itemid', '')
+            product_url = tile.get('href', '')
+            product_name = tile.find('h2').text.strip() if tile.find('h2') else ''
+
+            # Price and Discounted Price
+            price_element = tile.find('span', class_='price-value')
+            price = price_element.text.strip() if price_element else ''
+            discounted_price_element = tile.find('span', class_='product-sales-price')
+            discounted_price = discounted_price_element.find('span', class_='price-value').text.strip() if discounted_price_element else ''
+
+            # Extract all image URLs
+            image_elements = tile.find_all('source', media=True)
+            image_urls = [img['srcset'].split()[0] for img in image_elements if 'srcset' in img.attrs]
+
+            availability = tile.get('data-itemid', '')
+
+            product_data = [
+                category,
+                product_id,
+                product_url,
+                product_name,
+                price,
+                discounted_price,
+                ', '.join(image_urls),
+                availability
+            ]
+            parsed_data.append(product_data)
+        return parsed_data
