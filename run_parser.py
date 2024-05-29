@@ -11,12 +11,13 @@ bottega_parser = BottegaVenetaParser(output_directory_path)
 input_file_path = 'brands_html/bottega_veneta/women_bags.html'
 category = os.path.splitext(input_file_path)[0]  # Use the filename as the category  
 ##Uncomment to run##
-#bottega_parser_output = bottega_parser.parse_website(input_file_path, category)
-#bottega_parser.write_to_csv(bottega_parser_output)
+bottega_parser_output = bottega_parser.parse_website(input_file_path, category)
+bottega_parser.write_to_csv(bottega_parser_output)
 
 ##MULTIPLE FILE RUN, PASS DIRECTORY PATH
 ##Comment to run single file##
-# bottega_parser.parse_directory(directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\bottega_veneta'
+bottega_parser.parse_directory(directory_path)
 
 
 #GUCCI PRODUCT FETCH METHOD 2##
@@ -44,16 +45,16 @@ category_list = ['men-sale.json?', 'women-sale.json?', 'men.json?', 'women.json?
 #BALLY END
 
 #STELLA START
-stella_parser = StellaProductParser(output_directory_path)
+#stella_parser = StellaProductParser(output_directory_path)
 ##Comment to run single file##
-#directory_path = r'C:\Users\NikPopov\Desktop\msrp_html\utilities\site-parsing\internal_html\stella_mccartney'
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\stella_mccartney'
 #stella_parser.parse_directory(directory_path)
 #stella end
 
 #givenchy START
 #givenchy_parser = GivenchyProductParser(output_directory_path)
 ##Comment to run single file##
-#directory_path = r'C:\Users\NikPopov\Desktop\msrp_html\utilities\site-parsing\internal_html\givenchy'
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\givenchy'
 #givenchy_parser.parse_directory(directory_path)
 #givenchy END
 
@@ -70,7 +71,7 @@ stella_parser = StellaProductParser(output_directory_path)
 
 
 #Isabel Marant Start
-Isabel_Marant_Parser = IsabelMarantParser(output_directory_path)
+#Isabel_Marant_Parser = IsabelMarantParser(output_directory_path)
 ##Comment to run single file##
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\isabel_marant'
-Isabel_Marant_Parser.parse_directory(directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\isabel_marant'
+#Isabel_Marant_Parser.parse_directory(directory_path)

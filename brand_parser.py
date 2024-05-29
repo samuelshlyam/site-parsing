@@ -19,8 +19,6 @@ class BottegaVenetaParser(WebsiteParser):
         self.brand = 'bottega_veneta'  # Replace spaces with underscores
         self.directory = directory
 
-    def parse_website(self, source, category):
-        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
 
     def parse_product_blocks(self, soup, category):
         product_blocks = soup.find_all('article', class_='c-product')
@@ -89,45 +87,7 @@ class BottegaVenetaParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
-    def parse_directory(self, directory_path):
-        all_data = []
-        header_added = False
-        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt') or f.endswith('.html')])
-        processed_files = 0
 
-        print(f"Found {total_files} HTML files in the directory.")
-        print("Processing files...")
-
-        for filename in os.listdir(directory_path):
-            if filename.endswith('.txt') or filename.endswith('.html'):
-                file_path = os.path.join(directory_path, filename)
-                category = os.path.splitext(filename)[0]  # Use the filename as the category
-
-                tsv_output = self.parse_website(file_path, category)
-
-                if not header_added:
-                    all_data.append(tsv_output[0])  # Add the header row only once
-                    header_added = True
-
-                # Add the filename as a new column to the parsed data
-                for row in tsv_output[1:]:
-                    row.append(filename)
-                    all_data.append(row)
-
-                processed_files += 1
-                progress = (processed_files / total_files) * 100
-                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
-
-        # # Add the 'filename' column name to the header row
-        # all_data[0].append('filename')
-
-        print("Writing data to CSV file...")
-        #self.write_to_tsv(output_file, all_data)
-        self.write_to_csv(all_data)
-
-        print(f"Parsing completed. CSV file saved as: {self.directory}")
-
-        return all_data
 
 class GucciParser():
     ##COMPLETE
@@ -235,9 +195,6 @@ class FendiParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'fendi'  
         self.directory = directory
-        
-    def parse_website(self, source, category):
-        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
 
     def parse_product_blocks(self, soup, category):
         parsed_data = []
@@ -270,42 +227,7 @@ class FendiParser(WebsiteParser):
                 print(f"Error parsing block: {e}")
 
         return parsed_data
-    def parse_directory(self, directory_path):
-        all_data = []
-        header_added = False
-        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt') or f.endswith('.html')])
-        processed_files = 0
 
-        print(f"Found {total_files} HTML files in the directory.")
-        print("Processing files...")
-
-        for filename in os.listdir(directory_path):
-            if filename.endswith('.txt')  or filename.endswith('.html'):
-                file_path = os.path.join(directory_path, filename)
-                category = os.path.splitext(filename)[0]  # Use the filename as the category
-
-                tsv_output = self.parse_website(file_path, category)
-
-                if not header_added:
-                    all_data.append(tsv_output[0])  # Add the header row only once
-                    header_added = True
-
-                # Add the filename as a new column to the parsed data
-                for row in tsv_output[1:]:
-                    row.append(filename)
-                    all_data.append(row)
-
-                processed_files += 1
-                progress = (processed_files / total_files) * 100
-                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
-
-        print("Writing data to CSV file...")
-        # self.write_to_tsv(output_file, all_data)
-        self.write_to_csv(all_data)
-
-        print(f"Parsing completed. CSV file saved as: {self.directory}")
-
-        return all_data
 
 class GivenchyProductParser(WebsiteParser):
     ## This class parses the HTML files from the Bottega Veneta website.
@@ -357,44 +279,7 @@ class GivenchyProductParser(WebsiteParser):
 
         return parsed_data
     
-    def parse_website(self, source, category):
-        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
 
-    def parse_directory(self, directory_path):
-        all_data = []
-        header_added = False
-        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt') or f.endswith('.html')])
-        processed_files = 0
-
-        print(f"Found {total_files} HTML files in the directory.")
-        print("Processing files...")
-
-        for filename in os.listdir(directory_path):
-            if filename.endswith('.txt') or filename.endswith('.html'):
-                file_path = os.path.join(directory_path, filename)
-                category = os.path.splitext(filename)[0]  # Use the filename as the category
-
-                tsv_output = self.parse_website(file_path, category)
-
-                if not header_added:
-                    tsv_output[0].append('filename')  # Add the new column name for filename
-                    all_data.append(tsv_output[0])  # Add the header row only once
-                    header_added = True
-
-                # Add the filename as a new column to the parsed data
-                for row in tsv_output[1:]:
-                    row.append(filename)
-                    all_data.append(row)
-
-                processed_files += 1
-                progress = (processed_files / total_files) * 100
-                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
-
-        print("Writing data to CSV file...")
-        self.write_to_csv(all_data)
-
-
-        return all_data
 class CanadaGooseProductParser(WebsiteParser):
     ## This class parses the HTML files from the Bottega Veneta website.
     ## website: https://www.canadagoose.com/us/en
@@ -444,47 +329,12 @@ class CanadaGooseProductParser(WebsiteParser):
 
         return parsed_data
     
-    def parse_website(self, source, category):
-        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
 
-    def parse_directory(self, directory_path):
-        all_data = []
-        header_added = False
-        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt') or f.endswith('.html')])
-        processed_files = 0
-
-        print(f"Found {total_files} HTML files in the directory.")
-        print("Processing files...")
-
-        for filename in os.listdir(directory_path):
-            if filename.endswith('.txt') or filename.endswith('.html'):
-                file_path = os.path.join(directory_path, filename)
-                category = os.path.splitext(filename)[0]  # Use the filename as the category
-
-                tsv_output = self.parse_website(file_path, category)
-
-                if not header_added:
-                    tsv_output[0].append('filename')  # Add the new column name for filename
-                    all_data.append(tsv_output[0])  # Add the header row only once
-                    header_added = True
-
-                # Add the filename as a new column to the parsed data
-                for row in tsv_output[1:]:
-                    row.append(filename)
-                    all_data.append(row)
-
-                processed_files += 1
-                progress = (processed_files / total_files) * 100
-                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
-
-        print("Writing data to CSV file...")
-        self.write_to_csv(all_data)
-
-        return all_data
 
 class VejaProductParser(WebsiteParser):
-    def parse_website(self, source, category):
-        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
+    def __init__(self, directory):
+        self.brand = 'stella_mccartney'  # Replace spaces with underscores
+        self.directory = directory
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
@@ -517,42 +367,6 @@ class VejaProductParser(WebsiteParser):
 
         return parsed_data
 
-    def parse_directory(self, directory_path, output_file):
-        all_data = []
-        header_added = False
-        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt')])
-        processed_files = 0
-
-        print(f"Found {total_files} HTML files in the directory.")
-        print("Processing files...")
-
-        for filename in os.listdir(directory_path):
-            if filename.endswith('.txt'):
-                file_path = os.path.join(directory_path, filename)
-                category = os.path.splitext(filename)[0]  # Use the filename as the category
-
-                tsv_output = self.parse_website(file_path, category)
-
-                if not header_added:
-                    tsv_output[0].append('filename')  # Add the new column name for filename
-                    all_data.append(tsv_output[0])  # Add the header row only once
-                    header_added = True
-
-                # Add the filename as a new column to the parsed data
-                for row in tsv_output[1:]:
-                    row.append(filename)
-                    all_data.append(row)
-
-                processed_files += 1
-                progress = (processed_files / total_files) * 100
-                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
-
-        print("Writing data to CSV file...")
-        self.write_to_csv(output_file, all_data)
-
-        print(f"Parsing completed. CSV file saved as: {output_file}")
-
-        return all_data
     
 class StellaProductParser(WebsiteParser):
 
@@ -561,9 +375,6 @@ class StellaProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'stella_mccartney'  # Replace spaces with underscores
         self.directory = directory
-
-    def parse_website(self, source, category):
-        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
 
     def parse_product_blocks(self, soup, category):
         parsed_data = []
@@ -615,44 +426,12 @@ class StellaProductParser(WebsiteParser):
 
         return parsed_data
 
-    def parse_directory(self, directory_path):
-        all_data = []
-        header_added = False
-        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt') or f.endswith('.html')])
-        processed_files = 0
 
-        print(f"Found {total_files} HTML files in the directory.")
-        print("Processing files...")
-
-        for filename in os.listdir(directory_path):
-            if filename.endswith('.txt') or filename.endswith('.html'):
-                file_path = os.path.join(directory_path, filename)
-                category = os.path.splitext(filename)[0]  # Use the filename as the category
-
-                tsv_output = self.parse_website(file_path, category)
-
-                if not header_added:
-                    tsv_output[0].append('filename')  # Add the new column name for filename
-                    all_data.append(tsv_output[0])  # Add the header row only once
-                    header_added = True
-
-                # Add the filename as a new column to the parsed data
-                for row in tsv_output[1:]:
-                    row.append(filename)
-                    all_data.append(row)
-
-                processed_files += 1
-                progress = (processed_files / total_files) * 100
-                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
-
-        print("Writing data to CSV file...")
-        self.write_to_csv(all_data)
-
-        print(f"Parsing completed. CSV file saved as: {self.directory}")
-
-        return all_data
     
 class TomFordProductParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'tom_ford'  # Replace spaces with underscores
+        self.directory = directory
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
@@ -691,46 +470,12 @@ class TomFordProductParser(WebsiteParser):
 
         return parsed_data
     
-    def parse_website(self, source, category):
-        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
-    def parse_directory(self, directory_path, output_file):
-        all_data = []
-        header_added = False
-        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt')])
-        processed_files = 0
 
-        print(f"Found {total_files} HTML files in the directory.")
-        print("Processing files...")
-
-        for filename in os.listdir(directory_path):
-            if filename.endswith('.txt'):
-                file_path = os.path.join(directory_path, filename)
-                category = os.path.splitext(filename)[0]  # Use the filename as the category
-
-                tsv_output = self.parse_website(file_path, category)
-
-                if not header_added:
-                    tsv_output[0].append('filename')  # Add the new column name for filename
-                    all_data.append(tsv_output[0])  # Add the header row only once
-                    header_added = True
-
-                # Add the filename as a new column to the parsed data
-                for row in tsv_output[1:]:
-                    row.append(filename)
-                    all_data.append(row)
-
-                processed_files += 1
-                progress = (processed_files / total_files) * 100
-                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
-
-        print("Writing data to CSV file...")
-        self.write_to_csv(output_file, all_data)
-
-        print(f"Parsing completed. CSV file saved as: {output_file}")
-
-        return all_data
     
 class OffWhiteProductParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'off_white'  # Replace spaces with underscores
+        self.directory = directory
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
@@ -783,46 +528,8 @@ class OffWhiteProductParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
-
-    def parse_website(self, source, category):
-        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
     
-    def parse_directory(self, directory_path, output_file):
-        all_data = []
-        header_added = False
-        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt')])
-        processed_files = 0
 
-        print(f"Found {total_files} HTML files in the directory.")
-        print("Processing files...")
-
-        for filename in os.listdir(directory_path):
-            if filename.endswith('.txt'):
-                file_path = os.path.join(directory_path, filename)
-                category = os.path.splitext(filename)[0]  # Use the filename as the category
-
-                tsv_output = self.parse_website(file_path, category)
-
-                if not header_added:
-                    tsv_output[0].append('filename')  # Add the new column name for filename
-                    all_data.append(tsv_output[0])  # Add the header row only once
-                    header_added = True
-
-                # Add the filename as a new column to the parsed data
-                for row in tsv_output[1:]:
-                    row.append(filename)
-                    all_data.append(row)
-
-                processed_files += 1
-                progress = (processed_files / total_files) * 100
-                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
-
-        print("Writing data to TSV file...")
-        self.write_to_csv(output_file, all_data)
-
-        print(f"Parsing completed. TSV file saved as: {output_file}")
-
-        return all_data
     
 class BallyParser():
     ##COMPLETE
@@ -922,6 +629,7 @@ class IsabelMarantParser(WebsiteParser):
         self.brand = 'isabel_marant'  # Replace spaces with underscores
         self.directory = directory
 
+
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
@@ -974,49 +682,6 @@ class IsabelMarantParser(WebsiteParser):
 
         return parsed_data
 
-    def parse_website(self, source, category):
-        with open(source, 'r', encoding='utf-8') as file:
-            content = file.read()
-        soup = BeautifulSoup(content, 'html.parser')
-        return self.parse_product_blocks(soup, category)
-
-    def parse_website(self, source, category):
-        return super().parse_website(source, lambda soup: self.parse_product_blocks(soup, category))
-
-    def parse_directory(self, directory_path):
-        all_data = []
-        header_added = False
-        total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt') or f.endswith('.html')])
-        processed_files = 0
-
-        print(f"Found {total_files} HTML files in the directory.")
-        print("Processing files...")
-
-        for filename in os.listdir(directory_path):
-            if filename.endswith('.txt') or filename.endswith('.html'):
-                file_path = os.path.join(directory_path, filename)
-                category = os.path.splitext(filename)[0]  # Use the filename as the category
-
-                tsv_output = self.parse_website(file_path, category)
-
-                if not header_added:
-                    tsv_output[0].append('filename')  # Add the new column name for filename
-                    all_data.append(tsv_output[0])  # Add the header row only once
-                    header_added = True
-
-                # Add the filename as a new column to the parsed data
-                for row in tsv_output[1:]:
-                    row.append(filename)
-                    all_data.append(row)
-
-                processed_files += 1
-                progress = (processed_files / total_files) * 100
-                print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
-
-        print("Writing data to CSV file...")
-        self.write_to_csv(all_data)
-
-        return all_data
 
 
 
