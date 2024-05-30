@@ -3,7 +3,7 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     GivenchyProductParser, CanadaGooseProductParser, IsabelMarantParser, MCM_Parser, CultGaiaProductParser, \
     GoldenGooseProductParser, FendiParser, BalenciagaParser, SaintLaurentParser, AlexanderMcqueenParser, \
     Dolce_Gabbana_Parser, StoneIslandParser, EtroProductParser, MonclerParser, BalmainProductParser, \
-    VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser
+    VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -94,9 +94,9 @@ output_directory_path = "parser-output"
 #Chloe End
 
 #MCM start
-mcm_parser=MCM_Parser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\mcm'
-mcm_parser.parse_directory(directory_path)
+#mcm_parser=MCM_Parser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\mcm'
+#mcm_parser.parse_directory(directory_path)
 #MCM End
 
 #Cult Gaia Start
@@ -200,3 +200,10 @@ mcm_parser.parse_directory(directory_path)
 #directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\kenzo'
 #kenzoParser.parse_directory(directory_path)
 #Kenzo End
+
+
+#Jimmy Choo Start
+#jimmyChooParser = JimmyChooParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\jimmy_choo'
+#jimmyChooParser.parse_directory(directory_path)
+#JimmyChoo End
