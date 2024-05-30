@@ -73,9 +73,9 @@ output_directory_path = "parser-output"
 #Canada Goose END
 
 #Veja Start
-VejaParser = VejaProductParser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\veja'
-VejaParser.parse_directory(directory_path)
+#VejaParser = VejaProductParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\veja'
+#VejaParser.parse_directory(directory_path)
 #Veja End
 
 
@@ -94,9 +94,9 @@ VejaParser.parse_directory(directory_path)
 #Chloe End
 
 #MCM start
-#mcm_parser=MCM_Parser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\mcm'
-#mcm_parser.parse_directory(directory_path)
+mcm_parser=MCM_Parser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\mcm'
+mcm_parser.parse_directory(directory_path)
 #MCM End
 
 #Cult Gaia Start
