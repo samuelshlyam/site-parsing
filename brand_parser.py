@@ -1,4 +1,6 @@
 import os
+import re
+
 import requests
 from bs4 import BeautifulSoup
 import csv
@@ -629,7 +631,7 @@ class IsabelMarantParser(WebsiteParser):
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
-            'user_category', 'product_url', 'product_name', 'price', 'original_price', 'image_urls', 'sizes',
+            'user_category', 'product_url', 'product_name', 'price', 'discounted_price', 'image_urls', 'sizes',
             'availability', 'label'
         ]
         parsed_data.append(column_names)
@@ -640,12 +642,23 @@ class IsabelMarantParser(WebsiteParser):
             product_url = item.find('a', class_='product-item__aspect-ratio')['href'] if item.find('a',class_='product-item__aspect-ratio') else ''
             product_name = item.find('a', class_='product-item-meta__title').text.strip() if item.find('a',class_='product-item-meta__title') else ''
 
-            price_element = item.find('span', class_='price--highlight')
-            price = price_element.text.strip() if price_element else ''
+            price_element = item.find('span', class_='price--compare')
+            discounted_price_element = item.find('span', class_='price--highlight')
 
-            original_price_element = item.find('span', class_='price--compare')
-            original_price = original_price_element.text.strip() if original_price_element else ''
+            price = ''
+            discounted_price = ''
 
+            if price_element and discounted_price_element:
+                price = price_element.text.strip()
+                discounted_price = discounted_price_element.text.strip()
+            else:
+                # For non-discounted items
+                regular_price_element = item.find('span', class_='price')
+                if regular_price_element:
+                    price = regular_price_element.text.strip()
+
+            price = re.sub(r'[^\d.,]', '', price)
+            discounted_price = re.sub(r'[^\d.,]', '', discounted_price)
             # Extract all image URLs
             image_elements = item.find_all('img')
             image_urls = [img.get('src') for img in image_elements if img.get('src')]
@@ -668,7 +681,7 @@ class IsabelMarantParser(WebsiteParser):
                 product_url,
                 product_name,
                 price,
-                original_price,
+                discounted_price,
                 ', '.join(image_urls),
                 ', '.join(sizes),
                 ', '.join(availability),
@@ -1292,6 +1305,70 @@ class StoneIslandParser(WebsiteParser):
                 product_is_in_stock,
                 a_href,
                 img,
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+
+class EtroProductParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'etro'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+            'user_category', 'product_id', 'product_url', 'product_name', 'price', 'discounted_price', 'image_urls'
+        ]
+        parsed_data.append(column_names)
+
+        product_tiles = soup.find_all('article', class_='producttile')
+
+        for tile in product_tiles:
+            product_id = tile['data-productid'] if 'data-productid' in tile.attrs else ''
+            product_url = tile.find('a', class_='producttile-gallery-inner')['href'] if tile.find('a',
+                                                                                                  class_='producttile-gallery-inner') else ''
+            product_name = tile.find('h2', class_='producttile-name').text.strip() if tile.find('h2',
+                                                                                                class_='producttile-name') else ''
+
+            # Price elements
+            price = ''
+            discounted_price = ''
+            price_element = tile.find('span', class_='price--full')
+            discounted_price_element = tile.find('span', class_='price--current')
+
+            if price_element and discounted_price_element:
+                price = price_element.text.strip()
+                discounted_price = discounted_price_element.text.strip()
+            elif discounted_price_element:
+                price = discounted_price_element.text.strip()
+
+            # Extract all image URLs
+            image_urls = []
+            picture_elements = tile.find_all('picture')
+            for picture in picture_elements:
+                source_elements = picture.find_all('source')
+                for source in source_elements:
+                    srcset = source.get('data-srcset', '').split(',')
+                    for src in srcset:
+                        url = src.strip().split(' ')[0]
+                        if url:
+                            image_urls.append(url)
+                img_elements = picture.find_all('img')
+                for img in img_elements:
+                    url = img.get('data-src', '') or img.get('src', '')
+                    if url:
+                        image_urls.append(url)
+
+            product_data = [
+                category,
+                product_id,
+                product_url,
+                product_name,
+                price,
+                discounted_price,
+                ', '.join(image_urls)
             ]
             parsed_data.append(product_data)
 

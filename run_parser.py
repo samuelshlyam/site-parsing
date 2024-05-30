@@ -2,7 +2,7 @@ import os
 from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyParser, StellaProductParser, Chloe_Parser, \
     GivenchyProductParser, CanadaGooseProductParser, IsabelMarantParser, MCM_Parser, CultGaiaProductParser, \
     GoldenGooseProductParser, FendiParser, BalenciagaParser, SaintLaurentParser, AlexanderMcqueenParser, \
-    Dolce_Gabbana_Parser, StoneIslandParser
+    Dolce_Gabbana_Parser, StoneIslandParser, EtroProductParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -10,7 +10,7 @@ output_directory_path = "parser-output"
 ##Bottega Veneta Parser METHOD 1##
 #bottega_parser = BottegaVenetaParser(output_directory_path)
 ##SINGLE FILE RUN##
-#input_file_path = 'brands_html/bottega_veneta/women_bags.html'
+#input_file_path = 'brands_html/bottega_veneta/women_bags.html.html'
 #category = os.path.splitext(input_file_path)[0]  # Use the filename as the category
 ##Uncomment to run##
 #bottega_parser_output = bottega_parser.parse_website(input_file_path, category)
@@ -73,10 +73,10 @@ output_directory_path = "parser-output"
 
 
 #Isabel Marant Start
-#Isabel_Marant_Parser = IsabelMarantParser(output_directory_path)
+Isabel_Marant_Parser = IsabelMarantParser(output_directory_path)
 ##Comment to run single file##
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\isabel_marant'
-#Isabel_Marant_Parser.parse_directory(directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\isabel_marant'
+Isabel_Marant_Parser.parse_directory(directory_path)
 #Isabel Marant End
 
 #Chloe Start
@@ -141,7 +141,14 @@ output_directory_path = "parser-output"
 #Dolce End
 
 #Stone Island Start
-StoneParser = StoneIslandParser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\stone_island'
-StoneParser.parse_directory(directory_path)
+#StoneParser = StoneIslandParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\stone_island'
+#StoneParser.parse_directory(directory_path)
 #Stone Island End
+
+
+#Etro Start
+#EtroParser = EtroProductParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\etro'
+#EtroParser.parse_directory(directory_path)
+#Etro End
