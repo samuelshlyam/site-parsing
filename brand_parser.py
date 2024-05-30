@@ -1911,3 +1911,62 @@ class BrunelloCucinelliParser(WebsiteParser):
         text = re.sub(r'[\r\n]+', ' ', text)  # Replace newlines and multiple returns with a single space
         text = re.sub(r'\s{2,}', ' ', text)  # Replace multiple spaces with a single space
         return text.strip()
+
+
+class DSquaredParser(WebsiteParser):
+
+    def __init__(self, directory):
+        self.brand = 'dsquared2'  # Replace with brand name
+        self.directory = directory
+
+    # THIS WILL BE EDITED FOR EACH BRAND. THIS SHOULD BE THE ONLY CODE BEING UPDATED. MUST BE NAMED parse_product_blocks
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        container_prods = soup.find('div', {'id': 'productgrid'})
+        articulos = container_prods.find_all('section')
+
+        ##SELECT ALL BLOCKS FIRST
+
+        column_names = [
+            'data_id', 'name_prod', 'product_originalprice_tf', 'product_discount_tf', 'product_currentprice_tf',
+            'product_instock', 'product_breadcrumb_label', 'url', 'imgs']
+        parsed_data.append(column_names)
+
+        for articulo in articulos:
+            data_id = articulo.get('data-id', '')
+            name_prod = articulo.get('aria-label', '')
+
+            info_data = articulo.get('data-tc-analytics', '')
+            info_data = html.unescape(info_data)
+            info_data = json.loads(info_data) if info_data else None
+            if info_data:
+                product_originalprice_tf = info_data.get('product_originalprice_tf', '')
+
+                product_discount_tf = info_data.get('product_discount_tf', '')
+                product_currentprice_tf = info_data.get('product_currentprice_tf', '')
+
+                product_instock = info_data.get('product_instock', '')
+                product_breadcrumb_label = info_data.get('product_breadcrumb_label', '')
+                url = info_data.get('product_url_page', '')
+
+                imgs = articulo.find_all('img')
+                imgs_list = []
+                for img in imgs:
+                    img_src = img.get('src', '')
+                    imgs_list.append(img_src)
+
+                imgs = ", ".join(imgs_list)
+                product_data = [
+                    data_id,
+                    name_prod,
+                    product_originalprice_tf,
+                    product_discount_tf,
+                    product_currentprice_tf,
+                    product_instock,
+                    product_breadcrumb_label,
+                    url,
+                    imgs,
+                ]
+                parsed_data.append(product_data)
+
+        return parsed_data

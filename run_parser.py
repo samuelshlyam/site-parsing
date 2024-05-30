@@ -4,7 +4,7 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     GoldenGooseProductParser, FendiParser, BalenciagaParser, SaintLaurentParser, AlexanderMcqueenParser, \
     Dolce_Gabbana_Parser, StoneIslandParser, EtroProductParser, MonclerParser, BalmainProductParser, \
     VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser, \
-    BrunelloCucinelliParser
+    BrunelloCucinelliParser, DSquaredParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -190,9 +190,9 @@ output_directory_path = "parser-output"
 
 
 #Burberry Start
-burberryParser = BurberryParser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\burberry'
-burberryParser.parse_directory(directory_path)
+#burberryParser = BurberryParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\burberry'
+#burberryParser.parse_directory(directory_path)
 #Burberry End
 
 
@@ -215,3 +215,9 @@ burberryParser.parse_directory(directory_path)
 #directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\brunello_cucinelli'
 #brunelloCucinelliParser.parse_directory(directory_path)
 #Brunello Cucinelli End
+
+#DSquared2 Start
+dSquaredParser = DSquaredParser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\dsquared2'
+dSquaredParser.parse_directory(directory_path)
+#DSquared2 End
