@@ -701,8 +701,7 @@ class Chloe_Parser(WebsiteParser):
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
-            'user_category', 'product_url', 'product_name', 'price', 'original_price', 'image_urls', 'sizes',
-            'availability', 'label'
+            'Cod10', 'Title', 'Price', 'position', 'category', 'macro_category', 'micro_category', 'macro_category_id', 'micro_category_id', 'color', 'color_id', 'product_price', 'discountedPrice', 'price_tf', 'discountedPrice_tf', 'quantity', 'coupon', 'is_in_stock', 'list', 'url', 'img_src', 'filename'
         ]
         parsed_data.append(column_names)
         articlesChloe = soup.find_all('article', {'class': 'item'})
@@ -1818,3 +1817,97 @@ class JimmyChooParser(WebsiteParser):
             ]
             parsed_data.append(product_data)
         return parsed_data
+
+
+class BrunelloCucinelliParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'brunello_cucinelli'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+        column_names = [
+            'user_category', 'product_url', 'product_id', 'product_name', 'price', 'discounted_price', 'image_urls',
+            'sizes',
+            'availability', 'label'
+        ]
+        parsed_data.append(column_names)
+
+        product_items = soup.find_all('div', class_='product')
+
+        for item in product_items:
+            product_url_element_list = list(item.find_all('a', class_='js-pdp-variant-link'))
+            try:
+                product_url_element = product_url_element_list[0] if product_url_element_list[0] else ''
+                product_name_element = product_url_element_list[1] if product_url_element_list[1] else ''
+            except:
+                product_url_element = ''
+                product_name_element = ''
+            product_url = product_url_element['href'] if product_url_element else ''
+            product_id = product_url_element['data-pid'] if product_url_element else ''
+            product_name = product_name_element.get_text() if product_name_element else ''
+            product_name = self.clean_text(product_name)
+
+
+            price_element = item.find('span', class_='price')
+            discounted_price_element = item.find('span', class_='sales cc-sales')
+
+            price = ''
+            discounted_price = ''
+
+            if price_element and discounted_price_element:
+                price = price_element.find('span', class_='value').text.strip() if price_element.find('span',
+                                                                                                      class_='value') else ''
+                discounted_price = discounted_price_element.find('span',
+                                                                 class_='value').text.strip() if discounted_price_element.find(
+                    'span', class_='value') else ''
+            else:
+                regular_price_element = item.find('span', class_='cc-price-text')
+                if regular_price_element:
+                    price = regular_price_element.text.strip()
+
+            # Clean up the price and discounted price
+            price = re.sub(r'[^\d.,]', '', price)
+            discounted_price = re.sub(r'[^\d.,]', '', discounted_price)
+
+            # Extract all image URLs
+            image_elements = item.find_all('img')
+            image_urls = [img.get('src') for img in image_elements if img.get('src')]
+
+            # Extract sizes and availability
+            sizes_list = item.find_all('li', class_='cc-size-container')
+            sizes = []
+            availability = []
+            if sizes_list:
+                for li in sizes_list:
+                    size_text = li.find('label').text.strip() if li.find('label') else ''
+                    sizes.append(size_text)
+                    availability.append(
+                        'available' if 'cc-size-no-available' not in li.get('class', []) else 'not available')
+
+            # Extract labels (if any)
+            label_elements = item.find_all('span', class_='cc-product-tag')
+            labels = [label.text.strip() for label in label_elements if label.text.strip()]
+
+            product_data = [
+                category,
+                product_url,
+                product_id,
+                product_name,
+                price,
+                discounted_price,
+                ', '.join(image_urls),
+                ', '.join(sizes),
+                ', '.join(availability),
+                ', '.join(labels)
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+    def clean_text(self,text):
+        # Remove excessive whitespace and unwanted price or other numeric values
+        text = re.sub(r'\$\d+,*\d*\.*\d*', '', text)  # Remove price
+        text = re.sub(r'[\r\n]+', ' ', text)  # Replace newlines and multiple returns with a single space
+        text = re.sub(r'\s{2,}', ' ', text)  # Replace multiple spaces with a single space
+        return text.strip()

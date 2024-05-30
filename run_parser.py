@@ -3,7 +3,8 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     GivenchyProductParser, CanadaGooseProductParser, IsabelMarantParser, MCM_Parser, CultGaiaProductParser, \
     GoldenGooseProductParser, FendiParser, BalenciagaParser, SaintLaurentParser, AlexanderMcqueenParser, \
     Dolce_Gabbana_Parser, StoneIslandParser, EtroProductParser, MonclerParser, BalmainProductParser, \
-    VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser
+    VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser, \
+    BrunelloCucinelliParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -207,3 +208,10 @@ output_directory_path = "parser-output"
 #directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\jimmy_choo'
 #jimmyChooParser.parse_directory(directory_path)
 #JimmyChoo End
+
+
+#Brunello Cucinelli Start
+brunelloCucinelliParser = BrunelloCucinelliParser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\brunello_cucinelli'
+brunelloCucinelliParser.parse_directory(directory_path)
+#Brunello Cucinelli End
