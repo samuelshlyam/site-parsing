@@ -2,7 +2,8 @@ import os
 from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyParser, StellaProductParser, Chloe_Parser, \
     GivenchyProductParser, CanadaGooseProductParser, IsabelMarantParser, MCM_Parser, CultGaiaProductParser, \
     GoldenGooseProductParser, FendiParser, BalenciagaParser, SaintLaurentParser, AlexanderMcqueenParser, \
-    Dolce_Gabbana_Parser, StoneIslandParser, EtroProductParser
+    Dolce_Gabbana_Parser, StoneIslandParser, EtroProductParser, MonclerParser, BalmainProductParser, \
+    VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -71,17 +72,24 @@ output_directory_path = "parser-output"
 
 #Canada Goose END
 
+#Veja Start
+VejaParser = VejaProductParser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\veja'
+VejaParser.parse_directory(directory_path)
+#Veja End
+
+
 
 #Isabel Marant Start
-Isabel_Marant_Parser = IsabelMarantParser(output_directory_path)
+#Isabel_Marant_Parser = IsabelMarantParser(output_directory_path)
 ##Comment to run single file##
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\isabel_marant'
-Isabel_Marant_Parser.parse_directory(directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\isabel_marant'
+#Isabel_Marant_Parser.parse_directory(directory_path)
 #Isabel Marant End
 
 #Chloe Start
 #Chloe_parser=Chloe_Parser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_files\chloe_parser_julian\brands_html\chloe'
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\chloe'
 #Chloe_parser.parse_directory(directory_path)
 #Chloe End
 
@@ -152,3 +160,43 @@ Isabel_Marant_Parser.parse_directory(directory_path)
 #directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\etro'
 #EtroParser.parse_directory(directory_path)
 #Etro End
+
+#Balmain Start
+#BalmainParser = BalmainProductParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\balmain'
+#BalmainParser.parse_directory(directory_path)
+#Balmain End
+
+
+#Moncler Start
+#cookie= r'dwanonymous_6ff516fc64e5194a34356fc83db5a3b8=adhFdfPauAzgggM6avxKkbPflW; __cq_dnt=1; dw_dnt=1; dw_locale=en_US; rskxRunCookie=0; rCookie=36ssfsyb702aciihw01iwhlwryawsn; _fwb=1975g8QlX9fyClXBHhkbN6F.1716994684493; OptanonAlertBoxClosed=2024-05-29T14:58:07.857Z; OneTrustChoices=%7B%22action%22%3A%22ConsentTracking-OneTrust%22%2C%22queryString%22%3A%22optanonag%3D%252CC0001%252CH1%252CH7%252CH17%252CH8%252CH9%252C%22%2C%22locale%22%3A%22en_US%22%2C%22originalUri%22%3A%22https%3A%2F%2Fwww.moncler.com%2Fen-us%2Fconsent%2Fonetrust%2F%3Foptanonag%3D%252CC0001%252CH1%252CH7%252CH17%252CH8%252CH9%252C%22%2C%22success%22%3Atrue%2C%22cqtracking%22%3Afalse%2C%22gatraking%22%3Afalse%2C%22mcTraking%22%3Afalse%2C%22raTraking%22%3Afalse%2C%22meTracking%22%3Afalse%7D; sid=o0Jf9kgEuinJ59Dskka4dzkEcro3HfHBqOk; dwsid=F-y7KdVQqfreAnM4Olq2Jo2qlmWqSeISvwyA5sySefVH5gjtstEPYlHZ334dmY2aGrVN19QleeoR_K8W6_I0JQ==; lastRskxRun=1717084755902; RT="sl=1&ss=1717084737280&tt=2276&obo=0&sh=1717084739557%3D1%3A0%3A2276&dm=moncler.com&si=mkpaxe8itra&rl=1"; OptanonConsent=isGpcEnabled=0&datestamp=Thu+May+30+2024+11%3A59%3A16+GMT-0400+(Eastern+Daylight+Time)&version=202403.1.0&browserGpcFlag=0&isIABGlobal=false&consentId=78b98805-e066-4a97-83ef-75f4f2c60f4a&interactionCount=1&isAnonUser=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A0%2CC0004%3A0%2CC0003%3A0&hosts=H1%3A1%2CH7%3A1%2CH17%3A1%2CH8%3A1%2CH9%3A1%2CH15%3A0%2CH43%3A0%2CH18%3A0%2CH42%3A0%2CH48%3A0%2CH19%3A0%2CH46%3A0%2CH2%3A0%2CH20%3A0%2CH21%3A0%2CH40%3A0%2CH22%3A0%2CH23%3A0%2CH44%3A0%2CH24%3A0%2CH5%3A0%2CH25%3A0%2CH6%3A0%2CH26%3A0%2CH27%3A0%2CH41%3A0%2CH16%3A0%2CH28%3A0%2CH29%3A0%2CH30%3A0%2CH31%3A0%2CH49%3A0%2CH32%3A0%2CH45%3A0%2CH33%3A0%2CH34%3A0%2CH39%3A0%2CH35%3A0%2CH13%3A0%2CH36%3A0%2CH38%3A0%2CH37%3A0%2CH47%3A0%2CH50%3A0%2CH4%3A0%2CH11%3A0&genVendors=V1%3A0%2C&geolocation=US%3BNY&AwaitingReconsent=false'
+#categories = ['']
+#Moncler_Parser=MonclerParser()
+#Moncler_Parser.process_categories(categories,cookie)
+#Moncler End
+
+#Versace Start
+#VersaceParser = VersaceProductParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\versace'
+#VersaceParser.parse_directory(directory_path)
+#Versace End
+
+#Ferragamo Start
+#FerragamoParser = FerragamoProductParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\ferragamo'
+#FerragamoParser.parse_directory(directory_path)
+#Ferragamo End
+
+
+#Burberry Start
+#burberryParser = BurberryParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\burberry'
+#burberryParser.parse_directory(directory_path)
+#Burberry End
+
+
+#Kenzo Start
+#kenzoParser = KenzoParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\kenzo'
+#kenzoParser.parse_directory(directory_path)
+#Kenzo End
