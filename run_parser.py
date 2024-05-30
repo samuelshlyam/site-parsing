@@ -190,9 +190,9 @@ output_directory_path = "parser-output"
 
 
 #Burberry Start
-#burberryParser = BurberryParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\burberry'
-#burberryParser.parse_directory(directory_path)
+burberryParser = BurberryParser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\burberry'
+burberryParser.parse_directory(directory_path)
 #Burberry End
 
 
@@ -211,7 +211,7 @@ output_directory_path = "parser-output"
 
 
 #Brunello Cucinelli Start
-brunelloCucinelliParser = BrunelloCucinelliParser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\brunello_cucinelli'
-brunelloCucinelliParser.parse_directory(directory_path)
+#brunelloCucinelliParser = BrunelloCucinelliParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\brunello_cucinelli'
+#brunelloCucinelliParser.parse_directory(directory_path)
 #Brunello Cucinelli End
