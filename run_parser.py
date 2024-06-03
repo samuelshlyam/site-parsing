@@ -190,9 +190,9 @@ output_directory_path = "parser-output"
 
 
 #Burberry Start
-#burberryParser = BurberryParser(output_directory_path)
-#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/burberry'
-#burberryParser.parse_directory(directory_path)
+burberryParser = BurberryParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/burberry'
+burberryParser.parse_directory(directory_path)
 #Burberry End
 
 
@@ -231,7 +231,7 @@ output_directory_path = "parser-output"
 
 
 #Loro Piana Start
-categories=['L1_MEN','L1_WOM','L2_MEN_ACCESSORIES','L2_WOM_LG','L2_WOM_ACCESSORIES','L2_SHOES_WOM','L2_WOM_SLG','L2_SHOES_MAN',]
-LoroParser=LoroPianaParser()
-LoroParser.process_categories(categories)
+#categories=['L1_MEN','L1_WOM','L2_MEN_ACCESSORIES','L2_WOM_LG','L2_WOM_ACCESSORIES','L2_SHOES_WOM','L2_WOM_SLG','L2_SHOES_MAN',]
+#LoroParser=LoroPianaParser()
+#LoroParser.process_categories(categories)
 #Loro Piana End

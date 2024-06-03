@@ -1629,7 +1629,7 @@ class BurberryParser(WebsiteParser):
             base_url = "https://us.burberry.com/"
 
         for product in product_blocks:
-            name = product.select_one('.product-card-v2-title, .product-card-content__title').get_text(strip=True)
+            name = product.select_one('.product-card-v2-title, .product-card-content__title').get_text(strip=True) if product.select_one('.product-card-v2-title, .product-card-content__title') else ''
 
             product_link = urljoin(base_url, product['href'])
 
@@ -1637,7 +1637,7 @@ class BurberryParser(WebsiteParser):
             product_id = product_id.group(1) if product_id else "unavailable"
 
             price = product.select_one('.product-card-price__current-price, .product-card-v2-price__current').get_text(
-                strip=True)
+                strip=True) if product.select_one('.product-card-price__current-price, .product-card-v2-price__current') else ''
 
             discount_price = ""  # empty for now and can be added later if found
 
