@@ -4,7 +4,7 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     GoldenGooseProductParser, FendiParser, BalenciagaParser, SaintLaurentParser, AlexanderMcqueenParser, \
     Dolce_Gabbana_Parser, StoneIslandParser, EtroProductParser, MonclerParser, BalmainProductParser, \
     VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser, \
-    BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser
+    BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser, PradaParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -238,7 +238,13 @@ output_directory_path = "parser-output"
 
 
 #Marni Start
-marniParser = MarniParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/marni'
-marniParser.parse_directory(directory_path)
+#marniParser = MarniParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/marni'
+#marniParser.parse_directory(directory_path)
 #Marni End
+
+#Prada Start
+pradaParser = PradaParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/prada'
+pradaParser.parse_directory(directory_path)
+#Prada End

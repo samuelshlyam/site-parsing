@@ -2154,3 +2154,62 @@ class MarniParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+
+class PradaParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'prada'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'product_id', 'product_name', 'price',
+            'category', 'image_urls', 'product_url', 'colors'
+        ]
+        parsed_data.append(column_names)
+
+        items = soup.find_all('li', class_='w-full h-auto lg:h-full')
+
+        for item in items:
+            product_card = item.find('article', class_='product-card')
+            if not product_card:
+                continue
+
+            product_id = product_card.get('data-element', '')
+            product_name = product_card.find('h3', class_='product-card__name').text.strip() if product_card.find('h3', class_='product-card__name') else ''
+            product_url = product_card.find('a', class_='product-card__link').get('href', '') if product_card.find('a', class_='product-card__link') else ''
+            category = category
+
+            price = product_card.find('p', class_='product-card__price--new').text.strip() if product_card.find('p', class_='product-card__price--new') else ''
+
+            # Extract image URLs
+            image_divs = product_card.find_all('img', class_='product-card__picture')
+            image_urls = []
+            for img in image_divs:
+                srcset = img.get('data-srcset', '')
+                if srcset:
+                    first_url = srcset.split()[0]
+                    if first_url:
+                        image_urls.append(first_url)
+
+            # Extract colors
+            colors = []
+            color_dots = product_card.find_all('span', class_='w-3 h-3 rounded-full absolute border border-solid border-general-divider')
+            for dot in color_dots:
+                style = dot.get('style', '')
+                color = style.split('background: ')[1][:-1] if 'background: ' in style else ''
+                colors.append(color)
+
+            product_data = [
+                product_id,
+                product_name,
+                price,
+                category,
+                ', '.join(image_urls),
+                product_url,
+                ', '.join(colors)
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
