@@ -4,7 +4,8 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     GoldenGooseProductParser, FendiParser, BalenciagaParser, SaintLaurentParser, AlexanderMcqueenParser, \
     Dolce_Gabbana_Parser, StoneIslandParser, EtroProductParser, MonclerParser, BalmainProductParser, \
     VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser, \
-    BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser, PradaParser
+    BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser, PradaParser, TodsParser, \
+    ValentinoParser, JacquemusParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -244,7 +245,25 @@ output_directory_path = "parser-output"
 #Marni End
 
 #Prada Start
-pradaParser = PradaParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/prada'
-pradaParser.parse_directory(directory_path)
+#pradaParser = PradaParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/prada'
+#pradaParser.parse_directory(directory_path)
 #Prada End
+
+#Tods Start
+#todsParser = TodsParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/tods'
+#todsParser.parse_directory(directory_path)
+#Tods End
+
+#Valentino Start
+#valentinoParser = ValentinoParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/valentino'
+#valentinoParser.parse_directory(directory_path)
+#Valentino End
+
+#Jacquemus Start
+jacquemusParser = JacquemusParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/jacquemus'
+jacquemusParser.parse_directory(directory_path)
+#Jacquemus End

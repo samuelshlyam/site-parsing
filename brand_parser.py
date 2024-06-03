@@ -2213,3 +2213,190 @@ class PradaParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+
+
+class TodsParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'tods'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'product_id', 'product_name', 'price',
+            'category', 'image_urls', 'product_url', 'colors'
+        ]
+        parsed_data.append(column_names)
+
+        items = soup.find_all('div', class_='card display scrolling')
+
+        for item in items:
+            product_id = item.get('data-sku', '')
+            product_link = item.find('a', class_='card-link')
+            product_url = product_link.get('href', '') if product_link else ''
+            product_name = product_link.get('aria-label', '').split(',')[1].strip() if product_link else ''
+            price = product_link.get('aria-label', '').split(',')[-1].strip() if product_link else ''
+            color = product_link.get('aria-label', '').split(',')[2].strip() if product_link else ''
+            category = category
+
+            # Extract image URLs
+            img_box = item.find('div', class_='img-box')
+            image_urls = []
+            if img_box:
+                picture = img_box.find('picture')
+                if picture:
+                    sources = picture.find_all('source')
+                    for source in sources:
+                        srcset = source.get('srcset', '')
+                        if srcset:
+                            first_url = srcset.split(',')[0].split()[0]
+                            if first_url:
+                                image_urls.append(first_url)
+
+                    img_tag = picture.find('img')
+                    if img_tag:
+                        img_src = img_tag.get('data-src', '')
+                        if img_src:
+                            image_urls.append(img_src)
+
+            product_data = [
+                product_id,
+                product_name,
+                price,
+                category,
+                ', '.join(image_urls),
+                product_url,
+                color
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+class ValentinoParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'valentino'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'product_id', 'product_name', 'price', 'category',
+            'image_urls', 'product_url', 'colors', 'status'
+        ]
+        parsed_data.append(column_names)
+
+        items = soup.find_all('li', class_='productCard-wrapper')
+
+        for item in items:
+            product_id = item.get('data-product-sku', '')
+            product_name = item.get('data-product-name', '')
+            price = item.get('data-price', '0.0')
+            category = category
+            status = item.get('data-status', '')
+            color_description = item.get('data-color-description', '')
+
+            # Extract product URL
+            product_link = item.find('a', class_='productCard__image')
+            product_url = product_link.get('href', '') if product_link else ''
+
+            # Extract image URLs from both picture classes
+            image_urls = []
+            image_containers = item.find_all('picture')
+            for container in image_containers:
+                img = container.find('img')
+                if img:
+                    srcset = img.get('data-srcset', '').split(', ')
+                    if srcset:
+                        # Get the highest resolution image
+                        image_urls.append(srcset[-1].split(' ')[0])
+
+            product_data = [
+                product_id,
+                product_name,
+                price,
+                category,
+                ', '.join(image_urls),
+                product_url,
+                color_description,
+                status
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+
+class JacquemusParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'jacquemus'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'product_id', 'product_name', 'price', 'category',
+            'image_urls', 'product_url', 'colors', 'status'
+        ]
+        parsed_data.append(column_names)
+
+        items = soup.find_all('div', class_='product__tile')
+
+        for item in items:
+            # Extract product ID and other details from data-gtmdata attribute
+            gtm_data = item.find('input', class_='gtmdata')
+            if gtm_data:
+                data = gtm_data.get('data-gtmdata', '')
+                data = json.loads(data.replace('&quot;', '"')) if data else {}
+                product_id = data.get('id', '')
+                product_name = data.get('name', '')
+                price = data.get('price', '0.0')
+                color_description = data.get('color', '')
+                status = 'in stock' if data.get('in_stock', 0) == 1 else 'out of stock'
+            else:
+                product_id = ''
+                product_name = ''
+                price = '0.0'
+                color_description = ''
+                status = ''
+
+            # Extract category
+            category = category
+
+            # Extract product URL
+            product_title = item.find('a', class_='product__title__content')
+            product_url = product_title.get('href', '') if product_title else ''
+
+            # Extract image URLs
+            image_urls = []
+            images = item.find_all('img', class_='product__visuals__content')
+            print(images)
+            for img in images:
+                main_image = img.get('src', '')
+                image_urls.append(main_image)
+                srcset = img.get('srcset', '').split(', ')
+                for src in srcset:
+                    image_urls.append(src.split(' ')[0])
+
+            # Extract colors
+            colors = []
+            color_elements = item.find_all('div', class_='product__swatches__attributes__value')
+            for color_element in color_elements:
+                color_span = color_element.find('span')
+                if color_span:
+                    colors.append(color_span.text.strip())
+
+            product_data = [
+                product_id,
+                product_name,
+                price,
+                category,
+                ', '.join(image_urls),
+                product_url,
+                ', '.join(colors),
+                status
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
