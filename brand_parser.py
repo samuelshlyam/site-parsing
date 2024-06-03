@@ -2029,7 +2029,7 @@ class LoroPianaParser():
     ##COMPLETE
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
-        self.base_url = "https://us.loropiana.com/en/c/L1_WOM/results?page=3"
+        self.base_url = "https://us.loropiana.com/en/c/{category}/results?page={page}"
         self.data = pd.DataFrame()
     def format_url(self,url):
         """ Helper function to format URLs correctly """
@@ -2055,14 +2055,14 @@ class LoroPianaParser():
             response = session.get(base_url.format(category=category, page=0), headers=headers)
             response.raise_for_status()
             json_data = response.json()
-            total_pages = json_data.get('numberOfPages', 1)
-            print(f"Category: {category}, Total Pages: {total_pages}")
+            total_pages = json_data.get('pagination',{}).get('numberOfPages', 1)
+            print(f"Total Pages: {total_pages}")
 
             for page in range(total_pages):
                 response = session.get(base_url.format(category=category, page=page), headers=headers)
                 response.raise_for_status()
                 json_data = response.json()
-                items = json_data.get('products', {}).get('items', [])
+                items = json_data.get('results', [])
                 if not items:
                     print(f"No items found on Page: {page + 1}/{total_pages}")
                     continue
@@ -2070,41 +2070,15 @@ class LoroPianaParser():
                 for product in items:
                     product_info = {
                         'category': category,
-                        'productCode': self.safe_strip(product.get('productCode', '')),
-                        'title': self.safe_strip(product.get('title', '')).replace('\n', ' ').replace('\r', ''),
-                        'price': self.safe_strip(product.get('price', '')),
-                        'rawPrice': self.safe_strip(product.get('rawPrice', '')),
-                        'productLink': "https://www.gucci.com/us/en" + self.safe_strip(product.get('productLink', '')),
-                        'primaryImage': self.format_url(product.get('primaryImage', {}).get('src', '')),
-                        'alternateGalleryImages': " | ".join([self.format_url(img.get('src', '')) for img in product.get('alternateGalleryImages', [])]),
-                        'alternateImage': self.format_url(product.get('alternateImage', {}).get('src', '')),
-                        'isFavorite': str(product.get('isFavorite', False)).lower(),
-                        'isOnlineExclusive': str(product.get('isOnlineExclusive', False)).lower(),
-                        'isRegionalOnlineExclusive': str(product.get('isRegionalOnlineExclusive', False)).lower(),
-                        'regionalOnlineExclusiveMsg': self.safe_strip(product.get('regionalOnlineExclusiveMsg', '')),
-                        'isExclusiveSale': str(product.get('isExclusiveSale', False)).lower(),
-                        'label': self.safe_strip(product.get('label', '')),
-                        'fullPrice': self.safe_strip(product.get('fullPrice', '')),
-                        'position': int(product.get('position', 0)),
-                        'productName': self.safe_strip(product.get('productName', '')),
-                        'showSavedItemIcon': str(product.get('showSavedItemIcon', False)).lower(),
-                        'type': self.safe_strip(product.get('type', '')),
-                        'saleType': self.safe_strip(product.get('saleType', '')),
-                        'categoryPath': self.safe_strip(product.get('categoryPath', '')),
-                        'variant': self.safe_strip(product.get('variant', '')),
-                        'videoBackgroundImage': self.format_url(product.get('videoBackgroundImage', '')),
-                        'zoomImagePrimary': self.format_url(product.get('zoomImagePrimary', '')),
-                        'zoomImageAlternate': self.format_url(product.get('zoomImageAlternate', '')),
-                        'filterType': self.safe_strip(product.get('filterType', '')),
-                        'nonTransactionalWebSite': self.safe_strip(product.get('nonTransactionalWebSite', '')),
-                        'isDiyProduct': str(product.get('isDiyProduct', False)).lower(),
-                        'inStockEntry': str(product.get('inStockEntry', False)).lower(),
-                        'inStoreStockEntry': str(product.get('inStoreStockEntry', False)).lower(),
-                        'inStoreStockRegionalEntry': str(product.get('inStoreStockRegionalEntry', False)).lower(),
-                        'visibleWithoutStock': str(product.get('visibleWithoutStock', False)).lower(),
-                        'showAvailableInStoreOnlyLabel': str(product.get('showAvailableInStoreOnlyLabel', False)).lower(),
-                        'showOutOfStockLabel': str(product.get('showOutOfStockLabel', False)).lower(),
-                    }
+                        'product_id': product.get('code',''),
+                        'price': product.get('price',{}).get('value',''),
+                        'currency': product.get('price', {}).get('currencyIso', ''),
+                        'imageUrls': [img.get('url','') for img in product.get('images', [])],
+                        'name': product.get('name',''),
+                        'material': product.get('eshopMaterialCode',''),
+                        'colors':[color for color in product.get('allColorVariants', [])] if product.get('allColorVariants', []) else '',
+                        'url': self.format_url(product.get('url','')),
+                        }
                     all_products.append(product_info)
                 print(f"Processed {len(items)} products on Page: {page + 1}/{total_pages} for Category: {category}")
 
@@ -2122,6 +2096,6 @@ class LoroPianaParser():
         # Save the complete DataFrame to a CSV file
         #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
         current_date = datetime.datetime.now().strftime("%m_%d_%Y")
-        filename = f'parser-output/gucci_output_{current_date}.csv'
+        filename = f'parser-output/loro_piana_output_{current_date}.csv'
         self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
-        print("Complete data saved to 'output_gucci_5_27_24.csv'")
+        print(f"Complete data saved to 'loro_piana_output_{current_date}.csv'")
