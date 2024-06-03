@@ -4,7 +4,7 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     GoldenGooseProductParser, FendiParser, BalenciagaParser, SaintLaurentParser, AlexanderMcqueenParser, \
     Dolce_Gabbana_Parser, StoneIslandParser, EtroProductParser, MonclerParser, BalmainProductParser, \
     VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser, \
-    BrunelloCucinelliParser, DSquaredParser
+    BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -217,7 +217,21 @@ output_directory_path = "parser-output"
 #Brunello Cucinelli End
 
 #DSquared2 Start
-dSquaredParser = DSquaredParser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\dsquared2'
-dSquaredParser.parse_directory(directory_path)
+#dSquaredParser = DSquaredParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\dsquared2'
+#dSquaredParser.parse_directory(directory_path)
 #DSquared2 End
+
+
+#Celine Start
+#celineParser = CelineParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/celine'
+#celineParser.parse_directory(directory_path)
+#Celine End
+
+
+#Loro Piana Start
+loroPianaParser = LoroPianaParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/loro_piana'
+loroPianaParser.parse_directory(directory_path)
+#Loro Piana End
