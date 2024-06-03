@@ -284,11 +284,12 @@ class GivenchyProductParser(WebsiteParser):
     
 
 class CanadaGooseProductParser(WebsiteParser):
-    ## This class parses the HTML files from the Bottega Veneta website.
+    ## This class parses the HTML files from the Canada Goose website.
     ## website: https://www.canadagoose.com/us/en
     def __init__(self, directory):
-        self.brand = 'canada_goose'  # Replace spaces with underscores
+        self.brand = 'canada_goose'
         self.directory = directory
+
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
@@ -296,21 +297,35 @@ class CanadaGooseProductParser(WebsiteParser):
         ]
         parsed_data.append(column_names)
 
-        product_blocks = soup.find_all('div', class_='grid-tile')
+        product_blocks = soup.find_all('div', class_='product')
 
         for block in product_blocks:
-            #The product id is not being grabbed properly here and
-            #needs to be fixed
+            # Extract product ID from the data-pid attribute
             product_id = block.get('data-pid', 'No ID')
+
+            # Extract product URL
             product_link = block.find('a', class_='thumb-link')
             product_url = product_link['href'] if product_link else 'No URL'
+
+            # Extract product name
             product_name = block.find('div', class_='product-name').text.strip() if block.find('div', class_='product-name') else 'No Name'
-            
+
+            # Extract price
             price_element = block.find('span', class_='price-sales')
             price = price_element.find('span', class_='value').text.strip() if price_element else 'No Price'
-            
-            images = block.find_all('img', class_='lazy')
-            image_urls = [img.get('data-src', img.get('src', 'No images')) for img in images if 'data-src' in img.attrs] or ['No images']
+
+            # Extract image URLs
+            image_urls = []
+            images = block.find_all('img', class_='lazyloaded-init')
+            for img in images:
+                if 'srcset' in img.attrs:
+                    srcset = img['srcset'].split(', ')
+                    for src in srcset:
+                        image_urls.append(src.split(' ')[0])
+                elif 'src' in img.attrs:
+                    image_urls.append(img['src'])
+                elif 'data-src' in img.attrs:
+                    image_urls.append(img['data-src'])
 
             # Extract color options
             color_options = []
@@ -331,7 +346,6 @@ class CanadaGooseProductParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
-    
 
 
 class VejaProductParser(WebsiteParser):

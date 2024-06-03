@@ -67,11 +67,9 @@ output_directory_path = "parser-output"
 
 
 #Canada Goose Start
-#canada_goose_parser = CanadaGooseProductParser(output_directory_path)
-##Comment to run single file##
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\canada_goose'
-#canada_goose_parser.parse_directory(directory_path)
-
+canada_goose_parser = CanadaGooseProductParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/canada_goose'
+canada_goose_parser.parse_directory(directory_path)
 #Canada Goose END
 
 #Veja Start
@@ -263,7 +261,7 @@ output_directory_path = "parser-output"
 #Valentino End
 
 #Jacquemus Start
-jacquemusParser = JacquemusParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/jacquemus'
-jacquemusParser.parse_directory(directory_path)
+#jacquemusParser = JacquemusParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/jacquemus'
+#jacquemusParser.parse_directory(directory_path)
 #Jacquemus End
