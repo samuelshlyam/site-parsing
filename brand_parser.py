@@ -2099,3 +2099,58 @@ class LoroPianaParser():
         filename = f'parser-output/loro_piana_output_{current_date}.csv'
         self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
         print(f"Complete data saved to 'loro_piana_output_{current_date}.csv'")
+
+
+class MarniParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'marni'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'product_id', 'product_name', 'original_price', 'discounted_price',
+            'category', 'image_urls', 'product_url'
+        ]
+        parsed_data.append(column_names)
+
+        items = soup.find_all('div', class_='col-12 col-md-3 single-element show-second-image')
+
+        for item in items:
+            product_id = item.find('div', class_='product').get('data-pid', '')
+            product_name = item.find('div', class_='single-element-content-detail-description').find('a').text.strip()
+            product_url = item.find('div', class_='single-element-content-detail-description').find('a').get('href', '')
+            category = item.get('data-category', '')
+
+            # Extract prices
+            price_div = item.find('div', class_='price')
+            original_price = price_div.find('span', class_='strike-through list')
+            discounted_price = price_div.find('span', class_='sales')
+
+            if original_price:
+                original_price = original_price.find('span', class_='value').text.strip()
+                discounted_price = discounted_price.find('span',
+                                                         class_='value').text.strip() if discounted_price else ''
+            else:
+                original_price = discounted_price.find('span',
+                                                         class_='value').text.strip() if discounted_price else ''
+                discounted_price = ''
+            original_price = original_price.strip('\n\n- Original Price') if original_price else ''
+            discounted_price = discounted_price.strip('\n\n- Discounted Price') if discounted_price else ''
+            # Extract image URLs
+            image_divs = item.find_all('img', class_='tile-image')
+            image_urls = [img.get('data-srcset', '') for img in image_divs]
+
+            product_data = [
+                product_id,
+                product_name,
+                original_price,
+                discounted_price,
+                category,
+                ', '.join(image_urls),
+                product_url
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
