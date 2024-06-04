@@ -5,7 +5,7 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     Dolce_Gabbana_Parser, StoneIslandParser, EtroProductParser, MonclerParser, BalmainProductParser, \
     VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser, \
     BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser, PradaParser, TodsParser, \
-    ValentinoParser, JacquemusParser
+    ValentinoParser, JacquemusParser, LouboutinParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -266,3 +266,8 @@ output_directory_path = "parser-output"
 #jacquemusParser.parse_directory(directory_path)
 #Jacquemus End
 
+#Louboutin Start
+louboutinParser = LouboutinParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/louboutin'
+louboutinParser.parse_directory(directory_path)
+#Louboutin End

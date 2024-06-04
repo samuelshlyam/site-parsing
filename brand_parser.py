@@ -2415,3 +2415,45 @@ class JacquemusParser(WebsiteParser):
         return parsed_data
 
 
+class LouboutinParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'christian_louboutin'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'product_id', 'product_name', 'price', 'category',
+            'image_urls', 'product_url'
+        ]
+        parsed_data.append(column_names)
+
+        items = soup.find_all('div', class_='product-item-info')
+        for item in items:
+            url_piece=item.find('a',class_="product-item-link")
+            product_url=url_piece.get('href') if url_piece else ''
+            price=item.find('span', class_='price')
+            price=price.text.strip() if price else ''
+            name=item.find('p', class_='m-0')
+            name=name.text.strip() if name else ''
+
+            # Extract image URLs
+            image = item.find('img', class_='photo')
+            image=image.get('src','') if image else ''
+
+            product_id=item.find('p', class_='price-box')
+            product_id=product_id.get("data-product-id",'') if product_id else ''
+
+
+            product_data = [
+                product_id,
+                name,
+                price,
+                category,
+                image,
+                product_url
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
