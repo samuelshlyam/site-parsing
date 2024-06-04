@@ -6,7 +6,7 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser, \
     BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser, PradaParser, TodsParser, \
     ValentinoParser, JacquemusParser, LouboutinParser, PalmAngelsParser, MooseKnucklesParser, AcneStudiosParser, \
-    TheRowParser
+    TheRowParser, ManoloBlahnikParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -204,9 +204,9 @@ output_directory_path = "parser-output"
 
 
 #Jimmy Choo Start
-jimmyChooParser = JimmyChooParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/jimmy_choo'
-jimmyChooParser.parse_directory(directory_path)
+#jimmyChooParser = JimmyChooParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/jimmy_choo'
+#jimmyChooParser.parse_directory(directory_path)
 #JimmyChoo End
 
 
@@ -297,3 +297,8 @@ jimmyChooParser.parse_directory(directory_path)
 #theRowParser.parse_directory(directory_path)
 #The Row End
 
+#Manolo Blahnik Start
+manoloBlahnikParser = ManoloBlahnikParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/manolo_blahnik'
+manoloBlahnikParser.parse_directory(directory_path)
+#Manolo Blahnik End

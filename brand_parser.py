@@ -2792,3 +2792,54 @@ class TheRowParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+
+class ManoloBlahnikParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'manolo_blahnik'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'category', 'product_name', 'product_id', 'product_url', 'image_urls', 'price'
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('div', class_='item product product-item flex flex-col w-full')
+
+        for product in product_blocks:
+            # Extract product name
+            name_element = product.find('h2', class_='product-info-text')
+            product_name = name_element.get_text(strip=True) if name_element else ''
+
+            # Extract product URL and ID from the 'a' tag
+            url_element = product.find('a', class_='product-item-photo')
+            product_url = url_element.get('href') if url_element else ''
+
+            # Extract product ID from the onclick attribute
+            onclick_text = url_element.get('onclick', '') if url_element else ''
+            product_id_match = re.search(r'"id":"([^"]+)"', onclick_text)
+            product_id = product_id_match.group(1) if product_id_match else ''
+
+            # Extract image URLs
+            image_urls = []
+            images = product.find_all('img', class_='object-contain w-full')
+            for img in images:
+                image_urls.append(img.get('src'))
+
+            # Extract price
+            price_element = product.find('span', class_='price-wrapper')
+            price = price_element.get_text(strip=True) if price_element else ''
+
+            product_data = [
+                category,
+                product_name,
+                product_id,
+                product_url,
+                ', '.join(image_urls),
+                price
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
