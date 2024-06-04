@@ -2846,3 +2846,53 @@ class ManoloBlahnikParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+
+class GianvitoRossiParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'gianvito_rossi'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'category', 'product_name', 'product_id', 'product_url', 'image_urls', 'price'
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('section', class_='b-product_tile')
+
+        for product in product_blocks:
+            # Extract product name
+            product_name = product.get('data-product-name', '')
+
+            # Extract product ID
+            product_id = product.get('data-product-id', '')
+
+            # Extract product URL
+            url_element = product.find('a', class_='b-product_tile-image_link')
+            product_url = url_element.get('href') if url_element else ''
+
+            # Extract image URLs
+            image_urls = []
+            picture_elements = product.find_all('picture', class_='b-product_tile-image')
+            for picture in picture_elements:
+                img_tag = picture.find('img')
+                if img_tag:
+                    image_urls.append(img_tag.get('src', ''))
+
+            # Extract price
+            price_element = product.find('span', class_='b-price-item')
+            price = price_element.get_text(strip=True) if price_element else ''
+
+            product_data = [
+                category,
+                product_name,
+                product_id,
+                product_url,
+                ', '.join(image_urls),
+                price
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
