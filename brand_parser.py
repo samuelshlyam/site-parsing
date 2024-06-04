@@ -2802,7 +2802,7 @@ class ManoloBlahnikParser(WebsiteParser):
         parsed_data = []
 
         column_names = [
-            'category', 'product_name', 'product_id', 'product_url', 'image_urls', 'price'
+            'category', 'product_name', 'product_id', 'product_url', 'image_urls', 'price','description'
         ]
         parsed_data.append(column_names)
 
@@ -2831,6 +2831,8 @@ class ManoloBlahnikParser(WebsiteParser):
             # Extract price
             price_element = product.find('span', class_='price-wrapper')
             price = price_element.get_text(strip=True) if price_element else ''
+            description_element = product.find('div', class_='product-info-short')
+            description = description_element.get_text(strip=True) if description_element else ''
 
             product_data = [
                 category,
@@ -2838,7 +2840,8 @@ class ManoloBlahnikParser(WebsiteParser):
                 product_id,
                 product_url,
                 ', '.join(image_urls),
-                price
+                price,
+                description,
             ]
             parsed_data.append(product_data)
 
