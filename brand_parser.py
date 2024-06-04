@@ -316,8 +316,9 @@ class CanadaGooseProductParser(WebsiteParser):
 
             # Extract image URLs
             image_urls = []
-            images = block.find_all('img', class_='lazyloaded-init')
-            for img in images:
+            images = block.find_all('div', class_='slideritem')
+            for image in images:
+                img=image.find("img")
                 if 'srcset' in img.attrs:
                     srcset = img['srcset'].split(', ')
                     for src in srcset:
@@ -2679,6 +2680,79 @@ class AcneStudiosParser(WebsiteParser):
                 sale_price,
                 original_price,
                 discount
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+class TheRowParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'the_row'  # Assuming 'therow' as the brand based on the HTML
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'product_id', 'product_name', 'price', 'category',
+            'image_urls', 'product_url', 'sale_price', 'original_price', 'discount'
+        ]
+        parsed_data.append(column_names)
+
+        # Target the product container class
+        items = soup.find_all('div', class_='ProductItem')
+
+        for item in items:
+            product_id=None
+            # Extract product URL from product title link
+            product_title_link = item.find('a', class_='ProductItem__ImageWrapper ProductItem__ImageWrapper--withAlternateImage')
+            product_url = product_title_link.get('href', '') if product_title_link else ''
+
+            # Extract product name from product title text
+            product_name_element = item.find('h3', class_='ProductItem__Title Heading')
+            product_name = product_name_element.text.strip() if product_name_element else ''
+
+            # Extract image URLs from image sources (considering both main and alternate images)
+            image_urls = []
+            images = item.find_all('img', class_=['ProductItem__Image ProductItem__Image--alternate', 'ProductItem__Image'])
+            for img in images:
+                image_urls.append(img.get('src', ''))
+                if not product_id:
+                    pid_temp = img.get('src', '')
+                    product_id=pid_temp.split('/')[-1].split('_')[0]
+
+            # Extract price details
+            price_container = item.find('div', class_='ProductItem__PriceList Heading')  # Find the price container
+            if price_container:
+                price_element = price_container.find('span', class_='ProductItem__Price Price Price--highlight Text--subdued')
+                price = price_element.text.strip() if price_element else ''
+                # Assuming no sale prices on The Row website (can be modified if needed)
+                sale_price = ''
+                original_price = price
+                discount = ''
+            else:
+                price = ''
+                sale_price = ''
+                original_price = ''
+                discount = ''
+
+            # Check for sold-out indication
+            sold_out_label = item.find('span', class_='ProductItem__Label ProductItem__Label--soldOut Heading Text--subdued')
+            is_sold_out = 'Yes' if sold_out_label else 'No'
+
+            # Colors are not explicitly available in this product information snippet
+
+            product_data = [
+                product_id,  # Assuming product ID is not readily available in this structure
+                product_name,
+                original_price,  # No separate sale price assumed
+                category,
+                ', '.join(image_urls),
+                product_url,
+                sale_price,
+                original_price,
+                discount,
+                is_sold_out  # Additional field for sold-out status
             ]
             parsed_data.append(product_data)
 
