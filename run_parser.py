@@ -204,9 +204,9 @@ output_directory_path = "parser-output"
 
 
 #Jimmy Choo Start
-#jimmyChooParser = JimmyChooParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\jimmy_choo'
-#jimmyChooParser.parse_directory(directory_path)
+jimmyChooParser = JimmyChooParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/jimmy_choo'
+jimmyChooParser.parse_directory(directory_path)
 #JimmyChoo End
 
 
@@ -292,7 +292,8 @@ output_directory_path = "parser-output"
 #Acne Studios End
 
 #The Row Start
-theRowParser = TheRowParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/the_row'
-theRowParser.parse_directory(directory_path)
+#theRowParser = TheRowParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/the_row'
+#theRowParser.parse_directory(directory_path)
 #The Row End
+
