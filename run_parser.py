@@ -304,7 +304,7 @@ output_directory_path = "parser-output"
 #Manolo Blahnik End
 
 #Gianvito Rossi Start
-gianvitoRossiParser = GianvitoRossiParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/gianvito_rossi'
-gianvitoRossiParser.parse_directory(directory_path)
+#gianvitoRossiParser = GianvitoRossiParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/gianvito_rossi'
+#gianvitoRossiParser.parse_directory(directory_path)
 #Gianvito Rossi End
