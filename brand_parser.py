@@ -2456,3 +2456,75 @@ class LouboutinParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+
+class PalmAngelsParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'palm_angels'  # Assuming 'farfetch' as the brand based on the HTML
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'product_id', 'product_name', 'price', 'category',
+            'image_urls', 'product_url', 'colors', 'sale_price', 'original_price', 'discount'
+        ]
+        parsed_data.append(column_names)
+
+        items = soup.find_all('div', class_='css-u7k64p')  # Targeting the product card class
+
+        for item in items:
+            # Extract product URL from product title link
+            product_title = item.find('a', class_='css-1kcohcr')
+            product_url = product_title.get('href', '') if product_title else ''
+
+            # Extract product name from product title text
+            product_name_element = item.find('h2', class_='css-869f5i')
+            product_name = product_name_element.text.strip() if product_name_element else ''
+
+            # Extract image URLs from image sources
+            image_urls = []
+            images = item.find_all('img', class_='css-x5s4ri')
+            for img in images:
+                image_urls.append(img.get('src', ''))
+
+            # Extract price details
+            price_container = item.find('div', class_='css-1vwkltk')  # Find the price container
+            if price_container:
+                # Check for sale price first (assuming it's displayed prominently)
+                sale_price_element = price_container.find('span', class_='css-nh3e0y')
+                if sale_price_element:  # If sale price exists, use that and original price
+                    sale_price = sale_price_element.text.strip() if sale_price_element else ''
+                    original_price_element = price_container.find('span', class_='css-2droiu')
+                    original_price = original_price_element.text.strip() if original_price_element else ''
+                    discount_element = price_container.find('span', class_='css-hledai')
+                    discount = discount_element.text.strip() if discount_element else ''
+                else:  # If no sale price, use the regular price
+                    original_price_element = price_container.find('span', class_='css-ltnzhu')
+                    original_price = original_price_element.text.strip() if original_price_element else ''
+                    sale_price = ''
+                    discount = ''
+            else:
+                sale_price = ''
+                original_price = ''
+                discount = ''
+
+            # Colors are not explicitly available in this HTML structure
+
+            colors = []  # Assuming no colors data available
+
+            product_data = [
+                '',  # Assuming product ID is not available
+                product_name,
+                original_price,  # Use sale price if available
+                category,
+                ', '.join(image_urls),
+                product_url,
+                ', '.join(colors),
+                sale_price,
+                original_price,
+                discount
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
