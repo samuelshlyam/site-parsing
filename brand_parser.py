@@ -2467,7 +2467,7 @@ class PalmAngelsParser(WebsiteParser):
 
         column_names = [
             'product_id', 'product_name', 'price', 'category',
-            'image_urls', 'product_url', 'colors', 'sale_price', 'original_price', 'discount'
+            'image_urls', 'product_url', 'sale_price', 'original_price', 'discount'
         ]
         parsed_data.append(column_names)
 
@@ -2511,7 +2511,6 @@ class PalmAngelsParser(WebsiteParser):
 
             # Colors are not explicitly available in this HTML structure
 
-            colors = []  # Assuming no colors data available
 
             product_data = [
                 '',  # Assuming product ID is not available
@@ -2520,7 +2519,6 @@ class PalmAngelsParser(WebsiteParser):
                 category,
                 ', '.join(image_urls),
                 product_url,
-                ', '.join(colors),
                 sale_price,
                 original_price,
                 discount
@@ -2613,3 +2611,75 @@ class MooseKnucklesParser(WebsiteParser):
             return match.group(1)[4:]
         else:
             return None
+
+class AcneStudiosParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'acne_studios'  # Assuming 'acne_studios' as the brand based on the HTML
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'product_id', 'product_name', 'price', 'category',
+            'image_urls', 'product_url', 'colors', 'sale_price', 'original_price', 'discount'
+        ]
+        parsed_data.append(column_names)
+
+        # Target the tile class containing product information
+        items = soup.find_all('div', class_='tile tile--span-4 tile--has-link product-tile')
+
+        for item in items:
+            # Extract product URL from product title link
+            product_title_link = item.find('a', class_='tile__link')
+            product_url = product_title_link.get('href', '') if product_title_link else ''
+
+            # Extract product name from product title text
+            product_name_element = item.find('div', class_='product-tile__name')
+            product_name = product_name_element.find('a').text.strip() if product_name_element else ''
+            product_id=None
+            # Extract image URLs from image sources
+            image_urls = []
+            images = item.find_all('img', class_='lazyautosizes')
+            for image in images:
+                image_url = image.get('data-src', '')
+                if not product_id:
+                    product_id=image.get('alt','')
+                    product_id=product_id.split(',')[0]
+                if image_url:
+                    image_urls.append(image_url)
+
+            # Extract price details
+            price_container = item.find('div', class_='product-tile__price text-mask---small-down')
+            if price_container:
+                original_price = price_container.text.strip()
+                sale_price = ''
+                discount = ''
+            else:
+                original_price = ''
+                sale_price = ''
+                discount = ''
+
+            # Extract colors from color list (assuming 'text-mask color--gray text--no-case' contains color info)
+            colors = []
+            color_info = item.find('ul')
+            if color_info:
+                color_items = color_info.find_all('li')
+                for color_item in color_items:
+                    colors.append(color_item.text.strip())
+
+            product_data = [
+                product_id,
+                product_name,
+                original_price,
+                category,
+                ','.join(image_urls),
+                product_url,
+                ','.join(colors),
+                sale_price,
+                original_price,
+                discount
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
