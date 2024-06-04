@@ -67,9 +67,9 @@ output_directory_path = "parser-output"
 
 
 #Canada Goose Start
-canada_goose_parser = CanadaGooseProductParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/canada_goose'
-canada_goose_parser.parse_directory(directory_path)
+#canada_goose_parser = CanadaGooseProductParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/canada_goose'
+#canada_goose_parser.parse_directory(directory_path)
 #Canada Goose END
 
 #Veja Start
@@ -265,3 +265,4 @@ canada_goose_parser.parse_directory(directory_path)
 #directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/jacquemus'
 #jacquemusParser.parse_directory(directory_path)
 #Jacquemus End
+

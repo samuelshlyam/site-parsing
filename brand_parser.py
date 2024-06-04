@@ -2190,7 +2190,6 @@ class PradaParser(WebsiteParser):
             if not product_card:
                 continue
 
-            product_id = product_card.get('data-element', '')
             product_name = product_card.find('h3', class_='product-card__name').text.strip() if product_card.find('h3', class_='product-card__name') else ''
             product_url = product_card.find('a', class_='product-card__link').get('href', '') if product_card.find('a', class_='product-card__link') else ''
             category = category
@@ -2214,7 +2213,7 @@ class PradaParser(WebsiteParser):
                 style = dot.get('style', '')
                 color = style.split('background: ')[1][:-1] if 'background: ' in style else ''
                 colors.append(color)
-
+            product_id=product_url.split("/")[-1]
             product_data = [
                 product_id,
                 product_name,
@@ -2414,3 +2413,5 @@ class JacquemusParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+
+
