@@ -2442,8 +2442,7 @@ class LouboutinParser(WebsiteParser):
             image = item.find('img', class_='photo')
             image=image.get('src','') if image else ''
 
-            product_id=item.find('p', class_='price-box')
-            product_id=product_id.get("data-product-id",'') if product_id else ''
+            product_id=image.split('-')[-1].split("_1")[0]
 
 
             product_data = [
