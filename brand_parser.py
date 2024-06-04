@@ -2528,3 +2528,88 @@ class PalmAngelsParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+
+class MooseKnucklesParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'moose_knuckles'  # Assuming 'Moose Knuckles' as the brand
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'product_id', 'product_name', 'price', 'category',
+            'image_urls', 'product_url', 'colors', 'sale_price', 'original_price'
+        ]
+        parsed_data.append(column_names)
+
+        items = soup.find_all('div', class_='ProductTile_productitem-block__2sZ1u')  # Target product blocks
+
+        for item in items:
+            # Extract product URL from product title link
+            product_title = item.find('a', class_='ProductTile_productimg-link__MpSEW')
+            product_url = product_title.get('href', '') if product_title else ''
+
+            # Extract product name directly from the title text with proper class selection
+            product_name_element = item.find('span', class_='ProductTile_productname-link__3X5yR')
+            product_name = product_name_element.text.strip() if product_name_element else ''
+
+            # Rest of the code remains the same for extracting image, colors, and prices
+
+            # Extract image URL from product image
+            image_container = item.find('div', class_='ProductTile_productimage-block__3Djn2')
+            image_element = image_container.find('img', class_='ProductTile_product-img__2vdMI')
+            image_url = image_element.get('src', '') if image_element else ''
+
+            # Extract colors (assuming color information is in the swatches)
+            colors = []
+            color_list = item.find('ul', class_='color_id OptionColorTiles_optionColorTiles__2WXHX')
+            if color_list:
+                color_items = color_list.find_all('li')
+                for color_item in color_items:
+                    color_info = color_item.find('span', class_='relative')
+                    color_text = color_info.text.strip() if color_info else ''
+                    colors.append(color_text)
+
+            # Extract price directly from the price container
+            price_container = item.find('div', class_='product-price configurableproduct')
+            price = price_container.text.strip() if price_container else ''
+
+            # Assuming no sale price or discount information available
+            try:
+                sale_price = price.split("$")[2]
+            except:
+                sale_price=''
+            original_price = price.split("$")[1] if price.split("$")[1] else ''
+            price=original_price
+            product_id=self.extract_product_id(image_url)
+
+            product_data = [
+                product_id,  # Assuming product ID is not available
+                product_name,
+                price,
+                category,
+                image_url,
+                product_url,
+                ', '.join(colors),
+                sale_price,
+                original_price
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+    def extract_product_id(self,image_url):
+        """Extracts the product ID from a Moose Knuckles image URL.
+
+        Args:
+            image_url: The URL of the Moose Knuckles product image.
+
+        Returns:
+            The extracted product ID, or None if not found.
+        """
+        match = re.search(r"product/(.+)_", image_url)
+        if match:
+            return match.group(1)[4:]
+        else:
+            return None
