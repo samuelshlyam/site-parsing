@@ -6,7 +6,8 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser, \
     BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser, PradaParser, TodsParser, \
     ValentinoParser, JacquemusParser, LouboutinParser, PalmAngelsParser, MooseKnucklesParser, AcneStudiosParser, \
-    TheRowParser, ManoloBlahnikParser, GianvitoRossiParser, MiuMiuParser, BirkenstockParser, AquazzuraParser
+    TheRowParser, ManoloBlahnikParser, GianvitoRossiParser, MiuMiuParser, BirkenstockParser, AquazzuraParser, \
+    OffWhiteProductParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -54,10 +55,15 @@ output_directory_path = "parser-output"
 
 #STELLA START
 #stella_parser = StellaProductParser(output_directory_path)
-##Comment to run single file##
 #directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\stella_mccartney'
 #stella_parser.parse_directory(directory_path)
 #stella end
+
+#Off White START#
+#OffWhiteParser = OffWhiteProductParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\off_white'
+#OffWhiteParser.parse_directory(directory_path)
+#Off White end
 
 #givenchy START
 #givenchy_parser = GivenchyProductParser(output_directory_path)
@@ -274,9 +280,9 @@ output_directory_path = "parser-output"
 #Louboutin End
 
 #Palm Angels Start
-#palmAngelsParser = PalmAngelsParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\palm_angels'
-#palmAngelsParser.parse_directory(directory_path)
+palmAngelsParser = PalmAngelsParser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\palm_angels'
+palmAngelsParser.parse_directory(directory_path)
 #PalmAngels End
 
 #Moose Knuckles Start
@@ -316,9 +322,9 @@ output_directory_path = "parser-output"
 #Gianvito Rossi End
 
 #Birkenstock Start
-birkenstockParser = BirkenstockParser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\birkenstock'
-birkenstockParser.parse_directory(directory_path)
+#birkenstockParser = BirkenstockParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\birkenstock'
+#birkenstockParser.parse_directory(directory_path)
 #Birkenstock End
 
 #Aquazzura Start

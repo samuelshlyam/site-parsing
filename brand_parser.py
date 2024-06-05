@@ -494,61 +494,75 @@ class OffWhiteProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'off_white'  # Replace spaces with underscores
         self.directory = directory
+
     def parse_product_blocks(self, soup, category):
         parsed_data = []
+
         column_names = [
-            'product_id', 'product_url', 'product_name', 'base_price', 'discount_rate', 'sale_price', 'image_urls', 'alt_text'
+            'category', 'product_name', 'product_id', 'product_url', 'image_url', 'full_price', 'discount_price',
+            'availability'
         ]
         parsed_data.append(column_names)
+        main_block=soup.find("div",class_="css-1fb01a3 emnvohd7")
+        product_blocks = main_block.find_all('li')
 
-        product_items = soup.find_all('li')
+        for product in product_blocks:
+            # Extract product name
+            name_element = product.find('p', class_='css-1dw89jd e1i2jpfv10')
+            product_name = name_element.get_text(strip=True) if name_element else ''
 
-        for item in product_items:
-            div = item.find('div')
-            product_id = div.get('data-insights-object-id', '') if div else ''
-            product_url = item.find('a', class_='css-dpg8v2')['href'] if item.find('a', class_='css-dpg8v2') else ''
-            product_name = item.find('p', class_='css-1dw89jd').text.strip() if item.find('p', class_='css-1dw89jd') else ''
-            base_price=''
-            discount_rate=''
-            sale_price=''
-            # Price details
-            normal_price_span = item.find('span', class_='css-bks3r1') or item.find('span', class_='css-1go0pru')
-            if normal_price_span:
-                base_price = normal_price_span.text.strip()
-            
-            # Extract discount rate if present
-            discount_rate_span = item.find('span', class_='css-f5f5h3')
-            if discount_rate_span:
-                discount_rate = discount_rate_span.text.strip()
-            
-            # Extract sale price if present
-            sale_price_span = item.find('span', class_='css-uqjroe')
-            if sale_price_span:
-                sale_price = sale_price_span.text.strip()
-        
-            
-            
-            # Image URLs and alt text
-            images = item.find_all('img')
-            image_urls = [img['src'] for img in images if 'src' in img.attrs]
-            alt_texts = [img['alt'] for img in images if 'alt' in img.attrs]
+            # Extract product URL
+            url_element = product.find('a', class_='css-1ym16s2 e1i2jpfv14')
+            product_url = url_element.get('href') if url_element else ''
+
+            # Extract product ID
+            temp_id=product_url.split("-")[-1]
+            url_to_open=f"https://www.farfetch.com/sg/shopping/men/balmain-paris-logo-embroidered-bomber-jacket-item-{temp_id}.aspx"
+            print(url_to_open)
+            product_id_html = self.open_link(url_to_open)
+            product_id=temp_id
+            # Extract image URL
+            image_element = product.find('img', class_='css-wn0zwz er5xw931')
+            image_url = image_element.get('src') if image_element else ''
+
+            # Extract prices
+            full_price = ''
+            discount_price = ''
+            availability = 'In stock'
+
+            price_container = product.find('div', class_='e1i2jpfv9 css-1hril2i e1933l763')
+            if price_container:
+                full_price_element = price_container.find('span', class_='css-1go0pru e1933l761')
+                discount_price_element = price_container.find('span', class_='css-uqjroe e1933l762')
+                sale_price_element = price_container.find('span', class_='css-bks3r1 e1933l761')
+
+                if full_price_element:
+                    full_price = full_price_element.get_text(strip=True)
+                elif sale_price_element:
+                    full_price = sale_price_element.get_text(strip=True)
+
+                discount_price = discount_price_element.get_text(strip=True) if discount_price_element else ''
+
+            # Check for sold-out status
+            sold_out_element = product.find('div', class_='css-x9w7eo e1i2jpfv17')
+            if sold_out_element and 'sold out' in sold_out_element.text.lower():
+                availability = 'Sold out'
 
             product_data = [
-                product_id,
-                product_url,
+                category,
                 product_name,
-                base_price,
-                discount_rate,
-                sale_price,
-                ', '.join(image_urls),
-                ', '.join(alt_texts)
+                product_id,
+                f"https://www.off---white.com{product_url}" if product_url else '',
+                image_url,
+                full_price,
+                discount_price,
+                availability
             ]
             parsed_data.append(product_data)
 
         return parsed_data
-    
 
-    
+
 class BallyParser():
     ##COMPLETE
     def __init__(self):
@@ -716,7 +730,7 @@ class Chloe_Parser(WebsiteParser):
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
-            'Cod10', 'Title', 'Price', 'position', 'category', 'macro_category', 'micro_category', 'macro_category_id', 'micro_category_id', 'color', 'color_id', 'product_price', 'discountedPrice', 'price_tf', 'discountedPrice_tf', 'quantity', 'coupon', 'is_in_stock', 'list', 'url', 'img_src', 'filename'
+            'Product_ID','Cod10', 'Title', 'Price', 'position', 'category', 'macro_category', 'micro_category', 'macro_category_id', 'micro_category_id', 'color', 'color_id', 'product_price', 'discountedPrice', 'price_tf', 'discountedPrice_tf', 'quantity', 'coupon', 'is_in_stock', 'list', 'url', 'img_src', 'filename'
         ]
         parsed_data.append(column_names)
         articlesChloe = soup.find_all('article', {'class': 'item'})
@@ -734,8 +748,16 @@ class Chloe_Parser(WebsiteParser):
             if a_url:
                 a_url = a_url['href']
 
+            product_id_html=self.open_link(a_url)
+            soup_pid = BeautifulSoup(product_id_html, 'html.parser')
+            div_element = soup_pid.find('div', class_='itemdescription')
+            if div_element:
+                text_content = div_element.get_text()
+                product_id=text_content.split('Item code: ')[1]
+
             product_info = json.loads(data_pid)
 
+            product_data.append(product_id)
             product_data.append(product_info['product_cod10'])
             product_data.append(product_info['product_title'])
             product_data.append(product_info['product_price'])
@@ -2512,6 +2534,16 @@ class PalmAngelsParser(WebsiteParser):
             # Extract product URL from product title link
             product_title = item.find('a', class_='css-1kcohcr')
             product_url = product_title.get('href', '') if product_title else ''
+            product_url=f"https://www.palmangels.com{product_url}"
+
+            product_id=None
+
+            product_id_html=self.open_link(product_url)
+            print(product_id_html)
+            soup_pid = BeautifulSoup(product_id_html, 'html.parser')
+            div_elements = soup_pid.find_all('div',  class_='css-c3spse')
+            print(div_elements)
+
 
             # Extract product name from product title text
             product_name_element = item.find('h2', class_='css-869f5i')
@@ -2548,7 +2580,7 @@ class PalmAngelsParser(WebsiteParser):
 
 
             product_data = [
-                '',  # Assuming product ID is not available
+                product_id,  # Assuming product ID is not available
                 product_name,
                 original_price,  # Use sale price if available
                 category,

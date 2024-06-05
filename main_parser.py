@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 import csv
 import datetime
 import os
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 class WebsiteParser:
     def __init__(self):
@@ -80,3 +83,16 @@ class WebsiteParser:
         soup = BeautifulSoup(html_content, 'html.parser')
         parsed_data = self.parse_product_blocks(soup,category)
         return self.convert_to_tsv(parsed_data)
+    @staticmethod
+    def open_link(url):
+        try:
+            headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"}
+            response = requests.get(url,headers=headers,allow_redirects=True)
+            response.raise_for_status()  # Raises an HTTPError for bad responses
+            return response.text
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+            return None
+
+
+
