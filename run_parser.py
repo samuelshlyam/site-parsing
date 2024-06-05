@@ -280,9 +280,9 @@ output_directory_path = "parser-output"
 #PalmAngels End
 
 #Moose Knuckles Start
-#mooseKnucklesParser = MooseKnucklesParser(output_directory_path)
-#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/moose_knuckles'
-#mooseKnucklesParser.parse_directory(directory_path)
+mooseKnucklesParser = MooseKnucklesParser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\moose_knuckles'
+mooseKnucklesParser.parse_directory(directory_path)
 #Moose Knuckles End
 
 #Acne Studios Start
@@ -308,3 +308,4 @@ output_directory_path = "parser-output"
 #directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/gianvito_rossi'
 #gianvitoRossiParser.parse_directory(directory_path)
 #Gianvito Rossi End
+

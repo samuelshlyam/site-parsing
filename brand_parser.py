@@ -2616,7 +2616,9 @@ class MooseKnucklesParser(WebsiteParser):
                 sale_price=''
             original_price = price.split("$")[1] if price.split("$")[1] else ''
             price=original_price
-            product_id=self.extract_product_id(image_url)
+            product_id=product_url.split("-")[-1]
+            if not product_id.startswith("m"):
+                product_id = product_url.split("-")[-2]
 
             product_data = [
                 product_id,  # Assuming product ID is not available
@@ -2632,21 +2634,6 @@ class MooseKnucklesParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
-
-    def extract_product_id(self,image_url):
-        """Extracts the product ID from a Moose Knuckles image URL.
-
-        Args:
-            image_url: The URL of the Moose Knuckles product image.
-
-        Returns:
-            The extracted product ID, or None if not found.
-        """
-        match = re.search(r"product/(.+)_", image_url)
-        if match:
-            return match.group(1)[4:]
-        else:
-            return None
 
 class AcneStudiosParser(WebsiteParser):
     def __init__(self, directory):
