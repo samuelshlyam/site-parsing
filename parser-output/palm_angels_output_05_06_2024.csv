@@ -1,0 +1,872 @@
+product_id,product_name,price,category,image_urls,product_url,sale_price,original_price,discount,filename
+,Logo Track Jacket,$685,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-logo-track-jacket_22030552_52306887_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-track-jacket_22030552_52306884_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-track-jacket_22030552_52306881_2048.jpg",/en-us/shopping/logo-track-jacket-22030552,$445,$685,-35%,men_all_products_1.html
+,Logo Track Pants,$575,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-logo-track-pants_22030563_52968603_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-track-pants_22030563_52968594_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-track-pants_22030563_52968595_2048.jpg",/en-us/shopping/logo-track-pants-22030563,$374,$575,-35%,men_all_products_1.html
+,Logo Cap,$225,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-logo-cap_22030597_52399044_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-cap_22030597_52399041_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-cap_22030597_52399043_2048.jpg",/en-us/shopping/logo-cap-22030597,$146,$225,-35%,men_all_products_1.html
+,Pa 4 Sneakers,$620,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-pa-4-sneakers_22030590_52307097_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-pa-4-sneakers_22030590_52307098_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-pa-4-sneakers_22030590_52307100_2048.jpg",/en-us/shopping/pa-4-sneakers-22030590,,$620,,men_all_products_1.html
+,Back Foggy PA Hoodie,$660,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-back-foggy-pa-hoodie_21777406_51849850_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-back-foggy-pa-hoodie_21777406_51849830_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-back-foggy-pa-hoodie_21777406_51849847_2048.jpg",/en-us/shopping/back-foggy-pa-hoodie-21777406,$429,$660,-35%,men_all_products_1.html
+,Foggy PA T-Shirt,$490,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-foggy-pa-t-shirt_21777401_51849645_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-foggy-pa-t-shirt_21777401_51849622_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-foggy-pa-t-shirt_21777401_51849643_2048.jpg",/en-us/shopping/foggy-pa-t-shirt-21777401,$319,$490,-35%,men_all_products_1.html
+,Burning Monogram T-Shirt,$495,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-t-shirt_21773705_51846944_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-t-shirt_21773705_51846929_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-t-shirt_21773705_51846919_2048.jpg",/en-us/shopping/burning-monogram-t-shirt-21773705,$322,$495,-35%,men_all_products_1.html
+,Burning Monogram Swimshorts,$435,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-swimshorts_21773734_51847912_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-swimshorts_21773734_51847890_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-swimshorts_21773734_51847892_2048.jpg",/en-us/shopping/burning-monogram-swimshorts-21773734,$283,$435,-35%,men_all_products_1.html
+,Monogram Spray City T-Shirt Los Angels,$295,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-los-angels_22030624_53217654_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-los-angels_22030624_53217650_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-los-angels_22030624_53217647_2048.jpg",/en-us/shopping/monogram-spray-city-t-shirt-los-angels-22030624,,$295,,men_all_products_1.html
+,Monogram Spray City T-Shirt Paris,$295,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-paris_22030627_53217690_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-paris_22030627_53217684_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-paris_22030627_53217682_2048.jpg",/en-us/shopping/monogram-spray-city-t-shirt-paris-22030627,,$295,,men_all_products_1.html
+,Burning Monogram Crewneck,$565,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-crewneck_21777404_51849780_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-crewneck_21777404_51849743_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-crewneck_21777404_51849747_2048.jpg",/en-us/shopping/burning-monogram-crewneck-21777404,$367,$565,-35%,men_all_products_1.html
+,Burning Monogram Loose Pants,$790,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-loose-pants_21777396_51849575_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-loose-pants_21777396_51849531_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-loose-pants_21777396_51849560_2048.jpg",/en-us/shopping/burning-monogram-loose-pants-21777396,$514,$790,-35%,men_all_products_1.html
+,Burning Monogram Cap,$245,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-cap_21777397_51849596_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-cap_21777397_51849578_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-cap_21777397_51849595_2048.jpg",/en-us/shopping/burning-monogram-cap-21777397,$159,$245,-35%,men_all_products_1.html
+,PA 4 Sneakers,$620,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-pa-4-sneakers_21773743_51848226_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-pa-4-sneakers_21773743_51848228_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-pa-4-sneakers_21773743_51848229_2048.jpg",/en-us/shopping/pa-4-sneakers-21773743,,$620,,men_all_products_1.html
+,Monogram Spray City T-Shirt Los Angels,$295,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-los-angels_22028719_53217519_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-los-angels_22028719_53217513_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-los-angels_22028719_53217512_2048.jpg",/en-us/shopping/monogram-spray-city-t-shirt-los-angels-22028719,,$295,,men_all_products_1.html
+,Monogram Spray City T-Shirt Paris,$295,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-paris_22030626_53217677_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-paris_22030626_53217666_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-paris_22030626_53217667_2048.jpg",/en-us/shopping/monogram-spray-city-t-shirt-paris-22030626,,$295,,men_all_products_1.html
+,Logo Linen Track Jacket,"$1,325",men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-logo-linen-track-jacket_22030553_52455045_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-linen-track-jacket_22030553_52455028_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-linen-track-jacket_22030553_52455043_2048.jpg",/en-us/shopping/logo-linen-track-jacket-22030553,$851,"$1,325",-35%,men_all_products_1.html
+,Logo Linen Track Pant,$985,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-logo-linen-track-pant_22030564_52455120_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-linen-track-pant_22030564_52455095_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-linen-track-pant_22030564_52455082_2048.jpg",/en-us/shopping/logo-linen-track-pant-22030564,$641,$985,-35%,men_all_products_1.html
+,Palms Allover Shirt,$630,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-shirt_21777435_51850950_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-shirt_21777435_51850942_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-shirt_21777435_51850932_2048.jpg",/en-us/shopping/palms-allover-shirt-21777435,$410,$630,-35%,men_all_products_1.html
+,Palms Allover Swimshorts,$435,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-swimshorts_21777433_51850911_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-swimshorts_21777433_51850874_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-swimshorts_21777433_51850912_2048.jpg",/en-us/shopping/palms-allover-swimshorts-21777433,$283,$435,-35%,men_all_products_1.html
+,Hyper Monogram Hoodie,$725,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-hyper-monogram-hoodie_21556255_51959112_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-hyper-monogram-hoodie_21556255_51959111_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-hyper-monogram-hoodie_21556255_51959108_2048.jpg",/en-us/shopping/hyper-monogram-hoodie-21556255,$471,$725,-35%,men_all_products_1.html
+,Hyper Monogram T-Shirt,$390,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-hyper-monogram-t-shirt_21556257_51959119_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-hyper-monogram-t-shirt_21556257_51959118_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-hyper-monogram-t-shirt_21556257_51959121_2048.jpg",/en-us/shopping/hyper-monogram-t-shirt-21556257,$254,$390,-35%,men_all_products_1.html
+,Monogram Track Jacket,$650,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-jacket_21777409_51849960_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-jacket_21777409_51849932_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-jacket_21777409_51849935_2048.jpg",/en-us/shopping/monogram-track-jacket-21777409,,$650,,men_all_products_1.html
+,Monogram Track Pants,$520,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-pants_21777419_51850214_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-pants_21777419_51850198_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-pants_21777419_51850197_2048.jpg",/en-us/shopping/monogram-track-pants-21777419,,$520,,men_all_products_1.html
+,BEAR CLASSIC T-SHIRT,$390,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-bear-classic-t-shirt_18438568_39840371_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-bear-classic-t-shirt_18438568_39840368_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-bear-classic-t-shirt_18438568_39840369_2048.jpg",/en-us/shopping/bear-classic-t-shirt-18438568,$254,$390,-35%,men_all_products_1.html
+,BEAR CLASSIC T-SHIRT,$390,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-bear-classic-t-shirt_18438569_40627795_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-bear-classic-t-shirt_18438569_40630723_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-bear-classic-t-shirt_18438569_40630724_2048.jpg",/en-us/shopping/bear-classic-t-shirt-18438569,$254,$390,-35%,men_all_products_1.html
+,Monogram Track Jacket,$685,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-jacket_21777408_51849931_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-jacket_21777408_51849904_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-jacket_21777408_51849910_2048.jpg",/en-us/shopping/monogram-track-jacket-21777408,$445,$685,-35%,men_all_products_1.html
+,Monogram Track Pants,$575,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-pants_21777418_51850196_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-pants_21777418_51850178_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-pants_21777418_51850181_2048.jpg",/en-us/shopping/monogram-track-pants-21777418,$374,$575,-35%,men_all_products_1.html
+,Monogram Pool Slider,$300,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-pool-slider_22030591_52307104_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-pool-slider_22030591_52307102_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-pool-slider_22030591_52307105_2048.jpg",/en-us/shopping/monogram-pool-slider-22030591,$195,$300,-35%,men_all_products_1.html
+,Canvas Logo Tote Bag,$525,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-canvas-logo-tote-bag_22030601_52307154_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-canvas-logo-tote-bag_22030601_52307148_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-canvas-logo-tote-bag_22030601_52307149_2048.jpg",/en-us/shopping/canvas-logo-tote-bag-22030601,,$525,,men_all_products_1.html
+,LOS ANGELES SPRAYED T-SHIRT,$295,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-los-angeles-sprayed-t-shirt_16237739_36647308_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-los-angeles-sprayed-t-shirt_16237739_36646650_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-los-angeles-sprayed-t-shirt_16237739_36646645_2048.jpg",/en-us/shopping/los-angeles-sprayed-t-shirt-16237739,$192,$295,-35%,men_all_products_1.html
+,MILANO SPRAYED T-SHIRT,$295,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-milano-sprayed-t-shirt_16648887_36646692_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-milano-sprayed-t-shirt_16648887_36645860_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-milano-sprayed-t-shirt_16648887_36647331_2048.jpg",/en-us/shopping/milano-sprayed-t-shirt-16648887,$192,$295,-35%,men_all_products_1.html
+,CLASSIC LOGO OVER T-SHIRT,$330,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-classic-logo-over-t-shirt_16047101_44203868_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-classic-logo-over-t-shirt_16047101_44205964_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-classic-logo-over-t-shirt_16047101_44205960_2048.jpg",/en-us/shopping/classic-logo-over-t-shirt-16047101,,$330,,men_all_products_1.html
+,Doubled Logo Over Tee,$330,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-doubled-logo-over-tee_16237748_44203876_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-doubled-logo-over-tee_16237748_44205972_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-doubled-logo-over-tee_16237748_44205971_2048.jpg",/en-us/shopping/doubled-logo-over-tee-16237748,,$330,,men_all_products_1.html
+,Sweatshirt The Palm,$500,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-sweatshirt-the-palm_22030540_53217602_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-sweatshirt-the-palm_22030540_53217598_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-sweatshirt-the-palm_22030540_53217596_2048.jpg",/en-us/shopping/sweatshirt-the-palm-22030540,,$500,,men_all_products_1.html
+,Sweatshort The Palm,$435,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-sweatshort-the-palm_22028706_52968519_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-sweatshort-the-palm_22028706_52968493_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-sweatshort-the-palm_22028706_52968490_2048.jpg",/en-us/shopping/sweatshort-the-palm-22028706,,$435,,men_all_products_1.html
+,Monogram Trucker Suede Cap,$260,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-trucker-suede-cap_21776168_51848530_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-trucker-suede-cap_21776168_51848511_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-trucker-suede-cap_21776168_51848510_2048.jpg",/en-us/shopping/monogram-trucker-suede-cap-21776168,,$260,,men_all_products_1.html
+,PA 4 Sneakers,$620,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-pa-4-sneakers_21773744_51848255_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-pa-4-sneakers_21773744_51848251_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-pa-4-sneakers_21773744_51848253_2048.jpg",/en-us/shopping/pa-4-sneakers-21773744,,$620,,men_all_products_1.html
+,Hoodie The Palm,$525,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-hoodie-the-palm_22030544_52898061_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-hoodie-the-palm_22030544_52898056_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-hoodie-the-palm_22030544_52898057_2048.jpg",/en-us/shopping/hoodie-the-palm-22030544,,$525,,men_all_products_1.html
+,The Palm T-Shirt,$330,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-the-palm-t-shirt_22028700_52306358_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-t-shirt_22028700_52306353_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-t-shirt_22028700_52306354_2048.jpg",/en-us/shopping/the-palm-t-shirt-22028700,,$330,,men_all_products_1.html
+,The Palm T-Shirt,$330,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-the-palm-t-shirt_22030528_52306760_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-t-shirt_22030528_52306757_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-t-shirt_22030528_52306754_2048.jpg",/en-us/shopping/the-palm-t-shirt-22030528,$215,$330,-35%,men_all_products_1.html
+,The Palm T-Shirt,$365,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-the-palm-t-shirt_22030533_52306785_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-t-shirt_22030533_52306780_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-t-shirt_22030533_52306779_2048.jpg",/en-us/shopping/the-palm-t-shirt-22030533,,$365,,men_all_products_1.html
+,LOS ANGELES SPRAYED HOODIE,$560,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-los-angeles-sprayed-hoodie_17572878_36647700_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-los-angeles-sprayed-hoodie_17572878_36646819_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-los-angeles-sprayed-hoodie_17572878_36646822_2048.jpg",/en-us/shopping/los-angeles-sprayed-hoodie-17572878,$364,$560,-35%,men_all_products_1.html
+,MILANO SPRAYED HOODIE,$560,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-milano-sprayed-hoodie_17573275_36647770_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-milano-sprayed-hoodie_17573275_36646871_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-milano-sprayed-hoodie_17573275_36647769_2048.jpg",/en-us/shopping/milano-sprayed-hoodie-17573275,$364,$560,-35%,men_all_products_1.html
+,The Palm Back T-Shirt Black,$460,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-the-palm-back-t-shirt-black_23060274_53154417_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-back-t-shirt-black_23060274_53154392_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-back-t-shirt-black_23060274_53154395_2048.jpg",/en-us/shopping/the-palm-back-t-shirt-black-23060274,,$460,,men_all_products_1.html
+,The Palm Back T-Shirt White,$460,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-the-palm-back-t-shirt-white_23059082_53154337_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-back-t-shirt-white_23059082_53154319_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-back-t-shirt-white_23059082_53154335_2048.jpg",/en-us/shopping/the-palm-back-t-shirt-white-23059082,,$460,,men_all_products_1.html
+,Paisley Bowling Shirt,$755,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-paisley-bowling-shirt_22029652_53227256_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paisley-bowling-shirt_22029652_53227249_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paisley-bowling-shirt_22029652_53227251_2048.jpg",/en-us/shopping/paisley-bowling-shirt-22029652,$491,$755,-35%,men_all_products_1.html
+,Paisley Swimshort,$435,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-paisley-swimshort_22028711_53227248_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paisley-swimshort_22028711_53227221_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paisley-swimshort_22028711_53227219_2048.jpg",/en-us/shopping/paisley-swimshort-22028711,$283,$435,-35%,men_all_products_1.html
+,The Palm Socks,$95,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-the-palm-socks_22030617_52307203_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-socks_22030617_52307201_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-socks_22030617_52307203_2048.jpg",/en-us/shopping/the-palm-socks-22030617,$62,$95,-35%,men_all_products_1.html
+,Side Zip University Sneakers,$565,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-side-zip-university-sneakers_22030585_52968639_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-side-zip-university-sneakers_22030585_52968605_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-side-zip-university-sneakers_22030585_52968619_2048.jpg",/en-us/shopping/side-zip-university-sneakers-22030585,$367,$565,-35%,men_all_products_1.html
+,Banana Bowling Shirt,$595,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-banana-bowling-shirt_22030580_52307053_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-banana-bowling-shirt_22030580_52307048_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-banana-bowling-shirt_22030580_52307050_2048.jpg",/en-us/shopping/banana-bowling-shirt-22030580,$387,$595,-35%,men_all_products_1.html
+,Banana Swimshort,$400,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-banana-swimshort_22030574_52307014_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-banana-swimshort_22030574_52307010_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-banana-swimshort_22030574_52306997_2048.jpg",/en-us/shopping/banana-swimshort-22030574,$260,$400,-35%,men_all_products_1.html
+,Sunset Bowling Shirt,$630,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-sunset-bowling-shirt_22029650_52306661_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-sunset-bowling-shirt_22029650_52306656_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-sunset-bowling-shirt_22029650_52306657_2048.jpg",/en-us/shopping/sunset-bowling-shirt-22029650,$410,$630,-35%,men_all_products_1.html
+,Sunset Swimshort,$395,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-sunset-swimshort_22030572_52306987_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-sunset-swimshort_22030572_52306982_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-sunset-swimshort_22030572_52306984_2048.jpg",/en-us/shopping/sunset-swimshort-22030572,$257,$395,-35%,men_all_products_1.html
+,Paisley Bowling Shirt,$790,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-paisley-bowling-shirt_22029651_52306671_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paisley-bowling-shirt_22029651_52306662_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paisley-bowling-shirt_22029651_52306663_2048.jpg",/en-us/shopping/paisley-bowling-shirt-22029651,$514,$790,-35%,men_all_products_1.html
+,Paisley Shorts,$730,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-paisley-shorts_22030556_52306910_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paisley-shorts_22030556_52306905_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paisley-shorts_22030556_52306901_2048.jpg",/en-us/shopping/paisley-shorts-22030556,$475,$730,-35%,men_all_products_1.html
+,Paisley Bowling Shirt,$755,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-paisley-bowling-shirt_22030581_52917320_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paisley-bowling-shirt_22030581_52917317_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paisley-bowling-shirt_22030581_52917318_2048.jpg",/en-us/shopping/paisley-bowling-shirt-22030581,$491,$755,-35%,men_all_products_1.html
+,Paisley Swimshort,$435,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-paisley-swimshort_22028709_52306414_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paisley-swimshort_22028709_52306403_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paisley-swimshort_22028709_52306408_2048.jpg",/en-us/shopping/paisley-swimshort-22028709,$283,$435,-35%,men_all_products_1.html
+,Overshirt Stripes Monogram,"$1,190",men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-overshirt-stripes-monogram_22030571_52306983_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-overshirt-stripes-monogram_22030571_52306974_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-overshirt-stripes-monogram_22030571_52306970_2048.jpg",/en-us/shopping/overshirt-stripes-monogram-22030571,$774,"$1,190",-35%,men_all_products_1.html
+,Shorts Stripes Monogram,$630,men_all_products_1,"https://cdn-images.farfetch-contents.com/palm-angels-shorts-stripes-monogram_22030557_52306919_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-shorts-stripes-monogram_22030557_52306912_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-shorts-stripes-monogram_22030557_52306914_2048.jpg",/en-us/shopping/shorts-stripes-monogram-22030557,$410,$630,-35%,men_all_products_1.html
+,The Palm Socks,$95,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-the-palm-socks_22030616_52307200_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-socks_22030616_52307199_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-the-palm-socks_22030616_52307200_2048.jpg",/en-us/shopping/the-palm-socks-22030616,,$95,,men_all_products_2.html
+,Sandals Depa Palm Angels X Suicoke,$283,men_all_products_2,"https://cdn-images.farfetch-contents.com/suicoke-x-palm-angels-sandals-depa-palm-angels-x-suicoke_22534009_52456194_2048.jpg, https://cdn-images.farfetch-contents.com/suicoke-x-palm-angels-sandals-depa-palm-angels-x-suicoke_22534009_52456193_2048.jpg, https://cdn-images.farfetch-contents.com/suicoke-x-palm-angels-sandals-depa-palm-angels-x-suicoke_22534009_52456197_2048.jpg",/en-us/shopping/sandals-depa-palm-angels-x-suicoke-22534009,$184,$283,-35%,men_all_products_2.html
+,Dice Game Back Logo Crewneck,$620,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-dice-game-back-logo-crewneck_21777403_51849742_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-dice-game-back-logo-crewneck_21777403_51849729_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-dice-game-back-logo-crewneck_21777403_51849709_2048.jpg",/en-us/shopping/dice-game-back-logo-crewneck-21777403,$403,$620,-35%,men_all_products_2.html
+,Dice Game Tie Dye Hoodie,$790,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-dice-game-tie-dye-hoodie_21773716_51847367_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-dice-game-tie-dye-hoodie_21773716_51847352_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-dice-game-tie-dye-hoodie_21773716_51847335_2048.jpg",/en-us/shopping/dice-game-tie-dye-hoodie-21773716,$514,$790,-35%,men_all_products_2.html
+,Hoodie I Am Lost,$660,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-hoodie-i-am-lost_22030546_52306852_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-hoodie-i-am-lost_22030546_52306844_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-hoodie-i-am-lost_22030546_52306843_2048.jpg",/en-us/shopping/hoodie-i-am-lost-22030546,$429,$660,-35%,men_all_products_2.html
+,I Am Lost T-Shirt,$435,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-i-am-lost-t-shirt_22846868_52957839_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-i-am-lost-t-shirt_22846868_52957837_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-i-am-lost-t-shirt_22846868_52957831_2048.jpg",/en-us/shopping/i-am-lost-t-shirt-22846868,$283,$435,-35%,men_all_products_2.html
+,Monogram Spray City T-Shirt New York,$295,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-new-york_22030625_53217663_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-new-york_22030625_53217655_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-spray-city-t-shirt-new-york_22030625_53217656_2048.jpg",/en-us/shopping/monogram-spray-city-t-shirt-new-york-22030625,,$295,,men_all_products_2.html
+,Monogram Pockets Pants,"$1,060",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-pockets-pants_21777414_51850120_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-pockets-pants_21777414_51850101_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-pockets-pants_21777414_51850121_2048.jpg",/en-us/shopping/monogram-pockets-pants-21777414,$690,"$1,060",-35%,men_all_products_2.html
+,Monogram Denim Shirt,"$1,175",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-denim-shirt_21777474_51851384_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-denim-shirt_21777474_51851370_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-denim-shirt_21777474_51851366_2048.jpg",/en-us/shopping/monogram-denim-shirt-21777474,$764,"$1,175",-35%,men_all_products_2.html
+,Monogram Denim,$860,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-denim_21777472_51851338_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-denim_21777472_51851326_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-denim_21777472_51851323_2048.jpg",/en-us/shopping/monogram-denim-21777472,,$860,,men_all_products_2.html
+,Logo Military Plate Necklace,$290,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-logo-military-plate-necklace_22030610_52307187_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-military-plate-necklace_22030610_52307186_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-military-plate-necklace_22030610_52307192_2048.jpg",/en-us/shopping/logo-military-plate-necklace-22030610,,$290,,men_all_products_2.html
+,PA Espadrillas,$525,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-pa-espadrillas_21786029_51851662_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-pa-espadrillas_21786029_51851653_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-pa-espadrillas_21786029_51851654_2048.jpg",/en-us/shopping/pa-espadrillas-21786029,$341,$525,-35%,men_all_products_2.html
+,LONDON SPRAYED T-SHIRT,$295,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-london-sprayed-t-shirt_16665819_36645872_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-london-sprayed-t-shirt_16665819_36646693_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-london-sprayed-t-shirt_16665819_36646694_2048.jpg",/en-us/shopping/london-sprayed-t-shirt-16665819,$192,$295,-35%,men_all_products_2.html
+,PARIS SPRAYED T-SHIRT,$295,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-paris-sprayed-t-shirt_16237740_36647311_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paris-sprayed-t-shirt_16237740_36647307_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-paris-sprayed-t-shirt_16237740_36647309_2048.jpg",/en-us/shopping/paris-sprayed-t-shirt-16237740,$192,$295,-35%,men_all_products_2.html
+,Sunset Track Shirt,"$1,295",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-sunset-track-shirt_22030549_52306864_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-sunset-track-shirt_22030549_52306860_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-sunset-track-shirt_22030549_52306858_2048.jpg",/en-us/shopping/sunset-track-shirt-22030549,$842,"$1,295",-35%,men_all_products_2.html
+,Track Pants Sunset,"$1,325",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-track-pants-sunset_22030570_53217629_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-track-pants-sunset_22030570_53217617_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-track-pants-sunset_22030570_53217616_2048.jpg",/en-us/shopping/track-pants-sunset-22030570,$862,"$1,325",-35%,men_all_products_2.html
+,Embroidered Logo Slim T-Shirt,$510,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-embroidered-logo-slim-t-shirt_20205628_45722257_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-embroidered-logo-slim-t-shirt_20205628_45722251_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-embroidered-logo-slim-t-shirt_20205628_45722250_2048.jpg",/en-us/shopping/embroidered-logo-slim-t-shirt-20205628,,$510,,men_all_products_2.html
+,Embroidered Logo Slim T-Shirt,$510,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-embroidered-logo-slim-t-shirt_20205629_45722263_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-embroidered-logo-slim-t-shirt_20205629_45720527_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-embroidered-logo-slim-t-shirt_20205629_45720528_2048.jpg",/en-us/shopping/embroidered-logo-slim-t-shirt-20205629,,$510,,men_all_products_2.html
+,Monogram Stud Classic T-Shirt,$560,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-stud-classic-t-shirt_21773701_51846801_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-stud-classic-t-shirt_21773701_51846751_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-stud-classic-t-shirt_21773701_51846800_2048.jpg",/en-us/shopping/monogram-stud-classic-t-shirt-21773701,$364,$560,-35%,men_all_products_2.html
+,Milano Stud Loose T-Shirt,$660,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-milano-stud-loose-t-shirt_21773703_51846899_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-milano-stud-loose-t-shirt_21773703_51846850_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-milano-stud-loose-t-shirt_21773703_51846849_2048.jpg",/en-us/shopping/milano-stud-loose-t-shirt-21773703,$429,$660,-35%,men_all_products_2.html
+,Raffia Tote Bag,$860,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-raffia-tote-bag_21773749_51848349_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-raffia-tote-bag_21773749_51848323_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-raffia-tote-bag_21773749_51848322_2048.jpg",/en-us/shopping/raffia-tote-bag-21773749,$560,$860,-35%,men_all_products_2.html
+,PA Milano Bucket,$395,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-pa-milano-bucket_21773748_51848299_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-pa-milano-bucket_21773748_51848295_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-pa-milano-bucket_21773748_51848297_2048.jpg",/en-us/shopping/pa-milano-bucket-21773748,$257,$395,-35%,men_all_products_2.html
+,Back Logo Check Overshirt,"$1,125",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-back-logo-check-overshirt_21773731_51847776_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-back-logo-check-overshirt_21773731_51847749_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-back-logo-check-overshirt_21773731_51847779_2048.jpg",/en-us/shopping/back-logo-check-overshirt-21773731,,"$1,125",,men_all_products_2.html
+,Club Check Overshirt With Logo,"$1,095",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-club-check-overshirt-with-logo_22030568_52306962_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-club-check-overshirt-with-logo_22030568_52306957_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-club-check-overshirt-with-logo_22030568_52306958_2048.jpg",/en-us/shopping/club-check-overshirt-with-logo-22030568,$712,"$1,095",-35%,men_all_products_2.html
+,Sweatshirt Palm Dream,$595,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-sweatshirt-palm-dream_22030541_52306825_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-sweatshirt-palm-dream_22030541_52306808_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-sweatshirt-palm-dream_22030541_52306812_2048.jpg",/en-us/shopping/sweatshirt-palm-dream-22030541,$387,$595,-35%,men_all_products_2.html
+,Iphone 15 Case The Palm,$125,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-iphone-15-case-the-palm_22030611_52658432_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-iphone-15-case-the-palm_22030611_52658434_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-iphone-15-case-the-palm_22030611_52658432_2048.jpg",/en-us/shopping/iphone-15-case-the-palm-22030611,,$125,,men_all_products_2.html
+,T-Shirt Palm Oasis,$395,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-t-shirt-palm-oasis_22028702_52306366_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-t-shirt-palm-oasis_22028702_52306362_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-t-shirt-palm-oasis_22028702_52306363_2048.jpg",/en-us/shopping/t-shirt-palm-oasis-22028702,$257,$395,-35%,men_all_products_2.html
+,Palm Dream T-Shirt,$395,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-palm-dream-t-shirt_22030530_52306778_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palm-dream-t-shirt_22030530_52306772_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palm-dream-t-shirt_22030530_52306774_2048.jpg",/en-us/shopping/palm-dream-t-shirt-22030530,$257,$395,-35%,men_all_products_2.html
+,BEAR HOODIE,$925,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-bear-hoodie_16865283_44203960_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-bear-hoodie_16865283_44207050_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-bear-hoodie_16865283_44207049_2048.jpg",/en-us/shopping/bear-hoodie-16865283,$602,$925,-35%,men_all_products_2.html
+,BEAR CREW SWEATSHIRT,$895,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-bear-crew-sweatshirt_18438553_39841396_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-bear-crew-sweatshirt_18438553_39840305_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-bear-crew-sweatshirt_18438553_39841389_2048.jpg",/en-us/shopping/bear-crew-sweatshirt-18438553,$582,$895,-35%,men_all_products_2.html
+,Curved Logo Cardigan,$660,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-curved-logo-cardigan_21773738_51848031_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-curved-logo-cardigan_21773738_51848011_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-curved-logo-cardigan_21773738_51848008_2048.jpg",/en-us/shopping/curved-logo-cardigan-21773738,,$660,,men_all_products_2.html
+,Cotton Straight Leg Pants,$790,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-cotton-straight-leg-pants_22030554_52306892_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-cotton-straight-leg-pants_22030554_52306890_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-cotton-straight-leg-pants_22030554_52306889_2048.jpg",/en-us/shopping/cotton-straight-leg-pants-22030554,$514,$790,-35%,men_all_products_2.html
+,Logo Sweatshirt,$500,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-logo-sweatshirt_22030539_53217597_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-sweatshirt_22030539_53217592_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-sweatshirt_22030539_53217590_2048.jpg",/en-us/shopping/logo-sweatshirt-22030539,$325,$500,-35%,men_all_products_2.html
+,Logo Hoodie,$565,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-logo-hoodie_22030545_52306842_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-hoodie_22030545_52306838_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-hoodie_22030545_52306836_2048.jpg",/en-us/shopping/logo-hoodie-22030545,$367,$565,-35%,men_all_products_2.html
+,Palms Allover Track Jacket,$790,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-track-jacket_21773719_51847474_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-track-jacket_21773719_51847450_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-track-jacket_21773719_51847459_2048.jpg",/en-us/shopping/palms-allover-track-jacket-21773719,$514,$790,-35%,men_all_products_2.html
+,Palms Allover Track Pants,$725,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-track-pants_21777420_51850224_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-track-pants_21777420_51850215_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-track-pants_21777420_51850236_2048.jpg",/en-us/shopping/palms-allover-track-pants-21777420,$471,$725,-35%,men_all_products_2.html
+,Buckle Monogram Backpack,"$1,060",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-buckle-monogram-backpack_21776176_51848704_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-buckle-monogram-backpack_21776176_51848660_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-buckle-monogram-backpack_21776176_51848705_2048.jpg",/en-us/shopping/buckle-monogram-backpack-21776176,,"$1,060",,men_all_products_2.html
+,Allover Palms Bucket,$260,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-allover-palms-bucket_21776174_51848626_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-allover-palms-bucket_21776174_51848624_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-allover-palms-bucket_21776174_51848631_2048.jpg",/en-us/shopping/allover-palms-bucket-21776174,$169,$260,-35%,men_all_products_2.html
+,Palms Allover Track Jacket,$790,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-track-jacket_21773720_51847504_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-track-jacket_21773720_51847475_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-track-jacket_21773720_51847477_2048.jpg",/en-us/shopping/palms-allover-track-jacket-21773720,$514,$790,-35%,men_all_products_2.html
+,Palms Allover Track Pants,$725,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-track-pants_21773726_51847691_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-track-pants_21773726_51847648_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-palms-allover-track-pants_21773726_51847641_2048.jpg",/en-us/shopping/palms-allover-track-pants-21773726,$471,$725,-35%,men_all_products_2.html
+,Patchwork Palms Shirt,$630,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-patchwork-palms-shirt_21773736_51847979_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-patchwork-palms-shirt_21773736_51847943_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-patchwork-palms-shirt_21773736_51847978_2048.jpg",/en-us/shopping/patchwork-palms-shirt-21773736,$410,$630,-35%,men_all_products_2.html
+,Patchwork Palms Swimshorts,$445,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-patchwork-palms-swimshorts_21777431_51850810_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-patchwork-palms-swimshorts_21777431_51850746_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-patchwork-palms-swimshorts_21777431_51850737_2048.jpg",/en-us/shopping/patchwork-palms-swimshorts-21777431,$289,$445,-35%,men_all_products_2.html
+,Logo Cap,$225,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-logo-cap_22030596_52307128_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-cap_22030596_52307125_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-logo-cap_22030596_52307126_2048.jpg",/en-us/shopping/logo-cap-22030596,$146,$225,-35%,men_all_products_2.html
+,Monogram Pool Slider,$300,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-pool-slider_22030594_52658431_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-pool-slider_22030594_52658428_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-pool-slider_22030594_52658426_2048.jpg",/en-us/shopping/monogram-pool-slider-22030594,,$300,,men_all_products_2.html
+,PA City Washed Crewneck,$460,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-pa-city-washed-crewneck_21773714_51847295_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-pa-city-washed-crewneck_21773714_51847284_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-pa-city-washed-crewneck_21773714_51847281_2048.jpg",/en-us/shopping/pa-city-washed-crewneck-21773714,$299,$460,-35%,men_all_products_2.html
+,Curved Logo Zip Knit Hoodie,$725,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-curved-logo-zip-knit-hoodie_21777444_51851078_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-curved-logo-zip-knit-hoodie_21777444_51851068_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-curved-logo-zip-knit-hoodie_21777444_51851070_2048.jpg",/en-us/shopping/curved-logo-zip-knit-hoodie-21777444,,$725,,men_all_products_2.html
+,Curved Logo Cardigan,$660,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-curved-logo-cardigan_21777437_51850977_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-curved-logo-cardigan_21777437_51850955_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-curved-logo-cardigan_21777437_51850957_2048.jpg",/en-us/shopping/curved-logo-cardigan-21777437,,$660,,men_all_products_2.html
+,Cheetah Track Shirt,"$1,125",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-cheetah-track-shirt_22030550_52306877_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-cheetah-track-shirt_22030550_52306865_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-cheetah-track-shirt_22030550_52306871_2048.jpg",/en-us/shopping/cheetah-track-shirt-22030550,$732,"$1,125",-35%,men_all_products_2.html
+,Cheetah Track Pants,"$1,190",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-cheetah-track-pants_22030562_52455098_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-cheetah-track-pants_22030562_52455070_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-cheetah-track-pants_22030562_52455057_2048.jpg",/en-us/shopping/cheetah-track-pants-22030562,$774,"$1,190",-35%,men_all_products_2.html
+,Monogram Pin T-Shirt,$460,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-pin-t-shirt_21773708_51847023_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-pin-t-shirt_21773708_51846967_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-pin-t-shirt_21773708_51846985_2048.jpg",/en-us/shopping/monogram-pin-t-shirt-21773708,$299,$460,-35%,men_all_products_2.html
+,Cheetah Swimshort,$400,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-cheetah-swimshort_22028710_52306425_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-cheetah-swimshort_22028710_52306415_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-cheetah-swimshort_22028710_52306418_2048.jpg",/en-us/shopping/cheetah-swimshort-22028710,$260,$400,-35%,men_all_products_2.html
+,Burning Monogram T-Shirt,$495,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-t-shirt_21773704_51846926_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-t-shirt_21773704_51846901_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-burning-monogram-t-shirt_21773704_51846900_2048.jpg",/en-us/shopping/burning-monogram-t-shirt-21773704,$322,$495,-35%,men_all_products_2.html
+,Foggy PA T-Shirt,$490,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-foggy-pa-t-shirt_21773706_51846966_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-foggy-pa-t-shirt_21773706_51846941_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-foggy-pa-t-shirt_21773706_51846960_2048.jpg",/en-us/shopping/foggy-pa-t-shirt-21773706,$319,$490,-35%,men_all_products_2.html
+,Monogram Nylon Track Jacket,"$1,150",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-nylon-track-jacket_21773730_52454628_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-nylon-track-jacket_21773730_52454584_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-nylon-track-jacket_21773730_52454605_2048.jpg",/en-us/shopping/monogram-nylon-track-jacket-21773730,,"$1,150",,men_all_products_2.html
+,Monogram Nylon Track Pants,$790,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-nylon-track-pants_21777421_51850320_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-nylon-track-pants_21777421_51850251_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-nylon-track-pants_21777421_51850270_2048.jpg",/en-us/shopping/monogram-nylon-track-pants-21777421,,$790,,men_all_products_2.html
+,Monogram Track Hoodie,$710,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-hoodie_21773718_51847454_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-hoodie_21773718_51847412_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-track-hoodie_21773718_51847403_2048.jpg",/en-us/shopping/monogram-track-hoodie-21773718,$462,$710,-35%,men_all_products_2.html
+,Dice Game Logo Classic T-Shirt,$490,men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-dice-game-logo-classic-t-shirt_21773709_51847112_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-dice-game-logo-classic-t-shirt_21773709_51847025_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-dice-game-logo-classic-t-shirt_21773709_51847080_2048.jpg",/en-us/shopping/dice-game-logo-classic-t-shirt-21773709,$319,$490,-35%,men_all_products_2.html
+,Monogram Coach Jacket,"$1,295",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-coach-jacket_21777426_51850528_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-coach-jacket_21777426_51850476_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-coach-jacket_21777426_51850462_2048.jpg",/en-us/shopping/monogram-coach-jacket-21777426,$842,"$1,295",-35%,men_all_products_2.html
+,Multipockets Overshirt,"$1,655",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-multipockets-overshirt_21777430_51850733_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-multipockets-overshirt_21777430_51850659_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-multipockets-overshirt_21777430_51850660_2048.jpg",/en-us/shopping/multipockets-overshirt-21777430,"$1,074","$1,655",-35%,men_all_products_2.html
+,Monogram Stud Track Jacket,"$1,325",men_all_products_2,"https://cdn-images.farfetch-contents.com/palm-angels-monogram-stud-track-jacket_21777395_51849558_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-stud-track-jacket_21777395_51849521_2048.jpg, https://cdn-images.farfetch-contents.com/palm-angels-monogram-stud-track-jacket_21777395_51849501_2048.jpg",/en-us/shopping/monogram-stud-track-jacket-21777395,$851,"$1,325",-35%,men_all_products_2.html
+,Monogram Stud Track Pants,"$1,060",men_all_product_3,,/en-us/shopping/monogram-stud-track-pants-21777394,$690,"$1,060",-35%,men_all_product_3.html
+,GOTHIC LOGO SOCKS,$95,men_all_product_3,,/en-us/shopping/gothic-logo-socks-16863597,,$95,,men_all_product_3.html
+,UNIVERSITY SNEAKERS,$535,men_all_product_3,,/en-us/shopping/university-sneakers-18570607,$348,$535,-35%,men_all_product_3.html
+,Moncler X Palm Angels Genius Vest,"$1,170",men_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-vest-21767037,,"$1,170",,men_all_product_3.html
+,Moncler X Palm Angels Genius Knit Vest,"$1,045",men_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-knit-vest-21767038,,"$1,045",,men_all_product_3.html
+,Black Logo Denim,$605,men_all_product_3,,/en-us/shopping/black-logo-denim-17574003,,$605,,men_all_product_3.html
+,Moncler X Palm Angels Genius Jacket,"$2,050",men_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-jacket-21770009,,"$2,050",,men_all_product_3.html
+,Embroidery Logo Socks,$115,men_all_product_3,,/en-us/shopping/embroidery-logo-socks-22030615,,$115,,men_all_product_3.html
+,logo-print touch-strap slides,$430,men_all_product_3,,/en-us/shopping/logo-print-touch-strap-slides-19296849,$280,$430,-35%,men_all_product_3.html
+,Monogram Track Shorts,$790,men_all_product_3,,/en-us/shopping/monogram-track-shorts-20134277,$514,$790,-35%,men_all_product_3.html
+,Monogram Sweatshorts,$525,men_all_product_3,,/en-us/shopping/monogram-sweatshorts-20135344,,$525,,men_all_product_3.html
+,PA Ring,$365,men_all_product_3,,/en-us/shopping/pa-ring-19342594,,$365,,men_all_product_3.html
+,Monogram Polo Track Shirt,"$1,060",men_all_product_3,,/en-us/shopping/monogram-polo-track-shirt-20134271,,"$1,060",,men_all_product_3.html
+,Logo Raw Wash Loose 5 Pockets,$655,men_all_product_3,,/en-us/shopping/logo-raw-wash-loose-5-pockets-20205716,,$655,,men_all_product_3.html
+,Raw Wash Logo Denim Jacket,"$1,190",men_all_product_3,,/en-us/shopping/raw-wash-logo-denim-jacket-20205719,,"$1,190",,men_all_product_3.html
+,GOTHIC LOGO SOCKS,$95,men_all_product_3,,/en-us/shopping/gothic-logo-socks-16863594,,$95,,men_all_product_3.html
+,Moncler X Palm Angels Genius T-shirt,$345,men_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-t-shirt-21767031,,$345,,men_all_product_3.html
+,Moncler X Palm Angels Genius T-shirt,$345,men_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-t-shirt-21769007,,$345,,men_all_product_3.html
+,Moncler X Palm Angels Genius Sweater,$925,men_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-sweater-21769015,,$925,,men_all_product_3.html
+,Moncler X Palm Angels Genius Baseball Cap,$265,men_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-baseball-cap-21770014,,$265,,men_all_product_3.html
+,Logo Denim Jacket,"$1,190",men_all_product_3,,/en-us/shopping/logo-denim-jacket-20205720,,"$1,190",,men_all_product_3.html
+,Logo Loose 5 Pockets,$655,men_all_product_3,,/en-us/shopping/logo-loose-5-pockets-20205717,,$655,,men_all_product_3.html
+,Pa Ankle Combat Boots,"$1,255",men_all_product_3,,/en-us/shopping/pa-ankle-combat-boots-20205683,,"$1,255",,men_all_product_3.html
+,Moncler X Palm Angels Genius T-shirt,$345,men_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-t-shirt-21767033,,$345,,men_all_product_3.html
+,PARIS SPRAYED HOODIE,$560,men_all_product_3,,/en-us/shopping/paris-sprayed-hoodie-16579150,$364,$560,-35%,men_all_product_3.html
+,HONG KONG SPRAYED T-SHIRT,$295,men_all_product_3,,/en-us/shopping/hong-kong-sprayed-t-shirt-17574269,$192,$295,-35%,men_all_product_3.html
+,TOKYO SPRAYED HOODIE,$560,men_all_product_3,,/en-us/shopping/tokyo-sprayed-hoodie-17572881,$364,$560,-35%,men_all_product_3.html
+,BLACK LOGO CAP,$220,men_all_product_3,,/en-us/shopping/black-logo-cap-17571528,,$220,,men_all_product_3.html
+,NEW YORK SPRAYED HOODIE,$560,men_all_product_3,,/en-us/shopping/new-york-sprayed-hoodie-16750397,$364,$560,-35%,men_all_product_3.html
+,LAS VEGAS SPRAYED HOODIE,$560,men_all_product_3,,/en-us/shopping/las-vegas-sprayed-hoodie-17571472,$364,$560,-35%,men_all_product_3.html
+,University Sneakers,$525,men_all_product_3,,/en-us/shopping/university-sneakers-19257464,$341,$525,-35%,men_all_product_3.html
+,CLASSIC LOGO OVER T-SHIRT,$330,men_all_product_3,,/en-us/shopping/classic-logo-over-t-shirt-16046390,,$330,,men_all_product_3.html
+,logo-print cotton T-shirt,$360,men_all_product_3,,/en-us/shopping/logo-print-cotton-t-shirt-19296842,,$360,,men_all_product_3.html
+,Classic Logo Over T-shirt,$360,men_all_product_3,,/en-us/shopping/classic-logo-over-t-shirt-14739183,,$360,,men_all_product_3.html
+,DOUBLED LOGO T-SHIRT,$355,men_all_product_3,,/en-us/shopping/doubled-logo-t-shirt-16237750,$231,$355,-35%,men_all_product_3.html
+,Paddock Vest,"$1,050",men_all_product_3,,/en-us/shopping/paddock-vest-20116165,$683,"$1,050",-35%,men_all_product_3.html
+,CLASSIC LOGO BEANIE,$230,men_all_product_3,,/en-us/shopping/classic-logo-beanie-18436889,,$230,,men_all_product_3.html
+,Moncler X Palm Angels Genius Shirt,"$1,360",men_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-shirt-21769013,,"$1,360",,men_all_product_3.html
+,Embroidered Logo Over T-Shirt,$590,men_all_product_3,,/en-us/shopping/embroidered-logo-over-t-shirt-20205873,,$590,,men_all_product_3.html
+,Classic Logo Overshirt,$920,men_all_product_3,,/en-us/shopping/classic-logo-overshirt-19258012,,$920,,men_all_product_3.html
+,PALM PARIS SWEATER,"$1,190",men_all_product_3,,/en-us/shopping/palm-paris-sweater-20922042,$774,"$1,190",-35%,men_all_product_3.html
+,PALM PARIS CREWNECK,$925,men_all_product_3,,/en-us/shopping/palm-paris-crewneck-20921858,$602,$925,-35%,men_all_product_3.html
+,PALM PARIS CLASSIC T-SHIRT,$590,men_all_product_3,,/en-us/shopping/palm-paris-classic-t-shirt-20921857,$384,$590,-35%,men_all_product_3.html
+,PALM PARIS TRACK JACKET,"$1,320",men_all_product_3,,/en-us/shopping/palm-paris-track-jacket-20920759,$848,"$1,320",-35%,men_all_product_3.html
+,University T-shirt,$525,men_all_product_3,,/en-us/shopping/university-t-shirt-20880643,,$525,,men_all_product_3.html
+,Classic Logo Sweater,$925,men_all_product_3,,/en-us/shopping/classic-logo-sweater-20205673,,$925,,men_all_product_3.html
+,Monogram Pool Slider,$300,men_all_product_3,,/en-us/shopping/monogram-pool-slider-20134245,,$300,,men_all_product_3.html
+,University Sneakers,$525,men_all_product_3,,/en-us/shopping/university-sneakers-19258037,,$525,,men_all_product_3.html
+,bear-print hoodie,$925,men_all_product_3,,/en-us/shopping/bear-print-hoodie-18486793,$602,$925,-35%,men_all_product_3.html
+,Monogram Classic Varsity,"$2,645",men_all_product_3,,/en-us/shopping/monogram-classic-varsity-20135304,"$1,729","$2,645",-35%,men_all_product_3.html
+,LOGO HOODIE,$670,men_all_product_3,,/en-us/shopping/logo-hoodie-17571468,,$670,,men_all_product_3.html
+,logo-appliqué crew-neck T-shirt,$195,men_all_product_3,,/en-us/shopping/logo-applique-crew-neck-t-shirt-19406811,$127,$195,-35%,men_all_product_3.html
+,logo-appliqué crew-neck T-shirt,$195,men_all_product_3,,/en-us/shopping/logo-applique-crew-neck-t-shirt-19406813,$127,$195,-35%,men_all_product_3.html
+,Gothic logo-print cardholder,$305,men_all_product_3,,/en-us/shopping/gothic-logo-print-cardholder-18570649,,$305,,men_all_product_3.html
+,Curved Logo Sweater,$520,men_all_product_3,,/en-us/shopping/curved-logo-sweater-15458558,,$520,,men_all_product_3.html
+,Shark Crewneck,$880,men_all_product_3,,/en-us/shopping/shark-crewneck-19258021,$573,$880,-35%,men_all_product_3.html
+,Curved Logo Sweater,$520,men_all_product_3,,/en-us/shopping/curved-logo-sweater-19256838,,$520,,men_all_product_3.html
+,Black Logo Denim Jacket,$805,men_all_product_3,,/en-us/shopping/black-logo-denim-jacket-15445459,,$805,,men_all_product_3.html
+,Curved Logo Tneck Sweater,$545,men_all_product_3,,/en-us/shopping/curved-logo-tneck-sweater-15343430,,$545,,men_all_product_3.html
+,Monogram Pool Slider,$300,men_all_product_3,,/en-us/shopping/monogram-pool-slider-22028714,,$300,,men_all_product_3.html
+,Monogram Classic Track Jacket,$650,men_all_product_4,,/en-us/shopping/monogram-classic-track-jacket-20133497,,$650,,men_all_product_4.html
+,Monogram Classic Track Pants,$520,men_all_product_4,,/en-us/shopping/monogram-classic-track-pants-20134240,,$520,,men_all_product_4.html
+,Moncler X Palm Angels Genius Long Parka,"$2,600",men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-long-parka-21770010,,"$2,600",,men_all_product_4.html
+,Moncler X Palm Angels Genius Hat,$320,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-hat-21769016,,$320,,men_all_product_4.html
+,Moncler X Palm Angels Genius Vest,"$1,360",men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-vest-21769012,,"$1,360",,men_all_product_4.html
+,Moncler X Palm Angels Genius Jacket,"$2,090",men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-jacket-21767035,,"$2,090",,men_all_product_4.html
+,Moncler X Palm Angels Genius Jacket,"$1,720",men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-jacket-21767034,,"$1,720",,men_all_product_4.html
+,Moncler X Palm Angels Genius Pants,$910,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-pants-21767032,,$910,,men_all_product_4.html
+,Moncler X Palm Angels Genius Jacket,"$2,035",men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-jacket-21770008,,"$2,035",,men_all_product_4.html
+,Moncler X Palm Angels Genius T-shirt,$540,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-t-shirt-21770006,,$540,,men_all_product_4.html
+,Moncler X Palm Angels Genius Long Parka,"$2,680",men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-long-parka-21769011,,"$2,680",,men_all_product_4.html
+,Moncler X Palm Angels Genius Jacket,"$1,900",men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-jacket-21769010,,"$1,900",,men_all_product_4.html
+,Moncler X Palm Angels Genius Hat,$320,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-hat-21767039,,$320,,men_all_product_4.html
+,PA Ski Club Classic T-Shirt,$490,men_all_product_4,,/en-us/shopping/pa-ski-club-classic-t-shirt-22163465,$319,$490,-35%,men_all_product_4.html
+,Palm Ski Club Hoodie,$790,men_all_product_4,,/en-us/shopping/palm-ski-club-hoodie-22163467,$514,$790,-35%,men_all_product_4.html
+,Palm Ski Club Classic T-Shirt,$510,men_all_product_4,,/en-us/shopping/palm-ski-club-classic-t-shirt-22163462,$332,$510,-35%,men_all_product_4.html
+,Palms Ski Padded Jacket,"$3,310",men_all_product_4,,/en-us/shopping/palms-ski-padded-jacket-22163454,"$2,154","$3,310",-35%,men_all_product_4.html
+,Palms Ski Padded Pants,"$2,250",men_all_product_4,,/en-us/shopping/palms-ski-padded-pants-22163458,"$1,445","$2,250",-35%,men_all_product_4.html
+,PA Ski Club Padded Jacket,"$2,325",men_all_product_4,,/en-us/shopping/pa-ski-club-padded-jacket-22163456,"$1,496","$2,325",-35%,men_all_product_4.html
+,PA Ski Club Padded Pants,"$1,525",men_all_product_4,,/en-us/shopping/pa-ski-club-padded-pants-22163460,$978,"$1,525",-35%,men_all_product_4.html
+,Monogram Patch Ski Pile,"$1,060",men_all_product_4,,/en-us/shopping/monogram-patch-ski-pile-22163453,$690,"$1,060",-35%,men_all_product_4.html
+,PA Ski Club Hoodie,$755,men_all_product_4,,/en-us/shopping/pa-ski-club-hoodie-22162805,$491,$755,-35%,men_all_product_4.html
+,PA Reflective Ski Jacket,"$2,780",men_all_product_4,,/en-us/shopping/pa-reflective-ski-jacket-22163452,"$1,800","$2,780",-35%,men_all_product_4.html
+,PA Ski Club Pile,"$1,060",men_all_product_4,,/en-us/shopping/pa-ski-club-pile-22163450,$690,"$1,060",-35%,men_all_product_4.html
+,Moncler X Palm Angels Genius Bib,$540,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-bib-21770017,,$540,,men_all_product_4.html
+,Moncler X Palm Angels Genius Card Holder,$435,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-card-holder-21770016,,$435,,men_all_product_4.html
+,Moncler X Palm Angels Genius Baseball Cap,$290,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-baseball-cap-21770015,,$290,,men_all_product_4.html
+,Moncler X Palm Angels Genius Polo,$605,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-polo-21770013,,$605,,men_all_product_4.html
+,Moncler X Palm Angels Genius Polo,$320,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-polo-21770012,,$320,,men_all_product_4.html
+,Moncler X Palm Angels Genius Vest,"$2,065",men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-vest-21770011,,"$2,065",,men_all_product_4.html
+,Moncler X Palm Angels Genius Polo,$320,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-polo-21769014,,$320,,men_all_product_4.html
+,PALM PARIS HOODIE,"$1,055",men_all_product_4,,/en-us/shopping/palm-paris-hoodie-20922041,$686,"$1,055",-35%,men_all_product_4.html
+,Racing Bowling Shirt,$720,men_all_product_4,,/en-us/shopping/racing-bowling-shirt-20115875,$468,$720,-35%,men_all_product_4.html
+,PALM PARIS TRACK PANTS,$925,men_all_product_4,,/en-us/shopping/palm-paris-track-pants-20921859,$602,$925,-35%,men_all_product_4.html
+,Palm Angels Moncler Maya Jacket,"$6,185",men_all_product_4,,/en-us/shopping/palm-angels-moncler-maya-jacket-21769024,"$4,000","$6,185",-35%,men_all_product_4.html
+,Moncler X Palm Angels Genius Jacket,"$2,600",men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-jacket-21769009,,"$2,600",,men_all_product_4.html
+,Palm Angels Boxer Bipack,$195,men_all_product_4,,/en-us/shopping/palm-angels-boxer-bipack-20205713,,$195,,men_all_product_4.html
+,Palm Angels Boxer Bipack,$195,men_all_product_4,,/en-us/shopping/palm-angels-boxer-bipack-19296850,,$195,,men_all_product_4.html
+,Palm Angels Boxer Trunk Bipack,$190,men_all_product_4,,/en-us/shopping/palm-angels-boxer-trunk-bipack-19258035,,$190,,men_all_product_4.html
+,Palm Angels Trunk Bipack,$190,men_all_product_4,,/en-us/shopping/palm-angels-trunk-bipack-19258034,,$190,,men_all_product_4.html
+,Palm Angels Trunk Bipack,$190,men_all_product_4,,/en-us/shopping/palm-angels-trunk-bipack-19258033,,$190,,men_all_product_4.html
+,Palm Angels Boxer Trunk Tripack,$260,men_all_product_4,,/en-us/shopping/palm-angels-boxer-trunk-tripack-19256847,,$260,,men_all_product_4.html
+,Classic Logo-Waistband Boxers (Set Of 2),$195,men_all_product_4,,/en-us/shopping/classic-logo-waistband-boxers-set-of-2-19298088,,$195,,men_all_product_4.html
+,Monogram Travel Pants,$660,men_all_product_4,,/en-us/shopping/monogram-travel-pants-21777411,$429,$660,-35%,men_all_product_4.html
+,Moncler X Palm Angels Genius Sweatpants,$675,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-sweatpants-21770007,,$675,,men_all_product_4.html
+,Moncler X Palm Angels Genius Socks,$250,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-socks-21769018,,$250,,men_all_product_4.html
+,Moncler X Palm Angels Genius Socks,$250,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-socks-21769017,,$250,,men_all_product_4.html
+,Moncler X Palm Angels Genius Hoodie,$760,men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-hoodie-21769008,,$760,,men_all_product_4.html
+,Moncler X Palm Angels Genius Puffer Polo,"$1,310",men_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-puffer-polo-21767036,,"$1,310",,men_all_product_4.html
+,Pa 4 Sneakers,$620,men_all_product_4,,/en-us/shopping/pa-4-sneakers-22028713,,$620,,men_all_product_4.html
+,LONDON SPRAYED HOODIE,$560,men_all_product_4,,/en-us/shopping/london-sprayed-hoodie-16634269,$364,$560,-35%,men_all_product_4.html
+,Monogram Spray City T-shirt MIAMI,$295,men_all_product_4,,/en-us/shopping/monogram-spray-city-t-shirt-miami-23074462,,$295,,men_all_product_4.html
+,Neck logo T-shirt white,$320,men_all_product_4,,/en-us/shopping/neck-logo-t-shirt-white-23074263,,$320,,men_all_product_4.html
+,PA City Washed T-Shirt,$330,men_all_product_4,,/en-us/shopping/pa-city-washed-t-shirt-21773710,$215,$330,-35%,men_all_product_4.html
+,Monogram Spray City T-shirt Rome,$295,men_all_product_4,,/en-us/shopping/monogram-spray-city-t-shirt-rome-23074461,,$295,,men_all_product_4.html
+,Monogram Spray City T-shirt Las Vegas,$295,men_all_product_4,,/en-us/shopping/monogram-spray-city-t-shirt-las-vegas-23072262,,$295,,men_all_product_4.html
+,BEAR CREW SWEATSHIRT,$895,men_all_product_4,,/en-us/shopping/bear-crew-sweatshirt-19297548,$582,$895,-35%,men_all_product_4.html
+,DOUBLED LOGO T-SHIRT,$335,men_all_product_4,,/en-us/shopping/doubled-logo-t-shirt-22798489,,$335,,men_all_product_4.html
+,Monogram Spray City T-Shirt New York,$295,men_all_product_4,,/en-us/shopping/monogram-spray-city-t-shirt-new-york-22030623,,$295,,men_all_product_4.html
+,Logo Track Shorts,$460,men_all_product_4,,/en-us/shopping/logo-track-shorts-22030566,,$460,,men_all_product_4.html
+,Neck logo T-shirt,$320,men_all_product_5,,/en-us/shopping/neck-logo-t-shirt-23074264,,$320,,men_all_product_5.html
+,Slim Fit T-Shirt,$490,men_all_product_5,,/en-us/shopping/slim-fit-t-shirt-22030535,,$490,,men_all_product_5.html
+,Palms Allover Shirt,$630,men_all_product_5,,/en-us/shopping/palms-allover-shirt-21773737,$410,$630,-35%,men_all_product_5.html
+,3-Pack Logo T-Shirt,$685,men_all_product_5,,/en-us/shopping/3-pack-logo-t-shirt-22030537,,$685,,men_all_product_5.html
+,Logo Track Jacket,$650,men_all_product_5,,/en-us/shopping/logo-track-jacket-22030551,,$650,,men_all_product_5.html
+,Monogram Track Shorts,$460,men_all_product_5,,/en-us/shopping/monogram-track-shorts-21773728,,$460,,men_all_product_5.html
+,Monogram Track Denim Jacket,"$1,190",men_all_product_5,,/en-us/shopping/monogram-track-denim-jacket-21776183,$774,"$1,190",-35%,men_all_product_5.html
+,Logo Swimshorts,$500,men_all_product_5,,/en-us/shopping/logo-swimshorts-22030576,,$500,,men_all_product_5.html
+,logo-print drawstring sweatpants,$570,men_all_product_5,,/en-us/shopping/logo-print-drawstring-sweatpants-19298086,,$570,,men_all_product_5.html
+,Monogram T-Shirt Tripack,$685,men_all_product_5,,/en-us/shopping/monogram-t-shirt-tripack-21773712,,$685,,men_all_product_5.html
+,Gothic Logo Cap,$220,men_all_product_5,,/en-us/shopping/gothic-logo-cap-23074298,,$220,,men_all_product_5.html
+,Monogram Statement Hoodie,$790,men_all_product_5,,/en-us/shopping/monogram-statement-hoodie-21773695,$514,$790,-35%,men_all_product_5.html
+,Monogram Striped Shirt,$660,men_all_product_5,,/en-us/shopping/monogram-striped-shirt-21773735,$429,$660,-35%,men_all_product_5.html
+,Embroidery Logo Socks,$115,men_all_product_5,,/en-us/shopping/embroidery-logo-socks-22030614,,$115,,men_all_product_5.html
+,Logo Bucket Hat,$240,men_all_product_5,,/en-us/shopping/logo-bucket-hat-23074296,,$240,,men_all_product_5.html
+,Logo Vertigo Hoodie,$585,men_all_product_5,,/en-us/shopping/logo-vertigo-hoodie-23074271,,$585,,men_all_product_5.html
+,Sweatpants The Palm,$490,men_all_product_5,,/en-us/shopping/sweatpants-the-palm-22030558,,$490,,men_all_product_5.html
+,Pa 4 Sneakers,$620,men_all_product_5,,/en-us/shopping/pa-4-sneakers-22030589,,$620,,men_all_product_5.html
+,Classic Logo Socks,$95,men_all_product_5,,/en-us/shopping/classic-logo-socks-21776180,,$95,,men_all_product_5.html
+,Monogram Socks,$95,men_all_product_5,,/en-us/shopping/monogram-socks-21777464,,$95,,men_all_product_5.html
+,Monogram Cap,$220,men_all_product_5,,/en-us/shopping/monogram-cap-23074299,,$220,,men_all_product_5.html
+,Classic Logo Cap,$220,men_all_product_5,,/en-us/shopping/classic-logo-cap-23074297,,$220,,men_all_product_5.html
+,Logo Sweatshirt,$790,men_all_product_5,,/en-us/shopping/logo-sweatshirt-22030542,,$790,,men_all_product_5.html
+,Palm Beach University,$565,men_all_product_5,,/en-us/shopping/palm-beach-university-21777445,,$565,,men_all_product_5.html
+,Neck logo Hoodie,$490,men_all_product_5,,/en-us/shopping/neck-logo-hoodie-23074270,,$490,,men_all_product_5.html
+,Cherries Shirt,$685,men_all_product_5,,/en-us/shopping/cherries-shirt-23074288,,$685,,men_all_product_5.html
+,Palms Allover Loose Pants,$700,men_all_product_5,,/en-us/shopping/palms-allover-loose-pants-21773723,$455,$700,-35%,men_all_product_5.html
+,Monogram Cap,$245,men_all_product_5,,/en-us/shopping/monogram-cap-22163469,,$245,,men_all_product_5.html
+,Monogram Cap,$245,men_all_product_5,,/en-us/shopping/monogram-cap-21773698,,$245,,men_all_product_5.html
+,Palm Camo Swimshort,$385,men_all_product_5,,/en-us/shopping/palm-camo-swimshort-23074282,,$385,,men_all_product_5.html
+,Logo Swimshort,$400,men_all_product_5,,/en-us/shopping/logo-swimshort-22028708,,$400,,men_all_product_5.html
+,Striped Socks with logo,$95,men_all_product_5,,/en-us/shopping/striped-socks-with-logo-23074307,,$95,,men_all_product_5.html
+,Monogram Striped Socks,$95,men_all_product_5,,/en-us/shopping/monogram-striped-socks-23074305,,$95,,men_all_product_5.html
+,Overdye Loose Denim Jacket,"$1,325",men_all_product_5,,/en-us/shopping/overdye-loose-denim-jacket-22029654,$862,"$1,325",-35%,men_all_product_5.html
+,PA 4 Sneakers,$620,men_all_product_5,,/en-us/shopping/pa-4-sneakers-21777448,,$620,,men_all_product_5.html
+,Leaf Camo Swimshort,$385,men_all_product_5,,/en-us/shopping/leaf-camo-swimshort-23074281,,$385,,men_all_product_5.html
+,Classic Logo Slim T-Shirt,$590,men_all_product_5,,/en-us/shopping/classic-logo-slim-t-shirt-20205634,,$590,,men_all_product_5.html
+,Cherries Swimshort,$385,men_all_product_5,,/en-us/shopping/cherries-swimshort-23074284,,$385,,men_all_product_5.html
+,Monogram Striped Socks,$95,men_all_product_5,,/en-us/shopping/monogram-striped-socks-23074306,,$95,,men_all_product_5.html
+,Monogram Ski Beanie,$260,men_all_product_5,,/en-us/shopping/monogram-ski-beanie-22163470,$169,$260,-35%,men_all_product_5.html
+,Monogram Nylon Track Jacket,"$1,150",men_all_product_5,,/en-us/shopping/monogram-nylon-track-jacket-21773729,$748,"$1,150",-35%,men_all_product_5.html
+,Palm Beach University,$565,men_all_product_5,,/en-us/shopping/palm-beach-university-22030586,,$565,,men_all_product_5.html
+,Camo Swimshort,$385,men_all_product_5,,/en-us/shopping/camo-swimshort-23074283,,$385,,men_all_product_5.html
+,Palm Beach University,$565,men_all_product_5,,/en-us/shopping/palm-beach-university-21777446,,$565,,men_all_product_5.html
+,Logo Polo,$595,men_all_product_5,,/en-us/shopping/logo-polo-22030575,,$595,,men_all_product_5.html
+,Palm Angels Slip Bipack,$190,men_all_product_5,,/en-us/shopping/palm-angels-slip-bipack-21777469,,$190,,men_all_product_5.html
+,Logo Swim Brief,$295,men_all_product_5,,/en-us/shopping/logo-swim-brief-23074285,,$295,,men_all_product_5.html
+,Logo Shirt,$465,men_all_product_5,,/en-us/shopping/logo-shirt-22028712,,$465,,men_all_product_5.html
+,Palm Beach University,$565,men_all_product_5,,/en-us/shopping/palm-beach-university-21777442,,$565,,men_all_product_5.html
+,Monogram Swimshort,$390,men_all_product_5,,/en-us/shopping/monogram-swimshort-23074280,,$390,,men_all_product_5.html
+,Palms Camo Track Shirt,$845,men_all_product_5,,/en-us/shopping/palms-camo-track-shirt-23074286,,$845,,men_all_product_5.html
+,Logo Sweater,$465,men_all_product_5,,/en-us/shopping/logo-sweater-22030582,,$465,,men_all_product_5.html
+,Gothic Logo Bucket Hat,$295,men_all_product_5,,/en-us/shopping/gothic-logo-bucket-hat-23072245,,$295,,men_all_product_5.html
+,Summer denim Shirt,"$1,275",men_all_product_5,,/en-us/shopping/summer-denim-shirt-23074997,,"$1,275",,men_all_product_5.html
+,Cherries Pajama pants,$715,men_all_product_5,,/en-us/shopping/cherries-pajama-pants-23072244,,$715,,men_all_product_5.html
+,SUMMER LOOSE JEANS,"$1,000",men_all_product_5,,/en-us/shopping/summer-loose-jeans-23074308,,"$1,000",,men_all_product_5.html
+,Logo Plate Necklace,$320,men_all_product_5,,/en-us/shopping/logo-plate-necklace-23074304,,$320,,men_all_product_5.html
+,Palm Beach University,$565,men_all_product_5,,/en-us/shopping/palm-beach-university-22029653,,$565,,men_all_product_5.html
+,Pa 4 Sneakers,$620,men_all_product_5,,/en-us/shopping/pa-4-sneakers-22030588,,$620,,men_all_product_5.html
+,Logo Plate Bracelet,$230,men_all_product_5,,/en-us/shopping/logo-plate-bracelet-23074302,,$230,,men_all_product_5.html
+,Logo Loose Jeans,$790,men_all_product_6,,/en-us/shopping/logo-loose-jeans-22030621,,$790,,men_all_product_6.html
+,Monogram Hooded Overshirt,"$1,190",men_all_product_6,,/en-us/shopping/monogram-hooded-overshirt-21777429,,"$1,190",,men_all_product_6.html
+,Monogram Piquet Track Pants,"$1,060",men_all_product_6,,/en-us/shopping/monogram-piquet-track-pants-22030565,,"$1,060",,men_all_product_6.html
+,Monogram Pouch,$435,men_all_product_6,,/en-us/shopping/monogram-pouch-21777461,,$435,,men_all_product_6.html
+,Classic Logo Tote Bag,$625,men_all_product_6,,/en-us/shopping/classic-logo-tote-bag-23074300,,$625,,men_all_product_6.html
+,neck logo Crewneck,$425,men_all_product_6,,/en-us/shopping/neck-logo-crewneck-23074268,,$425,,men_all_product_6.html
+,Logo Down Vest,$790,men_all_product_6,,/en-us/shopping/logo-down-vest-22364804,,$790,,men_all_product_6.html
+,Logo Sweatshorts,$385,men_all_product_6,,/en-us/shopping/logo-sweatshorts-23074276,,$385,,men_all_product_6.html
+,Monogram Varsity,"$2,025",men_all_product_6,,/en-us/shopping/monogram-varsity-21777425,,"$2,025",,men_all_product_6.html
+,Logo Knit Hoodie,$620,men_all_product_6,,/en-us/shopping/logo-knit-hoodie-22030583,,$620,,men_all_product_6.html
+,Logo Cotton Travel Pants,$655,men_all_product_6,,/en-us/shopping/logo-cotton-travel-pants-20205646,,$655,,men_all_product_6.html
+,Logo Short Down Jacket,$910,men_all_product_6,,/en-us/shopping/logo-short-down-jacket-22363775,,$910,,men_all_product_6.html
+,Leather Monogram Belt,$365,men_all_product_6,,/en-us/shopping/leather-monogram-belt-22030839,,$365,,men_all_product_6.html
+,Monogram Crossbody,$565,men_all_product_6,,/en-us/shopping/monogram-crossbody-21776177,,$565,,men_all_product_6.html
+,Zip Small Wallet,$395,men_all_product_6,,/en-us/shopping/zip-small-wallet-21777460,,$395,,men_all_product_6.html
+,Palm Angels Ski Helmet,$790,men_all_product_6,,/en-us/shopping/palm-angels-ski-helmet-22163473,,$790,,men_all_product_6.html
+,Foggy PA Logo Over T-Shirt,$525,men_all_product_6,,/en-us/shopping/foggy-pa-logo-over-t-shirt-21773702,$341,$525,-35%,men_all_product_6.html
+,logo VERTIGO T-shirt,$255,men_all_product_6,,/en-us/shopping/logo-vertigo-t-shirt-23074261,,$255,,men_all_product_6.html
+,Monogram Pool Slider,$300,men_all_product_6,,/en-us/shopping/monogram-pool-slider-22030593,$195,$300,-35%,men_all_product_6.html
+,Hyper Monogram Sweatshorts,$420,men_all_product_6,,/en-us/shopping/hyper-monogram-sweatshorts-21556254,$273,$420,-35%,men_all_product_6.html
+,3-Pack Logo T-Shirt,$660,men_all_product_6,,/en-us/shopping/3-pack-logo-t-shirt-22030536,$429,$660,-35%,men_all_product_6.html
+,Slim Fit T-Shirt,$490,men_all_product_6,,/en-us/shopping/slim-fit-t-shirt-22030534,$319,$490,-35%,men_all_product_6.html
+,Logo Track Pants,$520,men_all_product_6,,/en-us/shopping/logo-track-pants-22030561,,$520,,men_all_product_6.html
+,PA City Cap,$235,men_all_product_6,,/en-us/shopping/pa-city-cap-21776175,$153,$235,-35%,men_all_product_6.html
+,Gothic logo over T-shirt white,$320,men_all_product_6,,/en-us/shopping/gothic-logo-over-t-shirt-white-23074266,,$320,,men_all_product_6.html
+,Monogram Slim T-Shirt,$430,men_all_product_6,,/en-us/shopping/monogram-slim-t-shirt-21773711,$280,$430,-35%,men_all_product_6.html
+,PA Monogram Pool Slider,$365,men_all_product_6,,/en-us/shopping/pa-monogram-pool-slider-21777451,$237,$365,-35%,men_all_product_6.html
+,Logo Sweatshort,$435,men_all_product_6,,/en-us/shopping/logo-sweatshort-22030559,$283,$435,-35%,men_all_product_6.html
+,Monogram Spray City T-Shirt Milano,$295,men_all_product_6,,/en-us/shopping/monogram-spray-city-t-shirt-milano-22030628,,$295,,men_all_product_6.html
+,Logo Cap,$225,men_all_product_6,,/en-us/shopping/logo-cap-22028715,$146,$225,-35%,men_all_product_6.html
+,Gothic logo over T-shirt black,$320,men_all_product_6,,/en-us/shopping/gothic-logo-over-t-shirt-black-23074267,,$320,,men_all_product_6.html
+,Monogram Pin Sweatshort,$525,men_all_product_6,,/en-us/shopping/monogram-pin-sweatshort-21777416,$341,$525,-35%,men_all_product_6.html
+,Foggy Pa Crewneck,$525,men_all_product_6,,/en-us/shopping/foggy-pa-crewneck-21773713,$341,$525,-35%,men_all_product_6.html
+,gotich logo T-shirt,$255,men_all_product_6,,/en-us/shopping/gotich-logo-t-shirt-23074262,,$255,,men_all_product_6.html
+,PA Milano Stud Cap,$375,men_all_product_6,,/en-us/shopping/pa-milano-stud-cap-21777456,$244,$375,-35%,men_all_product_6.html
+,Burning Monogram Shirt,$660,men_all_product_6,,/en-us/shopping/burning-monogram-shirt-21773696,$429,$660,-35%,men_all_product_6.html
+,Monogram Swimshorts,$490,men_all_product_6,,/en-us/shopping/monogram-swimshorts-21776172,$319,$490,-35%,men_all_product_6.html
+,Overdye Logo Jeans,$925,men_all_product_6,,/en-us/shopping/overdye-logo-jeans-22030620,$602,$925,-35%,men_all_product_6.html
+,Foggy PA Hoodie,$660,men_all_product_6,,/en-us/shopping/foggy-pa-hoodie-21773717,$429,$660,-35%,men_all_product_6.html
+,Monogram Statement Slim T-Shirt,$460,men_all_product_6,,/en-us/shopping/monogram-statement-slim-t-shirt-21777402,$299,$460,-35%,men_all_product_6.html
+,PA Milano Stud Cap,$375,men_all_product_6,,/en-us/shopping/pa-milano-stud-cap-21777455,$244,$375,-35%,men_all_product_6.html
+,Slim Fit T-Shirt,$490,men_all_product_6,,/en-us/shopping/slim-fit-t-shirt-22030532,,$490,,men_all_product_6.html
+,Monogram Ski Cap,$235,men_all_product_6,,/en-us/shopping/monogram-ski-cap-22163468,$153,$235,-35%,men_all_product_6.html
+,Milano Stud Track Pants,"$1,325",men_all_product_6,,/en-us/shopping/milano-stud-track-pants-21773727,$850,"$1,325",-35%,men_all_product_6.html
+,Logo Hoodie,$910,men_all_product_6,,/en-us/shopping/logo-hoodie-22028703,$592,$910,-35%,men_all_product_6.html
+,Monogram Socks,$95,men_all_product_6,,/en-us/shopping/monogram-socks-21777467,$62,$95,-35%,men_all_product_6.html
+,Logo Sweatshort,$645,men_all_product_6,,/en-us/shopping/logo-sweatshort-22028707,$419,$645,-35%,men_all_product_6.html
+,Milano Stud Crewneck,$790,men_all_product_6,,/en-us/shopping/milano-stud-crewneck-21777405,$514,$790,-35%,men_all_product_6.html
+,PA Monogram Pool Slider,$300,men_all_product_6,,/en-us/shopping/pa-monogram-pool-slider-21777450,,$300,,men_all_product_6.html
+,Monogram Pin Polo,$565,men_all_product_6,,/en-us/shopping/monogram-pin-polo-21777434,$367,$565,-35%,men_all_product_6.html
+,Logo Polo,$595,men_all_product_6,,/en-us/shopping/logo-polo-22030577,$387,$595,-35%,men_all_product_6.html
+,Monogram Stud Sweatshorts,$745,men_all_product_6,,/en-us/shopping/monogram-stud-sweatshorts-21777417,$484,$745,-35%,men_all_product_6.html
+,Monogram Travel Pants,$660,men_all_product_6,,/en-us/shopping/monogram-travel-pants-21777410,$429,$660,-35%,men_all_product_6.html
+,MoneyGram Haas F1 Team Monza T-Shirt,$525,men_all_product_6,,/en-us/shopping/moneygram-haas-f1-team-monza-t-shirt-20114934,$341,$525,-35%,men_all_product_6.html
+,Monogram Track Hoodie,$710,men_all_product_6,,/en-us/shopping/monogram-track-hoodie-21777407,$462,$710,-35%,men_all_product_6.html
+,Logo Swimshort,$400,men_all_product_6,,/en-us/shopping/logo-swimshort-22030573,$260,$400,-35%,men_all_product_6.html
+,logo Track pants fluo,$520,men_all_product_6,,/en-us/shopping/logo-track-pants-fluo-23074278,,$520,,men_all_product_6.html
+,Embroidered Logo Hoodie,$905,men_all_product_6,,/en-us/shopping/embroidered-logo-hoodie-20204745,,$905,,men_all_product_6.html
+,Sandals Depa Palm Angels X Suicoke,$283,men_all_product_6,,/en-us/shopping/sandals-depa-palm-angels-x-suicoke-22532575,$184,$283,-35%,men_all_product_6.html
+,Socks - Lunar New Year,$95,men_all_product_6,,/en-us/shopping/socks-lunar-new-year-21770022,$62,$95,-35%,men_all_product_6.html
+,T-Shirt Loose With Dragon - Lunar New Year,$525,men_all_product_7,,/en-us/shopping/t-shirt-loose-with-dragon-lunar-new-year-21769019,$341,$525,-35%,men_all_product_7.html
+,Classic Logo Crewneck,$790,men_all_product_7,,/en-us/shopping/classic-logo-crewneck-20205640,,$790,,men_all_product_7.html
+,Velvet Overshirt With Logo,"$1,030",men_all_product_7,,/en-us/shopping/velvet-overshirt-with-logo-22030569,$670,"$1,030",-35%,men_all_product_7.html
+,PA Studded Mule,$830,men_all_product_7,,/en-us/shopping/pa-studded-mule-21778523,$540,$830,-35%,men_all_product_7.html
+,Logo T-Shirt,$545,men_all_product_7,,/en-us/shopping/logo-t-shirt-22030538,,$545,,men_all_product_7.html
+,Monogram Socks,$95,men_all_product_7,,/en-us/shopping/monogram-socks-21776181,,$95,,men_all_product_7.html
+,Logo Linen Polo,$765,men_all_product_7,,/en-us/shopping/logo-linen-polo-22030578,$497,$765,-35%,men_all_product_7.html
+,Hyper Monogram Pants,$695,men_all_product_7,,/en-us/shopping/hyper-monogram-pants-21554672,$452,$695,-35%,men_all_product_7.html
+,Logo Cap,$225,men_all_product_7,,/en-us/shopping/logo-cap-22030598,,$225,,men_all_product_7.html
+,Palm Beach University,$565,men_all_product_7,,/en-us/shopping/palm-beach-university-21773742,,$565,,men_all_product_7.html
+,Palms Milano Stud Crewneck,$990,men_all_product_7,,/en-us/shopping/palms-milano-stud-crewneck-21773715,$644,$990,-35%,men_all_product_7.html
+,Patchwork Palms Shorts,$570,men_all_product_7,,/en-us/shopping/patchwork-palms-shorts-21777415,$371,$570,-35%,men_all_product_7.html
+,Monogram Pin Cap,$330,men_all_product_7,,/en-us/shopping/monogram-pin-cap-21773697,$215,$330,-35%,men_all_product_7.html
+,Monogram Swimshort,$390,men_all_product_7,,/en-us/shopping/monogram-swimshort-23074279,,$390,,men_all_product_7.html
+,Logo Tote Bag,$525,men_all_product_7,,/en-us/shopping/logo-tote-bag-22030600,$341,$525,-35%,men_all_product_7.html
+,Logo Knit Hoodie,$620,men_all_product_7,,/en-us/shopping/logo-knit-hoodie-22030584,$403,$620,-35%,men_all_product_7.html
+,Burning PA Iphone Case 15,$125,men_all_product_7,,/en-us/shopping/burning-pa-iphone-case-15-21777400,$81,$125,-35%,men_all_product_7.html
+,Embroidered Logo Over T-Shirt,$640,men_all_product_7,,/en-us/shopping/embroidered-logo-over-t-shirt-20205633,,$640,,men_all_product_7.html
+,Monogram Pockets Overshirt,"$1,590",men_all_product_7,,/en-us/shopping/monogram-pockets-overshirt-21773732,"$1,034","$1,590",-35%,men_all_product_7.html
+,Classic Logo Airpods Case Pro,$100,men_all_product_7,,/en-us/shopping/classic-logo-airpods-case-pro-21777475,$65,$100,-35%,men_all_product_7.html
+,Shirt Stripes Monogram,$725,men_all_product_7,,/en-us/shopping/shirt-stripes-monogram-22030579,$471,$725,-35%,men_all_product_7.html
+,Logo Camera Case Bag,$660,men_all_product_7,,/en-us/shopping/logo-camera-case-bag-22028717,$429,$660,-35%,men_all_product_7.html
+,Curved Logo Sweater,$500,men_all_product_7,,/en-us/shopping/curved-logo-sweater-21777438,$325,$500,-35%,men_all_product_7.html
+,Monogram Jacquard Sweater,"$1,020",men_all_product_7,,/en-us/shopping/monogram-jacquard-sweater-21777439,$664,"$1,020",-35%,men_all_product_7.html
+,Key Ring With Logo Strap,$180,men_all_product_7,,/en-us/shopping/key-ring-with-logo-strap-21773752,$117,$180,-35%,men_all_product_7.html
+,Monogram Baselayer Ski Bottom,$355,men_all_product_7,,/en-us/shopping/monogram-baselayer-ski-bottom-22163480,$231,$355,-35%,men_all_product_7.html
+,Curved Logo Sweater,$500,men_all_product_7,,/en-us/shopping/curved-logo-sweater-21773739,$325,$500,-35%,men_all_product_7.html
+,MONEYGRAM HAAS F1 TEAM CREWNECK,$750,men_all_product_7,,/en-us/shopping/moneygram-haas-f1-team-crewneck-20116161,$488,$750,-35%,men_all_product_7.html
+,Palms Stud Leather Shirt,"$4,505",men_all_product_7,,/en-us/shopping/palms-stud-leather-shirt-21777454,"$2,946","$4,505",-35%,men_all_product_7.html
+,Logo vertigo zipped Hoodie,$650,men_all_product_7,,/en-us/shopping/logo-vertigo-zipped-hoodie-23074272,,$650,,men_all_product_7.html
+,Monogram Beads Necklace,$330,men_all_product_7,,/en-us/shopping/monogram-beads-necklace-22030608,$215,$330,-35%,men_all_product_7.html
+,Logo Sweatshirt,$790,men_all_product_7,,/en-us/shopping/logo-sweatshirt-22030543,,$790,,men_all_product_7.html
+,Monogram Baselayer Ski Top,$395,men_all_product_7,,/en-us/shopping/monogram-baselayer-ski-top-22163478,$257,$395,-35%,men_all_product_7.html
+,Milano Stud Track Jacket,"$1,455",men_all_product_7,,/en-us/shopping/milano-stud-track-jacket-21778272,$935,"$1,455",-35%,men_all_product_7.html
+,Monogram Pocket Blazer,"$1,060",men_all_product_7,,/en-us/shopping/monogram-pocket-blazer-21777427,$690,"$1,060",-35%,men_all_product_7.html
+,Palms Pockets Overshirt,"$1,985",men_all_product_7,,/en-us/shopping/palms-pockets-overshirt-21773733,"$1,286","$1,985",-35%,men_all_product_7.html
+,Sweatshirt With Dragon - Lunar New Year,$895,men_all_product_7,,/en-us/shopping/sweatshirt-with-dragon-lunar-new-year-21770018,$582,$895,-35%,men_all_product_7.html
+,Logo Velvet Pants,$685,men_all_product_7,,/en-us/shopping/logo-velvet-pants-22030555,$445,$685,-35%,men_all_product_7.html
+,Monogram Loose Pants,$675,men_all_product_7,,/en-us/shopping/monogram-loose-pants-21773724,$439,$675,-35%,men_all_product_7.html
+,Logo Backpack,$790,men_all_product_7,,/en-us/shopping/logo-backpack-22030602,,$790,,men_all_product_7.html
+,PA Ski Club Socks,$130,men_all_product_7,,/en-us/shopping/pa-ski-club-socks-22163471,$85,$130,-35%,men_all_product_7.html
+,Classic Logo Iphone Case 15,$200,men_all_product_7,,/en-us/shopping/classic-logo-iphone-case-15-21776178,$130,$200,-35%,men_all_product_7.html
+,Destroyed Jeans,"$1,020",men_all_product_7,,/en-us/shopping/destroyed-jeans-22030619,$664,"$1,020",-35%,men_all_product_7.html
+,Destroyed Jeans,"$1,020",men_all_product_7,,/en-us/shopping/destroyed-jeans-22028718,$664,"$1,020",-35%,men_all_product_7.html
+,Hyper Monogram Coach Jacket,"$1,320",men_all_product_7,,/en-us/shopping/hyper-monogram-coach-jacket-21554671,$848,"$1,320",-35%,men_all_product_7.html
+,PA Espadrillas,$575,men_all_product_7,,/en-us/shopping/pa-espadrillas-21781302,$374,$575,-35%,men_all_product_7.html
+,Palms Allover Roundneck,"$1,325",men_all_product_7,,/en-us/shopping/palms-allover-roundneck-21773740,$860,"$1,325",-35%,men_all_product_7.html
+,Monogram Jacquard Sweater,"$1,020",men_all_product_7,,/en-us/shopping/monogram-jacquard-sweater-21777440,$664,"$1,020",-35%,men_all_product_7.html
+,Monogram Workwear Pants,$940,men_all_product_7,,/en-us/shopping/monogram-workwear-pants-21777413,$612,$940,-35%,men_all_product_7.html
+,Palm Beads Necklace,$330,men_all_product_7,,/en-us/shopping/palm-beads-necklace-22030607,$215,$330,-35%,men_all_product_7.html
+,Logo Bermuda,$565,men_all_product_7,,/en-us/shopping/logo-bermuda-22028705,,$565,,men_all_product_7.html
+,Monogram Iphone Case 15,$200,men_all_product_7,,/en-us/shopping/monogram-iphone-case-15-21777463,,$200,,men_all_product_7.html
+,Hoodie With Dragon - Lunar New Year,$960,men_all_product_7,,/en-us/shopping/hoodie-with-dragon-lunar-new-year-21770019,$625,$960,-35%,men_all_product_7.html
+,Monogram Workwear Short,$925,men_all_product_7,,/en-us/shopping/monogram-workwear-short-21776182,$602,$925,-35%,men_all_product_7.html
+,Logo Hoodie,"$1,095",men_all_product_7,,/en-us/shopping/logo-hoodie-22030547,$712,"$1,095",-35%,men_all_product_7.html
+,Beanie With Dragon - Lunar New Year,$285,men_all_product_7,,/en-us/shopping/beanie-with-dragon-lunar-new-year-21769021,$185,$285,-35%,men_all_product_7.html
+,Palm Angels Slip Bipack,$190,men_all_product_7,,/en-us/shopping/palm-angels-slip-bipack-21777470,,$190,,men_all_product_7.html
+,Monogram Piquet Track Shirt,$925,men_all_product_7,,/en-us/shopping/monogram-piquet-track-shirt-22030548,,$925,,men_all_product_7.html
+,Palm Beach University,$565,men_all_product_7,,/en-us/shopping/palm-beach-university-22030587,,$565,,men_all_product_7.html
+,Monogram Workwear Denim,"$1,190",men_all_product_7,,/en-us/shopping/monogram-workwear-denim-21777473,$774,"$1,190",-35%,men_all_product_7.html
+,Monogram Zipped Knit Hoodie,"$1,855",men_all_product_8,,/en-us/shopping/monogram-zipped-knit-hoodie-21777441,"$1,203","$1,855",-35%,men_all_product_8.html
+,Logo Varsity Jacket,"$2,025",men_all_product_8,,/en-us/shopping/logo-varsity-jacket-22030567,"$1,318","$2,025",-35%,men_all_product_8.html
+,Logo Plate Necklace,$310,men_all_product_8,,/en-us/shopping/logo-plate-necklace-22030609,,$310,,men_all_product_8.html
+,Basic Logo Sweater,$925,men_all_product_8,,/en-us/shopping/basic-logo-sweater-20203729,,$925,,men_all_product_8.html
+,Palms Allover Loose Pants,$700,men_all_product_8,,/en-us/shopping/palms-allover-loose-pants-21777412,$455,$700,-35%,men_all_product_8.html
+,Denim Monogram Pouch,$490,men_all_product_8,,/en-us/shopping/denim-monogram-pouch-21777462,$319,$490,-35%,men_all_product_8.html
+,Logo Fanny Pack,$660,men_all_product_8,,/en-us/shopping/logo-fanny-pack-22028716,,$660,,men_all_product_8.html
+,Monogram Travel Pants,$660,men_all_product_8,,/en-us/shopping/monogram-travel-pants-21773722,,$660,,men_all_product_8.html
+,Camouflage Track pants,$780,men_all_product_8,,/en-us/shopping/camouflage-track-pants-23074277,,$780,,men_all_product_8.html
+,Monogram Knit Hoodie,$925,men_all_product_8,,/en-us/shopping/monogram-knit-hoodie-21776173,$602,$925,-35%,men_all_product_8.html
+,Anello PA Con Monogram,$330,men_all_product_8,,/en-us/shopping/anello-pa-con-monogram-21773751,$215,$330,-35%,men_all_product_8.html
+,Monogram Leather Bomber,"$1,985",men_all_product_8,,/en-us/shopping/monogram-leather-bomber-21773746,"$1,291","$1,985",-35%,men_all_product_8.html
+,PA Studded Mule,$860,men_all_product_8,,/en-us/shopping/pa-studded-mule-21778524,$560,$860,-35%,men_all_product_8.html
+,Milano Stud Cardigan,"$1,390",men_all_product_8,,/en-us/shopping/milano-stud-cardigan-21777436,$902,"$1,390",-35%,men_all_product_8.html
+,Palm Shopping Bag,"$1,060",men_all_product_8,,/en-us/shopping/palm-shopping-bag-21777459,$690,"$1,060",-35%,men_all_product_8.html
+,Logo Shirt,$465,men_all_product_8,,/en-us/shopping/logo-shirt-22029649,,$465,,men_all_product_8.html
+,Logo Short Down Jacket,$910,men_all_product_8,,/en-us/shopping/logo-short-down-jacket-22030512,,$910,,men_all_product_8.html
+,PA City Laminated Biker,"$3,120",men_all_product_8,,/en-us/shopping/pa-city-laminated-biker-21777453,"$2,046","$3,120",-35%,men_all_product_8.html
+,Tracksuits With Dragon - Lunar New Year,"$1,050",men_all_product_8,,/en-us/shopping/tracksuits-with-dragon-lunar-new-year-21770020,$683,"$1,050",-35%,men_all_product_8.html
+,RACING AVIATOR JACKET,"$3,295",men_all_product_8,,/en-us/shopping/racing-aviator-jacket-20114938,"$2,160","$3,295",-35%,men_all_product_8.html
+,Monogram Baselayer Ski Bottom,$355,men_all_product_8,,/en-us/shopping/monogram-baselayer-ski-bottom-22163479,$231,$355,-35%,men_all_product_8.html
+,Monogram Iphone Case 15 Pro,$200,men_all_product_8,,/en-us/shopping/monogram-iphone-case-15-pro-21773753,,$200,,men_all_product_8.html
+,Essential Tank Bipack,$200,men_all_product_8,,/en-us/shopping/essential-tank-bipack-21777471,,$200,,men_all_product_8.html
+,Palm Shopping Bag,"$1,060",men_all_product_8,,/en-us/shopping/palm-shopping-bag-21777458,,"$1,060",,men_all_product_8.html
+,Monogram Iphone Case 15 Pro Max,$200,men_all_product_8,,/en-us/shopping/monogram-iphone-case-15-pro-max-21777466,,$200,,men_all_product_8.html
+,Nylon Track Joggers,$790,men_all_product_8,,/en-us/shopping/nylon-track-joggers-20204750,,$790,,men_all_product_8.html
+,BAHRAIN T-SHIRT MONEYGRAM HAAS F1 TEAM,$525,men_all_product_8,,/en-us/shopping/bahrain-t-shirt-moneygram-haas-f1-team-22464247,,$525,,men_all_product_8.html
+,Track Jacket Moneygram Haas F1 Team,"$1,460",men_all_product_8,,/en-us/shopping/track-jacket-moneygram-haas-f1-team-22030520,,"$1,460",,men_all_product_8.html
+,MAN'S TOD'S SNEAKERS,$915,men_all_product_8,,/en-us/shopping/mans-tods-sneakers-20943059,$595,$915,-35%,men_all_product_8.html
+,Racing Nylon Pants,$925,men_all_product_8,,/en-us/shopping/racing-nylon-pants-22030521,,$925,,men_all_product_8.html
+,Sweatshirt Moneygram Haas F1 Team,$745,men_all_product_8,,/en-us/shopping/sweatshirt-moneygram-haas-f1-team-22030517,,$745,,men_all_product_8.html
+,Track Pants Moneygram Haas F1 Team,"$1,060",men_all_product_8,,/en-us/shopping/track-pants-moneygram-haas-f1-team-22030522,,"$1,060",,men_all_product_8.html
+,Hoodie Moneygram Haas F1 Team,$905,men_all_product_8,,/en-us/shopping/hoodie-moneygram-haas-f1-team-22030518,,$905,,men_all_product_8.html
+,Racing Helmet Hoodie,$775,men_all_product_8,,/en-us/shopping/racing-helmet-hoodie-22030519,,$775,,men_all_product_8.html
+,Bowling Shirt Moneygram Haas F1 Team,$665,men_all_product_8,,/en-us/shopping/bowling-shirt-moneygram-haas-f1-team-22030526,,$665,,men_all_product_8.html
+,Cap Racing Monogram,$260,men_all_product_8,,/en-us/shopping/cap-racing-monogram-22030527,,$260,,men_all_product_8.html
+,SUZUKA T-SHIRT MONEYGRAM HAAS F1 TEAM,$525,men_all_product_8,,/en-us/shopping/suzuka-t-shirt-moneygram-haas-f1-team-22463479,,$525,,men_all_product_8.html
+,T-Shirt Racing Helmet White,$435,men_all_product_8,,/en-us/shopping/t-shirt-racing-helmet-white-22030515,,$435,,men_all_product_8.html
+,T-Shirt Moneygram Haas F1 Team,$575,men_all_product_8,,/en-us/shopping/t-shirt-moneygram-haas-f1-team-22028698,,$575,,men_all_product_8.html
+,Polo Moneygram Haas F1 Team,"$1,140",men_all_product_8,,/en-us/shopping/polo-moneygram-haas-f1-team-22030525,,"$1,140",,men_all_product_8.html
+,Palm Angels Moncler Maya Jacket,"$6,185",men_all_product_8,,/en-us/shopping/palm-angels-moncler-maya-jacket-21770025,"$4,000","$6,185",-35%,men_all_product_8.html
+,MIAMI T-SHIRT MONEYGRAM HAAS F1 TEAM,$525,men_all_product_8,,/en-us/shopping/miami-t-shirt-moneygram-haas-f1-team-22464248,,$525,,men_all_product_8.html
+,T-Shirt Racing Red,$395,men_all_product_8,,/en-us/shopping/t-shirt-racing-red-22030516,,$395,,men_all_product_8.html
+,Coach Jacket Moneygram Haas F1 Team,"$1,875",men_all_product_8,,/en-us/shopping/coach-jacket-moneygram-haas-f1-team-22030524,,"$1,875",,men_all_product_8.html
+,Bomber Jacket Moneygram Haas F1 Team,"$1,670",men_all_product_8,,/en-us/shopping/bomber-jacket-moneygram-haas-f1-team-22030523,,"$1,670",,men_all_product_8.html
+,SHANGHAI T-SHIRT MONEYGRAM HAAS F1 TEAM,$525,men_all_product_8,,/en-us/shopping/shanghai-t-shirt-moneygram-haas-f1-team-22463481,,$525,,men_all_product_8.html
+,Palms wash Denim Jacket,"$1,435",men_all_product_8,,/en-us/shopping/palms-wash-denim-jacket-23078002,,"$1,435",,men_all_product_8.html
+,T-Shirt Racing Helmet White,$510,men_all_product_8,,/en-us/shopping/t-shirt-racing-helmet-white-22030514,,$510,,men_all_product_8.html
+,Logo Pool Slider Orange,$295,men_all_product_8,,/en-us/shopping/logo-pool-slider-orange-23074294,,$295,,men_all_product_8.html
+,Gothic Logo Studded Crewneck,$650,men_all_product_8,,/en-us/shopping/gothic-logo-studded-crewneck-23072243,,$650,,men_all_product_8.html
+,Logo Pool Slider Yellow,$295,men_all_product_8,,/en-us/shopping/logo-pool-slider-yellow-23074293,,$295,,men_all_product_8.html
+,Cords Bracelet PA Monogram,$230,men_all_product_8,,/en-us/shopping/cords-bracelet-pa-monogram-23074301,,$230,,men_all_product_8.html
+,Neck logo Classic Shirt,$555,men_all_product_8,,/en-us/shopping/neck-logo-classic-shirt-23074287,,$555,,men_all_product_8.html
+,Neck logo T-shirt black,$320,men_all_product_8,,/en-us/shopping/neck-logo-t-shirt-black-23894057,,$320,,men_all_product_8.html
+,MONTE CARLO T-SHIRT MONEYGRAM HAAS F1 TEAM,$525,men_all_product_8,,/en-us/shopping/monte-carlo-t-shirt-moneygram-haas-f1-team-22464249,,$525,,men_all_product_8.html
+,MONTREAL T-SHIRT MONEYGRAM HAAS F1 TEAM,$525,men_all_product_8,,/en-us/shopping/montreal-t-shirt-moneygram-haas-f1-team-22463482,,$525,,men_all_product_8.html
+,Beads Necklace PA monogram,$295,men_all_product_8,,/en-us/shopping/beads-necklace-pa-monogram-23074303,,$295,,men_all_product_8.html
+,Logo Sweatpants,$450,men_all_product_8,,/en-us/shopping/logo-sweatpants-23074275,,$450,,men_all_product_8.html
+,logo Track jacket,$650,men_all_product_8,,/en-us/shopping/logo-track-jacket-23074273,,$650,,men_all_product_8.html
+,Cherries balconette top,$450,women_all_product_1,,/en-us/shopping/cherries-balconette-top-23072282,,$450,,women_all_product_1.html
+,Cherries Shorts boxer,$385,women_all_product_1,,/en-us/shopping/cherries-shorts-boxer-23074526,,$385,,women_all_product_1.html
+,Cherries shirt,$685,women_all_product_1,,/en-us/shopping/cherries-shirt-23074523,,$685,,women_all_product_1.html
+,Cherries pants,$910,women_all_product_1,,/en-us/shopping/cherries-pants-23074508,,$910,,women_all_product_1.html
+,Fisherman Cardigan,"$1,720",women_all_product_1,,/en-us/shopping/fisherman-cardigan-21776197,"$1,117","$1,720",-35%,women_all_product_1.html
+,Openback Midi Knit Dress,"$1,240",women_all_product_1,,/en-us/shopping/openback-midi-knit-dress-21773758,$805,"$1,240",-35%,women_all_product_1.html
+,Giorgina Bag,$525,women_all_product_1,,/en-us/shopping/giorgina-bag-22030632,,$525,,women_all_product_1.html
+,Palm Beach University,$565,women_all_product_1,,/en-us/shopping/palm-beach-university-21773742,,$565,,women_all_product_1.html
+,Monogram Jacquard Mini Dress,"$1,125",women_all_product_1,,/en-us/shopping/monogram-jacquard-mini-dress-21776202,$732,"$1,125",-35%,women_all_product_1.html
+,Monogram Pendant Earrings,$260,women_all_product_1,,/en-us/shopping/monogram-pendant-earrings-21776195,,$260,,women_all_product_1.html
+,Logo fitted T-shirt black,$240,women_all_product_1,,/en-us/shopping/logo-fitted-t-shirt-black-23074498,,$240,,women_all_product_1.html
+,Logo fitted T-shirt white,$240,women_all_product_1,,/en-us/shopping/logo-fitted-t-shirt-white-23074499,,$240,,women_all_product_1.html
+,Neck logo Sweater,$385,women_all_product_1,,/en-us/shopping/neck-logo-sweater-23074502,,$385,,women_all_product_1.html
+,Neck logo loose fit T-shirt,$320,women_all_product_1,,/en-us/shopping/neck-logo-loose-fit-t-shirt-23074493,,$320,,women_all_product_1.html
+,neck logo long sleeved crop T-shirt,$255,women_all_product_1,,/en-us/shopping/neck-logo-long-sleeved-crop-t-shirt-23074500,,$255,,women_all_product_1.html
+,Cuffed pants,$650,women_all_product_1,,/en-us/shopping/cuffed-pants-23074507,,$650,,women_all_product_1.html
+,PA 4 Sneakers,$620,women_all_product_1,,/en-us/shopping/pa-4-sneakers-21773744,,$620,,women_all_product_1.html
+,Leather Monogram Belt,$365,women_all_product_1,,/en-us/shopping/leather-monogram-belt-22030704,,$365,,women_all_product_1.html
+,Monogram Hoodie,$585,women_all_product_1,,/en-us/shopping/monogram-hoodie-23074505,,$585,,women_all_product_1.html
+,Monogram crop t-shirt,$255,women_all_product_1,,/en-us/shopping/monogram-crop-t-shirt-23074492,,$255,,women_all_product_1.html
+,Camouflage bomber track Jacket,$740,women_all_product_1,,/en-us/shopping/camouflage-bomber-track-jacket-23072269,,$740,,women_all_product_1.html
+,Camouflage Track Pants Loose fit,$685,women_all_product_1,,/en-us/shopping/camouflage-track-pants-loose-fit-23074512,,$685,,women_all_product_1.html
+,Monogram Jaquard Knit Top,$925,women_all_product_1,,/en-us/shopping/monogram-jaquard-knit-top-21777489,$602,$925,-35%,women_all_product_1.html
+,Monogram Jaquard Knit Pants,"$1,190",women_all_product_1,,/en-us/shopping/monogram-jaquard-knit-pants-21777488,$774,"$1,190",-35%,women_all_product_1.html
+,Logo Sweatshirts Beige,$595,women_all_product_1,,/en-us/shopping/logo-sweatshirts-beige-23054923,$387,$595,-35%,women_all_product_1.html
+,Logo Hoodie Pink,$725,women_all_product_1,,/en-us/shopping/logo-hoodie-pink-23054924,$471,$725,-35%,women_all_product_1.html
+,Camo cossover bikini top,$230,women_all_product_1,,/en-us/shopping/camo-cossover-bikini-top-23074519,,$230,,women_all_product_1.html
+,Camo cossover bikini slip,$230,women_all_product_1,,/en-us/shopping/camo-cossover-bikini-slip-23072273,,$230,,women_all_product_1.html
+,Cherries crossover bikini top,$230,women_all_product_1,,/en-us/shopping/cherries-crossover-bikini-top-23074520,,$230,,women_all_product_1.html
+,Cherries crossover bikini slip,$230,women_all_product_1,,/en-us/shopping/cherries-crossover-bikini-slip-23074517,,$230,,women_all_product_1.html
+,Monogram cossover bikini top,$230,women_all_product_1,,/en-us/shopping/monogram-cossover-bikini-top-23074521,,$230,,women_all_product_1.html
+,Monogram crossover bikini slip,$230,women_all_product_1,,/en-us/shopping/monogram-crossover-bikini-slip-23074518,,$230,,women_all_product_1.html
+,Logo Track Bomber Jacket,$650,women_all_product_1,,/en-us/shopping/logo-track-bomber-jacket-22847909,,$650,,women_all_product_1.html
+,Logo Track Loose Pants,$610,women_all_product_1,,/en-us/shopping/logo-track-loose-pants-22030653,,$610,,women_all_product_1.html
+,PA Studded Mule,$830,women_all_product_1,,/en-us/shopping/pa-studded-mule-21778525,$540,$830,-35%,women_all_product_1.html
+,Palm Shopping Bag,"$1,060",women_all_product_1,,/en-us/shopping/palm-shopping-bag-21777458,,"$1,060",,women_all_product_1.html
+,Striped cropped shirt,$495,women_all_product_1,,/en-us/shopping/striped-cropped-shirt-23074522,,$495,,women_all_product_1.html
+,Striped pants,$780,women_all_product_1,,/en-us/shopping/striped-pants-23074509,,$780,,women_all_product_1.html
+,Logo Track Bomber Jacket,$685,women_all_product_1,,/en-us/shopping/logo-track-bomber-jacket-22030643,$445,$685,-35%,women_all_product_1.html
+,Logo Track Loose Pants,$660,women_all_product_1,,/en-us/shopping/logo-track-loose-pants-22030655,$429,$660,-35%,women_all_product_1.html
+,Denim Corset,$520,women_all_product_1,,/en-us/shopping/denim-corset-23072542,,$520,,women_all_product_1.html
+,Denim Long Skirt,$950,women_all_product_1,,/en-us/shopping/denim-long-skirt-23074529,,$950,,women_all_product_1.html
+,Curved Logo Sweater,$490,women_all_product_1,,/en-us/shopping/curved-logo-sweater-21777487,,$490,,women_all_product_1.html
+,Classic Suit Pants,$700,women_all_product_1,,/en-us/shopping/classic-suit-pants-21777476,$455,$700,-35%,women_all_product_1.html
+,Giorgina Bag,$525,women_all_product_1,,/en-us/shopping/giorgina-bag-22030633,$341,$525,-35%,women_all_product_1.html
+,Logo Cap,$225,women_all_product_1,,/en-us/shopping/logo-cap-22028715,$146,$225,-35%,women_all_product_1.html
+,Monogram Sweater,$520,women_all_product_1,,/en-us/shopping/monogram-sweater-23074503,,$520,,women_all_product_1.html
+,Neck logo Fitted hoodie,$450,women_all_product_1,,/en-us/shopping/neck-logo-fitted-hoodie-23074504,,$450,,women_all_product_1.html
+,Monogram Colorblock Track Jacket,"$1,060",women_all_product_1,,/en-us/shopping/monogram-colorblock-track-jacket-22030644,$690,"$1,060",-35%,women_all_product_1.html
+,Monogram Colorblock Wide Track Pants,$830,women_all_product_1,,/en-us/shopping/monogram-colorblock-wide-track-pants-22030658,$540,$830,-35%,women_all_product_1.html
+,Monogram fitted T-shirt white,$240,women_all_product_1,,/en-us/shopping/monogram-fitted-t-shirt-white-23074495,,$240,,women_all_product_1.html
+,Monogram fitted T-shirt black,$240,women_all_product_1,,/en-us/shopping/monogram-fitted-t-shirt-black-23074497,,$240,,women_all_product_1.html
+,Monogram Jacquard Sweater,"$1,020",women_all_product_1,,/en-us/shopping/monogram-jacquard-sweater-21773756,$664,"$1,020",-35%,women_all_product_1.html
+,Monogram Jaquard Straps Dress,$910,women_all_product_1,,/en-us/shopping/monogram-jaquard-straps-dress-21776203,$592,$910,-35%,women_all_product_1.html
+,Giorgina Bag,$525,women_all_product_1,,/en-us/shopping/giorgina-bag-22030631,,$525,,women_all_product_1.html
+,Monogram Bracelet,$365,women_all_product_1,,/en-us/shopping/monogram-bracelet-21773754,,$365,,women_all_product_1.html
+,Monogram Cropped Polo,$660,women_all_product_1,,/en-us/shopping/monogram-cropped-polo-22030676,,$660,,women_all_product_1.html
+,Monogram Pleated Skirt,$490,women_all_product_1,,/en-us/shopping/monogram-pleated-skirt-22028731,,$490,,women_all_product_1.html
+,Logo Cropped Polo,$660,women_all_product_1,,/en-us/shopping/logo-cropped-polo-22030677,,$660,,women_all_product_1.html
+,Monogram Pleated Skirt,$490,women_all_product_1,,/en-us/shopping/monogram-pleated-skirt-22030652,,$490,,women_all_product_1.html
+,Monogram Jacquard Cardigan,"$1,455",women_all_product_2,,/en-us/shopping/monogram-jacquard-cardigan-21776196,$944,"$1,455",-35%,women_all_product_2.html
+,Monogram Jacquard Shorts,$790,women_all_product_2,,/en-us/shopping/monogram-jacquard-shorts-21776204,$514,$790,-35%,women_all_product_2.html
+,Giorgina Bag,$565,women_all_product_2,,/en-us/shopping/giorgina-bag-22028741,$367,$565,-35%,women_all_product_2.html
+,Monogram Pendant Earrings,$260,women_all_product_2,,/en-us/shopping/monogram-pendant-earrings-21776194,$169,$260,-35%,women_all_product_2.html
+,Curved Logo Cardigan,$765,women_all_product_2,,/en-us/shopping/curved-logo-cardigan-21777486,$497,$765,-35%,women_all_product_2.html
+,Evening Long Dress,"$2,980",women_all_product_2,,/en-us/shopping/evening-long-dress-21777477,"$1,945","$2,980",-35%,women_all_product_2.html
+,Lockbag,$830,women_all_product_2,,/en-us/shopping/lockbag-22030694,,$830,,women_all_product_2.html
+,Monogram Long Necklace,$925,women_all_product_2,,/en-us/shopping/monogram-long-necklace-21777483,,$925,,women_all_product_2.html
+,Curved Logo Cardigan,$765,women_all_product_2,,/en-us/shopping/curved-logo-cardigan-21777485,$497,$765,-35%,women_all_product_2.html
+,Satin Pajama Pants,$895,women_all_product_2,,/en-us/shopping/satin-pajama-pants-22030647,$582,$895,-35%,women_all_product_2.html
+,Monogram Colorblock Track Jacket,$710,women_all_product_2,,/en-us/shopping/monogram-colorblock-track-jacket-22028724,$462,$710,-35%,women_all_product_2.html
+,Monogram Colorblock Track Pants,$765,women_all_product_2,,/en-us/shopping/monogram-colorblock-track-pants-22030659,$497,$765,-35%,women_all_product_2.html
+,Paisley Track Bomber Jacket,"$1,455",women_all_product_2,,/en-us/shopping/paisley-track-bomber-jacket-22030639,$946,"$1,455",-35%,women_all_product_2.html
+,Paisley Track Loose Pants,"$1,060",women_all_product_2,,/en-us/shopping/paisley-track-loose-pants-22030656,$690,"$1,060",-35%,women_all_product_2.html
+,Logo Down Vest,$925,women_all_product_2,,/en-us/shopping/logo-down-vest-22030629,$602,$925,-35%,women_all_product_2.html
+,Parachute Pants,$925,women_all_product_2,,/en-us/shopping/parachute-pants-22028732,$602,$925,-35%,women_all_product_2.html
+,Monogram Pool Slider,$300,women_all_product_2,,/en-us/shopping/monogram-pool-slider-22030594,,$300,,women_all_product_2.html
+,Phone Bag,"$1,060",women_all_product_2,,/en-us/shopping/phone-bag-21776189,$690,"$1,060",-35%,women_all_product_2.html
+,Monogram Plaque Bikini Top,$255,women_all_product_2,,/en-us/shopping/monogram-plaque-bikini-top-23072274,,$255,,women_all_product_2.html
+,Monogram Plaque Bikini Slip,$255,women_all_product_2,,/en-us/shopping/monogram-plaque-bikini-slip-23072272,,$255,,women_all_product_2.html
+,Logo Long-sleeved top,$285,women_all_product_2,,/en-us/shopping/logo-long-sleeved-top-23074528,,$285,,women_all_product_2.html
+,Classic logo Leggins,$300,women_all_product_2,,/en-us/shopping/classic-logo-leggins-23074527,,$300,,women_all_product_2.html
+,PA Ring,$365,women_all_product_2,,/en-us/shopping/pa-ring-19342594,,$365,,women_all_product_2.html
+,Monogram Leather Card Holder,$255,women_all_product_2,,/en-us/shopping/monogram-leather-card-holder-22028740,,$255,,women_all_product_2.html
+,Palms Stripes Crop Shirt,$700,women_all_product_2,,/en-us/shopping/palms-stripes-crop-shirt-22030680,$455,$700,-35%,women_all_product_2.html
+,Palms Stripes Boxer Shorts,$660,women_all_product_2,,/en-us/shopping/palms-stripes-boxer-shorts-22028728,$429,$660,-35%,women_all_product_2.html
+,Raffia Tote Bag,$860,women_all_product_2,,/en-us/shopping/raffia-tote-bag-21773749,$560,$860,-35%,women_all_product_2.html
+,Classic Palm Gem Earrings,$260,women_all_product_2,,/en-us/shopping/classic-palm-gem-earrings-21776193,,$260,,women_all_product_2.html
+,Hyper Monogram Crop T-Shirt,$355,women_all_product_2,,/en-us/shopping/hyper-monogram-crop-t-shirt-21554674,$231,$355,-35%,women_all_product_2.html
+,Hyper Monogram Sweatpants,$630,women_all_product_2,,/en-us/shopping/hyper-monogram-sweatpants-21556256,$410,$630,-35%,women_all_product_2.html
+,Hyper Monogram Hoodie,$695,women_all_product_2,,/en-us/shopping/hyper-monogram-hoodie-21554673,$452,$695,-35%,women_all_product_2.html
+,Hoodie With Dragon - Lunar New Year,$855,women_all_product_2,,/en-us/shopping/hoodie-with-dragon-lunar-new-year-21770024,$556,$855,-35%,women_all_product_2.html
+,Top With Chain Details,$790,women_all_product_2,,/en-us/shopping/top-with-chain-details-22030688,$514,$790,-35%,women_all_product_2.html
+,Knit Shorts With Chain Details,$865,women_all_product_2,,/en-us/shopping/knit-shorts-with-chain-details-22028737,$563,$865,-35%,women_all_product_2.html
+,Lockbag,$830,women_all_product_2,,/en-us/shopping/lockbag-22028742,,$830,,women_all_product_2.html
+,Logo Cap,$225,women_all_product_2,,/en-us/shopping/logo-cap-22030596,$146,$225,-35%,women_all_product_2.html
+,Logo Tape Knit Top,$660,women_all_product_2,,/en-us/shopping/logo-tape-knit-top-22030687,$429,$660,-35%,women_all_product_2.html
+,Logo Tape Knit Pants,"$1,060",women_all_product_2,,/en-us/shopping/logo-tape-knit-pants-22030686,$690,"$1,060",-35%,women_all_product_2.html
+,Logo Tote Bag,$525,women_all_product_2,,/en-us/shopping/logo-tote-bag-22030600,$341,$525,-35%,women_all_product_2.html
+,Palm Pendant Strass Earring,$500,women_all_product_2,,/en-us/shopping/palm-pendant-strass-earring-21776192,$325,$500,-35%,women_all_product_2.html
+,Paisley Bowling Shirt,$895,women_all_product_2,,/en-us/shopping/paisley-bowling-shirt-22030682,$582,$895,-35%,women_all_product_2.html
+,Paisley Track Shorts,$660,women_all_product_2,,/en-us/shopping/paisley-track-shorts-22030651,$429,$660,-35%,women_all_product_2.html
+,Paisley Cropped Shirt,$700,women_all_product_2,,/en-us/shopping/paisley-cropped-shirt-22030683,$455,$700,-35%,women_all_product_2.html
+,Paisley Pajama Pants,$925,women_all_product_2,,/en-us/shopping/paisley-pajama-pants-22030648,$602,$925,-35%,women_all_product_2.html
+,Paisley Slip Dress,$925,women_all_product_2,,/en-us/shopping/paisley-slip-dress-22030664,$602,$925,-35%,women_all_product_2.html
+,Banana Slip Dress,$860,women_all_product_2,,/en-us/shopping/banana-slip-dress-22030665,$560,$860,-35%,women_all_product_2.html
+,Chambray Track Bomber Jacket,"$1,325",women_all_product_2,,/en-us/shopping/chambray-track-bomber-jacket-22028733,$860,"$1,325",-35%,women_all_product_2.html
+,Chambray Track Pants,$790,women_all_product_2,,/en-us/shopping/chambray-track-pants-22028725,$514,$790,-35%,women_all_product_2.html
+,Monogram Linen Cropped Shirt,$660,women_all_product_2,,/en-us/shopping/monogram-linen-cropped-shirt-22028736,$429,$660,-35%,women_all_product_2.html
+,Monogram Linen Boxer Shorts,$660,women_all_product_2,,/en-us/shopping/monogram-linen-boxer-shorts-22028729,$429,$660,-35%,women_all_product_2.html
+,Palm Bridge Bag,$790,women_all_product_2,,/en-us/shopping/palm-bridge-bag-21776210,$514,$790,-35%,women_all_product_2.html
+,Sandals Depa Palm Angels X Suicoke,$283,women_all_product_2,,/en-us/shopping/sandals-depa-palm-angels-x-suicoke-22532575,$184,$283,-35%,women_all_product_2.html
+,Monogram Colorblock Cropped Track Vest,$525,women_all_product_2,,/en-us/shopping/monogram-colorblock-cropped-track-vest-22030645,$341,$525,-35%,women_all_product_2.html
+,Monogram Colorblock Track Shorts,$510,women_all_product_2,,/en-us/shopping/monogram-colorblock-track-shorts-22030661,$332,$510,-35%,women_all_product_2.html
+,Monogram Track Jacket,$685,women_all_product_2,,/en-us/shopping/monogram-track-jacket-22030642,$445,$685,-35%,women_all_product_2.html
+,Monogram Track Pants,$575,women_all_product_2,,/en-us/shopping/monogram-track-pants-22030657,$374,$575,-35%,women_all_product_2.html
+,Cropped Linen Blazer,"$1,760",women_all_product_2,,/en-us/shopping/cropped-linen-blazer-22030667,"$1,145","$1,760",-35%,women_all_product_2.html
+,Linen Carrot Pants Metal Angles,"$1,255",women_all_product_2,,/en-us/shopping/linen-carrot-pants-metal-angles-22030649,$816,"$1,255",-35%,women_all_product_2.html
+,Overdye Logo Denim Jacket,"$1,325",women_all_product_2,,/en-us/shopping/overdye-logo-denim-jacket-22030841,$860,"$1,325",-35%,women_all_product_2.html
+,Overdye Logo Wide Leg Jeans,$790,women_all_product_2,,/en-us/shopping/overdye-logo-wide-leg-jeans-22030723,$514,$790,-35%,women_all_product_2.html
+,Bucket Bag,$790,women_all_product_3,,/en-us/shopping/bucket-bag-21777492,$514,$790,-35%,women_all_product_3.html
+,Denim Jacket,"$1,190",women_all_product_3,,/en-us/shopping/denim-jacket-21778527,$774,"$1,190",-35%,women_all_product_3.html
+,Monogram Allover Shirt,$790,women_all_product_3,,/en-us/shopping/monogram-allover-shirt-21776188,$514,$790,-35%,women_all_product_3.html
+,Curved Logo Sweater,$490,women_all_product_3,,/en-us/shopping/curved-logo-sweater-21776199,,$490,,women_all_product_3.html
+,Logo Cap,$225,women_all_product_3,,/en-us/shopping/logo-cap-22030597,$146,$225,-35%,women_all_product_3.html
+,Monogram Satin Cropped Shirt,$660,women_all_product_3,,/en-us/shopping/monogram-satin-cropped-shirt-22030681,$429,$660,-35%,women_all_product_3.html
+,Logo Cap,$225,women_all_product_3,,/en-us/shopping/logo-cap-22030598,,$225,,women_all_product_3.html
+,Embroidery Logo Socks,$115,women_all_product_3,,/en-us/shopping/embroidery-logo-socks-22030615,,$115,,women_all_product_3.html
+,Monogram Pool Slider,$300,women_all_product_3,,/en-us/shopping/monogram-pool-slider-20134245,,$300,,women_all_product_3.html
+,Monogram Pool Slider,$300,women_all_product_3,,/en-us/shopping/monogram-pool-slider-22030591,$195,$300,-35%,women_all_product_3.html
+,Sandals Depa Palm Angels X Suicoke,$283,women_all_product_3,,/en-us/shopping/sandals-depa-palm-angels-x-suicoke-22534009,$184,$283,-35%,women_all_product_3.html
+,Soiree Pajama Pants,$685,women_all_product_3,,/en-us/shopping/soiree-pajama-pants-20134256,$445,$685,-35%,women_all_product_3.html
+,Paddock Vest,"$1,050",women_all_product_3,,/en-us/shopping/paddock-vest-20116165,$683,"$1,050",-35%,women_all_product_3.html
+,GOTHIC LOGO SOCKS,$95,women_all_product_3,,/en-us/shopping/gothic-logo-socks-16863594,,$95,,women_all_product_3.html
+,Woman's Racing Palm Web Sneakers,$750,women_all_product_3,,/en-us/shopping/womans-racing-palm-web-sneakers-20155554,$488,$750,-35%,women_all_product_3.html
+,Logo Tape Cropped T-shirt,$330,women_all_product_3,,/en-us/shopping/logo-tape-cropped-t-shirt-19257487,,$330,,women_all_product_3.html
+,LOGO LEGGINGS,$310,women_all_product_3,,/en-us/shopping/logo-leggings-16865362,,$310,,women_all_product_3.html
+,Monogram Ski Beanie,$260,women_all_product_3,,/en-us/shopping/monogram-ski-beanie-22163470,$169,$260,-35%,women_all_product_3.html
+,GOTHIC LOGO SOCKS,$95,women_all_product_3,,/en-us/shopping/gothic-logo-socks-16863597,,$95,,women_all_product_3.html
+,Monogram Ski Cap,$235,women_all_product_3,,/en-us/shopping/monogram-ski-cap-22163468,$153,$235,-35%,women_all_product_3.html
+,Palm Ski Club Loose T-Shirt,$510,women_all_product_3,,/en-us/shopping/palm-ski-club-loose-t-shirt-22163487,$332,$510,-35%,women_all_product_3.html
+,Monogram Cap,$245,women_all_product_3,,/en-us/shopping/monogram-cap-22163469,,$245,,women_all_product_3.html
+,Moncler X Palm Angels Genius Hat,$320,women_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-hat-21767039,,$320,,women_all_product_3.html
+,Palm Angels Moncler Maya Jacket,"$6,185",women_all_product_3,,/en-us/shopping/palm-angels-moncler-maya-jacket-21788630,"$4,000","$6,185",-35%,women_all_product_3.html
+,Moncler X Palm Angels Genius T-shirt,$345,women_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-t-shirt-21767031,,$345,,women_all_product_3.html
+,Moncler X Palm Angels Genius T-shirt,$345,women_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-t-shirt-21767033,,$345,,women_all_product_3.html
+,Moncler X Palm Angels Genius T-shirt,$540,women_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-t-shirt-21770006,,$540,,women_all_product_3.html
+,Moncler X Palm Angels Genius Socks,$250,women_all_product_3,,/en-us/shopping/moncler-x-palm-angels-genius-socks-21769018,,$250,,women_all_product_3.html
+,Logo Sport Top,$260,women_all_product_3,,/en-us/shopping/logo-sport-top-22030721,,$260,,women_all_product_3.html
+,Logo Sport Shorts,$255,women_all_product_3,,/en-us/shopping/logo-sport-shorts-22030718,,$255,,women_all_product_3.html
+,Cropped Sport Tank,$300,women_all_product_3,,/en-us/shopping/cropped-sport-tank-22030719,$195,$300,-35%,women_all_product_3.html
+,Logo Leggings,$395,women_all_product_3,,/en-us/shopping/logo-leggings-22030717,$257,$395,-35%,women_all_product_3.html
+,Cropped Sport Tank,$305,women_all_product_3,,/en-us/shopping/cropped-sport-tank-22030720,$198,$305,-35%,women_all_product_3.html
+,LOGO SPORT BRA,$260,women_all_product_3,,/en-us/shopping/logo-sport-bra-16864628,,$260,,women_all_product_3.html
+,BLACK TRACK LEGGINGS,$395,women_all_product_3,,/en-us/shopping/black-track-leggings-16864612,$257,$395,-35%,women_all_product_3.html
+,BLACK LOGO CAP,$220,women_all_product_3,,/en-us/shopping/black-logo-cap-17571528,,$220,,women_all_product_3.html
+,Bear Cropped T-shirt,$360,women_all_product_3,,/en-us/shopping/bear-cropped-t-shirt-19258054,$234,$360,-35%,women_all_product_3.html
+,Training Track Tank Top,$305,women_all_product_3,,/en-us/shopping/training-track-tank-top-19256850,$198,$305,-35%,women_all_product_3.html
+,Training Track Cyclist Pants,$305,women_all_product_3,,/en-us/shopping/training-track-cyclist-pants-19258045,$198,$305,-35%,women_all_product_3.html
+,Leather Effect Bomber Track Jacket,$625,women_all_product_3,,/en-us/shopping/leather-effect-bomber-track-jacket-19256890,,$625,,women_all_product_3.html
+,Leather Effect Loose Track Pants,$615,women_all_product_3,,/en-us/shopping/leather-effect-loose-track-pants-19258070,,$615,,women_all_product_3.html
+,Palm Baselayer Ski Top,$395,women_all_product_3,,/en-us/shopping/palm-baselayer-ski-top-22163490,$257,$395,-35%,women_all_product_3.html
+,Palm Baselayer Ski Bottom,$395,women_all_product_3,,/en-us/shopping/palm-baselayer-ski-bottom-22163492,$257,$395,-35%,women_all_product_3.html
+,LOGO TANK TOP,$255,women_all_product_3,,/en-us/shopping/logo-tank-top-16241283,$166,$255,-35%,women_all_product_3.html
+,LOGO SWEATSHIRT,$635,women_all_product_3,,/en-us/shopping/logo-sweatshirt-17431562,,$635,,women_all_product_3.html
+,SHARK CROPPED SWEATSHIRT,$850,women_all_product_3,,/en-us/shopping/shark-cropped-sweatshirt-17573366,$553,$850,-35%,women_all_product_3.html
+,Classic Logo Fitted T-shirt,$240,women_all_product_3,,/en-us/shopping/classic-logo-fitted-t-shirt-17574050,,$240,,women_all_product_3.html
+,CLASSIC LOGO FITTED T-SHIRT,$245,women_all_product_3,,/en-us/shopping/classic-logo-fitted-t-shirt-17574051,,$245,,women_all_product_3.html
+,PALM BEAR HOODIE,$895,women_all_product_3,,/en-us/shopping/palm-bear-hoodie-18436884,$582,$895,-35%,women_all_product_3.html
+,CLASSIC LOGO BEANIE,$230,women_all_product_3,,/en-us/shopping/classic-logo-beanie-18436889,,$230,,women_all_product_3.html
+,PALM BEAR FITTED CREW SWEATSHIRT,$855,women_all_product_3,,/en-us/shopping/palm-bear-fitted-crew-sweatshirt-18437674,$556,$855,-35%,women_all_product_3.html
+,Classic Logo Fitted Cardigan,$790,women_all_product_3,,/en-us/shopping/classic-logo-fitted-cardigan-20205756,,$790,,women_all_product_3.html
+,Fitted Track Blazer,"$1,455",women_all_product_3,,/en-us/shopping/fitted-track-blazer-20204694,$935,"$1,455",-35%,women_all_product_3.html
+,Palm Bear Fitted Crew Sweatshirt,$855,women_all_product_3,,/en-us/shopping/palm-bear-fitted-crew-sweatshirt-19257472,$556,$855,-35%,women_all_product_3.html
+,Broken Bear cotton T-shirt,$390,women_all_product_3,,/en-us/shopping/broken-bear-cotton-t-shirt-19298090,$254,$390,-35%,women_all_product_3.html
+,Broken Bear cotton T-shirt,$360,women_all_product_3,,/en-us/shopping/broken-bear-cotton-t-shirt-19296851,$234,$360,-35%,women_all_product_3.html
+,Bear Hoodie,$895,women_all_product_3,,/en-us/shopping/bear-hoodie-19257475,$582,$895,-35%,women_all_product_3.html
+,Broken Bear cotton T-shirt,$390,women_all_product_3,,/en-us/shopping/broken-bear-cotton-t-shirt-19297559,$254,$390,-35%,women_all_product_3.html
+,Logo Tape Cropped T-shirt,$330,women_all_product_3,,/en-us/shopping/logo-tape-cropped-t-shirt-19257485,,$330,,women_all_product_3.html
+,Mockneck Logo Top L/s Black White,$285,women_all_product_3,,/en-us/shopping/mockneck-logo-top-l-s-black-white-19258047,,$285,,women_all_product_3.html
+,PA Ski Club Socks,$130,women_all_product_4,,/en-us/shopping/pa-ski-club-socks-22163471,$85,$130,-35%,women_all_product_4.html
+,Palm Angels Ski Helmet,$790,women_all_product_4,,/en-us/shopping/palm-angels-ski-helmet-22163473,,$790,,women_all_product_4.html
+,Logo Hooded Down Jacket,"$1,060",women_all_product_4,,/en-us/shopping/logo-hooded-down-jacket-22030630,,"$1,060",,women_all_product_4.html
+,Monogram Cozy Ski Jacket,"$1,590",women_all_product_4,,/en-us/shopping/monogram-cozy-ski-jacket-22163482,"$1,022","$1,590",-35%,women_all_product_4.html
+,Monogram Cozy Ski Pants,"$1,230",women_all_product_4,,/en-us/shopping/monogram-cozy-ski-pants-22163481,$800,"$1,230",-35%,women_all_product_4.html
+,PA Palms Ski Jacket,"$2,450",women_all_product_4,,/en-us/shopping/pa-palms-ski-jacket-22163483,"$1,576","$2,450",-35%,women_all_product_4.html
+,PA Palms Ski Pants,"$1,985",women_all_product_4,,/en-us/shopping/pa-palms-ski-pants-22163486,"$1,273","$1,985",-35%,women_all_product_4.html
+,Palm Baselayer Ski Top,$395,women_all_product_4,,/en-us/shopping/palm-baselayer-ski-top-22163489,$257,$395,-35%,women_all_product_4.html
+,Palm Baselayer Ski Bottom,$395,women_all_product_4,,/en-us/shopping/palm-baselayer-ski-bottom-22163491,$257,$395,-35%,women_all_product_4.html
+,Waist Belt Down Jacket,"$1,720",women_all_product_4,,/en-us/shopping/waist-belt-down-jacket-20205746,,"$1,720",,women_all_product_4.html
+,Logo Tape Flare Sweatpants,$630,women_all_product_4,,/en-us/shopping/logo-tape-flare-sweatpants-20205737,,$630,,women_all_product_4.html
+,Paisley Triangle Bikini Top,$195,women_all_product_4,,/en-us/shopping/paisley-triangle-bikini-top-22030674,$127,$195,-35%,women_all_product_4.html
+,V Bikini Bottom Paisley,$210,women_all_product_4,,/en-us/shopping/v-bikini-bottom-paisley-22030671,$137,$210,-35%,women_all_product_4.html
+,Metallic Triangle Bikini Top,$245,women_all_product_4,,/en-us/shopping/metallic-triangle-bikini-top-22030673,$159,$245,-35%,women_all_product_4.html
+,Metallic V Bikini Bottom,$245,women_all_product_4,,/en-us/shopping/metallic-v-bikini-bottom-22030670,$159,$245,-35%,women_all_product_4.html
+,V Bikini Bottom Lurex,$325,women_all_product_4,,/en-us/shopping/v-bikini-bottom-lurex-22030672,$211,$325,-35%,women_all_product_4.html
+,Metallic V Neck Swimsuit,$360,women_all_product_4,,/en-us/shopping/metallic-v-neck-swimsuit-22028735,$234,$360,-35%,women_all_product_4.html
+,Paisley Criss-Cross Swimsuit,$310,women_all_product_4,,/en-us/shopping/paisley-criss-cross-swimsuit-22030669,$202,$310,-35%,women_all_product_4.html
+,Logo Tape Triangle Bra,$130,women_all_product_4,,/en-us/shopping/logo-tape-triangle-bra-22030708,$85,$130,-35%,women_all_product_4.html
+,Logo Tape Bra,$135,women_all_product_4,,/en-us/shopping/logo-tape-bra-22030706,$88,$135,-35%,women_all_product_4.html
+,Logo Tape Triangle Bra,$130,women_all_product_4,,/en-us/shopping/logo-tape-triangle-bra-22030709,$85,$130,-35%,women_all_product_4.html
+,Logo Tape Highwaist Brazilian,$125,women_all_product_4,,/en-us/shopping/logo-tape-highwaist-brazilian-22030711,$81,$125,-35%,women_all_product_4.html
+,Logo Tape Bralette,$125,women_all_product_4,,/en-us/shopping/logo-tape-bralette-22030714,$81,$125,-35%,women_all_product_4.html
+,Logo Tape Thong,$105,women_all_product_4,,/en-us/shopping/logo-tape-thong-22030716,$68,$105,-35%,women_all_product_4.html
+,Classic Logo Thong,$105,women_all_product_4,,/en-us/shopping/classic-logo-thong-19257488,,$105,,women_all_product_4.html
+,Logo Tape Bra,$135,women_all_product_4,,/en-us/shopping/logo-tape-bra-22030707,$88,$135,-35%,women_all_product_4.html
+,Classic Logo Thong,$105,women_all_product_4,,/en-us/shopping/classic-logo-thong-19258059,,$105,,women_all_product_4.html
+,Classic Logo Brazilian Panties,$105,women_all_product_4,,/en-us/shopping/classic-logo-brazilian-panties-20205788,$68,$105,-35%,women_all_product_4.html
+,Classic Logo Mel Triangle Bra,$125,women_all_product_4,,/en-us/shopping/classic-logo-mel-triangle-bra-19257491,,$125,,women_all_product_4.html
+,Classic Logo Thong,$105,women_all_product_4,,/en-us/shopping/classic-logo-thong-19257489,,$105,,women_all_product_4.html
+,Classic Logo Bra,$135,women_all_product_4,,/en-us/shopping/classic-logo-bra-19257492,,$135,,women_all_product_4.html
+,Monogram Lace Bra,$245,women_all_product_4,,/en-us/shopping/monogram-lace-bra-22030705,$159,$245,-35%,women_all_product_4.html
+,Monogram Lace Brazilian Brief,$245,women_all_product_4,,/en-us/shopping/monogram-lace-brazilian-brief-22030710,$159,$245,-35%,women_all_product_4.html
+,Bridge Shoulder Bag,"$1,190",women_all_product_4,,/en-us/shopping/bridge-shoulder-bag-21777493,$774,"$1,190",-35%,women_all_product_4.html
+,Moncler X Palm Angels Genius Jacket,"$2,050",women_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-jacket-21770009,,"$2,050",,women_all_product_4.html
+,Moncler X Palm Angels Genius Socks,$250,women_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-socks-21769017,,$250,,women_all_product_4.html
+,Moncler X Palm Angels Genius Hat,$320,women_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-hat-21769016,,$320,,women_all_product_4.html
+,Palm Rhinestone Earrings,$300,women_all_product_4,,/en-us/shopping/palm-rhinestone-earrings-21777484,,$300,,women_all_product_4.html
+,Monogram Allover Blouse,$725,women_all_product_4,,/en-us/shopping/monogram-allover-blouse-21777479,$471,$725,-35%,women_all_product_4.html
+,Moncler X Palm Angels Genius Card Holder,$435,women_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-card-holder-21770016,,$435,,women_all_product_4.html
+,Moncler X Palm Angels Genius Baseball Cap,$290,women_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-baseball-cap-21770015,,$290,,women_all_product_4.html
+,T-Shirt Loose With Dragon - Lunar New Year,$430,women_all_product_4,,/en-us/shopping/t-shirt-loose-with-dragon-lunar-new-year-21769023,$280,$430,-35%,women_all_product_4.html
+,Beanie With Dragon - Lunar New Year,$285,women_all_product_4,,/en-us/shopping/beanie-with-dragon-lunar-new-year-21769021,$185,$285,-35%,women_all_product_4.html
+,Moncler X Palm Angels Genius Jacket,"$2,090",women_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-jacket-21767035,,"$2,090",,women_all_product_4.html
+,Moncler X Palm Angels Genius Jacket,"$1,720",women_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-jacket-21767034,,"$1,720",,women_all_product_4.html
+,Monogram Statement Loose T-Shirt,$525,women_all_product_4,,/en-us/shopping/monogram-statement-loose-t-shirt-21776185,$341,$525,-35%,women_all_product_4.html
+,PA Reflective Ski Jacket,"$2,980",women_all_product_4,,/en-us/shopping/pa-reflective-ski-jacket-22163484,"$1,928","$2,980",-35%,women_all_product_4.html
+,Monogram Leather Wallet,$460,women_all_product_4,,/en-us/shopping/monogram-leather-wallet-22030693,,$460,,women_all_product_4.html
+,Moncler X Palm Angels Genius Jacket,"$2,600",women_all_product_4,,/en-us/shopping/moncler-x-palm-angels-genius-jacket-21769009,,"$2,600",,women_all_product_4.html
+,Racing Bowling Shirt,$720,women_all_product_4,,/en-us/shopping/racing-bowling-shirt-20115875,$468,$720,-35%,women_all_product_4.html
+,Monogram Jaquard Knit Bra,$925,women_all_product_4,,/en-us/shopping/monogram-jaquard-knit-bra-21777490,$602,$925,-35%,women_all_product_4.html
+,Classic Logo Airpods Case Pro,$100,women_all_product_4,,/en-us/shopping/classic-logo-airpods-case-pro-21777475,$65,$100,-35%,women_all_product_4.html
+,PA Ski Club Fitted T-Shirt,$460,women_all_product_4,,/en-us/shopping/pa-ski-club-fitted-t-shirt-22163488,$299,$460,-35%,women_all_product_4.html
+,Monogram Chocker,$575,women_all_product_4,,/en-us/shopping/monogram-chocker-21773755,,$575,,women_all_product_4.html
+,Velvet Suit Pants,$895,women_all_product_4,,/en-us/shopping/velvet-suit-pants-21776187,$582,$895,-35%,women_all_product_4.html
+,PA Chain Velvet Top,"$2,250",women_all_product_4,,/en-us/shopping/pa-chain-velvet-top-21776186,"$1,448","$2,250",-35%,women_all_product_4.html
+,Logo Cropped T-Shirt Black,$490,women_all_product_4,,/en-us/shopping/logo-cropped-t-shirt-black-23059085,,$490,,women_all_product_4.html
+,rear logo print T-shirt,$330,women_all_product_4,,/en-us/shopping/rear-logo-print-t-shirt-18594178,,$330,,women_all_product_4.html
+,Monogram Pool Slider,$300,women_all_product_4,,/en-us/shopping/monogram-pool-slider-22028714,,$300,,women_all_product_4.html
+,LOGO OVER T-SHIRT,$330,women_all_product_4,,/en-us/shopping/logo-over-t-shirt-16865380,,$330,,women_all_product_4.html
+,Monogram Fitted T-Shirt,$365,women_all_product_5,,/en-us/shopping/monogram-fitted-t-shirt-22028721,,$365,,women_all_product_5.html
+,Logo Tape Zipped Hoodie,$660,women_all_product_5,,/en-us/shopping/logo-tape-zipped-hoodie-22028723,$429,$660,-35%,women_all_product_5.html
+,Pa 4 Sneakers,$620,women_all_product_5,,/en-us/shopping/pa-4-sneakers-22030589,,$620,,women_all_product_5.html
+,Classic Logo Socks,$95,women_all_product_5,,/en-us/shopping/classic-logo-socks-21776180,,$95,,women_all_product_5.html
+,Monogram Socks,$95,women_all_product_5,,/en-us/shopping/monogram-socks-21777464,,$95,,women_all_product_5.html
+,Palm Beach University,$565,women_all_product_5,,/en-us/shopping/palm-beach-university-21777445,,$565,,women_all_product_5.html
+,Monogram Cap,$245,women_all_product_5,,/en-us/shopping/monogram-cap-21773698,,$245,,women_all_product_5.html
+,PA 4 Sneakers,$620,women_all_product_5,,/en-us/shopping/pa-4-sneakers-21777448,,$620,,women_all_product_5.html
+,Monogram Mini Dress,$630,women_all_product_5,,/en-us/shopping/monogram-mini-dress-22030662,,$630,,women_all_product_5.html
+,3-Pack Logo T-Shirt,$650,women_all_product_5,,/en-us/shopping/3-pack-logo-t-shirt-22030635,,$650,,women_all_product_5.html
+,Palm Beach University,$565,women_all_product_5,,/en-us/shopping/palm-beach-university-22030586,,$565,,women_all_product_5.html
+,Monogram loose fit T-shirt,$295,women_all_product_5,,/en-us/shopping/monogram-loose-fit-t-shirt-23072266,,$295,,women_all_product_5.html
+,Logo Loose T-Shirt Black,$500,women_all_product_5,,/en-us/shopping/logo-loose-t-shirt-black-23054921,,$500,,women_all_product_5.html
+,Logo Tank Top,$335,women_all_product_5,,/en-us/shopping/logo-tank-top-22030638,,$335,,women_all_product_5.html
+,Logo Tape Flare Sweatpants,$630,women_all_product_5,,/en-us/shopping/logo-tape-flare-sweatpants-22030654,$410,$630,-35%,women_all_product_5.html
+,Logo Tank Top,$335,women_all_product_5,,/en-us/shopping/logo-tank-top-22030637,,$335,,women_all_product_5.html
+,Gothic logo Cap,$220,women_all_product_5,,/en-us/shopping/gothic-logo-cap-23072277,,$220,,women_all_product_5.html
+,Palm Beach University,$565,women_all_product_5,,/en-us/shopping/palm-beach-university-21777442,,$565,,women_all_product_5.html
+,Monogram Swimsuit,$325,women_all_product_5,,/en-us/shopping/monogram-swimsuit-23074515,,$325,,women_all_product_5.html
+,Logo Knit Top,$410,women_all_product_5,,/en-us/shopping/logo-knit-top-22030689,,$410,,women_all_product_5.html
+,Palm Beach University,$565,women_all_product_5,,/en-us/shopping/palm-beach-university-22029653,,$565,,women_all_product_5.html
+,Pa 4 Sneakers,$620,women_all_product_5,,/en-us/shopping/pa-4-sneakers-22030588,,$620,,women_all_product_5.html
+,Knitted Top,$555,women_all_product_5,,/en-us/shopping/knitted-top-23072276,,$555,,women_all_product_5.html
+,Canvas Logo Tote Bag,$525,women_all_product_5,,/en-us/shopping/canvas-logo-tote-bag-22030601,,$525,,women_all_product_5.html
+,Knitted pants,$910,women_all_product_5,,/en-us/shopping/knitted-pants-23074524,,$910,,women_all_product_5.html
+,Monogram Skirt,$585,women_all_product_5,,/en-us/shopping/monogram-skirt-23074511,,$585,,women_all_product_5.html
+,Monogram Pouch,$435,women_all_product_5,,/en-us/shopping/monogram-pouch-21777461,,$435,,women_all_product_5.html
+,Angels logo Neclace,$300,women_all_product_5,,/en-us/shopping/angels-logo-neclace-23072280,,$300,,women_all_product_5.html
+,Palm logo Necklace,$300,women_all_product_5,,/en-us/shopping/palm-logo-necklace-23072279,,$300,,women_all_product_5.html
+,Palm Beads Bracelet,$220,women_all_product_5,,/en-us/shopping/palm-beads-bracelet-23072278,,$220,,women_all_product_5.html
+,Logo Striped Socks,$95,women_all_product_5,,/en-us/shopping/logo-striped-socks-23072281,,$95,,women_all_product_5.html
+,Logo T-Shirt Dress Black,$595,women_all_product_5,,/en-us/shopping/logo-t-shirt-dress-black-23059087,,$595,,women_all_product_5.html
+,Palm Strass Charm Necklace,$395,women_all_product_5,,/en-us/shopping/palm-strass-charm-necklace-21777481,,$395,,women_all_product_5.html
+,Monogram Pool Slider,$300,women_all_product_5,,/en-us/shopping/monogram-pool-slider-22030593,$195,$300,-35%,women_all_product_5.html
+,PA City Cap,$235,women_all_product_5,,/en-us/shopping/pa-city-cap-21776175,$153,$235,-35%,women_all_product_5.html
+,TRACK TOP,$300,women_all_product_5,,/en-us/shopping/track-top-16865341,$195,$300,-35%,women_all_product_5.html
+,Palms Cropped T-Shirt,$395,women_all_product_5,,/en-us/shopping/palms-cropped-t-shirt-22028720,$257,$395,-35%,women_all_product_5.html
+,Burning Monogram Cap,$245,women_all_product_5,,/en-us/shopping/burning-monogram-cap-21777397,$159,$245,-35%,women_all_product_5.html
+,PA Milano Stud Cap,$375,women_all_product_5,,/en-us/shopping/pa-milano-stud-cap-21777456,$244,$375,-35%,women_all_product_5.html
+,Allover Palms Bucket,$260,women_all_product_5,,/en-us/shopping/allover-palms-bucket-21776174,$169,$260,-35%,women_all_product_5.html
+,PA Milano Stud Cap,$375,women_all_product_5,,/en-us/shopping/pa-milano-stud-cap-21777455,$244,$375,-35%,women_all_product_5.html
+,Monogram Socks,$95,women_all_product_5,,/en-us/shopping/monogram-socks-21777467,$62,$95,-35%,women_all_product_5.html
+,PA Monogram Pool Slider,$300,women_all_product_5,,/en-us/shopping/pa-monogram-pool-slider-21777450,,$300,,women_all_product_5.html
+,Logo Fitted T-Shirt,$365,women_all_product_5,,/en-us/shopping/logo-fitted-t-shirt-22030634,,$365,,women_all_product_5.html
+,Logo Knit Top,$410,women_all_product_5,,/en-us/shopping/logo-knit-top-22030690,$267,$410,-35%,women_all_product_5.html
+,Embroidery Logo Socks,$115,women_all_product_5,,/en-us/shopping/embroidery-logo-socks-22030703,$75,$115,-35%,women_all_product_5.html
+,Socks - Lunar New Year,$95,women_all_product_5,,/en-us/shopping/socks-lunar-new-year-21770022,$62,$95,-35%,women_all_product_5.html
+,Denim Straight Leg,$660,women_all_product_5,,/en-us/shopping/denim-straight-leg-21777495,$429,$660,-35%,women_all_product_5.html
+,PA Milano Bucket,$395,women_all_product_5,,/en-us/shopping/pa-milano-bucket-21773748,$257,$395,-35%,women_all_product_5.html
+,Double Layer Mesh Long Dress,"$1,060",women_all_product_5,,/en-us/shopping/double-layer-mesh-long-dress-22030663,$690,"$1,060",-35%,women_all_product_5.html
+,Monogram Socks,$95,women_all_product_5,,/en-us/shopping/monogram-socks-21776181,,$95,,women_all_product_5.html
+,Pa 4 Sneakers,$620,women_all_product_5,,/en-us/shopping/pa-4-sneakers-22028713,,$620,,women_all_product_5.html
+,Logo Track Shorts,$425,women_all_product_5,,/en-us/shopping/logo-track-shorts-22030660,,$425,,women_all_product_5.html
+,Pa 4 Sneakers,$620,women_all_product_5,,/en-us/shopping/pa-4-sneakers-22030590,,$620,,women_all_product_5.html
+,Logo Tape Highwaist Brazilian,$125,women_all_product_5,,/en-us/shopping/logo-tape-highwaist-brazilian-22030712,$81,$125,-35%,women_all_product_5.html
+,Logo T-Shirt Dress Pink,$595,women_all_product_5,,/en-us/shopping/logo-t-shirt-dress-pink-23059086,$387,$595,-35%,women_all_product_5.html
+,Logo Tape Thong,$105,women_all_product_5,,/en-us/shopping/logo-tape-thong-22030715,$68,$105,-35%,women_all_product_5.html
+,Monogram Pin Cap,$330,women_all_product_5,,/en-us/shopping/monogram-pin-cap-21773697,$215,$330,-35%,women_all_product_5.html
+,Burning PA Iphone Case 15,$125,women_all_product_5,,/en-us/shopping/burning-pa-iphone-case-15-21777400,$81,$125,-35%,women_all_product_5.html
+,Logo Leggings,$395,women_all_product_5,,/en-us/shopping/logo-leggings-22028745,$257,$395,-35%,women_all_product_5.html
+,Monogram Trucker Suede Cap,$260,women_all_product_6,,/en-us/shopping/monogram-trucker-suede-cap-21776168,,$260,,women_all_product_6.html
+,Monogram Jaquard Knit Top,$925,women_all_product_6,,/en-us/shopping/monogram-jaquard-knit-top-21776205,$602,$925,-35%,women_all_product_6.html
+,Logo Tank Top,$335,women_all_product_6,,/en-us/shopping/logo-tank-top-22030641,$218,$335,-35%,women_all_product_6.html
+,PA Pool Slides,$685,women_all_product_6,,/en-us/shopping/pa-pool-slides-21786030,$445,$685,-35%,women_all_product_6.html
+,Lurex V Neck Swimsuit,$435,women_all_product_6,,/en-us/shopping/lurex-v-neck-swimsuit-22030668,$283,$435,-35%,women_all_product_6.html
+,Monogram Lace Thong,$205,women_all_product_6,,/en-us/shopping/monogram-lace-thong-22028744,$133,$205,-35%,women_all_product_6.html
+,Monogram Lace Bralette,$245,women_all_product_6,,/en-us/shopping/monogram-lace-bralette-22030713,$159,$245,-35%,women_all_product_6.html
+,Monogram Pocket Blazer,"$1,060",women_all_product_6,,/en-us/shopping/monogram-pocket-blazer-21777427,$690,"$1,060",-35%,women_all_product_6.html
+,Monogram Loose Pants,$675,women_all_product_6,,/en-us/shopping/monogram-loose-pants-21773724,$439,$675,-35%,women_all_product_6.html
+,Lurex Triangle Bikini Top,$270,women_all_product_6,,/en-us/shopping/lurex-triangle-bikini-top-22030675,$176,$270,-35%,women_all_product_6.html
+,Logo Knit Top,$410,women_all_product_6,,/en-us/shopping/logo-knit-top-22028738,,$410,,women_all_product_6.html
+,Classic Logo Iphone Case 15,$200,women_all_product_6,,/en-us/shopping/classic-logo-iphone-case-15-21776178,$130,$200,-35%,women_all_product_6.html
+,Monogram Stripes Shirt,$700,women_all_product_6,,/en-us/shopping/monogram-stripes-shirt-22030679,$455,$700,-35%,women_all_product_6.html
+,Curved Logo Knit Hoodie,$630,women_all_product_6,,/en-us/shopping/curved-logo-knit-hoodie-21776206,$410,$630,-35%,women_all_product_6.html
+,Classic Track Shirt,$725,women_all_product_6,,/en-us/shopping/classic-track-shirt-20205752,,$725,,women_all_product_6.html
+,Monogram Iphone Case 15,$200,women_all_product_6,,/en-us/shopping/monogram-iphone-case-15-21777463,,$200,,women_all_product_6.html
+,Monogram Colorblock Anorak,$765,women_all_product_6,,/en-us/shopping/monogram-colorblock-anorak-22028734,$497,$765,-35%,women_all_product_6.html
+,Monogram Stud Zip Sweater,"$1,455",women_all_product_6,,/en-us/shopping/monogram-stud-zip-sweater-21776198,$944,"$1,455",-35%,women_all_product_6.html
+,Palm Strass Long Necklace,$500,women_all_product_6,,/en-us/shopping/palm-strass-long-necklace-22028743,$325,$500,-35%,women_all_product_6.html
+,Monogram criss-croosed Top,$500,women_all_product_6,,/en-us/shopping/monogram-criss-croosed-top-23074494,,$500,,women_all_product_6.html
+,Palm Strass Earrings,$435,women_all_product_6,,/en-us/shopping/palm-strass-earrings-22030699,$283,$435,-35%,women_all_product_6.html
+,Monogram Jaquard Knit Wide Pants,"$1,590",women_all_product_6,,/en-us/shopping/monogram-jaquard-knit-wide-pants-21773757,"$1,020","$1,590",-35%,women_all_product_6.html
+,Palm Strass Hoop Earrings,$525,women_all_product_6,,/en-us/shopping/palm-strass-hoop-earrings-22030701,$341,$525,-35%,women_all_product_6.html
+,Palm Beach University,$565,women_all_product_6,,/en-us/shopping/palm-beach-university-22030587,,$565,,women_all_product_6.html
+,Monogram Colorblock Shorts,$435,women_all_product_6,,/en-us/shopping/monogram-colorblock-shorts-22028730,$283,$435,-35%,women_all_product_6.html
+,Carrot Pants Metal Angles,"$1,190",women_all_product_6,,/en-us/shopping/carrot-pants-metal-angles-22028726,$774,"$1,190",-35%,women_all_product_6.html
+,Paisley Boxer Shorts,$860,women_all_product_6,,/en-us/shopping/paisley-boxer-shorts-22028727,$560,$860,-35%,women_all_product_6.html
+,Iphone 15 Case The Palm,$125,women_all_product_6,,/en-us/shopping/iphone-15-case-the-palm-22030611,,$125,,women_all_product_6.html
+,Logo Cotton Cardigan,$620,women_all_product_6,,/en-us/shopping/logo-cotton-cardigan-22030684,$403,$620,-35%,women_all_product_6.html
+,Lategram Flat Sandals,$925,women_all_product_6,,/en-us/shopping/lategram-flat-sandals-22030691,$602,$925,-35%,women_all_product_6.html
+,PA Monogram Corset,$520,women_all_product_6,,/en-us/shopping/pa-monogram-corset-23074501,,$520,,women_all_product_6.html
+,Denim Monogram Pouch,$490,women_all_product_6,,/en-us/shopping/denim-monogram-pouch-21777462,$319,$490,-35%,women_all_product_6.html
+,Horseshoe Charm Necklace,$355,women_all_product_6,,/en-us/shopping/horseshoe-charm-necklace-22030696,$231,$355,-35%,women_all_product_6.html
+,Quilted Palms Rope Sole Mule,$925,women_all_product_6,,/en-us/shopping/quilted-palms-rope-sole-mule-21778526,$602,$925,-35%,women_all_product_6.html
+,Monogram Jaquard Openback Dress,"$1,655",women_all_product_6,,/en-us/shopping/monogram-jaquard-openback-dress-21776201,"$1,074","$1,655",-35%,women_all_product_6.html
+,Horseshoe Earrings,$335,women_all_product_6,,/en-us/shopping/horseshoe-earrings-22030700,$218,$335,-35%,women_all_product_6.html
+,The Palm Dress,"$3,710",women_all_product_6,,/en-us/shopping/the-palm-dress-21777478,"$2,430","$3,710",-35%,women_all_product_6.html
+,Palm Knit Hoodie,"$1,720",women_all_product_6,,/en-us/shopping/palm-knit-hoodie-21773759,"$1,116","$1,720",-35%,women_all_product_6.html
+,PA Espadrillas,$525,women_all_product_6,,/en-us/shopping/pa-espadrillas-21786029,$341,$525,-35%,women_all_product_6.html
+,Monogram Chocker,$575,women_all_product_6,,/en-us/shopping/monogram-chocker-21777482,$374,$575,-35%,women_all_product_6.html
+,Palm Shopping Bag,"$1,060",women_all_product_6,,/en-us/shopping/palm-shopping-bag-21777459,$690,"$1,060",-35%,women_all_product_6.html
+,Bridge Shoulder Bag Quilt,"$1,325",women_all_product_6,,/en-us/shopping/bridge-shoulder-bag-quilt-21776212,$862,"$1,325",-35%,women_all_product_6.html
+,PALM HEELS,$710,women_all_product_6,,/en-us/shopping/palm-heels-17571446,$462,$710,-35%,women_all_product_6.html
+,Denim Pajama Pants,$590,women_all_product_6,,/en-us/shopping/denim-pajama-pants-20204862,$384,$590,-35%,women_all_product_6.html
+,Monogram Classic Shirt,$445,women_all_product_6,,/en-us/shopping/monogram-classic-shirt-22030678,,$445,,women_all_product_6.html
+,Logo Cotton Sweater,$445,women_all_product_6,,/en-us/shopping/logo-cotton-sweater-22030685,,$445,,women_all_product_6.html
+,Horseshoe Ring,$290,women_all_product_6,,/en-us/shopping/horseshoe-ring-22030698,$189,$290,-35%,women_all_product_6.html
+,Monogram Strass Ring,$305,women_all_product_6,,/en-us/shopping/monogram-strass-ring-21776191,$198,$305,-35%,women_all_product_6.html
+,Curved Logo stripe Shirtdress,$780,women_all_product_6,,/en-us/shopping/curved-logo-stripe-shirtdress-23074514,,$780,,women_all_product_6.html
+,Lategram Flat Sandals,$925,women_all_product_6,,/en-us/shopping/lategram-flat-sandals-22030692,$602,$925,-35%,women_all_product_6.html
+,Knit Tape Suit Pants,$925,women_all_product_6,,/en-us/shopping/knit-tape-suit-pants-20203745,,$925,,women_all_product_6.html
+,Monogram Tank Top,$335,women_all_product_6,,/en-us/shopping/monogram-tank-top-22030636,,$335,,women_all_product_6.html
+,Wool Blend Blazer,"$1,325",women_all_product_6,,/en-us/shopping/wool-blend-blazer-22030666,,"$1,325",,women_all_product_6.html
+,Logo Plate Necklace,$310,women_all_product_6,,/en-us/shopping/logo-plate-necklace-22030697,,$310,,women_all_product_6.html
+,Monogram Iphone Case 15 Pro,$200,women_all_product_6,,/en-us/shopping/monogram-iphone-case-15-pro-21773753,,$200,,women_all_product_6.html
+,Logo Plate Bracelet,$280,women_all_product_6,,/en-us/shopping/logo-plate-bracelet-22030695,,$280,,women_all_product_6.html
+,Logo Rib Dress,$640,women_all_product_6,,/en-us/shopping/logo-rib-dress-20204688,,$640,,women_all_product_6.html
+,Classic Logo Sweater,$655,women_all_product_6,,/en-us/shopping/classic-logo-sweater-20205757,,$655,,women_all_product_6.html
+,Wool Blend Suit Pants,$925,women_all_product_6,,/en-us/shopping/wool-blend-suit-pants-22030646,,$925,,women_all_product_6.html
+,Palm Strass Earrings,$300,women_all_product_6,,/en-us/shopping/palm-strass-earrings-20204708,,$300,,women_all_product_6.html
+,Monogram Iphone Case 15 Pro Max,$200,women_all_product_7,,/en-us/shopping/monogram-iphone-case-15-pro-max-21777466,,$200,,women_all_product_7.html
+,Palm Rhinestone Necklace,$330,women_all_product_7,,/en-us/shopping/palm-rhinestone-necklace-21777480,,$330,,women_all_product_7.html
+,Pa Ankle Combat Boots,"$1,255",women_all_product_7,,/en-us/shopping/pa-ankle-combat-boots-20205683,,"$1,255",,women_all_product_7.html
+,BAHRAIN T-SHIRT MONEYGRAM HAAS F1 TEAM,$525,women_all_product_7,,/en-us/shopping/bahrain-t-shirt-moneygram-haas-f1-team-22464247,,$525,,women_all_product_7.html
+,Moncler X Palm Angels Genius Pants,$910,women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-pants-21767032,,$910,,women_all_product_7.html
+,Moncler X Palm Angels Genius Jacket,"$2,035",women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-jacket-21770008,,"$2,035",,women_all_product_7.html
+,Moncler X Palm Angels Genius Knit Vest,"$1,045",women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-knit-vest-21767038,,"$1,045",,women_all_product_7.html
+,Moncler X Palm Angels Genius Vest,"$1,360",women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-vest-21769012,,"$1,360",,women_all_product_7.html
+,Moncler X Palm Angels Genius Shirt,"$1,360",women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-shirt-21769013,,"$1,360",,women_all_product_7.html
+,Moncler X Palm Angels Genius T-shirt,$345,women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-t-shirt-21769007,,$345,,women_all_product_7.html
+,Moncler X Palm Angels Genius Puffer Polo,"$1,310",women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-puffer-polo-21767036,,"$1,310",,women_all_product_7.html
+,Moncler X Palm Angels Genius Bib,$540,women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-bib-21770017,,$540,,women_all_product_7.html
+,Moncler X Palm Angels Genius Jacket,"$1,900",women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-jacket-21769010,,"$1,900",,women_all_product_7.html
+,SUZUKA T-SHIRT MONEYGRAM HAAS F1 TEAM,$525,women_all_product_7,,/en-us/shopping/suzuka-t-shirt-moneygram-haas-f1-team-22463479,,$525,,women_all_product_7.html
+,Moncler X Palm Angels Genius Vest,"$2,065",women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-vest-21770011,,"$2,065",,women_all_product_7.html
+,MIAMI T-SHIRT MONEYGRAM HAAS F1 TEAM,$525,women_all_product_7,,/en-us/shopping/miami-t-shirt-moneygram-haas-f1-team-22464248,,$525,,women_all_product_7.html
+,TURTLENECK SIDE-OPEN SWEATER,"$1,190",women_all_product_7,,/en-us/shopping/turtleneck-side-open-sweater-20920764,$774,"$1,190",-35%,women_all_product_7.html
+,Moncler X Palm Angels Genius Long Parka,"$2,680",women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-long-parka-21769011,,"$2,680",,women_all_product_7.html
+,Moncler X Palm Angels Genius Sweater,$925,women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-sweater-21769015,,$925,,women_all_product_7.html
+,SHANGHAI T-SHIRT MONEYGRAM HAAS F1 TEAM,$525,women_all_product_7,,/en-us/shopping/shanghai-t-shirt-moneygram-haas-f1-team-22463481,,$525,,women_all_product_7.html
+,Moncler X Palm Angels Genius Vest,"$1,170",women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-vest-21767037,,"$1,170",,women_all_product_7.html
+,Moncler X Palm Angels Genius Long Parka,"$2,600",women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-long-parka-21770010,,"$2,600",,women_all_product_7.html
+,Moncler X Palm Angels Genius Hoodie,$760,women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-hoodie-21769008,,$760,,women_all_product_7.html
+,Moncler X Palm Angels Genius Polo,$320,women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-polo-21769014,,$320,,women_all_product_7.html
+,Moncler X Palm Angels Genius Polo,$605,women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-polo-21770013,,$605,,women_all_product_7.html
+,WOMEN'S TOD'S SNEAKERS,$915,women_all_product_7,,/en-us/shopping/womens-tods-sneakers-20943060,$595,$915,-35%,women_all_product_7.html
+,Palm Beads Necklace,$295,women_all_product_7,,/en-us/shopping/palm-beads-necklace-23074525,,$295,,women_all_product_7.html
+,Moncler X Palm Angels Genius Polo,$320,women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-polo-21770012,,$320,,women_all_product_7.html
+,Moncler X Palm Angels Genius Sweatpants,$675,women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-sweatpants-21770007,,$675,,women_all_product_7.html
+,Moncler X Palm Angels Genius Baseball Cap,$265,women_all_product_7,,/en-us/shopping/moncler-x-palm-angels-genius-baseball-cap-21770014,,$265,,women_all_product_7.html
+,MONTE CARLO T-SHIRT MONEYGRAM HAAS F1 TEAM,$525,women_all_product_7,,/en-us/shopping/monte-carlo-t-shirt-moneygram-haas-f1-team-22464249,,$525,,women_all_product_7.html
+,MONTREAL T-SHIRT MONEYGRAM HAAS F1 TEAM,$525,women_all_product_7,,/en-us/shopping/montreal-t-shirt-moneygram-haas-f1-team-22463482,,$525,,women_all_product_7.html

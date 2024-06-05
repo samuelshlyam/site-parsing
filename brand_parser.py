@@ -2420,7 +2420,6 @@ class JacquemusParser(WebsiteParser):
             # Extract image URLs
             image_urls = []
             images = item.find_all('img', class_='product__visuals__content')
-            print(images)
             for img in images:
                 main_image = img.get('src', '')
                 image_urls.append(main_image)
