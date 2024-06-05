@@ -6,7 +6,7 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser, \
     BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser, PradaParser, TodsParser, \
     ValentinoParser, JacquemusParser, LouboutinParser, PalmAngelsParser, MooseKnucklesParser, AcneStudiosParser, \
-    TheRowParser, ManoloBlahnikParser, GianvitoRossiParser
+    TheRowParser, ManoloBlahnikParser, GianvitoRossiParser, MiuMiuParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -14,7 +14,7 @@ output_directory_path = "parser-output"
 ##Bottega Veneta Parser METHOD 1##
 #bottega_parser = BottegaVenetaParser(output_directory_path)
 ##SINGLE FILE RUN##
-#input_file_path = 'brands_html/bottega_veneta/women_bags.html.html'
+#input_file_path = 'brands_html/bottega_veneta/women.html.html'
 #category = os.path.splitext(input_file_path)[0]  # Use the filename as the category
 ##Uncomment to run##
 #bottega_parser_output = bottega_parser.parse_website(input_file_path, category)
@@ -280,9 +280,9 @@ output_directory_path = "parser-output"
 #PalmAngels End
 
 #Moose Knuckles Start
-mooseKnucklesParser = MooseKnucklesParser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\moose_knuckles'
-mooseKnucklesParser.parse_directory(directory_path)
+#mooseKnucklesParser = MooseKnucklesParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\moose_knuckles'
+#mooseKnucklesParser.parse_directory(directory_path)
 #Moose Knuckles End
 
 #Acne Studios Start
@@ -309,3 +309,8 @@ mooseKnucklesParser.parse_directory(directory_path)
 #gianvitoRossiParser.parse_directory(directory_path)
 #Gianvito Rossi End
 
+#Miu Miu Start
+miuMiuParser = MiuMiuParser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\miu_miu'
+miuMiuParser.parse_directory(directory_path)
+#Gianvito Rossi End

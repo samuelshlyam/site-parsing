@@ -2883,3 +2883,52 @@ class GianvitoRossiParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+
+class MiuMiuParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'miu_miu'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'category', 'product_name', 'product_id', 'product_url', 'image_urls', 'price'
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('li', class_='h-full')
+
+        for product in product_blocks:
+            # Extract product name
+            name_element = product.find('h3', class_='card__title')
+            product_name = name_element.get_text(strip=True) if name_element else ''
+
+            # Extract product URL
+            url_element = product.find('a', class_='h-full')
+            product_url = url_element.get('href') if url_element else ''
+
+            # Extract product ID from URL
+            product_id = product_url.split('/')[-1] if product_url else ''
+
+            # Extract image URLs
+            image_urls = []
+            images = product.find_all('source')
+            for img in images:
+                image_urls.append(img.get('data-srcset', ''))
+
+            # Extract price
+            price_element = product.find('p', class_='card__price')
+            price = price_element.get_text(strip=True) if price_element else ''
+
+            product_data = [
+                category,
+                product_name,
+                product_id,
+                f"https://www.miumiu.com{product_url}" if product_url else '',
+                ', '.join(image_urls),
+                price
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
