@@ -2932,3 +2932,67 @@ class MiuMiuParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+
+
+class BirkenstockParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'birkenstock'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'category', 'product_name', 'product_id', 'product_url', 'image_urls', 'full_price', 'discount_price'
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('li', class_='xlt-producttile')
+
+        for product in product_blocks:
+            # Extract product name
+            name_element = product.find('div', class_='product-modelname')
+            product_name = name_element.get_text(strip=True) if name_element else ''
+            product_name += ' ' + product.find('div', class_='product-shortname').get_text(strip=True) if product.find(
+                'div', class_='product-shortname') else ''
+
+            # Extract product URL
+            url_element = product.find('a', class_='product-tile')
+            product_url = url_element.get('href') if url_element else ''
+
+            # Extract image URLs and Product ID
+            product_id=None
+            image_urls = []
+            images = product.find_all('img', class_='standard-tileimage')
+            for img in images:
+                image_urls.append(img.get('src', ''))
+                if not product_id:
+                    product_id=", ".join(img.get('src', '').split("/")[-1].split(".jpg")[0].strip("_sole").split("_"))
+
+            # Extract prices
+            full_price = ''
+            discount_price = ''
+
+            price_element = product.find('span', class_='price-standard')
+            if price_element:
+                full_price = price_element.get_text(strip=True)
+
+            discount_price_element = product.find('span', class_='price-promotion')
+            if discount_price_element:
+                discount_price = discount_price_element.get_text(strip=True)
+                full_price_element = product.find('span', class_='price-strike')
+                if full_price_element:
+                    full_price = full_price_element.get_text(strip=True)
+
+            product_data = [
+                category,
+                product_name,
+                product_id,
+                f"https://www.birkenstock.com{product_url}" if product_url else '',
+                ', '.join(image_urls),
+                full_price,
+                discount_price
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data

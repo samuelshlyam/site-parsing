@@ -6,7 +6,7 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser, \
     BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser, PradaParser, TodsParser, \
     ValentinoParser, JacquemusParser, LouboutinParser, PalmAngelsParser, MooseKnucklesParser, AcneStudiosParser, \
-    TheRowParser, ManoloBlahnikParser, GianvitoRossiParser, MiuMiuParser
+    TheRowParser, ManoloBlahnikParser, GianvitoRossiParser, MiuMiuParser, BirkenstockParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -310,7 +310,13 @@ output_directory_path = "parser-output"
 #Gianvito Rossi End
 
 #Miu Miu Start
-miuMiuParser = MiuMiuParser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\miu_miu'
-miuMiuParser.parse_directory(directory_path)
+#miuMiuParser = MiuMiuParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\miu_miu'
+#miuMiuParser.parse_directory(directory_path)
 #Gianvito Rossi End
+
+#Birkenstock Start
+birkenstockParser = BirkenstockParser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\birkenstock'
+birkenstockParser.parse_directory(directory_path)
+#Birkenstock End
