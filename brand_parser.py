@@ -2996,3 +2996,65 @@ class BirkenstockParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+
+class AquazzuraParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'aquazzura'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'category', 'product_name', 'product_id', 'product_url', 'image_url', 'full_price', 'discount_price'
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('div', class_='wrapp-single-item')
+
+        for product in product_blocks:
+            # Extract product name
+            name_element = product.find('h2', class_='card-product__info__intro__link__name')
+            product_name = name_element.get_text(strip=True) if name_element else ''
+
+            # Extract product ID
+            product_id = product.find('article').get('data-sku', '')
+
+            # Extract product URL
+            url_element = product.find('a', class_='card-product__media_link')
+            product_url = url_element.get('href') if url_element else ''
+
+            # Extract image URL
+            image_element = product.find('img')
+            image_url = image_element.get('src') if image_element else ''
+
+            # Extract prices
+            full_price = ''
+            discount_price = ''
+
+            price_container = product.find('div', class_='product-price')
+            if price_container:
+                original_price_element = price_container.find('span', class_='product-price_original')
+                if original_price_element:
+                    full_price = original_price_element.get_text(strip=True)
+                    discount_price_element = price_container.find('div')
+                    if discount_price_element:
+                        discount_price = discount_price_element.get_text(strip=True).split()[-1]
+                else:
+                    full_price_element = price_container.find('span')
+                    full_price = full_price_element.get_text(strip=True) if full_price_element else ''
+
+            product_data = [
+                category,
+                product_name,
+                product_id,
+                f"https://www.aquazzura.com{product_url}" if product_url else '',
+                image_url,
+                full_price,
+                discount_price
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+
