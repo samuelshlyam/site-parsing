@@ -1451,12 +1451,8 @@ class BalmainProductParser(WebsiteParser):
 
                 images = [img['src'] for img in item.find_all('img') if img.get('src')]
                 product_url = item.find('a', class_='tile-body')['href']
-                if len(images) == 1:
-                    image_url = images[0]
-                elif len(images) >= 2:
-                    image_url = images[1]
-                else:
-                    image_url = None
+                images = list(set(images))
+                images = [image for image in images if image != '' and "logo-sm" not in image]
 
                 product_data_list = [
                     product_data.get('item_id', ''),
@@ -1473,7 +1469,7 @@ class BalmainProductParser(WebsiteParser):
                     product_data.get('item_category', ''),
                     product_data.get('item_category2', ''),
                     product_data.get('item_category3', ''),
-                    image_url,
+                    ", ".join(images),
                     'us.balmain.com' + str(product_url)
                 ]
 
