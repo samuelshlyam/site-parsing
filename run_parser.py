@@ -23,9 +23,9 @@ output_directory_path = "parser-output"
 
 ##MULTIPLE FILE RUN, PASS DIRECTORY PATH
 ##Comment to run single file##
-bottega_parser = BottegaVenetaParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/bottega_veneta'
-bottega_parser.parse_directory(directory_path)
+#bottega_parser = BottegaVenetaParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/bottega_veneta'
+#bottega_parser.parse_directory(directory_path)
 
 
 #GUCCI PRODUCT FETCH METHOD 2##
@@ -81,9 +81,9 @@ bottega_parser.parse_directory(directory_path)
 #Canada Goose END
 
 #Veja Start
-VejaParser = VejaProductParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/veja'
-VejaParser.parse_directory(directory_path)
+#VejaParser = VejaProductParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/veja'
+#VejaParser.parse_directory(directory_path)
 #Veja End
 
 
@@ -170,9 +170,9 @@ VejaParser.parse_directory(directory_path)
 #Etro End
 
 #Balmain Start
-#BalmainParser = BalmainProductParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\balmain'
-#BalmainParser.parse_directory(directory_path)
+BalmainParser = BalmainProductParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/balmain'
+BalmainParser.parse_directory(directory_path)
 #Balmain End
 
 
