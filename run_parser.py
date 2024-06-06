@@ -13,9 +13,9 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
 output_directory_path = "parser-output"
 #directory_path = 'brands_html/bottega_veneta'
 ##Bottega Veneta Parser METHOD 1##
-#bottega_parser = BottegaVenetaParser(output_directory_path)
+
 ##SINGLE FILE RUN##
-#input_file_path = 'brands_html/bottega_veneta/women.html.html'
+#input_file_path = '/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/bottega_veneta'
 #category = os.path.splitext(input_file_path)[0]  # Use the filename as the category
 ##Uncomment to run##
 #bottega_parser_output = bottega_parser.parse_website(input_file_path, category)
@@ -23,8 +23,9 @@ output_directory_path = "parser-output"
 
 ##MULTIPLE FILE RUN, PASS DIRECTORY PATH
 ##Comment to run single file##
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\bottega_veneta'
-#bottega_parser.parse_directory(directory_path)
+bottega_parser = BottegaVenetaParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/bottega_veneta'
+bottega_parser.parse_directory(directory_path)
 
 
 #GUCCI PRODUCT FETCH METHOD 2##
@@ -119,9 +120,9 @@ VejaParser.parse_directory(directory_path)
 #Golden Goose End
 
 #Balenciaga Start
-balenciaga_Parser=BalenciagaParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/balenciaga'
-balenciaga_Parser.parse_directory(directory_path)
+#balenciaga_Parser=BalenciagaParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/balenciaga'
+#balenciaga_Parser.parse_directory(directory_path)
 #Balenciaga End
 
 

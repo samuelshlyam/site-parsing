@@ -28,7 +28,7 @@ class BottegaVenetaParser(WebsiteParser):
         parsed_data = []
 
         column_names = [
-            'filename','data_pid', 'id', 'name', 'collection', 'productSMC', 'material', 'customization',
+            'data_pid', 'id', 'name', 'collection', 'productSMC', 'material', 'customization',
             'packshotType', 'brand', 'color', 'colorId', 'size', 'price', 'discountPrice',
             'coupon', 'subCategory', 'category', 'topCategory', 'productCategory', 'macroCategory',
             'microCategory', 'superMicroCategory', 'list', 'stock', 'productGlobalSMC', 'images', 'product_url'
@@ -46,15 +46,17 @@ class BottegaVenetaParser(WebsiteParser):
             data_gtmproduct = block['data-gtmproduct']
             data_gtmproduct = html.unescape(data_gtmproduct)
             product_info = json.loads(data_gtmproduct)
-
             # Extract product images
             images = []
             image_container = block.find('div', class_='c-product__imagecontainer')
             if image_container:
                 image_elements = image_container.find_all('img', class_='c-product__image')
                 for img in image_elements:
-                    images.append(img['src'])
-
+                    images.append(img.get('src', ''))
+                    images.append(img.get('data-src', ''))
+                    images.append(img.get('srcset', ''))
+            images = list(set(images))
+            images = [image for image in images if image != '' and "/on/demandware.static/" not in image]
             # Extract product URL
             product_url = block.find('a', class_='c-product__link')['href']
 
