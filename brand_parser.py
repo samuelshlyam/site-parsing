@@ -356,7 +356,7 @@ class VejaProductParser(WebsiteParser):
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
-            'category', 'product_name', 'price', 'main_image_url', 'additional_image_url',
+            'category', 'product_id','product_name', 'price', 'main_image_url', 'additional_image_url',
             'product_details_url'
         ]
         parsed_data.append(column_names)
@@ -371,9 +371,10 @@ class VejaProductParser(WebsiteParser):
             images = block.find_all('img', alt=product_name)
             main_image_url = images[0]['src'] if images else 'No image available'
             additional_image_url = images[1]['src'] if len(images) > 1 else 'No additional image available'
-
+            product_id=product_details_url.split("-")[-1].strip(".html")
             product_data_list = [
                 category,
+                product_id,
                 product_name,
                 price,
                 main_image_url,
@@ -874,7 +875,6 @@ class CultGaiaProductParser(WebsiteParser):
 
             # Extract tag
             tag = tile.find('p', class_='tag').text.strip() if tile.find('p', class_='tag') else ''
-
             product_data = [
                 category,
                 product_url,
@@ -979,8 +979,11 @@ class BalenciagaParser(WebsiteParser):
             if image_container:
                 image_elements = image_container.find_all('img', class_='c-product__image')
                 for img in image_elements:
-                    images.append(img['src'])
-
+                    images.append(img.get('src',''))
+                    images.append(img.get('data-src',''))
+                    images.append(img.get('srcset',''))
+            images=list(set(images))
+            images=[image for image in images if image != '' and "/on/demandware.static/" not in image]
             # Extract product URL
             product_url = block.find('a', class_='c-product__focus')['href']
 

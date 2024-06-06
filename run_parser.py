@@ -80,9 +80,9 @@ output_directory_path = "parser-output"
 #Canada Goose END
 
 #Veja Start
-#VejaParser = VejaProductParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\veja'
-#VejaParser.parse_directory(directory_path)
+VejaParser = VejaProductParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/veja'
+VejaParser.parse_directory(directory_path)
 #Veja End
 
 
@@ -119,9 +119,9 @@ output_directory_path = "parser-output"
 #Golden Goose End
 
 #Balenciaga Start
-#balenciaga_Parser=BalenciagaParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\balenciaga'
-#balenciaga_Parser.parse_directory(directory_path)
+balenciaga_Parser=BalenciagaParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/balenciaga'
+balenciaga_Parser.parse_directory(directory_path)
 #Balenciaga End
 
 
@@ -280,9 +280,9 @@ output_directory_path = "parser-output"
 #Louboutin End
 
 #Palm Angels Start
-palmAngelsParser = PalmAngelsParser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\palm_angels'
-palmAngelsParser.parse_directory(directory_path)
+#palmAngelsParser = PalmAngelsParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\palm_angels'
+#palmAngelsParser.parse_directory(directory_path)
 #PalmAngels End
 
 #Moose Knuckles Start
