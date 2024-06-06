@@ -127,9 +127,9 @@ output_directory_path = "parser-output"
 
 
 #YSL Start
-#YSL_Parser=SaintLaurentParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\saint-laurent'
-#YSL_Parser.parse_directory(directory_path)
+YSL_Parser=SaintLaurentParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/saint-laurent'
+YSL_Parser.parse_directory(directory_path)
 #YSL End
 
 
@@ -170,9 +170,9 @@ output_directory_path = "parser-output"
 #Etro End
 
 #Balmain Start
-BalmainParser = BalmainProductParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/balmain'
-BalmainParser.parse_directory(directory_path)
+#BalmainParser = BalmainProductParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/balmain'
+#BalmainParser.parse_directory(directory_path)
 #Balmain End
 
 
