@@ -466,7 +466,8 @@ class TomFordProductParser(WebsiteParser):
             product_id = block.get('data-pid', '')
             product_name = block.find('a', class_='link').text.strip() if block.find('a', class_='link') else ''
             product_url = block.find('a', class_='tile-image-container')['href'] if block.find('a', class_='tile-image-container') else ''
-            
+            product_url= f"https://www.tomfordfashion.com/{product_url}" if product_url else ''
+
             price_element = block.find('span', class_='value')
             price = price_element.text.strip() if price_element else ''
             
@@ -478,6 +479,10 @@ class TomFordProductParser(WebsiteParser):
             
             variation_element = block.find('div', class_='variation-count')
             variation_count = variation_element.text.strip() if variation_element else ''
+
+            if "-" not in product_id:
+                product_id=images[0].split('/')[-1].split("_APPEN")[0]
+
             product_data = [
                 product_id,
                 product_name,
@@ -490,9 +495,8 @@ class TomFordProductParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
-    
 
-    
+
 class OffWhiteProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'off_white'  # Replace spaces with underscores
@@ -2701,6 +2705,7 @@ class AcneStudiosParser(WebsiteParser):
                 if not product_id:
                     product_id=image.get('alt','')
                     product_id=product_id.split(',')[0]
+                    product_id = product_id.split(' ')[0]
                 if image_url:
                     image_urls.append(image_url)
 
@@ -2723,6 +2728,8 @@ class AcneStudiosParser(WebsiteParser):
                 for color_item in color_items:
                     colors.append(color_item.text.strip())
 
+            if product_id.length != 16:
+                product_id = self.extract_product_id(product_url)
             product_data = [
                 product_id,
                 product_name,
@@ -2738,6 +2745,9 @@ class AcneStudiosParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+    def extract_product_id(self,product_url):
+        html=self.open_link(product_url)
+        print(html)
 
 class TheRowParser(WebsiteParser):
     def __init__(self, directory):

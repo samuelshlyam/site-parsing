@@ -7,7 +7,7 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser, PradaParser, TodsParser, \
     ValentinoParser, JacquemusParser, LouboutinParser, PalmAngelsParser, MooseKnucklesParser, AcneStudiosParser, \
     TheRowParser, ManoloBlahnikParser, GianvitoRossiParser, MiuMiuParser, BirkenstockParser, AquazzuraParser, \
-    OffWhiteProductParser
+    OffWhiteProductParser, TomFordProductParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -127,9 +127,9 @@ output_directory_path = "parser-output"
 
 
 #YSL Start
-YSL_Parser=SaintLaurentParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/saint-laurent'
-YSL_Parser.parse_directory(directory_path)
+#YSL_Parser=SaintLaurentParser(output_directory_path)
+#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/saint-laurent'
+#YSL_Parser.parse_directory(directory_path)
 #YSL End
 
 
@@ -334,3 +334,9 @@ YSL_Parser.parse_directory(directory_path)
 #aquazzuraParser.parse_directory(directory_path)
 #Aquazzura End
 
+#Tom Ford Start
+TomFordParser = TomFordProductParser(output_directory_path)
+directory_path_mac = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/tom_ford'
+#directory_path_office = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\tom_ford'
+TomFordParser.parse_directory(directory_path_mac)
+#Tom Ford End
