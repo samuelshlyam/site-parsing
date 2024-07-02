@@ -517,9 +517,6 @@ class OffWhiteProductParser(WebsiteParser):
 
             # Extract product ID
             temp_id=product_url.split("-")[-1]
-            url_to_open=f"https://www.farfetch.com/sg/shopping/men/balmain-paris-logo-embroidered-bomber-jacket-item-{temp_id}.aspx"
-            print(url_to_open)
-            product_id_html = self.open_link(url_to_open)
             product_id=temp_id
             # Extract image URL
             image_element = product.find('img', class_='css-wn0zwz er5xw931')
@@ -2536,13 +2533,8 @@ class PalmAngelsParser(WebsiteParser):
             product_url = product_title.get('href', '') if product_title else ''
             product_url=f"https://www.palmangels.com{product_url}"
 
-            product_id=None
+            product_id=product_url.split("-")[-1]
 
-            product_id_html=self.open_link(product_url)
-            print(product_id_html)
-            soup_pid = BeautifulSoup(product_id_html, 'html.parser')
-            div_elements = soup_pid.find_all('div',  class_='css-c3spse')
-            print(div_elements)
 
 
             # Extract product name from product title text
