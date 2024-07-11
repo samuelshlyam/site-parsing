@@ -7,7 +7,7 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser, PradaParser, TodsParser, \
     ValentinoParser, JacquemusParser, LouboutinParser, PalmAngelsParser, MooseKnucklesParser, AcneStudiosParser, \
     TheRowParser, ManoloBlahnikParser, GianvitoRossiParser, MiuMiuParser, BirkenstockParser, AquazzuraParser, \
-    OffWhiteProductParser, TomFordProductParser
+    OffWhiteProductParser, TomFordProductParser, LoeweParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -295,7 +295,8 @@ output_directory_path = "parser-output"
 #Acne Studios Start
 #acneStudiosParser = AcneStudiosParser(output_directory_path)
 #directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\acne_studios'
-#acneStudiosParser.parse_directory(directory_path)
+#directory_path_1 = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/acne_studios'
+#acneStudiosParser.parse_directory(directory_path_1)
 #Acne Studios End
 
 #The Row Start
@@ -335,8 +336,28 @@ output_directory_path = "parser-output"
 #Aquazzura End
 
 #Tom Ford Start
-TomFordParser = TomFordProductParser(output_directory_path)
-directory_path_mac = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/tom_ford'
+#TomFordParser = TomFordProductParser(output_directory_path)
+#directory_path_mac = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/tom_ford'
 #directory_path_office = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\tom_ford'
-TomFordParser.parse_directory(directory_path_mac)
+#TomFordParser.parse_directory(directory_path_mac)
 #Tom Ford End
+
+#Loewe Start
+#bearer_token= "eyJ2ZXIiOiIxLjAiLCJqa3UiOiJzbGFzL3Byb2QvYmJwY19wcmQiLCJraWQiOiIzNmFjMzZlNy0wMmMwLTQyMzgtYjVjYS1iYmYyZDk2OGUyZDciLCJ0eXAiOiJqd3QiLCJjbHYiOiJKMi4zLjQiLCJhbGciOiJFUzI1NiJ9.eyJhdXQiOiJHVUlEIiwic2NwIjoic2ZjYy5zaG9wcGVyLW15YWNjb3VudC5iYXNrZXRzIHNmY2Muc2hvcHBlci1kaXNjb3Zlcnktc2VhcmNoIHNmY2Muc2hvcHBlci1teWFjY291bnQucGF5bWVudGluc3RydW1lbnRzIHNmY2Muc2hvcHBlci1jdXN0b21lcnMubG9naW4gc2ZjYy5zaG9wcGVyLWV4cGVyaWVuY2Ugc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5vcmRlcnMgc2ZjYy5zaG9wcGVyLXByb2R1Y3RsaXN0cyBzZmNjLnNob3BwZXItcHJvbW90aW9ucyBzZmNjLnNlc3Npb25fYnJpZGdlIHNmY2Muc2hvcHBlci1teWFjY291bnQucGF5bWVudGluc3RydW1lbnRzLnJ3IHNmY2Muc2hvcHBlci1teWFjY291bnQucHJvZHVjdGxpc3RzIHNmY2Muc2hvcHBlci1jYXRlZ29yaWVzIHNmY2Muc2hvcHBlci1teWFjY291bnQgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5hZGRyZXNzZXMgc2ZjYy5zaG9wcGVyLXByb2R1Y3RzIHNmY2Muc2hvcHBlci1teWFjY291bnQucncgc2ZjYy5zaG9wcGVyLWNvbnRleHQucncgc2ZjYy5zaG9wcGVyLWJhc2tldHMtb3JkZXJzIHNmY2Muc2hvcHBlci1jdXN0b21lcnMucmVnaXN0ZXIgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5hZGRyZXNzZXMucncgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5wcm9kdWN0bGlzdHMucncgc2ZjYy5zaG9wcGVyLWJhc2tldHMtb3JkZXJzLnJ3IHNmY2Muc2hvcHBlci1naWZ0LWNlcnRpZmljYXRlcyBzZmNjLnNob3BwZXItcHJvZHVjdC1zZWFyY2ggc2ZjYy5zaG9wcGVyLXNlbyIsInN1YiI6ImNjLXNsYXM6OmJicGNfcHJkOjpzY2lkOjJiNTYzYTRlLWI1MTAtNDE0My05N2UxLWY0NTQxNTk2M2UyMTo6dXNpZDoxYmM2NzlkZS01NDFmLTQyZDYtODcyNS1iYWRhMTU4YTNiYTciLCJjdHgiOiJzbGFzIiwiaXNzIjoic2xhcy9wcm9kL2JicGNfcHJkIiwiaXN0IjoxLCJkbnQiOiIwIiwiYXVkIjoiY29tbWVyY2VjbG91ZC9wcm9kL2JicGNfcHJkIiwibmJmIjoxNzIwNzEyOTMwLCJzdHkiOiJVc2VyIiwiaXNiIjoidWlkbzpzbGFzOjp1cG46R3Vlc3Q6OnVpZG46R3Vlc3QgVXNlcjo6Z2NpZDphYmt1aEhsSEEzeGVzUmxyb1Z4R1lZa0tvMDo6Y2hpZDpMT0VfVVNBIiwiZXhwIjoxNzIwNzE0NzYwLCJpYXQiOjE3MjA3MTI5NjAsImp0aSI6IkMyQzE3MjI2Mjc5NzgwLTY1MzY3MTExMTU1MDYxNTQwNjc4NDY3NjMifQ.3lNy_YmTMbOkPeZU25o4wDs8miMCV1y8NI8T1Hop_LEY1M16H0EcqH_pGPoQYiNk4RlSwCMIPvGGgEmzHgvndA"
+#categories = ['cgid%3Dwomen','cgid%3Dmen']
+#Loewe_Parser=LoeweParser()
+#Loewe_Parser.process_categories(categories,bearer_token)
+#Loewe End
+#Saint Laurent Start
+#categories = ['view-all-shoes-women','view-all-rtw-women','view-all-handbags-women','view-all-slg-women','view-all-jewelry-women','view-all-accessories-women','view-all-rtw-men','view-all-shoes-men','view-all-slg-men','view-all-accessories-women','view-all-bags-men']
+#SaintLaurentParser=SaintLaurentParser()
+#SaintLaurentParser.process_categories(categories)
+#Saint Laurent End
+
+#Tods Start
+cookie='USER=%7B%22username%22%3A%22anonymous%22%2C%22customerId%22%3A%22anonymous%22%2C%22type%22%3A%22anonymous%22%2C%22accessToken%22%3A%22rFU6o5pVttBdr9dfh9Pn76Vb1QQ%22%7D; nodeSessionId=%22275455d2-6506-4408-bd96-f8f55fe0f204%22; countryIP=US; PIM-SESSION-ID=dKYPEJlTzFutZbem; ftr_ncd=6; mt.v=2.1640508195.1717444029726; __attentive_id=3dac250b06504483b03f13d40b455c95; _attn_=eyJ1Ijoie1wiY29cIjoxNzE3NDQ0MDMwNDQ1LFwidW9cIjoxNzE3NDQ0MDMwNDQ1LFwibWFcIjoyMTkwMCxcImluXCI6ZmFsc2UsXCJ2YWxcIjpcIjNkYWMyNTBiMDY1MDQ0ODNiMDNmMTNkNDBiNDU1Yzk1XCJ9In0=; __attentive_cco=1717444030446; __attentive_utm_param_medium=cpc; __attentive_utm_param_source=google; __attentive_utm_param_campaign=W_US_Tods_Search_Brand_Pure_Exact_MS; OptanonAlertBoxClosed=2024-06-03T19:47:12.442Z; nodeClientToken=TgPITCn5tGqje8P1IHOIdSbrvKA; _abck=3A3D621F16F8EF8DFE2FE8D4265C7D47~0~YAAQp3UZuEE3k52QAQAAGhTaogyrFD6+dvrTiwvF4Df4RPJsFGZ12c6aGRJpE3O0VIUcsFHWyoRGduENvws4I2kSg1jfPHBq4EJEAZgBUeX3pgKnMb+Bpk8hGmhV9xkvBbfvm9P3jboU9glQEd/E03LvAf2kBjU2jJrOWq0oGZ/Vc1T1GCd3WrTRzNGQ4VCpaCHCMj7WeJ+7iimfmN5YVZnfbCA2TjSjglYj/Zv/lKjW/wUg0PjyiYOUFBFbkFSbtMHi4KoTJtN68B5VJPlXn1X9CgaVmYG+oytxjIqhQAhNabWHPZuhMry+xpjsG6ta4n/k/XdAPqcsf6YokPASMG7IA4E7g04urBL6b5bnETuzgljzA3lI6FJpimXtjLPAAMopieUXMoNh+nEkYphUrP/Jviia+A==~-1~-1~-1; bm_sz=8EDCC5BA94466D27287CA8797694F88F~YAAQp3UZuEQ3k52QAQAAGhTaohjMWiovP+GWEBAB3oo5GZ5uN775UBRD9UCdVtWhs9S8n+CtTqGl2BwPX2meVLDJYJcvoiESGrudn7pJBoSV8RVADzZHRqTmLqCGOEF5DF2J5uneWTkZvlfBTrnw9VfMASJnLqEekCYg4D5EE/UgR3ciKgxuQDh17gUjMJYP86avdAPGhK0Hn0zJus+mIxkrVb6zT6YALtx8gvT3m6157wfbvx4NX5PDYdAwY8HQ5xifw3ytvgD8Sp8Jm8EEyFszZF3RBb2kF8W5N2ZoS9kf1NnCtAcZ1cQon4K5amzSfbk1E3yswLj4ySbZgaJLCcmUrG4Usxc2UBcPbjdJB+8oRjvRxRu4iewm1eBLUC6KSTAZvVlWTNPYWI9t7Q==~4605240~3687984; _ga=GA1.2.2084743707.1717444029; _gid=GA1.2.189325169.1720719121; OptanonConsent=isGpcEnabled=0&datestamp=Thu+Jul+11+2024+13%3A32%3A02+GMT-0400+(Eastern+Daylight+Time)&version=202405.2.0&isIABGlobal=false&hosts=&consentId=64366740-d2c7-4167-b73b-b319c0e2d697&interactionCount=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A0%2CC0003%3A0%2CC0004%3A0&browserGpcFlag=0&geolocation=%3B&isAnonUser=1&AwaitingReconsent=false; forterToken=1453d78c098542ff9df9d2a1f85cc129_1720719120016__UDF43-m4_9ck_; __attentive_dv=1; ak_bmsc=897B8625E566FCC2ECB8BCA162217D09~000000000000000000000000000000~YAAQp3UZuICXlZ2QAQAAvTxLoxjkFV7keOka2Xhgj3AucYtZnC6tJYxqYWJLJF5dAAQwGP6hDUBerI5RiMLHyxD7MD/6Y3L2VIu/NMjVSPGDcvtRqCGrbJBJmPe/3FmVzpcztHcQGgSxFot1a5B6h8oEz4Sd9vm7XZFicG0KQcIyQN4dmVz4e1GVPTx+wELOIsxVltLIB1QtD4U3VeOXfdxsPFmpp3MFcH0fUZScoeyZH1o0Ype3ZERBJSu/QNppuvEyO4Oe1ae6Z21vfi4ea4eTIiQVufgWIRYqBxMUkBTIQSa/as5cW/M33lx6Z5ETzWFBq1ZyHLj8RWRMgEC0pEPZ83/Q0flGcDL58CMjroa+xPvc0MQ5s7SnwKnYYzp6mJpFAcgLdXZ7; __attentive_ss_referrer=ORGANIC; AKA_A2=A; bm_sv=0BCBD75A0BD98F8A50B4D0519E8B24EF~YAAQp3UZuBkklp2QAQAAb3lkoxhoiAvZEL3bEK1PIZeYI41Xz+v5jnimyJ7sll0A/R0Rn0wxtiGF+3uOzX2FtVTxmEiXiGJx7C9cl9sZ6MwCsplHQMtEHT1hiXc6axANh77AwQ6ygWqI+fo8brRLmKN2FVglCEGvac54NWR1gR4G2Hv0ibSPFLiUr2CJSVZPU+0IUSszwhDbXbbMAghbsggBBGeM/KPErUOHwbpwzx5wHaO2ht8A9XC48Le6QgM=~1; __attentive_pv=3; _cs_mk_ga=0.09827259723164605_1720728189824; _ga_YMQ83SWR7E=GS1.1.1720726107.9.1.1720728190.0.0.0; RT="z=1&dm=tods.com&si=b6c793d5-de44-4668-8bbb-9e7d839cbb96&ss=lyhnreqk&sl=2&tt=1ke&bcn=%2F%2F68794912.akstat.io%2F&nu=9y8m6cy&cl=zd31&ld=zase"'
+categories = [f'{number}-Tods' for number in range(100,350)]
+print(categories)
+TodsParser=TodsParser()
+TodsParser.process_categories(categories,cookie)
+#Tods End
