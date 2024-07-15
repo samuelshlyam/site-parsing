@@ -754,15 +754,17 @@ class Chloe_Parser(WebsiteParser):
             a_url = articleChloe.find('a')
             if a_url:
                 a_url = a_url['href']
-
+            print(a_url)
+            product_id = ''
             product_id_html=self.open_link(a_url)
-            soup_pid = BeautifulSoup(product_id_html, 'html.parser')
-            div_element = soup_pid.find('div', class_='itemdescription')
-            if div_element:
-                text_content = div_element.get_text()
-                product_id=text_content.split('Item code: ')[1]
+            if product_id_html:
+                soup_pid = BeautifulSoup(product_id_html, 'html.parser')
+                div_element = soup_pid.find('div', class_='itemdescription')
+                if div_element:
+                    text_content = div_element.get_text()
+                    product_id=text_content.split('Item code: ')[1]
 
-            product_info = json.loads(data_pid)
+                product_info = json.loads(data_pid)
 
             product_data.append(product_id)
             product_data.append(product_info['product_cod10'])
@@ -2059,7 +2061,7 @@ class CelineParser(WebsiteParser):
         container_prods = soup.find_all('div', class_='m-product-listing')
 
         column_names = [
-            'product_id', 'product_name', 'product_price', 'product_color', 'category', 'image_urls'
+            'category','product_id', 'product_name', 'product_price', 'product_color', 'category', 'image_urls'
         ]
         parsed_data.append(column_names)
 
@@ -2095,7 +2097,8 @@ class CelineParser(WebsiteParser):
                 product_price,
                 product_color,
                 category,
-                image_urls
+                image_urls,
+                category
             ]
             parsed_data.append(product_data)
 
@@ -2349,58 +2352,58 @@ class PradaParser(WebsiteParser):
 #
 #         return parsed_data
 
-class ValentinoParser(WebsiteParser):
-    def __init__(self, directory):
-        self.brand = 'valentino'
-        self.directory = directory
+# class ValentinoParser(WebsiteParser):
+#     def __init__(self, directory):
+#         self.brand = 'valentino'
+#         self.directory = directory
 
-    def parse_product_blocks(self, soup, category):
-        parsed_data = []
+#     def parse_product_blocks(self, soup, category):
+#         parsed_data = []
 
-        column_names = [
-            'product_id', 'product_name', 'price', 'category',
-            'image_urls', 'product_url', 'colors', 'status'
-        ]
-        parsed_data.append(column_names)
+#         column_names = [
+#             'product_id', 'product_name', 'price', 'category',
+#             'image_urls', 'product_url', 'colors', 'status'
+#         ]
+#         parsed_data.append(column_names)
 
-        items = soup.find_all('li', class_='productCard-wrapper')
+#         items = soup.find_all('li', class_='productCard-wrapper')
 
-        for item in items:
-            product_id = item.get('data-product-sku', '')
-            product_name = item.get('data-product-name', '')
-            price = item.get('data-price', '0.0')
-            category = category
-            status = item.get('data-status', '')
-            color_description = item.get('data-color-description', '')
+#         for item in items:
+#             product_id = item.get('data-product-sku', '')
+#             product_name = item.get('data-product-name', '')
+#             price = item.get('data-price', '0.0')
+#             category = category
+#             status = item.get('data-status', '')
+#             color_description = item.get('data-color-description', '')
 
-            # Extract product URL
-            product_link = item.find('a', class_='productCard__image')
-            product_url = product_link.get('href', '') if product_link else ''
+#             # Extract product URL
+#             product_link = item.find('a', class_='productCard__image')
+#             product_url = product_link.get('href', '') if product_link else ''
 
-            # Extract image URLs from both picture classes
-            image_urls = []
-            image_containers = item.find_all('picture')
-            for container in image_containers:
-                img = container.find('img')
-                if img:
-                    srcset = img.get('data-srcset', '').split(', ')
-                    if srcset:
-                        # Get the highest resolution image
-                        image_urls.append(srcset[-1].split(' ')[0])
+#             # Extract image URLs from both picture classes
+#             image_urls = []
+#             image_containers = item.find_all('picture')
+#             for container in image_containers:
+#                 img = container.find('img')
+#                 if img:
+#                     srcset = img.get('data-srcset', '').split(', ')
+#                     if srcset:
+#                         # Get the highest resolution image
+#                         image_urls.append(srcset[-1].split(' ')[0])
 
-            product_data = [
-                product_id,
-                product_name,
-                price,
-                category,
-                ', '.join(image_urls),
-                product_url,
-                color_description,
-                status
-            ]
-            parsed_data.append(product_data)
+#             product_data = [
+#                 product_id,
+#                 product_name,
+#                 price,
+#                 category,
+#                 ', '.join(image_urls),
+#                 product_url,
+#                 color_description,
+#                 status
+#             ]
+#             parsed_data.append(product_data)
 
-        return parsed_data
+#         return parsed_data
 
 
 class JacquemusParser(WebsiteParser):
@@ -3385,10 +3388,12 @@ class TodsParser(WebsiteParser):
             response.raise_for_status()
             json_data = response.json()
             results=json_data.get("searchPageData",{}).get("results","")
+            categoryName=json_data.get("searchPageData",{}).get("categoryName","")
             for result in results:
                 product=result.get("product","")
                 if isinstance(product,dict):
                     product_info = {
+                        'category':categoryName,
                         'aggregatedStock': product.get('aggregatedStock', 0),
                         'baseOptions': product.get('baseOptions', []),
                         'categories': product.get('categories', []),
@@ -3417,7 +3422,6 @@ class TodsParser(WebsiteParser):
                         'volumePricesFlag': product.get('volumePricesFlag', False)
                     }
                 else:
-                    print(f"The product is of the wrong type:\n{product}")
                     break
 
                 all_products.append(product_info)
@@ -3435,6 +3439,254 @@ class TodsParser(WebsiteParser):
         # Save the complete DataFrame to a CSV file
         # data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
         current_date = datetime.datetime.now().strftime("%m_%d_%Y")
-        filename = f'parser-output/Tods_output_{current_date}.csv'
+        filename = f'parser-output/tods_output_{current_date}.csv'
         self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
-        print(f"Complete data saved to 'Tods_output_{current_date}.csv'")
+        print(f"Complete data saved to 'tods_output_{current_date}.csv'")
+
+class ChloeProductParser(WebsiteParser):
+    def __init__(self):
+        self.base_url = 'https://www.chloe.com/Search/RenderProductsAsync?department={category}&page={page}&productsPerPage=1000'
+        self.category=''
+        self.data=pd.DataFrame()
+        
+        
+    def fetch_data(self, category, base_url):
+        session = requests.Session()
+        # Setup retry strategy
+        retries = Retry(
+            total=5,
+            backoff_factor=1,
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
+        )
+        session.mount("https://", HTTPAdapter(max_retries=retries))
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3'
+        }
+        all_products = []  # Use a list to store product dictionaries
+        try:
+            response = session.get(base_url.format(category=category, page=0), headers=headers)
+            response.raise_for_status()
+            html_content=response.text
+            match = re.search(r'yTos\.search\.totalPages\s*=\s*(\d+);', html_content)
+            if match:
+                total_pages = int(match.group(1))
+                print(f"Total pages: {total_pages}")
+            else:
+                print("Total pages not found")
+            if total_pages:
+                for page in range(total_pages):
+                    response = session.get(base_url.format(category=category, page=page), headers=headers)
+                    response.raise_for_status()
+                    html_content=response.text
+                    products = self.parse_product_blocks(html_content)
+                    print(products)
+                    all_products.extend(products)
+                    print(f"Currently on page {page}/{total_pages} for category {category}")
+                print(response.text)
+                return pd.DataFrame(all_products)
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+            return pd.DataFrame()
+        
+
+            
+        
+    def process_categories(self, categories):
+        for category in categories:
+            self.category=category
+            category_data = self.fetch_data(category, self.base_url)
+            self.data = pd.concat([self.data, category_data], ignore_index=True)
+
+        # Save the complete DataFrame to a CSV file
+        # data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
+        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+        filename = f'parser-output/chloe_output_{current_date}.csv'
+        self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
+        print(f"Complete data saved to 'chloe_output_{current_date}.csv'")
+    
+    
+    
+    
+    
+    
+    def parse_product_blocks(self,html_content):
+        soup = BeautifulSoup(html_content, 'html.parser')
+        product_blocks = soup.find_all('article', class_='searchProduct-wrapper')
+        
+        parsed_products = []
+        for block in product_blocks:
+            parsed_data = self.parse_product(block)
+            if parsed_data:
+                parsed_products.append(parsed_data)
+        
+        return parsed_products
+
+    def parse_product(self, product_block):
+        try:
+            parsed_data = self.extract_product_data(product_block)
+            return parsed_data
+        except Exception as e:
+            print(f"Error parsing block: {str(e)}")
+            return None
+
+    def extract_product_data(self, block):
+        product_data = {}
+
+        # Extract data from data-ytos-track-product-data attribute
+        track_data_str = block.get('data-ytos-track-product-data', '{}')
+        track_data_str = self.preprocess_json(track_data_str)
+        track_data = json.loads(track_data_str)
+
+        product_data['product_id'] = block.get('data-ytos-item', '')
+        product_data['product_name'] = track_data.get('product_title', '')
+        product_data['brand'] = track_data.get('product_brand', '')
+        product_data['price'] = track_data.get('product_price', '')
+        product_data['discounted_price']=track_data.get('product_discountedPrice','')
+        product_data['currency'] = 'USD'  # Assuming USD, adjust if needed
+        product_data['category'] = self.category
+        product_data['sub_category'] = track_data.get('product_micro_category', '')
+        product_data['color'] = track_data.get('product_color', '')
+
+        # Extract image URL
+        img_tag = block.select_one('img[data-origin]')
+        if img_tag:
+            product_data['image_url'] = img_tag.get('data-origin', '')
+
+        # Extract product URL
+        link_tag = block.select_one('a.wrapper')
+        if link_tag:
+            product_url=link_tag.get('href', '')
+            product_data['product_url'] = product_url if product_url else ''
+
+        return product_data
+
+    def preprocess_json(self, json_str):
+        # Replace JavaScript boolean values with JSON-compatible ones
+        json_str = re.sub(r'\btrue\b', 'true', json_str)
+        json_str = re.sub(r'\bfalse\b', 'false', json_str)
+        return json_str
+class ValentinoProductParser(WebsiteParser):
+    def __init__(self):
+        self.brand = 'Va;entino'
+        self.base_url = 'https://www.valentino.com/en-us/{category}.pagination?currentPage={page}&pageSize=50'
+        self.category=''
+        self.data=pd.DataFrame()
+        
+        
+    def fetch_data(self, category, base_url):
+        session = requests.Session()
+        # Setup retry strategy
+        retries = Retry(
+            total=5,
+            backoff_factor=1,
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
+        )
+        session.mount("https://", HTTPAdapter(max_retries=retries))
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3'
+        }
+        all_products = []  # Use a list to store product dictionaries
+        try:
+            response = session.get(base_url.format(category=category, page=0), headers=headers)
+            response.raise_for_status()
+            html_content=response.text
+            match = re.search(r'yTos\.search\.totalPages\s*=\s*(\d+);', html_content)
+            if match:
+                total_pages = int(match.group(1))
+                print(f"Total pages: {total_pages}")
+            else:
+                print("Total pages not found")
+            if total_pages:
+                for page in range(total_pages):
+                    response = session.get(base_url.format(category=category, page=page), headers=headers)
+                    response.raise_for_status()
+                    html_content=response.text
+                    products = self.parse_product_blocks(html_content)
+                    print(products)
+                    all_products.extend(products)
+                    print(f"Currently on page {page}/{total_pages} for category {category}")
+                print(response.text)
+                return pd.DataFrame(all_products)
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+            return pd.DataFrame()
+        
+
+            
+        
+    def process_categories(self, categories):
+        for category in categories:
+            self.category=category
+            category_data = self.fetch_data(category, self.base_url)
+            self.data = pd.concat([self.data, category_data], ignore_index=True)
+
+        # Save the complete DataFrame to a CSV file
+        # data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
+        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+        filename = f'parser-output/chloe_output_{current_date}.csv'
+        self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
+        print(f"Complete data saved to 'chloe_output_{current_date}.csv'")
+    
+    
+    
+    
+    
+    
+    def parse_product_blocks(self,html_content):
+        soup = BeautifulSoup(html_content, 'html.parser')
+        product_blocks = soup.find_all('article', class_='searchProduct-wrapper')
+        
+        parsed_products = []
+        for block in product_blocks:
+            parsed_data = self.parse_product(block)
+            if parsed_data:
+                parsed_products.append(parsed_data)
+        
+        return parsed_products
+
+    def parse_product(self, product_block):
+        try:
+            parsed_data = self.extract_product_data(product_block)
+            return parsed_data
+        except Exception as e:
+            print(f"Error parsing block: {str(e)}")
+            return None
+
+    def extract_product_data(self, block):
+        product_data = {}
+
+        # Extract data from data-ytos-track-product-data attribute
+        track_data_str = block.get('data-ytos-track-product-data', '{}')
+        track_data_str = self.preprocess_json(track_data_str)
+        track_data = json.loads(track_data_str)
+
+        product_data['product_id'] = block.get('data-ytos-item', '')
+        product_data['product_name'] = track_data.get('product_title', '')
+        product_data['brand'] = self.brand
+        product_data['price'] = track_data.get('product_price', '')
+        product_data['currency'] = 'USD'  # Assuming USD, adjust if needed
+        product_data['category'] = self.category
+        product_data['sub_category'] = track_data.get('product_micro_category', '')
+        product_data['color'] = track_data.get('product_color', '')
+
+        # Extract image URL
+        img_tag = block.select_one('img[data-origin]')
+        if img_tag:
+            product_data['image_url'] = img_tag.get('data-origin', '')
+
+        # Extract product URL
+        link_tag = block.select_one('a.wrapper')
+        if link_tag:
+            product_data['product_url'] = 'https://www.chloe.com' + link_tag.get('href', '')
+
+        return product_data
+
+    def preprocess_json(self, json_str):
+        # Replace JavaScript boolean values with JSON-compatible ones
+        json_str = re.sub(r'\btrue\b', 'true', json_str)
+        json_str = re.sub(r'\bfalse\b', 'false', json_str)
+        return json_str
