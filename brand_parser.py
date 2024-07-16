@@ -1,5 +1,6 @@
 import os
 import re
+import urllib
 from urllib.parse import urljoin, urlunparse, urlparse
 
 import requests
@@ -28,7 +29,7 @@ class BottegaVenetaParser(WebsiteParser):
         parsed_data = []
 
         column_names = [
-            'filename','data_pid', 'id', 'name', 'collection', 'productSMC', 'material', 'customization',
+            'data_pid', 'id', 'name', 'collection', 'productSMC', 'material', 'customization',
             'packshotType', 'brand', 'color', 'colorId', 'size', 'price', 'discountPrice',
             'coupon', 'subCategory', 'category', 'topCategory', 'productCategory', 'macroCategory',
             'microCategory', 'superMicroCategory', 'list', 'stock', 'productGlobalSMC', 'images', 'product_url'
@@ -46,15 +47,17 @@ class BottegaVenetaParser(WebsiteParser):
             data_gtmproduct = block['data-gtmproduct']
             data_gtmproduct = html.unescape(data_gtmproduct)
             product_info = json.loads(data_gtmproduct)
-
             # Extract product images
             images = []
             image_container = block.find('div', class_='c-product__imagecontainer')
             if image_container:
                 image_elements = image_container.find_all('img', class_='c-product__image')
                 for img in image_elements:
-                    images.append(img['src'])
-
+                    images.append(img.get('src', ''))
+                    images.append(img.get('data-src', ''))
+                    images.append(img.get('srcset', ''))
+            images = list(set(images))
+            images = [image for image in images if image != '' and "/on/demandware.static/" not in image]
             # Extract product URL
             product_url = block.find('a', class_='c-product__link')['href']
 
@@ -191,7 +194,7 @@ class GucciParser():
         current_date = datetime.datetime.now().strftime("%m_%d_%Y")
         filename = f'parser-output/gucci_output_{current_date}.csv'
         self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
-        print("Complete data saved to 'output_gucci_5_27_24.csv'")
+        print(f"Complete data saved to 'output_gucci_{current_date}.csv'")
 class FendiParser(WebsiteParser):
     ## This class parses the HTML files from the Fendi website. 
     ## website: https://www.fendi.com
@@ -356,7 +359,7 @@ class VejaProductParser(WebsiteParser):
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         column_names = [
-            'category', 'product_name', 'price', 'main_image_url', 'additional_image_url',
+            'category', 'product_id','product_name', 'price', 'main_image_url', 'additional_image_url',
             'product_details_url'
         ]
         parsed_data.append(column_names)
@@ -371,9 +374,10 @@ class VejaProductParser(WebsiteParser):
             images = block.find_all('img', alt=product_name)
             main_image_url = images[0]['src'] if images else 'No image available'
             additional_image_url = images[1]['src'] if len(images) > 1 else 'No additional image available'
-
+            product_id=product_details_url.split("-")[-1].strip(".html")
             product_data_list = [
                 category,
+                product_id,
                 product_name,
                 price,
                 main_image_url,
@@ -463,7 +467,8 @@ class TomFordProductParser(WebsiteParser):
             product_id = block.get('data-pid', '')
             product_name = block.find('a', class_='link').text.strip() if block.find('a', class_='link') else ''
             product_url = block.find('a', class_='tile-image-container')['href'] if block.find('a', class_='tile-image-container') else ''
-            
+            product_url= f"https://www.tomfordfashion.com/{product_url}" if product_url else ''
+
             price_element = block.find('span', class_='value')
             price = price_element.text.strip() if price_element else ''
             
@@ -475,6 +480,10 @@ class TomFordProductParser(WebsiteParser):
             
             variation_element = block.find('div', class_='variation-count')
             variation_count = variation_element.text.strip() if variation_element else ''
+
+            if "-" not in product_id:
+                product_id=images[0].split('/')[-1].split("_APPEN")[0]
+
             product_data = [
                 product_id,
                 product_name,
@@ -487,9 +496,8 @@ class TomFordProductParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
-    
 
-    
+
 class OffWhiteProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'off_white'  # Replace spaces with underscores
@@ -871,7 +879,6 @@ class CultGaiaProductParser(WebsiteParser):
 
             # Extract tag
             tag = tile.find('p', class_='tag').text.strip() if tile.find('p', class_='tag') else ''
-
             product_data = [
                 category,
                 product_url,
@@ -976,8 +983,11 @@ class BalenciagaParser(WebsiteParser):
             if image_container:
                 image_elements = image_container.find_all('img', class_='c-product__image')
                 for img in image_elements:
-                    images.append(img['src'])
-
+                    images.append(img.get('src',''))
+                    images.append(img.get('data-src',''))
+                    images.append(img.get('srcset',''))
+            images=list(set(images))
+            images=[image for image in images if image != '' and "/on/demandware.static/" not in image]
             # Extract product URL
             product_url = block.find('a', class_='c-product__focus')['href']
 
@@ -1014,99 +1024,99 @@ class BalenciagaParser(WebsiteParser):
 
         return parsed_data
 
-class SaintLaurentParser(WebsiteParser):
-    def __init__(self, directory):
-        self.brand = 'saint_laurent'  # Replace spaces with underscores
-        self.directory = directory
-    def parse_product_blocks(self, soup, category):
-        product_blocks = soup.find_all('article', class_='c-product')
-        parsed_data = []
-        column_names = [
-            'data_pid', 'id', 'name', 'collection', 'productSMC', 'material', 'customization',
-            'packshotType', 'brand', 'color', 'colorId', 'size', 'price', 'discountPrice',
-            'coupon', 'subCategory', 'category', 'topCategory', 'productCategory', 'macroCategory',
-            'microCategory', 'superMicroCategory', 'list', 'stock', 'productGlobalSMC', 'images', 'product_url'
-        ]
-        parsed_data.append(column_names)
-        for block in product_blocks:
-            product_data = []
-            # Extract data-pid
-            data_pid = block['data-pid']
-            # Extract data-gtmproduct and parse JSON
-            data_gtmproduct = block['data-gtmproduct']
-            data_gtmproduct = html.unescape(data_gtmproduct)
-            product_info = json.loads(data_gtmproduct)
-            images = []
-            # Extract main product image
-            main_image_container = block.find('div', class_='c-product__imagecontainerinner')
-            if main_image_container:
-                main_image = main_image_container.find('img', class_='c-product__image')
-                if main_image:
-                    if 'data-srcset' in main_image.attrs:
-                        srcset = main_image['data-srcset']
-                        image_urls = [url.strip().split(' ')[0] for url in srcset.split(',') if
-                                      'saint-laurent.dam.kering.com' in url]
-                        images.extend(image_urls)
-                    elif 'data-src' in main_image.attrs:
-                        image_url = main_image['data-src']
-                        if 'saint-laurent.dam.kering.com' in image_url:
-                            images.append(image_url)
-                    elif 'src' in main_image.attrs:
-                        image_url = main_image['src']
-                        if 'saint-laurent.dam.kering.com' in image_url:
-                            images.append(image_url)
-            # Extract carousel images
-            carousel_container = block.find('div', class_='c-productcarousel')
-            if carousel_container:
-                carousel_images = carousel_container.find_all('img', class_='c-product__image')
-                for img in carousel_images:
-                    if 'data-srcset' in img.attrs:
-                        srcset = img['data-srcset']
-                        image_urls = [url.strip().split(' ')[0] for url in srcset.split(',') if
-                                      'saint-laurent.dam.kering.com' in url]
-                        images.extend(image_urls)
-                    elif 'data-src' in img.attrs:
-                        image_url = img['data-src']
-                        if 'saint-laurent.dam.kering.com' in image_url:
-                            images.append(image_url)
-                    elif 'src' in img.attrs:
-                        image_url = img['src']
-                        if 'saint-laurent.dam.kering.com' in image_url:
-                            images.append(image_url)
-            # Remove exact duplicate image URLs
-            images = list(set(images))
-            # Extract product URL
-            product_url = block.find('a', class_='c-product__link')['href']
-            # Append the extracted information to the product_data list
-            product_data.append(data_pid)
-            product_data.append(product_info['id'])
-            product_data.append(product_info['name'])
-            product_data.append(product_info['collection'])
-            product_data.append(product_info['productSMC'])
-            product_data.append(product_info['material'])
-            product_data.append(product_info['customization'])
-            product_data.append(product_info['packshotType'])
-            product_data.append(product_info['brand'])
-            product_data.append(product_info['color'])
-            product_data.append(product_info['colorId'])
-            product_data.append(product_info['size'])
-            product_data.append(product_info['price'])
-            product_data.append(product_info['discountPrice'])
-            product_data.append(product_info['coupon'])
-            product_data.append(product_info['subCategory'])
-            product_data.append(category)
-            product_data.append(product_info['topCategory'])
-            product_data.append(product_info['productCategory'])
-            product_data.append(product_info['macroCategory'])
-            product_data.append(product_info['microCategory'])
-            product_data.append(product_info['superMicroCategory'])
-            product_data.append(product_info['list'])
-            product_data.append(product_info['stock'])
-            product_data.append(product_info['productGlobalSMC'])
-            product_data.append(', '.join(images))
-            product_data.append(product_url)
-            parsed_data.append(product_data)
-        return parsed_data
+#class SaintLaurentParser(WebsiteParser):
+    # def __init__(self, directory):
+    #     self.brand = 'saint_laurent'  # Replace spaces with underscores
+    #     self.directory = directory
+    # def parse_product_blocks(self, soup, category):
+    #     product_blocks = soup.find_all('article', class_='c-product')
+    #     parsed_data = []
+    #     column_names = [
+    #         'data_pid', 'id', 'name', 'collection', 'productSMC', 'material', 'customization',
+    #         'packshotType', 'brand', 'color', 'colorId', 'size', 'price', 'discountPrice',
+    #         'coupon', 'subCategory', 'category', 'topCategory', 'productCategory', 'macroCategory',
+    #         'microCategory', 'superMicroCategory', 'list', 'stock', 'productGlobalSMC', 'images', 'product_url'
+    #     ]
+    #     parsed_data.append(column_names)
+    #     for block in product_blocks:
+    #         product_data = []
+    #         # Extract data-pid
+    #         data_pid = block['data-pid']
+    #         # Extract data-gtmproduct and parse JSON
+    #         data_gtmproduct = block['data-gtmproduct']
+    #         data_gtmproduct = html.unescape(data_gtmproduct)
+    #         product_info = json.loads(data_gtmproduct)
+    #         images = []
+    #         # Extract main product image
+    #         main_image_container = block.find('div', class_='c-product__imagecontainerinner')
+    #         if main_image_container:
+    #             main_image = main_image_container.find('img', class_='c-product__image')
+    #             if main_image:
+    #                 if 'data-srcset' in main_image.attrs:
+    #                     srcset = main_image['data-srcset']
+    #                     image_urls = [url.strip().split(' ')[0] for url in srcset.split(',') if
+    #                                   'saint-laurent.dam.kering.com' in url]
+    #                     images.extend(image_urls)
+    #                 elif 'data-src' in main_image.attrs:
+    #                     image_url = main_image['data-src']
+    #                     if 'saint-laurent.dam.kering.com' in image_url:
+    #                         images.append(image_url)
+    #                 elif 'src' in main_image.attrs:
+    #                     image_url = main_image['src']
+    #                     if 'saint-laurent.dam.kering.com' in image_url:
+    #                         images.append(image_url)
+    #         # Extract carousel images
+    #         carousel_container = block.find('div', class_='c-productcarousel')
+    #         if carousel_container:
+    #             carousel_images = carousel_container.find_all('img', class_='c-product__image')
+    #             for img in carousel_images:
+    #                 if 'data-srcset' in img.attrs:
+    #                     srcset = img['data-srcset']
+    #                     image_urls = [url.strip().split(' ')[0] for url in srcset.split(',') if
+    #                                   'saint-laurent.dam.kering.com' in url]
+    #                     images.extend(image_urls)
+    #                 elif 'data-src' in img.attrs:
+    #                     image_url = img['data-src']
+    #                     if 'saint-laurent.dam.kering.com' in image_url:
+    #                         images.append(image_url)
+    #                 elif 'src' in img.attrs:
+    #                     image_url = img['src']
+    #                     if 'saint-laurent.dam.kering.com' in image_url:
+    #                         images.append(image_url)
+    #         # Remove exact duplicate image URLs
+    #         images = list(set(images))
+    #         # Extract product URL
+    #         product_url = block.find('a', class_='c-product__link')['href']
+    #         # Append the extracted information to the product_data list
+    #         product_data.append(data_pid)
+    #         product_data.append(product_info['id'])
+    #         product_data.append(product_info['name'])
+    #         product_data.append(product_info['collection'])
+    #         product_data.append(product_info['productSMC'])
+    #         product_data.append(product_info['material'])
+    #         product_data.append(product_info['customization'])
+    #         product_data.append(product_info['packshotType'])
+    #         product_data.append(product_info['brand'])
+    #         product_data.append(product_info['color'])
+    #         product_data.append(product_info['colorId'])
+    #         product_data.append(product_info['size'])
+    #         product_data.append(product_info['price'])
+    #         product_data.append(product_info['discountPrice'])
+    #         product_data.append(product_info['coupon'])
+    #         product_data.append(product_info['subCategory'])
+    #         product_data.append(category)
+    #         product_data.append(product_info['topCategory'])
+    #         product_data.append(product_info['productCategory'])
+    #         product_data.append(product_info['macroCategory'])
+    #         product_data.append(product_info['microCategory'])
+    #         product_data.append(product_info['superMicroCategory'])
+    #         product_data.append(product_info['list'])
+    #         product_data.append(product_info['stock'])
+    #         product_data.append(product_info['productGlobalSMC'])
+    #         product_data.append(', '.join(images))
+    #         product_data.append(product_url)
+    #         parsed_data.append(product_data)
+    #     return parsed_data
 
 class AlexanderMcqueenParser(WebsiteParser):
     def __init__(self, base_url):
@@ -1443,12 +1453,8 @@ class BalmainProductParser(WebsiteParser):
 
                 images = [img['src'] for img in item.find_all('img') if img.get('src')]
                 product_url = item.find('a', class_='tile-body')['href']
-                if len(images) == 1:
-                    image_url = images[0]
-                elif len(images) >= 2:
-                    image_url = images[1]
-                else:
-                    image_url = None
+                images = list(set(images))
+                images = [image for image in images if image != '' and "logo-sm" not in image]
 
                 product_data_list = [
                     product_data.get('item_id', ''),
@@ -1465,7 +1471,7 @@ class BalmainProductParser(WebsiteParser):
                     product_data.get('item_category', ''),
                     product_data.get('item_category2', ''),
                     product_data.get('item_category3', ''),
-                    image_url,
+                    ", ".join(images),
                     'us.balmain.com' + str(product_url)
                 ]
 
@@ -2051,123 +2057,148 @@ class CelineParser(WebsiteParser):
         container_prods = soup.find_all('div', class_='m-product-listing')
 
         column_names = [
-            'product_id', 'product_name', 'product_price', 'product_color', 'category', 'image_urls'
+            'product_id','color_id', 'product_name', 'product_price','currency', 'product_color', 'category', 'image_urls','product_url'
         ]
         parsed_data.append(column_names)
 
         for item in container_prods:
             product_id = item.get('data-id', '')
-
+            color_id=product_id.split('.')[1] if product_id and '_' not in product_id  else ''
             imgs = item.find_all('img')
             imgs_list = []
             for img in imgs:
                 img_src = img.get('data-lazy-src', '') or img.get('src', '')
+                if img_src:
+                    img_src=img_src.split("?")[0]
                 imgs_list.append(img_src)
 
             image_urls = ", ".join(imgs_list)
 
             meta_div = item.find('div', class_='m-product-listing__meta')
+            link = item.find('a', href=True)
+            product_url = link['href']
+            anchor=item.find('a',attrs={'data-gtm-data': True})
+            gtm_data=anchor.get('data-gtm-data','') if anchor else ''
+            if gtm_data:
+                decoded_data = urllib.parse.unquote(gtm_data)
+                product_info = json.loads(decoded_data) if gtm_data else ''
+                category_internal=product_info.get('category','') if product_info else ''
+                price=product_info.get('productBasePrice','') if product_info else ''
+            else:
+                category_internal=''
             if meta_div:
                 meta_title_div = meta_div.find('div', class_='m-product-listing__meta-title')
                 product_name = meta_title_div.get_text(strip=True) if meta_title_div else ''
 
                 color_span = meta_div.find('span', class_='a11y')
                 product_color = color_span.get_text(strip=True) if color_span else ''
+                product_color=product_color.split("; ")[1] if product_color else ''
 
                 price_strong = meta_div.find('strong', class_='f-body--em')
                 product_price = price_strong.get_text(strip=True) if price_strong else ''
+                if product_price and not price:
+                    price=product_price.split(' ')[0]
+                elif product_price:
+                    currency=product_price.split(' ')[1]
+                else:
+                    price = ''
+                    currency = ''
             else:
                 product_name = ''
                 product_color = ''
-                product_price = ''
+                price = ''
+                currency=''
 
             product_data = [
                 product_id,
+                color_id,
                 product_name,
-                product_price,
+                price,
+                currency,
                 product_color,
-                category,
-                image_urls
+                category_internal,
+                image_urls,
+                product_url
             ]
             parsed_data.append(product_data)
 
         return parsed_data
 
 
-class LoroPianaParser():
-    ##COMPLETE
-    def __init__(self):
-        # Initialize with common base URL and empty DataFrame to accumulate results
-        self.base_url = "https://us.loropiana.com/en/c/{category}/results?page={page}"
-        self.data = pd.DataFrame()
-    def format_url(self,url):
-        """ Helper function to format URLs correctly """
-        return f"https:{url}" if url else ''
-
-    def safe_strip(self,value):
-        """ Helper function to strip strings safely """
-        return value.strip() if isinstance(value, str) else value
-    def fetch_data(self,category, base_url):
-        session = requests.Session()
-        # Setup retry strategy
-        retries = Retry(
-            total=5,
-            backoff_factor=1,
-            status_forcelist=[429, 500, 502, 503, 504],
-            allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
-        )
-        session.mount("https://", HTTPAdapter(max_retries=retries))
-
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3'}
-        all_products = []  # Use a list to store product dictionaries
-        try:
-            response = session.get(base_url.format(category=category, page=0), headers=headers)
-            response.raise_for_status()
-            json_data = response.json()
-            total_pages = json_data.get('pagination',{}).get('numberOfPages', 1)
-            print(f"Total Pages: {total_pages}")
-
-            for page in range(total_pages):
-                response = session.get(base_url.format(category=category, page=page), headers=headers)
-                response.raise_for_status()
-                json_data = response.json()
-                items = json_data.get('results', [])
-                if not items:
-                    print(f"No items found on Page: {page + 1}/{total_pages}")
-                    continue
-
-                for product in items:
-                    product_info = {
-                        'category': category,
-                        'product_id': product.get('code',''),
-                        'price': product.get('price',{}).get('value',''),
-                        'currency': product.get('price', {}).get('currencyIso', ''),
-                        'imageUrls': [img.get('url','') for img in product.get('images', [])],
-                        'name': product.get('name',''),
-                        'material': product.get('eshopMaterialCode',''),
-                        'colors':[color for color in product.get('allColorVariants', [])] if product.get('allColorVariants', []) else '',
-                        'url': self.format_url(product.get('url','')),
-                        }
-                    all_products.append(product_info)
-                print(f"Processed {len(items)} products on Page: {page + 1}/{total_pages} for Category: {category}")
-
-            return pd.DataFrame(all_products)
-        except requests.exceptions.RequestException as e:
-            print(f"An error occurred: {e}")
-            return pd.DataFrame()
-
-
-    def process_categories(self, categories):
-        for category in categories:
-            category_data = self.fetch_data(category, self.base_url)
-            self.data = pd.concat([self.data, category_data], ignore_index=True)
-
-        # Save the complete DataFrame to a CSV file
-        #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
-        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
-        filename = f'parser-output/loro_piana_output_{current_date}.csv'
-        self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
-        print(f"Complete data saved to 'loro_piana_output_{current_date}.csv'")
+# class LoroPianaParser():
+#     ##COMPLETE
+#     def __init__(self):
+#         # Initialize with common base URL and empty DataFrame to accumulate results
+#         self.base_url = "https://us.loropiana.com/en/c/{category}/results?page={page}"
+#         self.data = pd.DataFrame()
+#     def format_url(self,url):
+#         """ Helper function to format URLs correctly """
+#         return f"https:{url}" if url else ''
+#
+#     def safe_strip(self,value):
+#         """ Helper function to strip strings safely """
+#         return value.strip() if isinstance(value, str) else value
+#     def fetch_data(self,category, base_url):
+#         session = requests.Session()
+#         # Setup retry strategy
+#         retries = Retry(
+#             total=5,
+#             backoff_factor=1,
+#             status_forcelist=[429, 500, 502, 503, 504],
+#             allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
+#         )
+#         session.mount("https://", HTTPAdapter(max_retries=retries))
+#
+#         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3'}
+#         all_products = []  # Use a list to store product dictionaries
+#         try:
+#             response = session.get(base_url.format(category=category, page=0), headers=headers)
+#             response.raise_for_status()
+#             json_data = response.json()
+#             total_pages = json_data.get('pagination',{}).get('numberOfPages', 1)
+#             print(f"Total Pages: {total_pages}")
+#
+#             for page in range(total_pages):
+#                 response = session.get(base_url.format(category=category, page=page), headers=headers)
+#                 response.raise_for_status()
+#                 json_data = response.json()
+#                 items = json_data.get('results', [])
+#                 if not items:
+#                     print(f"No items found on Page: {page + 1}/{total_pages}")
+#                     continue
+#
+#                 for product in items:
+#                     product_info = {
+#                         'category': category,
+#                         'product_id': product.get('code',''),
+#                         'price': product.get('price',{}).get('value',''),
+#                         'currency': product.get('price', {}).get('currencyIso', ''),
+#                         'imageUrls': [img.get('url','') for img in product.get('images', [])],
+#                         'name': product.get('name',''),
+#                         'material': product.get('eshopMaterialCode',''),
+#                         'colors':[color for color in product.get('allColorVariants', [])] if product.get('allColorVariants', []) else '',
+#                         'url': self.format_url(product.get('url','')),
+#                         }
+#                     all_products.append(product_info)
+#                 print(f"Processed {len(items)} products on Page: {page + 1}/{total_pages} for Category: {category}")
+#
+#             return pd.DataFrame(all_products)
+#         except requests.exceptions.RequestException as e:
+#             print(f"An error occurred: {e}")
+#             return pd.DataFrame()
+#
+#
+#     def process_categories(self, categories):
+#         for category in categories:
+#             category_data = self.fetch_data(category, self.base_url)
+#             self.data = pd.concat([self.data, category_data], ignore_index=True)
+#
+#         # Save the complete DataFrame to a CSV file
+#         #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
+#         current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+#         filename = f'parser-output/loro_piana_output_{current_date}.csv'
+#         self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
+#         print(f"Complete data saved to 'loro_piana_output_{current_date}.csv'")
 
 
 class MarniParser(WebsiteParser):
@@ -2187,11 +2218,9 @@ class MarniParser(WebsiteParser):
         items = soup.find_all('div', class_='col-12 col-md-3 single-element show-second-image')
 
         for item in items:
-            product_id = item.find('div', class_='product').get('data-pid', '')
             product_name = item.find('div', class_='single-element-content-detail-description').find('a').text.strip()
             product_url = item.find('div', class_='single-element-content-detail-description').find('a').get('href', '')
-            category = item.get('data-category', '')
-
+            product_id=product_url.split("-")[-1].split('.')[0]
             # Extract prices
             price_div = item.find('div', class_='price')
             original_price = price_div.find('span', class_='strike-through list')
@@ -2208,8 +2237,21 @@ class MarniParser(WebsiteParser):
             original_price = original_price.strip('\n\n- Original Price') if original_price else ''
             discounted_price = discounted_price.strip('\n\n- Discounted Price') if discounted_price else ''
             # Extract image URLs
-            image_divs = item.find_all('img', class_='tile-image')
-            image_urls = [img.get('data-srcset', '') for img in image_divs]
+            image_holder=item.find('div',class_='swiper-wrapper')
+            image_divs = image_holder.find_all('div', class_='swiper-slide') if image_holder else ''
+            image_urls = []
+            if image_divs:
+                for img in image_divs:
+                    image=img.find('img',class_='lazyloaded')
+                    if not image:
+                        image=img.find('img',class_='lazyload')
+                    srcset = image.get('data-srcset', '') if image else ''
+                    if srcset:
+                        # Extract all URLs from srcset
+                        urls = re.findall(r'(https?://\S+)(?=\s\d+w)', srcset)
+                        # Add the largest image (last URL) to the list
+                        if urls:
+                            image_urls.append(urls[-1])
 
             product_data = [
                 product_id,
@@ -2283,63 +2325,63 @@ class PradaParser(WebsiteParser):
         return parsed_data
 
 
-class TodsParser(WebsiteParser):
-    def __init__(self, directory):
-        self.brand = 'tods'
-        self.directory = directory
-
-    def parse_product_blocks(self, soup, category):
-        parsed_data = []
-
-        column_names = [
-            'product_id', 'product_name', 'price',
-            'category', 'image_urls', 'product_url', 'colors'
-        ]
-        parsed_data.append(column_names)
-
-        items = soup.find_all('div', class_='card display scrolling')
-
-        for item in items:
-            product_id = item.get('data-sku', '')
-            product_link = item.find('a', class_='card-link')
-            product_url = product_link.get('href', '') if product_link else ''
-            product_name = product_link.get('aria-label', '').split(',')[1].strip() if product_link else ''
-            price = product_link.get('aria-label', '').split(',')[-1].strip() if product_link else ''
-            color = product_link.get('aria-label', '').split(',')[2].strip() if product_link else ''
-            category = category
-
-            # Extract image URLs
-            img_box = item.find('div', class_='img-box')
-            image_urls = []
-            if img_box:
-                picture = img_box.find('picture')
-                if picture:
-                    sources = picture.find_all('source')
-                    for source in sources:
-                        srcset = source.get('srcset', '')
-                        if srcset:
-                            first_url = srcset.split(',')[0].split()[0]
-                            if first_url:
-                                image_urls.append(first_url)
-
-                    img_tag = picture.find('img')
-                    if img_tag:
-                        img_src = img_tag.get('data-src', '')
-                        if img_src:
-                            image_urls.append(img_src)
-
-            product_data = [
-                product_id,
-                product_name,
-                price,
-                category,
-                ', '.join(image_urls),
-                product_url,
-                color
-            ]
-            parsed_data.append(product_data)
-
-        return parsed_data
+# class TodsParser(WebsiteParser):
+#     def __init__(self, directory):
+#         self.brand = 'tods'
+#         self.directory = directory
+#
+#     def parse_product_blocks(self, soup, category):
+#         parsed_data = []
+#
+#         column_names = [
+#             'product_id', 'product_name', 'price',
+#             'category', 'image_urls', 'product_url', 'colors'
+#         ]
+#         parsed_data.append(column_names)
+#
+#         items = soup.find_all('div', class_='card display scrolling')
+#
+#         for item in items:
+#             product_id = item.get('data-sku', '')
+#             product_link = item.find('a', class_='card-link')
+#             product_url = product_link.get('href', '') if product_link else ''
+#             product_name = product_link.get('aria-label', '').split(',')[1].strip() if product_link else ''
+#             price = product_link.get('aria-label', '').split(',')[-1].strip() if product_link else ''
+#             color = product_link.get('aria-label', '').split(',')[2].strip() if product_link else ''
+#             category = category
+#
+#             # Extract image URLs
+#             img_box = item.find('div', class_='img-box')
+#             image_urls = []
+#             if img_box:
+#                 picture = img_box.find('picture')
+#                 if picture:
+#                     sources = picture.find_all('source')
+#                     for source in sources:
+#                         srcset = source.get('srcset', '')
+#                         if srcset:
+#                             first_url = srcset.split(',')[0].split()[0]
+#                             if first_url:
+#                                 image_urls.append(first_url)
+#
+#                     img_tag = picture.find('img')
+#                     if img_tag:
+#                         img_src = img_tag.get('data-src', '')
+#                         if img_src:
+#                             image_urls.append(img_src)
+#
+#             product_data = [
+#                 product_id,
+#                 product_name,
+#                 price,
+#                 category,
+#                 ', '.join(image_urls),
+#                 product_url,
+#                 color
+#             ]
+#             parsed_data.append(product_data)
+#
+#         return parsed_data
 
 class ValentinoParser(WebsiteParser):
     def __init__(self, directory):
@@ -2692,6 +2734,7 @@ class AcneStudiosParser(WebsiteParser):
                 if not product_id:
                     product_id=image.get('alt','')
                     product_id=product_id.split(',')[0]
+                    product_id = product_id.split(' ')[0]
                 if image_url:
                     image_urls.append(image_url)
 
@@ -2713,7 +2756,9 @@ class AcneStudiosParser(WebsiteParser):
                 color_items = color_info.find_all('li')
                 for color_item in color_items:
                     colors.append(color_item.text.strip())
-
+            length=len(product_id) if product_id else ''
+            if length != 16 or not product_id:
+                product_id = self.extract_product_id(product_url)
             product_data = [
                 product_id,
                 product_name,
@@ -2729,6 +2774,10 @@ class AcneStudiosParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+    def extract_product_id(self,product_url):
+        html=self.open_link(product_url)
+        soup_pid=BeautifulSoup(html, 'html.parser')
+
 
 class TheRowParser(WebsiteParser):
     def __init__(self, directory):
@@ -3081,3 +3130,459 @@ class AquazzuraParser(WebsiteParser):
         return parsed_data
 
 
+class LoeweParser(WebsiteParser):
+    ##COMPLETEZ
+    def __init__(self):
+        # Initialize with common base URL and empty DataFrame to accumulate results
+        self.base_url = "https://www.loewe.com/mobify/proxy/api/search/shopper-search/v1/organizations/f_ecom_bbpc_prd/product-search?siteId=LOE_USA&refine=htype%3Dset%7Cvariation_group&refine=price%3D%280.01..1370000000%29&refine={category}&refine=c_LW_custom_level%3Dwomen&currency=USD&locale=en-US&offset={offset}&limit=32&c_isSaUserType=false&c_expanded=true&c_countryCode=US"
+        self.data = pd.DataFrame()
+
+    def format_url(self, url):
+        """ Helper function to format URLs correctly """
+        return f"https:{url}" if url else ''
+
+    def safe_strip(self, value):
+        """ Helper function to strip strings safely """
+        return value.strip() if isinstance(value, str) else value
+
+    def fetch_data(self, category, base_url, bearer_token):
+        session = requests.Session()
+        # Setup retry strategy
+        retries = Retry(
+            total=5,
+            backoff_factor=1,
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
+        )
+        session.mount("https://", HTTPAdapter(max_retries=retries))
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3',
+            'Authorization': f'Bearer {bearer_token}'
+                }
+        all_products = []  # Use a list to store product dictionaries
+        try:
+            offset=0
+            response = session.get(base_url.format(category=category, offset=0), headers=headers)
+            response.raise_for_status()
+            json_data = response.json()
+            items=json_data.get('hits',[])
+            totalProducts=int(items[0].get('c_totalProducts','').replace(',',''))
+
+            while offset<=totalProducts:
+                response = session.get(base_url.format(category=category, offset=offset), headers=headers)
+                response.raise_for_status()
+                json_data = response.json()
+                items = json_data.get('hits', [])
+                if not items:
+                    print(f"No items found on offset: {offset}")
+                    continue
+
+                for product in items:
+                    product_data = product.get('c_gtm_data', {})
+                    all_images = json.loads(product.get('c_allImages', '[]'))
+                    color_swatches = json.loads(product.get('c_colorSwatches', '[]'))
+
+                    product_info = {
+                        # Extracting information from c_gtm_data
+                        'brand': product_data.get('brand', ''),
+                        'category': product_data.get('category', ''),
+                        'id': product_data.get('id', ''),
+                        'name': product_data.get('name', ''),
+                        'price_gtm': product_data.get('price', ''),
+                        'productColor': product_data.get('productColor', ''),
+                        'colorId': product_data.get('colorId', ''),
+                        'productEan': product_data.get('productEan', ''),
+                        'productGender': product_data.get('productGender', ''),
+                        'productMasterId': product_data.get('productMasterId', ''),
+                        'productStock': product_data.get('productStock', ''),
+                        'isDiscounted': product_data.get('isDiscounted', ''),
+                        'position_gtm': product_data.get('position', ''),
+                        'currency': product.get('currency', ''),
+                        'image': {
+                            'alt': product.get('image', {}).get('alt', ''),
+                            'disBaseLink': product.get('image', {}).get('disBaseLink', ''),
+                            'link': product.get('image', {}).get('link', ''),
+                            'title': product.get('image', {}).get('title', '')
+                        },
+                        'imageUrl':product.get('image', {}).get('link', ''),
+                        'orderable': product.get('orderable', False),
+                        'price': product.get('price', ''),
+                        'pricePerUnit': product.get('pricePerUnit', ''),
+                        'productId': product.get('productId', ''),
+                        'productName': product.get('productName', ''),
+                        'productType': product.get('productType', {}),
+                        'representedProduct': product.get('representedProduct', {}),
+                        'representedProducts': product.get('representedProducts', []),
+                        'c_totalProducts': product.get('c_totalProducts', ''),
+                        'c_lineImagePath': product.get('c_lineImagePath', ''),
+                        'c_productDetailPageURL': product.get('c_productDetailPageURL', ''),
+                        'c_imageURL': product.get('c_imageURL', ''),
+                        'c_isPromoPrice': product.get('c_isPromoPrice', False),
+                        'c_showStandardPrice': product.get('c_showStandardPrice', False),
+                        'c_salesPriceFormatted': product.get('c_salesPriceFormatted', ''),
+                        'c_standardPriceFormatted': product.get('c_standardPriceFormatted', ''),
+                        'c_hidePrice': product.get('c_hidePrice', False),
+                        'c_colorSwatches': color_swatches,
+                        'c_colorSelected': product.get('c_colorSelected', ''),
+                        'c_allImages': all_images,
+                        'c_LW_limiterColorBadges': product.get('c_LW_limiterColorBadges', ''),
+                        'c_availabilityStatus': product.get('c_availabilityStatus', ''),
+                        'c_productDetailUrlComplete': product.get('c_productDetailUrlComplete', '')
+                    }
+                    all_products.append(product_info)
+                print(f"Processed {len(items)} products on offset: {offset} for Category: {category}")
+                offset+=32
+            return pd.DataFrame(all_products)
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+            return pd.DataFrame()
+
+    def process_categories(self, categories,bearer_token):
+        for category in categories:
+            category_data = self.fetch_data(category, self.base_url,bearer_token)
+            self.data = pd.concat([self.data, category_data], ignore_index=True)
+
+        # Save the complete DataFrame to a CSV file
+        # data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
+        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+        filename = f'parser-output/loewe_output_{current_date}.csv'
+        self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
+        print(f"Complete data saved to 'loewe_output_{current_date}.csv'")
+
+class SaintLaurentParser(WebsiteParser):
+    def __init__(self):
+        # Initialize with common base URL and empty DataFrame to accumulate results
+        self.base_url = ("https://www.ysl.com/api/v1/category/{category}?locale=en-us&page={page}&categoryIds={category}&hitsPerPage=15")
+        self.data = pd.DataFrame()
+
+    def format_url(self, url):
+        """ Helper function to format URLs correctly """
+        return f"https:{url}" if url else ''
+
+    def safe_strip(self, value):
+        """ Helper function to strip strings safely """
+        return value.strip() if isinstance(value, str) else value
+
+    def fetch_data(self, category, base_url):
+        session = requests.Session()
+        # Setup retry strategy
+        retries = Retry(
+            total=5,
+            backoff_factor=1,
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
+        )
+        session.mount("https://", HTTPAdapter(max_retries=retries))
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3'
+        }
+        all_products = []  # Use a list to store product dictionaries
+        try:
+            response = session.get(base_url.format(category=category, page=0), headers=headers)
+            response.raise_for_status()
+            json_data = response.json()
+
+            total_pages=json_data.get('stats',{}).get('nbPages',0)
+            print(total_pages)
+            for page in range(total_pages):
+                response = session.get(base_url.format(category=category, page=page), headers=headers)
+                response.raise_for_status()
+                json_data = response.json()
+                items = json_data.get('products', [])
+                hits = json_data.get('hitsAlgolia', [])
+                if not (items and hits):
+                    print(f"No items found on page: {page}")
+                    continue
+
+                for product,hit in zip(items,hits):
+                    price_dict=product.get('price', 0)
+                    product_info = {
+                        'category':product.get('categories',{}).get('productCategory',''),
+                        'product_url':product.get('url',''),
+                        'product_color': product.get('color', ''),
+                        'product_relatedColors': [{
+                            'color': color.get('color', ''),
+                            'colorHex': color.get('colorHex', ''),
+                            'styleMaterialColor': color.get('styleMaterialColor', ''),
+                            'swatchUrl': color.get('swatchUrl', ''),
+                            'employeeSaleVisible': color.get('employeeSaleVisible', False)
+                        } for color in product.get('relatedColors', [])],
+                        'product_styleMaterialColor': product.get('styleMaterialColor', ''),
+                        'product_thumbnailUrls': product.get('thumbnailUrls', []),
+                        'product_inStock': product.get('inStock', False),
+                        'product_stock': product.get('stock', 0),
+                        'product_categoryIds': product.get('categoryIds', []),
+                        'product_ID': product.get('id', ''),
+                        'product_bornSeasonDesc': product.get('bornSeasonDesc', ''),
+                        'product_name': product.get('name', ''),
+                        'product_microColor': product.get('microColor', ''),
+                        'product_image':product.get('image',{}).get('src',''),
+                        'product_images':" | ".join([image.get('srcset','') for image in product.get('images',{})]),
+                        # Extract data from the second JSON (hit)
+                        'hit_id': hit.get('id', ''),
+                        'hit_isSku': hit.get('isSku', False),
+                        'hit_size': hit.get('size', ''),
+                        'hit_categories': hit.get('categories', {}),
+                        'hit_imageThumbnail': hit.get('imageThumbnail', {}).get('src', ''),
+                        'hit_priceDetails': hit.get('price', {}),
+                        'hit_formattedSize': hit.get('formattedSize', ''),
+                        'hit_swatches': [{
+                            'smcId': swatch.get('smcId', ''),
+                            'microColorHexa': swatch.get('microColorHexa', ''),
+                            'microColor': swatch.get('microColor', ''),
+                            'swatchImage': swatch.get('swatchImage', ''),
+                            'url': swatch.get('url', '')
+                        } for swatch in product.get('swatches', [])],
+                        'price_id':price_dict.get('id',''),
+                        'price_has_sale_price': price_dict.get('hasSalePrice', ''),
+                        'price_currency': price_dict.get('currencyCode', ''),
+                        'price_percentageOff': price_dict.get('percentageOff', ''),
+                        'sale_price': price_dict.get('salePrice', ''),
+                        'list_price': price_dict.get('listPrice', ''),
+                        'final_price':price_dict.get('finalPrice',''),
+                        'has_empl_sale':price_dict.get('hasEmployeeSalePromotion',''),
+                        'isPriceOnDemand': price_dict.get('isPriceOnDemand', '')
+                    }
+                    all_products.append(product_info)
+                print(f"Processed {len(items)} products on page: {page} for Category: {category}")
+            return pd.DataFrame(all_products)
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+            return pd.DataFrame()
+
+    def process_categories(self, categories):
+        for category in categories:
+            category_data = self.fetch_data(category, self.base_url)
+            self.data = pd.concat([self.data, category_data], ignore_index=True)
+
+        # Save the complete DataFrame to a CSV file
+        # data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
+        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+        filename = f'parser-output/YSL_output_{current_date}.csv'
+        self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
+        print(f"Complete data saved to 'YSL_output_{current_date}.csv'")
+class TodsParser(WebsiteParser):
+    def __init__(self):
+        # Initialize with common base URL and empty DataFrame to accumulate results
+        self.base_url = ("https://www.tods.com/rest/v2/tods-us/products/search?query=:rank-asc:category:{category}&fields=NAV&currentPage=0&pageSize=1000&key=undefined&lang=en&access_token=TgPITCn5tGqje8P1IHOIdSbrvKA&Cookie={cookie}")
+        self.data = pd.DataFrame()
+
+    def format_url(self, url):
+        """ Helper function to format URLs correctly """
+        return f"https:{url}" if url else ''
+
+    def safe_strip(self, value):
+        """ Helper function to strip strings safely """
+        return value.strip() if isinstance(value, str) else value
+    def fetch_categories(self,cookie):
+        category_full=[f'{number}-Tods' for number in range(350)]
+        category_sale=[f'{number}-TodsUS' for number in range(700,750)]
+        categories=category_full+category_sale
+        session = requests.Session()
+        # Setup retry strategy
+        retries = Retry(
+            total=2,
+            backoff_factor=1,
+            status_forcelist=[403, 400, 429, 500, 502, 503, 504],
+            allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
+        )
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3'
+        }
+        session.mount("https://", HTTPAdapter(max_retries=retries))
+        final_categories=[]
+        for category in categories:
+            try:
+                response = session.get(self.base_url.format(category=category, page=0, cookie=cookie), headers=headers)
+                response.raise_for_status()
+                json_data = response.json()
+                results = json_data.get("searchPageData", {}).get("results", "")
+                if results:
+                    final_categories.append(category)
+                    print(category)
+            except Exception as e:
+                print(f"Exception occured: {e}\n for category: {category}")
+                continue
+        return final_categories
+    def fetch_data(self, category, base_url, cookie):
+        session = requests.Session()
+        # Setup retry strategy
+        retries = Retry(
+            total=5,
+            backoff_factor=1,
+            status_forcelist=[403,400,429, 500, 502, 503, 504],
+            allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
+        )
+        session.mount("https://", HTTPAdapter(max_retries=retries))
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3'
+        }
+        all_products = []  # Use a list to store product dictionaries
+        try:
+            response = session.get(base_url.format(category=category, page=0, cookie=cookie), headers=headers)
+            response.raise_for_status()
+            json_data = response.json()
+            results=json_data.get("searchPageData",{}).get("results","")
+            category_internal=json_data.get("searchPageData",{}).get("categoryName","")
+            for result in results:
+                product=result.get("product","")
+                if isinstance(product,dict):
+                    product_info = {
+                        "category":category_internal,
+                        'aggregatedStock': product.get('aggregatedStock', ''),
+                        'baseOptions': product.get('baseOptions', []),
+                        'categories': product.get('categories', []),
+                        'code': product.get('code', ''),
+                        'color': product.get('color', ''),
+                        'colorGA': product.get('colorGA', ''),
+                        'colorVariantNumber': product.get('colorVariantNumber', ''),
+                        'currentHero': product.get('currentHero', False),
+                        'freeTextLabel': product.get('freeTextLabel', ''),
+                        'galleryAltText': product.get('galleryAltText', []),
+                        'hasVirtualTryOn': product.get('hasVirtualTryOn', False),
+                        'isBlocked': product.get('isBlocked', False),
+                        'isDiscount': product.get('isDiscount', False),
+                        'name': product.get('name', ''),
+                        'nameGA': product.get('nameGA', ''),
+                        'price_currencyIso': product.get('price', {}).get('currencyIso', ''),
+                        'price_formattedValue': product.get('price', {}).get('formattedValue', ''),
+                        'full_price_value': product.get('fullPrice', {}).get('value', ''),
+                        'price_value': product.get('price', {}).get('value', ''),
+                        'primaryImageAlt': product.get('primaryImageAlt', ''),
+                        'primaryImageUrl': product.get('primaryImageUrl', ''),
+                        'salableStores': product.get('salableStores', False),
+                        'secondaryImageAlt': product.get('secondaryImageAlt', ''),
+                        'secondaryImageUrl': product.get('secondaryImageUrl', ''),
+                        'stockLabel': product.get('stockLabel', ''),
+                        'url': product.get('url', ''),
+                        'volumePricesFlag': product.get('volumePricesFlag', False)
+                    }
+                else:
+                    print(f"The product is of the wrong type:\n{product}")
+                    break
+
+                all_products.append(product_info)
+            print(f"Processed {len(results)} for Category: {category}")
+            return pd.DataFrame(all_products)
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+            return pd.DataFrame()
+
+    def process_categories(self, categories, cookie):
+        for category in categories:
+            category_data = self.fetch_data(category, self.base_url, cookie)
+            self.data = pd.concat([self.data, category_data], ignore_index=True)
+
+        # Save the complete DataFrame to a CSV file
+        # data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
+        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+        filename = f'parser-output/tods_output_{current_date}.csv'
+        self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
+        print(f"Complete data saved to 'tods_output_{current_date}.csv'")
+class LoroPianaParser():
+    ##COMPLETE
+    def __init__(self):
+        # Initialize with common base URL and empty DataFrame to accumulate results
+        self.base_url = "https://us.loropiana.com/en/c/{category}/results?page={page}"
+        self.data = pd.DataFrame()
+    def format_url(self,url):
+        """ Helper function to format URLs correctly """
+        return f"https:{url}" if url else ''
+
+    def safe_strip(self,value):
+        """ Helper function to strip strings safely """
+        return value.strip() if isinstance(value, str) else value
+    def fetch_data(self,category, base_url):
+        session = requests.Session()
+        # Setup retry strategy
+        retries = Retry(
+            total=5,
+            backoff_factor=1,
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
+        )
+        session.mount("https://", HTTPAdapter(max_retries=retries))
+
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3'}
+        all_products = []  # Use a list to store product dictionaries
+        try:
+            response = session.get(base_url.format(category=category, page=0), headers=headers)
+            response.raise_for_status()
+            json_data = response.json()
+            total_pages = json_data.get('pagination', {}).get("numberOfPages",0)
+            print(f"Category: {category}, Total Pages: {total_pages}")
+
+            for page in range(total_pages):
+                response = session.get(base_url.format(category=category, page=page), headers=headers)
+                response.raise_for_status()
+                json_data = response.json()
+                items = json_data.get('results', {})
+                if not items:
+                    print(f"No items found on Page: {page + 1}/{total_pages}")
+                    continue
+
+                for data in items:
+                    gtm_info=self.safe_strip(data.get('gtmInfo', ''))
+                    gtm_info=eval(gtm_info)
+                    product_info = {
+                        'code': self.safe_strip(data.get('code', '')),
+                        'colorCode':self.safe_strip(data.get('code', '')).split("_")[-1],
+                        'solrIsFeatured': str(data.get('solrIsFeatured', False)).lower(),
+                        'invertedImages': str(data.get('invertedImages', False)).lower(),
+                        'genderFluid': str(data.get('genderFluid', False)).lower(),
+                        'isAvailable': str(data.get('isAvailable', False)).lower(),
+                        'variantsNr': data.get('variantsNr', ''),
+                        'price_currencyIso': self.safe_strip(data.get('price', {}).get('currencyIso', '')),
+                        'price_value': data.get('price', {}).get('value', ''),
+                        'price_priceType': self.safe_strip(data.get('price', {}).get('priceType', '')),
+                        'price_formattedValue': self.safe_strip(data.get('price', {}).get('formattedValue', '')),
+                        'price_minQuantity': data.get('price', {}).get('minQuantity', None),
+                        'price_maxQuantity': data.get('price', {}).get('maxQuantity', None),
+                        'primaryImage': data.get('images', [])[0].get('url', '') if data.get('images') else '',
+                        'allImages': " | ".join([img.get('url', '') for img in data.get('images', [])]),
+                        'configurable': str(data.get('configurable', False)).lower(),
+                        'name': self.safe_strip(data.get('name', '')),
+                        'eshopMaterialCode': self.safe_strip(data.get('eshopMaterialCode', '')),
+                        'gtmInfo': gtm_info,
+                        'colorName':gtm_info.get('variant','').split("- ")[-1],
+                        'relativeUrl': self.safe_strip(data.get('relativeUrl', '')),
+                        'url': self.safe_strip(data.get('url', '')),
+                        'colors': self.safe_strip(data.get('colors', '')),
+                        'category':category,
+                        'allColorVariants': data.get('allColorVariants', []),
+                        'productsInLook': self.safe_strip(data.get('productsInLook', '')),
+                        'configurableMto': str(data.get('configurableMto', False)).lower(),
+                        'configurableScarves': str(data.get('configurableScarves', False)).lower(),
+                        'doubleGender': self.safe_strip(data.get('doubleGender', '')),
+                        'preorderable': str(data.get('preorderable', False)).lower(),
+                        'backorderable': self.safe_strip(data.get('backorderable', '')),
+                        'flPreviewProduct': str(data.get('flPreviewProduct', False)).lower(),
+                        'digitalUrl': self.safe_strip(data.get('digitalUrl', '')),
+                        'description': self.safe_strip(data.get('description', '')),
+                        'eshopValid': str(data.get('eshopValid', False)).lower(),
+                        'forceMrf': str(data.get('forceMrf', False)).lower(),
+                        'normalProductEshopValid': str(data.get('normalProductEshopValid', False)).lower(),
+                    }
+                    all_products.append(product_info)
+                print(f"Processed {len(items)} products on Page: {page + 1}/{total_pages} for Category: {category}")
+
+            return pd.DataFrame(all_products)
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {e}")
+            return pd.DataFrame()
+
+
+    def process_categories(self, categories):
+        for category in categories:
+            category_data = self.fetch_data(category, self.base_url)
+            self.data = pd.concat([self.data, category_data], ignore_index=True)
+
+        # Save the complete DataFrame to a CSV file
+        #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
+        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+        filename = f'parser-output/loro_piana_output_{current_date}.csv'
+        self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
+        print(f"Complete data saved to 'output_loro_piana_{current_date}.csv'")
