@@ -2412,7 +2412,7 @@ class JacquemusParser(WebsiteParser):
         parsed_data = []
 
         column_names = [
-            'product_id', 'product_name', 'price', 'category',
+            'product_id', 'color_id', 'product_name', 'price', 'category',
             'image_urls', 'product_url', 'colors', 'status'
         ]
         parsed_data.append(column_names)
@@ -2461,9 +2461,10 @@ class JacquemusParser(WebsiteParser):
                 color_span = color_element.find('span')
                 if color_span:
                     colors.append(color_span.text.strip())
-
+            color_id=product_id.split('-')[-1]
             product_data = [
                 product_id,
+                color_id,
                 product_name,
                 price,
                 category,

@@ -269,9 +269,9 @@ output_directory_path = "parser-output"
 #Valentino End
 
 #Jacquemus Start
-#jacquemusParser = JacquemusParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\jacquemus'
-#jacquemusParser.parse_directory(directory_path)
+jacquemusParser = JacquemusParser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\jacquemus'
+jacquemusParser.parse_directory(directory_path)
 #Jacquemus End
 
 #Louboutin Start
