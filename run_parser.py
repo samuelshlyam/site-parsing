@@ -140,14 +140,13 @@ print(main_directory)
 
 
 #Alexander Mcqueen Start
-#women_categories = ['w-ready-to-wear','W-All-Shoes' ,'W-All-Bags','W-All-Accessories','w-jewellery' ]  # Assuming you have a list of categories
-#men_categories = ['M-All-Ready-to-Wear','M-Shoes','M-All-Accessories', 'm-jewellery','M-Bags']
-#women_base_url = "https://www.alexandermcqueen.com/api/v1/category/women?locale=en-us&categoryIds={clothing_category}&page={page}"
-#men_base_url = "https://www.alexandermcqueen.com/api/v1/category/men?locale=en-us&categoryIds={clothing_category}&page={page}"
-#AlexMcqueenMenParser=AlexanderMcqueenParser(men_base_url)
-#AlexMcqueenWomenParser=AlexanderMcqueenParser(women_base_url)
-#AlexMcqueenMenParser.process_categories(men_categories)
-#AlexMcqueenWomenParser.process_categories(women_categories)
+# women_categories = ['w-ready-to-wear','W-All-Shoes' ,'W-All-Bags','W-All-Accessories','w-jewellery' ]  # Assuming you have a list of categories
+# men_categories = ['M-All-Ready-to-Wear','M-Shoes','M-All-Accessories', 'm-jewellery','M-Bags']
+# women_base_url = "https://www.alexandermcqueen.com/api/v1/category/women?locale=en-us&categoryIds={clothing_category}&page={page}"
+# men_base_url = "https://www.alexandermcqueen.com/api/v1/category/men?locale=en-us&categoryIds={clothing_category}&page={page}"
+# directory_path = '/content/drive/MyDrive/msrp_archive_raw/alexander_mcqueen/2024-07-08_12-45-00/M/'
+# AlexandarMcqueenParser=AlexanderMcqueenParser(men_base_url)
+# AlexandarMcqueenParser.process_categories(men_categories,directory_path)
 #Alexander Mcqueen End
 
 #Dolce Start
@@ -215,9 +214,9 @@ print(main_directory)
 
 
 #Jimmy Choo Start
-jimmyChooParser = JimmyChooParser(output_directory_path)
-directory_path = os.path.join(main_directory,'jimmy_choo')
-jimmyChooParser.parse_directory(directory_path)
+#jimmyChooParser = JimmyChooParser(output_directory_path)
+#directory_path = os.path.join(main_directory,'jimmy_choo')
+#jimmyChooParser.parse_directory(directory_path)
 #JimmyChoo End
 
 
@@ -360,22 +359,22 @@ jimmyChooParser.parse_directory(directory_path)
 #Saint Laurent End
 
 #Tods Start
-#TodsParser=TodsParser()
-#cookie='ftr_ncd=6; mt.v=2.91441120.1720795186835; __attentive_id=9dd8fdfb2a634a25b33a05bddbaea5a4; _attn_=eyJ1Ijoie1wiY29cIjoxNzIwNzk1MTg3MzU5LFwidW9cIjoxNzIwNzk1MTg3MzU5LFwibWFcIjoyMTkwMCxcImluXCI6ZmFsc2UsXCJ2YWxcIjpcIjlkZDhmZGZiMmE2MzRhMjViMzNhMDViZGRiYWVhNWE0XCJ9In0=; __attentive_cco=1720795187360; OptanonAlertBoxClosed=2024-07-12T14:39:50.226Z; nodeClientToken=TgPITCn5tGqje8P1IHOIdSbrvKA; USER=%7B%22username%22%3A%22anonymous%22%2C%22customerId%22%3A%22anonymous%22%2C%22type%22%3A%22anonymous%22%2C%22accessToken%22%3A%22oXyZLwV-y6eQeBiG130xNZoCpQM%22%7D; nodeSessionId=%22a8b149b3-1990-4cc9-8141-383409795986%22; countryIP=US; AKA_A2=A; _abck=33603576242A74C7496127C28B0E34BE~0~YAAQxMgsFxyITLaQAQAAsdx4vAz7v4KHhurJZlkz46njo3UgqOW0FTcivTzeS4zOIwaVqFY3mrKysCFXEd5hHhnOLdUc807Y73AwEMiujNE3TeCLh6+LPyfBeoTQre39GPsbrvsUUiInpajb1gl0yibi7Noffe6uF78/koZmMOWXOCSyjXx98a7iHPHZzJxMdmPfvFlNNaOmzcg4ubvHfGlZl+ljbpMZjjOKRKmHZsHiJeDqvRrajsJimsPBALa9U1fuJRfDvi2IWDpQMoZKHfN1lsPWokA/k7npRZXZrN4VZ2p+3+yAkd37JjWaMReVjcl9onUCbm/JCXeVSLZq6z5/UyD1FhgCgFEtqO0HEPW9Xg0/S2E89xDeG01xYhA+QvOYPBo3u+27fmWT4669aiQXYNmH1w==~-1~-1~-1; bm_sz=B8F44CA3495E1A73521F76314743EF9F~YAAQxMgsFx+ITLaQAQAAsdx4vBhLG433z000loJxqejKosGvRTFO4/uZadpG5wM7aaDqZiyvNoeubCk2HM9V6tzIdXSkkh7LBaygbZ5efC2FuzKJbfS6vZ54H1PwhWmztzHzEavvEImqhnIPB/LzPsodWyTIaTOriEsDXjX11wtO7Y6WO+dtLiHtvtnRUqlzRsRmS6VFgRIhM8odNnN2tJl5Ril+7ZpjG7X6MZ108n1gFVWp0+1B+Zrs3ecqB6EymP0x7EP7Tl+X+j6URTV3bmN9MYTaGzHR/c4PPNlA4Cx6s+AR6xHTyxB1JkZDfnssFCsOSHoZR9RN4mB6OxWZbKmISWeqANpm1u/mVEQtBbKWFziElAtok6Ojx7i+NRaqfwdmnrPWKis+j5gb7Sg=~4536642~3621174; PIM-SESSION-ID=IAUZPefx620he0If; _cs_mk_ga=0.0739706499717212_1721148957046; _gid=GA1.2.1855863707.1721148957; _ga=GA1.2.1520502800.1720795186; ak_bmsc=A3858ABE0725B00A0AF17AAF79053C7C~000000000000000000000000000000~YAAQxMgsF0CJTLaQAQAATOh4vBiAMseTevUJYssKk+/Hiiffh7Yb/prqOaEQufn7cO6uqUYanYV4iEBhl7Rn7DM9NZWNZD+MSKWaT7QEn83uVL3au+HPR1mnbzLe4n01H4jrhT2i8Ai4JrPNmBQaKGPzhvgRP2sEhrBv5h1h5dY8xWnRj7F69U7O0P9lW1KfKjlc+Tx5ZU7ZoOpLXVZ6eNLZoa4j7gg264NJP6l/jC9DBNsKpvKlcGBKG1BnNVMGAIq0hn8cByMQUzFiqTgCMmo8n562HqgaIC7ZYC9g1nGFR/IyFSaUlUdOJeU+JBcPi98uzRd2U4YNlj8VDtckzmdB1+adD3Ge+BFsLXl22vfd5BQjeriDAwzb+cMMQeSOvuWBncToFqUv6vmEu1Bw4Rh30ADSRnUgg864mjcNYkHLv5dq9sqo3QxoaRzYhA==; OptanonConsent=isGpcEnabled=0&datestamp=Tue+Jul+16+2024+12%3A55%3A58+GMT-0400+(Eastern+Daylight+Time)&version=202405.2.0&browserGpcFlag=0&isIABGlobal=false&hosts=&consentId=073ae49f-e470-48e1-b404-312cac8c5717&interactionCount=1&isAnonUser=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A0%2CC0003%3A0%2CC0004%3A0&intType=undefined&geolocation=%3B&AwaitingReconsent=false; forterToken=ca43b01699004ab88ab9fccb53451566_1721148956606__UDF43-m4_9ck_; QueueITAccepted-SDFrts345E-V3_tods=EventId%3Dtods%26QueueId%3D77e7644b-2e59-4cfa-a8aa-d3e692510e6f%26RedirectType%3Dsafetynet%26IssueTime%3D1721148959%26Hash%3D15e619f44015c99375b3b5d9fe6654de45f808f4d8353e292ff46ee149787465; __attentive_utm_param_medium=cpc; __attentive_utm_param_source=google; __attentive_utm_param_campaign=W_US_Tods_Search_Brand_Pure_Exact_MS; __attentive_ss_referrer=https://www.google.com/; __attentive_dv=1; __attentive_pv=2; RT="z=1&dm=tods.com&si=2d6b53f5-49d7-4666-97b8-76c5eb97df45&ss=lyonnckv&sl=1&tt=3w7&rl=1&ld=3w9&nu=pmxcb4ms&cl=j7a"; _ga_YMQ83SWR7E=GS1.1.1721148957.2.1.1721148979.0.0.0; bm_sv=B1F13FA6025020E76AB4B3D4137F7FD1~YAAQxMgsF4KNTLaQAQAAmD15vBjIqF+J5NX8tq+eNAievVRfZB6Bz/12ZwQ2tHn8pt7jim6s//uSxD4ZJJYrl7rN6SHeVCCsKlNz/TicQQfEWwVeJnG1c9SAzxWPKIC4CyztE3vtDfEYhd4lW8g3cq6yiFsVnqsLXEUC7hvN9X2FYQH1c56pjkkEnKC3uptSwtFGt/VIZJdO373LjA8B/OB86xwEZpdC2X3EkAtz4EN9lOIXb8FAP9nKN9PJZg==~1'
-#categories=TodsParser.fetch_categories(cookie)
-#print(categories)
-#TodsParser.process_categories(categories,cookie)
+# TodsParser=TodsParser()
+# cookie='ftr_ncd=6; mt.v=2.91441120.1720795186835; __attentive_id=9dd8fdfb2a634a25b33a05bddbaea5a4; _attn_=eyJ1Ijoie1wiY29cIjoxNzIwNzk1MTg3MzU5LFwidW9cIjoxNzIwNzk1MTg3MzU5LFwibWFcIjoyMTkwMCxcImluXCI6ZmFsc2UsXCJ2YWxcIjpcIjlkZDhmZGZiMmE2MzRhMjViMzNhMDViZGRiYWVhNWE0XCJ9In0=; __attentive_cco=1720795187360; OptanonAlertBoxClosed=2024-07-12T14:39:50.226Z; nodeClientToken=TgPITCn5tGqje8P1IHOIdSbrvKA; USER=%7B%22username%22%3A%22anonymous%22%2C%22customerId%22%3A%22anonymous%22%2C%22type%22%3A%22anonymous%22%2C%22accessToken%22%3A%22oXyZLwV-y6eQeBiG130xNZoCpQM%22%7D; nodeSessionId=%22a8b149b3-1990-4cc9-8141-383409795986%22; countryIP=US; AKA_A2=A; _abck=33603576242A74C7496127C28B0E34BE~0~YAAQxMgsFxyITLaQAQAAsdx4vAz7v4KHhurJZlkz46njo3UgqOW0FTcivTzeS4zOIwaVqFY3mrKysCFXEd5hHhnOLdUc807Y73AwEMiujNE3TeCLh6+LPyfBeoTQre39GPsbrvsUUiInpajb1gl0yibi7Noffe6uF78/koZmMOWXOCSyjXx98a7iHPHZzJxMdmPfvFlNNaOmzcg4ubvHfGlZl+ljbpMZjjOKRKmHZsHiJeDqvRrajsJimsPBALa9U1fuJRfDvi2IWDpQMoZKHfN1lsPWokA/k7npRZXZrN4VZ2p+3+yAkd37JjWaMReVjcl9onUCbm/JCXeVSLZq6z5/UyD1FhgCgFEtqO0HEPW9Xg0/S2E89xDeG01xYhA+QvOYPBo3u+27fmWT4669aiQXYNmH1w==~-1~-1~-1; bm_sz=B8F44CA3495E1A73521F76314743EF9F~YAAQxMgsFx+ITLaQAQAAsdx4vBhLG433z000loJxqejKosGvRTFO4/uZadpG5wM7aaDqZiyvNoeubCk2HM9V6tzIdXSkkh7LBaygbZ5efC2FuzKJbfS6vZ54H1PwhWmztzHzEavvEImqhnIPB/LzPsodWyTIaTOriEsDXjX11wtO7Y6WO+dtLiHtvtnRUqlzRsRmS6VFgRIhM8odNnN2tJl5Ril+7ZpjG7X6MZ108n1gFVWp0+1B+Zrs3ecqB6EymP0x7EP7Tl+X+j6URTV3bmN9MYTaGzHR/c4PPNlA4Cx6s+AR6xHTyxB1JkZDfnssFCsOSHoZR9RN4mB6OxWZbKmISWeqANpm1u/mVEQtBbKWFziElAtok6Ojx7i+NRaqfwdmnrPWKis+j5gb7Sg=~4536642~3621174; PIM-SESSION-ID=IAUZPefx620he0If; _cs_mk_ga=0.0739706499717212_1721148957046; _gid=GA1.2.1855863707.1721148957; _ga=GA1.2.1520502800.1720795186; ak_bmsc=A3858ABE0725B00A0AF17AAF79053C7C~000000000000000000000000000000~YAAQxMgsF0CJTLaQAQAATOh4vBiAMseTevUJYssKk+/Hiiffh7Yb/prqOaEQufn7cO6uqUYanYV4iEBhl7Rn7DM9NZWNZD+MSKWaT7QEn83uVL3au+HPR1mnbzLe4n01H4jrhT2i8Ai4JrPNmBQaKGPzhvgRP2sEhrBv5h1h5dY8xWnRj7F69U7O0P9lW1KfKjlc+Tx5ZU7ZoOpLXVZ6eNLZoa4j7gg264NJP6l/jC9DBNsKpvKlcGBKG1BnNVMGAIq0hn8cByMQUzFiqTgCMmo8n562HqgaIC7ZYC9g1nGFR/IyFSaUlUdOJeU+JBcPi98uzRd2U4YNlj8VDtckzmdB1+adD3Ge+BFsLXl22vfd5BQjeriDAwzb+cMMQeSOvuWBncToFqUv6vmEu1Bw4Rh30ADSRnUgg864mjcNYkHLv5dq9sqo3QxoaRzYhA==; OptanonConsent=isGpcEnabled=0&datestamp=Tue+Jul+16+2024+12%3A55%3A58+GMT-0400+(Eastern+Daylight+Time)&version=202405.2.0&browserGpcFlag=0&isIABGlobal=false&hosts=&consentId=073ae49f-e470-48e1-b404-312cac8c5717&interactionCount=1&isAnonUser=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A0%2CC0003%3A0%2CC0004%3A0&intType=undefined&geolocation=%3B&AwaitingReconsent=false; forterToken=ca43b01699004ab88ab9fccb53451566_1721148956606__UDF43-m4_9ck_; QueueITAccepted-SDFrts345E-V3_tods=EventId%3Dtods%26QueueId%3D77e7644b-2e59-4cfa-a8aa-d3e692510e6f%26RedirectType%3Dsafetynet%26IssueTime%3D1721148959%26Hash%3D15e619f44015c99375b3b5d9fe6654de45f808f4d8353e292ff46ee149787465; __attentive_utm_param_medium=cpc; __attentive_utm_param_source=google; __attentive_utm_param_campaign=W_US_Tods_Search_Brand_Pure_Exact_MS; __attentive_ss_referrer=https://www.google.com/; __attentive_dv=1; __attentive_pv=2; RT="z=1&dm=tods.com&si=2d6b53f5-49d7-4666-97b8-76c5eb97df45&ss=lyonnckv&sl=1&tt=3w7&rl=1&ld=3w9&nu=pmxcb4ms&cl=j7a"; _ga_YMQ83SWR7E=GS1.1.1721148957.2.1.1721148979.0.0.0; bm_sv=B1F13FA6025020E76AB4B3D4137F7FD1~YAAQxMgsF4KNTLaQAQAAmD15vBjIqF+J5NX8tq+eNAievVRfZB6Bz/12ZwQ2tHn8pt7jim6s//uSxD4ZJJYrl7rN6SHeVCCsKlNz/TicQQfEWwVeJnG1c9SAzxWPKIC4CyztE3vtDfEYhd4lW8g3cq6yiFsVnqsLXEUC7hvN9X2FYQH1c56pjkkEnKC3uptSwtFGt/VIZJdO373LjA8B/OB86xwEZpdC2X3EkAtz4EN9lOIXb8FAP9nKN9PJZg==~1'
+# categories=TodsParser.fetch_categories(cookie)
+# print(categories)
+# TodsParser.process_categories(categories,cookie)
 #Tods End
 
 
 #Herno Start
-hernoParser = HernoParser(output_directory_path)
-directory_path = os.path.join(main_directory, 'herno')
-hernoParser.parse_directory(directory_path)
+#hernoParser = HernoParser(output_directory_path)
+#directory_path = os.path.join(main_directory, 'herno')
+#hernoParser.parse_directory(directory_path)
 #Herno End
 
 #Lanvin Start
-lanvinParser = LanvinParser(output_directory_path)
-directory_path = os.path.join(main_directory, 'lanvin')
-lanvinParser.parse_directory(directory_path)
+# lanvinParser = LanvinParser(output_directory_path)
+# directory_path = os.path.join(main_directory, 'lanvin')
+# lanvinParser.parse_directory(directory_path)
 #Lanvin End
