@@ -14,8 +14,12 @@ output_directory_path = "parser-output"
 #directory_path = 'brands_html/bottega_veneta'
 ##Bottega Veneta Parser METHOD 1##
 
+current_directory= os.getcwd()
+main_directory=os.path.join(current_directory,'internal_html')
+print(main_directory)
+
 ##SINGLE FILE RUN##
-#input_file_path = '/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/bottega_veneta'
+#input_file_path = os.path.join(main_directory,'bottega_veneta')
 #category = os.path.splitext(input_file_path)[0]  # Use the filename as the category
 ##Uncomment to run##
 #bottega_parser_output = bottega_parser.parse_website(input_file_path, category)
@@ -211,9 +215,9 @@ output_directory_path = "parser-output"
 
 
 #Jimmy Choo Start
-#jimmyChooParser = JimmyChooParser(output_directory_path)
-#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/jimmy_choo'
-#jimmyChooParser.parse_directory(directory_path)
+jimmyChooParser = JimmyChooParser(output_directory_path)
+directory_path = os.path.join(main_directory,'jimmy_choo')
+jimmyChooParser.parse_directory(directory_path)
 #JimmyChoo End
 
 
@@ -269,9 +273,9 @@ output_directory_path = "parser-output"
 #Valentino End
 
 #Jacquemus Start
-jacquemusParser = JacquemusParser(output_directory_path)
-directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\jacquemus'
-jacquemusParser.parse_directory(directory_path)
+#jacquemusParser = JacquemusParser(output_directory_path)
+#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\jacquemus'
+#jacquemusParser.parse_directory(directory_path)
 #Jacquemus End
 
 #Louboutin Start
@@ -365,13 +369,13 @@ jacquemusParser.parse_directory(directory_path)
 
 
 #Herno Start
-# hernoParser = HernoParser(output_directory_path)
-# directory_path = r'/Users/samuelshlyam/PycharmProjects/SiteParsers/site-parsing/internal_html/herno'
-# hernoParser.parse_directory(directory_path)
+hernoParser = HernoParser(output_directory_path)
+directory_path = os.path.join(main_directory, 'herno')
+hernoParser.parse_directory(directory_path)
 #Herno End
 
 #Lanvin Start
 lanvinParser = LanvinParser(output_directory_path)
-directory_path = r'/Users/samuelshlyam/PycharmProjects/SiteParsers/site-parsing/internal_html/lanvin'
+directory_path = os.path.join(main_directory, 'lanvin')
 lanvinParser.parse_directory(directory_path)
 #Lanvin End
