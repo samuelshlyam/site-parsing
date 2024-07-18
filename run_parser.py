@@ -7,7 +7,7 @@ from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyPar
     BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser, PradaParser, TodsParser, \
     ValentinoParser, JacquemusParser, LouboutinParser, PalmAngelsParser, MooseKnucklesParser, AcneStudiosParser, \
     TheRowParser, ManoloBlahnikParser, GianvitoRossiParser, MiuMiuParser, BirkenstockParser, AquazzuraParser, \
-    OffWhiteProductParser, TomFordProductParser, LoeweParser
+    OffWhiteProductParser, TomFordProductParser, LoeweParser, HernoParser, LanvinParser
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -238,9 +238,9 @@ output_directory_path = "parser-output"
 
 
 #Loro Piana Start
-categories=['L1_MEN','L1_WOM','L2_MEN_ACCESSORIES','L2_WOM_LG','L2_WOM_ACCESSORIES','L2_SHOES_WOM','L2_WOM_SLG','L2_SHOES_MAN','L2_DIGITALFW24_MAN','L2_DIGITALFW24_WOM','L2_SS23_WOM','L2_SS23_MAN']
-LoroParser=LoroPianaParser()
-LoroParser.process_categories(categories)
+# categories=['L1_MEN','L1_WOM','L2_MEN_ACCESSORIES','L2_WOM_LG','L2_WOM_ACCESSORIES','L2_SHOES_WOM','L2_WOM_SLG','L2_SHOES_MAN','L2_DIGITALFW24_MAN','L2_DIGITALFW24_WOM','L2_SS23_WOM','L2_SS23_MAN']
+# LoroParser=LoroPianaParser()
+# LoroParser.process_categories(categories)
 #Loro Piana End
 
 
@@ -269,9 +269,9 @@ LoroParser.process_categories(categories)
 #Valentino End
 
 #Jacquemus Start
-#jacquemusParser = JacquemusParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\jacquemus'
-#jacquemusParser.parse_directory(directory_path)
+jacquemusParser = JacquemusParser(output_directory_path)
+directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\jacquemus'
+jacquemusParser.parse_directory(directory_path)
 #Jacquemus End
 
 #Louboutin Start
@@ -362,3 +362,16 @@ LoroParser.process_categories(categories)
 #print(categories)
 #TodsParser.process_categories(categories,cookie)
 #Tods End
+
+
+#Herno Start
+# hernoParser = HernoParser(output_directory_path)
+# directory_path = r'/Users/samuelshlyam/PycharmProjects/SiteParsers/site-parsing/internal_html/herno'
+# hernoParser.parse_directory(directory_path)
+#Herno End
+
+#Lanvin Start
+lanvinParser = LanvinParser(output_directory_path)
+directory_path = r'/Users/samuelshlyam/PycharmProjects/SiteParsers/site-parsing/internal_html/lanvin'
+lanvinParser.parse_directory(directory_path)
+#Lanvin End
