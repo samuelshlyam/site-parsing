@@ -1322,7 +1322,9 @@ class StoneIslandParser(WebsiteParser):
 
         ##SELECT ALL BLOCKS FIRST
 
-        articulos = container_prods.find_all('li', {'class': 'item'})
+        articulos = container_prods.find_all('li', {'class': 'item'}) if container_prods else []
+
+        #COLUMN NAMES
         column_names = [
             'category', 'product_title', 'product_price', 'product_discountedPrice', 'product_position',
             'product_cod10', 'product_brand', 'product_category', 'product_macro_category', 'product_micro_category',
@@ -1334,38 +1336,56 @@ class StoneIslandParser(WebsiteParser):
         for articulo in articulos:
             item_desc = articulo.find('div', {'class': 'item'})
 
-            data_gtmproduct = item_desc['data-ytos-track-product-data']
+            data_gtmproduct = item_desc.get('data-ytos-track-product-data','') if item_desc else ''
             data_gtmproduct = html.unescape(data_gtmproduct)
-            product_info = json.loads(data_gtmproduct)
+            product_info = json.loads(data_gtmproduct) if data_gtmproduct else ''
+            if product_info:
+              product_position = product_info.get('product_position','')
+              product_cod10 = product_info.get('product_cod10','')
 
-            product_position = product_info['product_position']
-            product_cod10 = product_info['product_cod10']
+              product_brand = product_info.get('product_brand','')
+              product_category = product_info.get('product_category','')
+              product_macro_category = product_info.get('product_macro_category','')
+              product_micro_category = product_info.get('product_micro_category','')
+              product_macro_category_id = product_info.get('product_macro_category_id','')
+              product_color = product_info.get('product_color','')
+              product_color_id = product_info.get('product_color_id','')
+              product_title = product_info.get('product_title','')
 
-            product_brand = product_info['product_brand']
-            product_category = product_info['product_category']
-            product_macro_category = product_info['product_macro_category']
-            product_micro_category = product_info['product_micro_category']
-            product_macro_category_id = product_info['product_macro_category_id']
-            product_color = product_info['product_color']
-            product_color_id = product_info['product_color_id']
-            product_title = product_info['product_title']
-
-            product_price = product_info['product_price']
-            product_discountedPrice = product_info['product_discountedPrice']
-            product_micro_category_id = product_info['product_micro_category_id']
-            product_price_tf = product_info['product_price_tf']
-            product_discountedPrice_tf = product_info['product_discountedPrice_tf']
-
-            product_quantity = product_info['product_quantity']
-            product_coupon = product_info['product_coupon']
-            product_is_in_stock = product_info['product_is_in_stock']
+              product_price = product_info.get('product_price','')
+              product_discountedPrice = product_info.get('product_discountedPrice','')
+              product_micro_category_id = product_info.get('product_micro_category_id','')
+              product_price_tf = product_info.get('product_price_tf','')
+              product_discountedPrice_tf = product_info.get('product_discountedPrice_tf','')
+              product_quantity = product_info.get('product_quantity','')
+              product_coupon = product_info.get('product_coupon','')
+              product_is_in_stock = product_info.get('product_is_in_stock','')
+            else:
+              product_position = ''
+              product_cod10 = ''
+              product_brand = ''
+              product_category = ''
+              product_macro_category = ''
+              product_micro_category = ''
+              product_macro_category_id = ''
+              product_color = ''
+              product_color_id = ''
+              product_title = ''
+              product_price = ''
+              product_discountedPrice = ''
+              product_micro_category_id = ''
+              product_price_tf = ''
+              product_discountedPrice_tf = ''
+              product_quantity = ''
+              product_coupon = ''
+              product_is_in_stock = ''
 
             a_href = articulo.find('a', {'class': 'itemLink'})
 
-            a_href = a_href['href']
+            a_href = a_href.get('href','')
 
             img = articulo.find('img')
-            img = img.get('src')
+            img = img.get('src','')
 
             product_data = [
                 category,
@@ -3632,3 +3652,158 @@ class LoroPianaParser():
         filename = f'parser-output/loro_piana_output_{current_date}.csv'
         self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
         print("Complete data saved to 'output_loro_piana_5_27_24.csv'")
+
+class HernoParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'herno'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'category', 'product_name', 'product_id', 'price', 'discount_price',
+            'product_url', 'image_urls', 'color_name', 'currency'
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('div', class_='b-product_tile')
+
+        for product in product_blocks:
+            category = product.get('data-category', '')
+            # Extract product name
+            name_element = product.find('a', class_='b-product_name')
+            product_name = name_element.get_text(strip=True) if name_element else ''
+
+            # Extract product ID and color ID
+            product_id = product.get('data-itemid', '')
+
+
+            # Extract product URL
+            product_url = name_element.get('href', '') if name_element else ''
+
+            # Extract image URLs
+            image_element = product.find('img', class_='b-product_image')
+            image_urls = []
+            if image_element:
+                main_image = image_element.get('data-src', '')
+                alt_image = image_element.get('data-altimage', '')
+                main_image_2 = f"https://us.herno.com{main_image}" if main_image else ""
+                alt_image_2 = f"https://us.herno.com{alt_image}" if alt_image else ""
+                image_urls = list(filter(None, [main_image_2, alt_image_2]))
+
+            # Extract prices
+            price_container = product.find('div', class_='b-product_price')
+            if price_container:
+                price_element = price_container.find('div', class_='b-product_price-standard')
+                price = price_element.get_text(strip=True) if price_element else ''
+
+                discount_price_element = price_container.find('span', class_='b-product_price-sales')
+                discount_price = discount_price_element.get_text(
+                    strip=True) if discount_price_element and not 'h-hidden' in discount_price_element.get('class',
+                                                                                                           []) else ''
+
+
+            else:
+                price = ''
+                discount_price = ''
+                discount_percentage = ''
+
+            # Extract currency
+            if '$' in price:
+                currency = 'USD'  # Assuming USD based on the $ sign in prices
+            else:
+                currency=''
+            # Extract color name
+            color_name = product.get('data-variant', '')
+
+
+
+            # These fields are not directly available in the given HTML
+
+            # Clean up prices
+            price = re.sub(r'[^\d.]', '', price)
+            discount_price = re.sub(r'[^\d.]', '', discount_price)
+
+            product_data = [
+                category,
+                product_name,
+                product_id,
+                price,
+                discount_price,
+                f"https://us.herno.com{product_url}" if product_url else '',
+                '|'.join(image_urls),  # Join multiple image URLs with a separator
+                color_name,
+                currency
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+class LanvinParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'lanvin'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'category', 'product_id',  'price',
+            'product_url', 'image_urls', 'name', 'currency'
+
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('div', class_='product-item')
+        for product in product_blocks:
+            # Extract product name
+            name_element = product.find('p', class_='sr-product-title')
+            name = name_element.find('a').get_text(strip=True) if name_element else ''
+
+            # Extract product URL
+            product_url = name_element.find('a')['href'] if name_element else ''
+
+            # Extract product ID
+            index=self.find_nth_last(product_url[::-1],'-',4)
+            index=len(product_url)-index
+            product_id=product_url[index:]
+            # Extract price
+            price_element = product.find('p', class_='product-price')
+            price = price_element.get_text(strip=True) if price_element else ''
+
+            # Extract currency
+            currency = 'USD' if '$' in price else ''
+
+            # Clean up price
+            price = re.sub(r'[^\d.]', '', price)
+
+            # Extract image URLs
+            image_elements = product.find_all('div', class_='image')
+            image_urls = []
+            for img in image_elements:
+                img_src = img.find('img')
+                if img_src and 'data-srcset' in img_src.attrs:
+                    srcset = img_src['data-srcset']
+                    highest_res_img = srcset.split(',')[-1].split()[0]
+                    image_urls.append(highest_res_img)
+
+
+            product_data = [
+                category,
+                product_id,
+                price,
+                f"https://us.lanvin.com{product_url}" if product_url else '',
+                '|'.join(image_urls),
+                name,
+                currency
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+    def find_nth_last(self, string, substring, n):
+        if n == 1:
+            return string.find(substring)
+        else:
+            return string.find(substring, self.find_nth_last(string, substring, n - 1) + 1)
