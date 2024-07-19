@@ -123,8 +123,18 @@ class WebsiteParser:
     @staticmethod
     def open_link(url):
         try:
+            session = requests.Session()
+            # Setup retry strategy
+            retries = Retry(
+                total=5,
+                backoff_factor=1,
+                status_forcelist=[429, 500, 502, 503, 504],
+                allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
+            )
+            session.mount("https://", HTTPAdapter(max_retries=retries))
             headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"}
-            response = requests.get(url,headers=headers,allow_redirects=True)
+            print(url)
+            response = session.get(url,headers=headers,allow_redirects=True)
             response.raise_for_status()  # Raises an HTTPError for bad responses
             return response.text
         except requests.exceptions.RequestException as e:

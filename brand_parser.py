@@ -1,9 +1,9 @@
 import os
 import re
 from urllib.parse import urljoin, urlunparse, urlparse
-
+from bs4 import BeautifulSoup, Tag
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 import csv
 import json
 import html
@@ -466,16 +466,16 @@ class TomFordProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'tom_ford'  # Replace spaces with underscores
         self.directory = directory
-    def parse_product_blocks(self, soup, category):
+    def parse_product_blocks(self, soup,category):
         parsed_data = []
         column_names = [
             'product_id', 'product_name', 'product_url', 'price', 'images', 'quick_view_url','variation_count'
         ]
         parsed_data.append(column_names)
 
-        product_blocks = soup.find_all('div', class_='product')
-
-        for block in product_blocks:
+        product_blocks = soup.find_all('div', class_='product-tile-wrap')
+        for block_temp in product_blocks:
+            block=block_temp.find('div',class_='product')
             product_id = block.get('data-pid', '')
             product_name = block.find('a', class_='link').text.strip() if block.find('a', class_='link') else ''
             product_url = block.find('a', class_='tile-image-container')['href'] if block.find('a', class_='tile-image-container') else ''
@@ -494,7 +494,10 @@ class TomFordProductParser(WebsiteParser):
             variation_count = variation_element.text.strip() if variation_element else ''
 
             if "-" not in product_id:
-                product_id=images[0].split('/')[-1].split("_APPEN")[0]
+                if block:
+                    product_id = self.extract_product_id(str(block_temp))
+                else:
+                    product_id=''
 
             product_data = [
                 product_id,
@@ -509,7 +512,26 @@ class TomFordProductParser(WebsiteParser):
 
         return parsed_data
 
+    def extract_product_id(self,html_content):
+        # Regular expression to find the specific script tag
+        pattern = r'<script>window\._gdl=window\._gdl\|\|\[];window\._gdl\.push\((.*?)\);</script>'
 
+        # Find all matches
+        matches = re.findall(pattern, html_content)
+
+        if matches:
+            # Get the first match
+            data_string = matches[0]
+
+            # Convert the string to a Python dictionary
+            data = json.loads(data_string)
+
+            # Extract the product ID
+            product_id = data['d']['id']
+
+            return product_id
+
+        return None
 class OffWhiteProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'off_white'  # Replace spaces with underscores
@@ -2296,7 +2318,7 @@ class PradaParser(WebsiteParser):
 
         column_names = [
             'product_id', 'product_name', 'price',
-            'category', 'image_urls', 'product_url', 'colors'
+            'category', 'image_urls', 'product_url'
         ]
         parsed_data.append(column_names)
 
@@ -2336,9 +2358,8 @@ class PradaParser(WebsiteParser):
                 product_name,
                 price,
                 category,
-                ', '.join(image_urls),
-                product_url,
-                ', '.join(colors)
+                '| '.join(image_urls),
+                product_url
             ]
             parsed_data.append(product_data)
 
@@ -2799,7 +2820,19 @@ class AcneStudiosParser(WebsiteParser):
         return parsed_data
     def extract_product_id(self,product_url):
         html=self.open_link(product_url)
-        soup_pid=BeautifulSoup(html, 'html.parser')
+        soup_pid=BeautifulSoup(html, 'html.parser') if html else ''
+        if soup_pid:
+            style_id_item = soup_pid.find('li', string=lambda text: 'Style ID:' in text if text else False)
+
+            if style_id_item:
+                # Extract the Style ID
+                style_id = style_id_item.text.split('Style ID:')[1].strip()
+                print(f"Product ID: {style_id}")
+                return style_id
+            else:
+                print("Product ID not found.")
+        else:
+            print(f'Your URL is broken: {product_url}')
 
 
 class TheRowParser(WebsiteParser):
@@ -3591,153 +3624,153 @@ class LoroPianaParser():
         self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
         print("Complete data saved to 'output_loro_piana_5_27_24.csv'")
 
-    class HernoParser(WebsiteParser):
-        def __init__(self, directory):
-            self.brand = 'herno'
-            self.directory = directory
+class HernoParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'herno'
+        self.directory = directory
 
-        def parse_product_blocks(self, soup, category):
-            parsed_data = []
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
 
-            column_names = [
-                'category', 'product_name', 'product_id', 'price', 'discount_price',
-                'product_url', 'image_urls', 'color_name', 'currency'
-            ]
-            parsed_data.append(column_names)
+        column_names = [
+            'category', 'product_name', 'product_id', 'price', 'discount_price',
+            'product_url', 'image_urls', 'color_name', 'currency'
+        ]
+        parsed_data.append(column_names)
 
-            product_blocks = soup.find_all('div', class_='b-product_tile')
+        product_blocks = soup.find_all('div', class_='b-product_tile')
 
-            for product in product_blocks:
-                category = product.get('data-category', '')
-                # Extract product name
-                name_element = product.find('a', class_='b-product_name')
-                product_name = name_element.get_text(strip=True) if name_element else ''
+        for product in product_blocks:
+            category = product.get('data-category', '')
+            # Extract product name
+            name_element = product.find('a', class_='b-product_name')
+            product_name = name_element.get_text(strip=True) if name_element else ''
 
-                # Extract product ID and color ID
-                product_id = product.get('data-itemid', '')
+            # Extract product ID and color ID
+            product_id = product.get('data-itemid', '')
 
-                # Extract product URL
-                product_url = name_element.get('href', '') if name_element else ''
+            # Extract product URL
+            product_url = name_element.get('href', '') if name_element else ''
 
-                # Extract image URLs
-                image_element = product.find('img', class_='b-product_image')
-                image_urls = []
-                if image_element:
-                    main_image = image_element.get('data-src', '')
-                    alt_image = image_element.get('data-altimage', '')
-                    main_image_2 = f"https://us.herno.com{main_image}" if main_image else ""
-                    alt_image_2 = f"https://us.herno.com{alt_image}" if alt_image else ""
-                    image_urls = list(filter(None, [main_image_2, alt_image_2]))
+            # Extract image URLs
+            image_element = product.find('img', class_='b-product_image')
+            image_urls = []
+            if image_element:
+                main_image = image_element.get('data-src', '')
+                alt_image = image_element.get('data-altimage', '')
+                main_image_2 = f"https://us.herno.com{main_image}" if main_image else ""
+                alt_image_2 = f"https://us.herno.com{alt_image}" if alt_image else ""
+                image_urls = list(filter(None, [main_image_2, alt_image_2]))
 
-                # Extract prices
-                price_container = product.find('div', class_='b-product_price')
-                if price_container:
-                    price_element = price_container.find('div', class_='b-product_price-standard')
-                    price = price_element.get_text(strip=True) if price_element else ''
-
-                    discount_price_element = price_container.find('span', class_='b-product_price-sales')
-                    discount_price = discount_price_element.get_text(
-                        strip=True) if discount_price_element and not 'h-hidden' in discount_price_element.get('class',
-                                                                                                               []) else ''
-
-
-                else:
-                    price = ''
-                    discount_price = ''
-                    discount_percentage = ''
-
-                # Extract currency
-                if '$' in price:
-                    currency = 'USD'  # Assuming USD based on the $ sign in prices
-                else:
-                    currency = ''
-                # Extract color name
-                color_name = product.get('data-variant', '')
-
-                # These fields are not directly available in the given HTML
-
-                # Clean up prices
-                price = re.sub(r'[^\d.]', '', price)
-                discount_price = re.sub(r'[^\d.]', '', discount_price)
-
-                product_data = [
-                    category,
-                    product_name,
-                    product_id,
-                    price,
-                    discount_price,
-                    f"https://us.herno.com{product_url}" if product_url else '',
-                    '|'.join(image_urls),  # Join multiple image URLs with a separator
-                    color_name,
-                    currency
-                ]
-                parsed_data.append(product_data)
-
-            return parsed_data
-
-    class LanvinParser(WebsiteParser):
-        def __init__(self, directory):
-            self.brand = 'lanvin'
-            self.directory = directory
-
-        def parse_product_blocks(self, soup, category):
-            parsed_data = []
-
-            column_names = [
-                'category', 'product_id', 'price',
-                'product_url', 'image_urls', 'name', 'currency'
-
-            ]
-            parsed_data.append(column_names)
-
-            product_blocks = soup.find_all('div', class_='product-item')
-            for product in product_blocks:
-                # Extract product name
-                name_element = product.find('p', class_='sr-product-title')
-                name = name_element.find('a').get_text(strip=True) if name_element else ''
-
-                # Extract product URL
-                product_url = name_element.find('a')['href'] if name_element else ''
-
-                # Extract product ID
-                index = self.find_nth_last(product_url[::-1], '-', 4)
-                index = len(product_url) - index
-                product_id = product_url[index:]
-                # Extract price
-                price_element = product.find('p', class_='product-price')
+            # Extract prices
+            price_container = product.find('div', class_='b-product_price')
+            if price_container:
+                price_element = price_container.find('div', class_='b-product_price-standard')
                 price = price_element.get_text(strip=True) if price_element else ''
 
-                # Extract currency
-                currency = 'USD' if '$' in price else ''
+                discount_price_element = price_container.find('span', class_='b-product_price-sales')
+                discount_price = discount_price_element.get_text(
+                    strip=True) if discount_price_element and not 'h-hidden' in discount_price_element.get('class',
+                                                                                                           []) else ''
 
-                # Clean up price
-                price = re.sub(r'[^\d.]', '', price)
 
-                # Extract image URLs
-                image_elements = product.find_all('div', class_='image')
-                image_urls = []
-                for img in image_elements:
-                    img_src = img.find('img')
-                    if img_src and 'data-srcset' in img_src.attrs:
-                        srcset = img_src['data-srcset']
-                        highest_res_img = srcset.split(',')[-1].split()[0]
-                        image_urls.append(highest_res_img)
-
-                product_data = [
-                    category,
-                    product_id,
-                    price,
-                    f"https://us.lanvin.com{product_url}" if product_url else '',
-                    '|'.join(image_urls),
-                    name,
-                    currency
-                ]
-                parsed_data.append(product_data)
-
-            return parsed_data
-
-        def find_nth_last(self, string, substring, n):
-            if n == 1:
-                return string.find(substring)
             else:
-                return string.find(substring, self.find_nth_last(string, substring, n - 1) + 1)
+                price = ''
+                discount_price = ''
+                discount_percentage = ''
+
+            # Extract currency
+            if '$' in price:
+                currency = 'USD'  # Assuming USD based on the $ sign in prices
+            else:
+                currency = ''
+            # Extract color name
+            color_name = product.get('data-variant', '')
+
+            # These fields are not directly available in the given HTML
+
+            # Clean up prices
+            price = re.sub(r'[^\d.]', '', price)
+            discount_price = re.sub(r'[^\d.]', '', discount_price)
+
+            product_data = [
+                category,
+                product_name,
+                product_id,
+                price,
+                discount_price,
+                f"https://us.herno.com{product_url}" if product_url else '',
+                '|'.join(image_urls),  # Join multiple image URLs with a separator
+                color_name,
+                currency
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+class LanvinParser(WebsiteParser):
+    def __init__(self, directory):
+        self.brand = 'lanvin'
+        self.directory = directory
+
+    def parse_product_blocks(self, soup, category):
+        parsed_data = []
+
+        column_names = [
+            'category', 'product_id', 'price',
+            'product_url', 'image_urls', 'name', 'currency'
+
+        ]
+        parsed_data.append(column_names)
+
+        product_blocks = soup.find_all('div', class_='product-item')
+        for product in product_blocks:
+            # Extract product name
+            name_element = product.find('p', class_='sr-product-title')
+            name = name_element.find('a').get_text(strip=True) if name_element else ''
+
+            # Extract product URL
+            product_url = name_element.find('a')['href'] if name_element else ''
+
+            # Extract product ID
+            index = self.find_nth_last(product_url[::-1], '-', 4)
+            index = len(product_url) - index
+            product_id = product_url[index:]
+            # Extract price
+            price_element = product.find('p', class_='product-price')
+            price = price_element.get_text(strip=True) if price_element else ''
+
+            # Extract currency
+            currency = 'USD' if '$' in price else ''
+
+            # Clean up price
+            price = re.sub(r'[^\d.]', '', price)
+
+            # Extract image URLs
+            image_elements = product.find_all('div', class_='image')
+            image_urls = []
+            for img in image_elements:
+                img_src = img.find('img')
+                if img_src and 'data-srcset' in img_src.attrs:
+                    srcset = img_src['data-srcset']
+                    highest_res_img = srcset.split(',')[-1].split()[0]
+                    image_urls.append(highest_res_img)
+
+            product_data = [
+                category,
+                product_id,
+                price,
+                f"https://us.lanvin.com{product_url}" if product_url else '',
+                '|'.join(image_urls),
+                name,
+                currency
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+    def find_nth_last(self, string, substring, n):
+        if n == 1:
+            return string.find(substring)
+        else:
+            return string.find(substring, self.find_nth_last(string, substring, n - 1) + 1)
