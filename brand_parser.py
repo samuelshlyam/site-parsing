@@ -1876,6 +1876,7 @@ class KenzoParser(WebsiteParser):
         biggest_image_url = max(images, key=lambda x: x[0])[1]
         return biggest_image_url
 
+
 class JimmyChooParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'jimmy_choo'
@@ -1885,65 +1886,106 @@ class JimmyChooParser(WebsiteParser):
         parsed_data = []
 
         column_names = [
-            'category', 'product_name', 'product_id', 'product_url', 'image_urls', 'full_price', 'discount_price'
+            'product_id', 'category', 'product_name', 'full_price', 'discount_price', 'colors', 'article_id',
+            'product_url', 'color_code', 'image_urls', 'product_type', 'currency', 'description'
         ]
         parsed_data.append(column_names)
 
-        product_blocks = soup.find_all('article', class_='product-tile')
+        product_blocks = soup.find_all('li', class_='js-grid-tile')
 
         for product in product_blocks:
-            # Extract product name
-            name_element = product.find('h2', class_='product-name')
-            product_name = name_element.get_text(strip=True) if name_element else ''
+            details_element = product.find('div', class_='js-googledatalayer-data-productTile')
+            details_dict = details_element.get('data-value') if details_element else ''
+            if details_dict:
+                details_dict = json.loads(details_dict)
+                product_id = details_dict.get('id', '')
+                category = details_dict.get('subcategory', '')
+                product_name = details_dict.get('name', '')
+                full_price = details_dict.get('base_price', '')
+                discount_price = details_dict.get('price', '')
+                colors = details_dict.get('color', '')
+                article_id = details_dict.get('attributes', {}).get('Article_ID', '')
+                product_url = details_dict.get('url', '')
+                master_id = details_dict.get('masterID', '').replace('_S', '')
+                color_code = product_id.replace('_S', '').replace(master_id, '')
+                image_urls = details_dict.get('image_urls', [])
+                product_type = details_dict.get('type', '')
+                currency = details_dict.get('currency', '')
+                description = details_dict.get('description', '')
+            else:
+                # Extract product ID
+                product_id = product.get('data-itemid', '')
 
-            # Extract product ID
-            product_id = product.get('data-itemid', '')
+                # Extract product name
+                name_element = product.find('h2', class_='product-name')
+                product_name = name_element.get_text(strip=True) if name_element else ''
 
-            # Extract product URL
-            url_element = name_element.find('a') if name_element else None
-            product_url = url_element.get('href') if url_element else ''
+                # Extract product URL
+                url_element = name_element.find('a') if name_element else None
+                product_url = url_element.get('href') if url_element else ''
 
-            # Extract image URLs
-            image_urls = []
-            images = product.find_all('img', class_='product-image-slider-item')
-            for img in images:
-                image_urls.append(img.get('data-src', img.get('src', '')))
+                # Extract image URLs
+                image_urls = []
+                images = product.find_all('img', class_='product-image-slider-item')
+                for img in images:
+                    image_urls.append(img.get('data-src', img.get('src', '')))
 
-            # Extract prices
-            full_price = ''
-            discount_price = ''
+                # Extract prices
+                full_price = ''
+                discount_price = ''
 
-            # Look for price in the price range element
-            price_element = product.find('div', class_='price-range')
-            if price_element:
-                full_price_tag = price_element.find('span', class_='js-st-price')
-                full_price = full_price_tag.get_text(strip=True) if full_price_tag else ''
-
-                discount_price_tag = price_element.find('span', class_='js-sl-price')
-                discount_price = discount_price_tag.get_text(strip=True) if discount_price_tag else ''
-            # Look for prices in the standard-price element if not found in price-range
-            if not full_price:
-                standard_price_element = product.find('div', class_='standart-price')
-                if standard_price_element:
-                    full_price_tag = standard_price_element.find('span', class_='js-st-price')
+                # Look for price in the price range element
+                price_element = product.find('div', class_='price-range')
+                if price_element:
+                    full_price_tag = price_element.find('span', class_='js-st-price')
                     full_price = full_price_tag.get_text(strip=True) if full_price_tag else ''
-            if not discount_price:
-                top=product.find('div', class_='price-range')
-                if top:
-                    discount_price_tag = top.find('span', class_='product-sale-price-wrap')
-                    if discount_price_tag:
-                        discount_price_tag = discount_price_tag.find('span', class_="js-sl-price")
-                        discount_price = discount_price_tag.get_text(strip=True)
+
+                    discount_price_tag = price_element.find('span', class_='js-sl-price')
+                    discount_price = discount_price_tag.get_text(strip=True) if discount_price_tag else ''
+                # Look for prices in the standard-price element if not found in price-range
+                if not full_price:
+                    standard_price_element = product.find('div', class_='standart-price')
+                    if standard_price_element:
+                        full_price_tag = standard_price_element.find('span', class_='js-st-price')
+                        full_price = full_price_tag.get_text(strip=True) if full_price_tag else ''
+                if not discount_price:
+                    top = product.find('div', class_='price-range')
+                    if top:
+                        discount_price_tag = top.find('span', class_='product-sale-price-wrap')
+                        if discount_price_tag:
+                            discount_price_tag = discount_price_tag.find('span', class_="js-sl-price")
+                            discount_price = discount_price_tag.get_text(strip=True)
+
+                # Extract Colors
+
+                color_elements = product.find_all('img', class_='js-defer-image')
+                colors = []
+                for color in color_elements:
+                    colors.append(color.get('alt'))
+                colors = ', '.join(colors)
+
+                article_id = ''
+                product_type = ''
+                currency = ''
+                description = ''
+                color_code = ''
+                product_type = ''
 
             product_data = [
-                    category,
-                    product_name,
-                    product_id,
-                    f"https://www.jimmychoo.com{product_url}" if product_url else '',
-                    ', '.join(image_urls),
-                    full_price,
-                    discount_price
-                ]
+                product_id,
+                category,
+                product_name,
+                full_price,
+                discount_price,
+                colors,
+                article_id,
+                product_url,
+                color_code,
+                "|".join(image_urls),
+                product_type,
+                currency,
+                description
+            ]
             parsed_data.append(product_data)
 
         return parsed_data
@@ -2489,7 +2531,7 @@ class JacquemusParser(WebsiteParser):
         parsed_data = []
 
         column_names = [
-            'product_id', 'color_id', 'product_name', 'price', 'category',
+            'product_id', 'color_id', 'product_name', 'price', 'discount_price', 'category',
             'image_urls', 'product_url', 'colors', 'status'
         ]
         parsed_data.append(column_names)
@@ -2505,6 +2547,7 @@ class JacquemusParser(WebsiteParser):
                 product_id = data.get('id', '')
                 product_name = data.get('name', '')
                 price = data.get('price', '0.0')
+                category_internal=data.get('category','')
                 color_description = data.get('color', '')
                 status = 'in stock' if data.get('in_stock', 0) == 1 else 'out of stock'
             else:
@@ -2513,6 +2556,15 @@ class JacquemusParser(WebsiteParser):
                 price = '0.0'
                 color_description = ''
                 status = ''
+                category_internal=''
+
+            if not category_internal:
+                category_internal=category
+
+            # Extract discount price
+            price_element=item.find('div', class_='product__price')
+            discount_price_element=price_element.find('span', class_='product__price__value -saled')
+            discount_price=discount_price_element.text.strip() if discount_price_element else ''
 
             # Extract category
             category = category
@@ -2544,7 +2596,8 @@ class JacquemusParser(WebsiteParser):
                 color_id,
                 product_name,
                 price,
-                category,
+                discount_price,
+                category_internal,
                 ', '.join(image_urls),
                 product_url,
                 ', '.join(colors),
@@ -2553,6 +2606,7 @@ class JacquemusParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+
 
 
 class LouboutinParser(WebsiteParser):
@@ -2983,7 +3037,7 @@ class GianvitoRossiParser(WebsiteParser):
         parsed_data = []
 
         column_names = [
-            'category', 'product_name', 'product_id', 'product_url', 'image_urls', 'price'
+            'category', 'product_name', 'product_id', 'product_url', 'image_urls', 'price','discount_price'
         ]
         parsed_data.append(column_names)
 
@@ -3008,17 +3062,29 @@ class GianvitoRossiParser(WebsiteParser):
                 if img_tag:
                     image_urls.append(img_tag.get('src', ''))
 
+            category_element=product.find('a', class_='b-product_tile-link')
+            category_dict=category_element.get('data-analytics','')
+            category_dict=json.loads(category_dict) if category_dict else category
+            category_internal=category_dict.get('category','')
+            if not category_internal:
+              category_internal=category
             # Extract price
             price_element = product.find('span', class_='b-price-item')
             price = price_element.get_text(strip=True) if price_element else ''
 
+            discount_price_element = product.find('span', class_='b-price-item m-new')
+            discount_price = discount_price_element.get_text(strip=True) if discount_price_element else ''
+            if discount_price:
+              price_element = product.find('span', class_='b-price-item m-old')
+              price = price_element.get_text(strip=True) if price_element else ''
             product_data = [
-                category,
+                category_internal,
                 product_name,
                 product_id,
                 product_url,
                 ', '.join(image_urls),
-                price
+                price,
+                discount_price
             ]
             parsed_data.append(product_data)
 
@@ -3733,9 +3799,20 @@ class LanvinParser(WebsiteParser):
             product_url = name_element.find('a')['href'] if name_element else ''
 
             # Extract product ID
-            index = self.find_nth_last(product_url[::-1], '-', 4)
-            index = len(product_url) - index
-            product_id = product_url[index:]
+            if 'sunglasses' in product_url:
+                index = self.find_nth_last(product_url[::-1], '-', 4)
+                index = len(product_url) - index
+                product_id = product_url[index:]
+                if 'sunglasses' in product_id:
+                    index = self.find_nth_last(product_url[::-1], '-', 2)
+                    index = len(product_url) - index
+                    product_id = product_url[index:]
+            else:
+                index = self.find_nth_last(product_url[::-1], '-', 4)
+                index = len(product_url) - index
+                product_id = product_url[index:]
+
+
             # Extract price
             price_element = product.find('p', class_='product-price')
             price = price_element.get_text(strip=True) if price_element else ''
