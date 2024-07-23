@@ -65,9 +65,9 @@ print(main_directory)
 #stella end
 
 #Off White START#
-#OffWhiteParser = OffWhiteProductParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\off_white'
-#OffWhiteParser.parse_directory(directory_path)
+OffWhiteParser = OffWhiteProductParser(output_directory_path)
+directory_path = os.path.join(main_directory,'off_white')
+OffWhiteParser.parse_directory(directory_path)
 #Off White end
 
 #givenchy START
@@ -284,9 +284,9 @@ print(main_directory)
 #Louboutin End
 
 #Palm Angels Start
-#palmAngelsParser = PalmAngelsParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\palm_angels'
-#palmAngelsParser.parse_directory(directory_path)
+palmAngelsParser = PalmAngelsParser(output_directory_path)
+directory_path = os.path.join(main_directory,'palm_angels_7-23-24')
+palmAngelsParser.parse_directory(directory_path)
 #PalmAngels End
 
 #Moose Knuckles Start
@@ -338,9 +338,9 @@ print(main_directory)
 #Aquazzura End
 
 #Tom Ford Start
-TomFordParser = TomFordProductParser(output_directory_path)
-directory_path = os.path.join(main_directory,"tom_ford")
-TomFordParser.parse_directory(directory_path)
+# TomFordParser = TomFordProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,"tom_ford")
+# TomFordParser.parse_directory(directory_path)
 #Tom Ford End
 
 #Loewe Start

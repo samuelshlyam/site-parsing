@@ -577,7 +577,7 @@ class OffWhiteProductParser(WebsiteParser):
 
                 if full_price_element:
                     full_price = full_price_element.get_text(strip=True)
-                elif sale_price_element:
+                if sale_price_element:
                     full_price = sale_price_element.get_text(strip=True)
 
                 discount_price = discount_price_element.get_text(strip=True) if discount_price_element else ''
@@ -2653,7 +2653,7 @@ class LouboutinParser(WebsiteParser):
 
 class PalmAngelsParser(WebsiteParser):
     def __init__(self, directory):
-        self.brand = 'palm_angels'  # Assuming 'farfetch' as the brand based on the HTML
+        self.brand = 'palm_angels_old'  # Assuming 'farfetch' as the brand based on the HTML
         self.directory = directory
 
     def parse_product_blocks(self, soup, category):
