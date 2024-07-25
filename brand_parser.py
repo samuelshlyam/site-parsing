@@ -4,6 +4,8 @@ from urllib.parse import urljoin, urlunparse, urlparse
 from bs4 import BeautifulSoup, Tag
 import requests
 from bs4 import BeautifulSoup, Tag
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 import csv
 import json
 import html
@@ -11,6 +13,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 import pandas as pd
 import datetime
+import time
 from main_parser import WebsiteParser
 
 class BottegaVenetaParser(WebsiteParser):
@@ -765,6 +768,10 @@ class Chloe_Parser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'chloe'  # Replace spaces with underscores
         self.directory = directory
+        options = webdriver.ChromeOptions()
+        options.add_argument(
+            "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+        self.driver = webdriver.Chrome(options=options)
 
     def parse_product_blocks(self, soup, category):
         parsed_data = []
@@ -781,20 +788,17 @@ class Chloe_Parser(WebsiteParser):
             if imgSource:
                 imgSource = imgSource['src']
 
-            data_pid = articleChloe['data-ytos-track-product-data']
+            data_pinfo = articleChloe['data-ytos-track-product-data']
 
             a_url = articleChloe.find('a')
             if a_url:
                 a_url = a_url['href']
 
-            product_id_html=self.open_link(a_url)
-            soup_pid = BeautifulSoup(product_id_html, 'html.parser')
-            div_element = soup_pid.find('div', class_='itemdescription')
-            if div_element:
-                text_content = div_element.get_text()
-                product_id=text_content.split('Item code: ')[1]
+            product_id=''
+            product_id=self.extract_product_id(a_url)
 
-            product_info = json.loads(data_pid)
+
+            product_info = json.loads(data_pinfo)
 
             product_data.append(product_id)
             product_data.append(product_info['product_cod10'])
@@ -825,6 +829,25 @@ class Chloe_Parser(WebsiteParser):
             product_data.append(category)
             parsed_data.append(product_data)
         return parsed_data
+    def extract_product_id(self,product_url):
+        self.driver.get(product_url)
+        time.sleep(1)
+        html=self.driver.page_source
+        pid_text='Item code:'
+        soup_pid=BeautifulSoup(html, 'html.parser') if html else ''
+        if soup_pid:
+            main_item = soup_pid.find('div', class_='itemdescription')
+            if main_item:
+                # Extract the Style ID
+                style_id_text=main_item.text
+                print(style_id_text)
+                style_id = style_id_text.split(pid_text)[1].strip()
+                print(f"Product ID: {style_id}")
+                return style_id
+            else:
+                print(f'Product ID not found for url: {product_url}')
+        else:
+            print(f'Your URL is broken: {product_url}')
 class MCM_Parser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'mcm'  # Replace spaces with underscores
@@ -1536,29 +1559,24 @@ class BalmainProductParser(WebsiteParser):
 
 class MonclerParser(WebsiteParser):
     def __init__(self):
-        self.brand = 'moncler'  # Replace spaces with underscores
-    def fetch_moncler_products(self,categories, cookie):
-        base_url = "https://www.moncler.com/on/demandware.store/Sites-MonclerUS-Site/en_US/SearchApi-Search"
-        all_products = []
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-            'Cookie': f'{cookie}'
-        }
-
+        options = webdriver.ChromeOptions()
+        options.add_argument(
+            "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+        self.driver = webdriver.Chrome(options=options)
+        self.base_url="https://www.moncler.com/on/demandware.store/{country_code}/SearchApi-Search?cgid={category}&sz=2000&start=0"
+        self.country=''
+    def fetch_moncler_products(self,categories,country_code):
+        all_products=[]
         for category in categories:
             offset = 0
             while True:
-                params = {
-                    'cgid': category,
-                    'start': offset,
-                    'sz': 12  # Assuming page size is constant as 12
-                }
-                response = requests.get(base_url, headers=headers, params=params)
-                if response.status_code != 200:
-                    print(f"Failed to fetch data: {response.status_code} - {response.text}")
-                    break
-
-                data = response.json()
+                formatted_url = self.base_url.format(category=category,country_code=country_code)
+                self.driver.get(formatted_url)
+                self.country=country_code.split('/')[-1]
+                response = self.driver.find_element(By.TAG_NAME, "body").text
+                print(type(response))
+                print(response[:10000])
+                data = json.loads(response)
                 products = data['data']['products']
                 if not products:
                     break
@@ -1580,6 +1598,7 @@ class MonclerParser(WebsiteParser):
 
                 # Update offset to next page
                 offset += len(products)
+                print(f'Found {len(products)} products on offset {offset}')
                 total_count = data['data']['count']
                 if offset >= total_count:
                     break
@@ -1603,7 +1622,7 @@ class MonclerParser(WebsiteParser):
         print(all_data.head())
 
         current_date = datetime.datetime.now().strftime("%m_%d_%Y")
-        filename = f'parser-output/moncler_output_{current_date}.csv'
+        filename = f'parser-output/moncler_output_{self.country}_{current_date}.csv'
         all_data.to_csv(filename, index=False)
         print("Complete data saved to 'moncler_products.csv'")
 
@@ -2874,13 +2893,14 @@ class AcneStudiosParser(WebsiteParser):
         return parsed_data
     def extract_product_id(self,product_url):
         html=self.open_link(product_url)
+        pid_text = 'Style ID:'
         soup_pid=BeautifulSoup(html, 'html.parser') if html else ''
         if soup_pid:
-            style_id_item = soup_pid.find('li', string=lambda text: 'Style ID:' in text if text else False)
+            style_id_item = soup_pid.find('li', string=lambda text: pid_text in text if text else False)
 
             if style_id_item:
                 # Extract the Style ID
-                style_id = style_id_item.text.split('Style ID:')[1].strip()
+                style_id = style_id_item.text.split(pid_text)[1].strip()
                 print(f"Product ID: {style_id}")
                 return style_id
             else:
@@ -2899,7 +2919,7 @@ class TheRowParser(WebsiteParser):
 
         column_names = [
             'product_id', 'product_name', 'price', 'category',
-            'image_urls', 'product_url', 'sale_price', 'original_price', 'discount'
+            'image_urls', 'product_url', 'sale_price', 'status'
         ]
         parsed_data.append(column_names)
 
@@ -2911,7 +2931,7 @@ class TheRowParser(WebsiteParser):
             # Extract product URL from product title link
             product_title_link = item.find('a', class_='ProductItem__ImageWrapper ProductItem__ImageWrapper--withAlternateImage')
             product_url = product_title_link.get('href', '') if product_title_link else ''
-
+            product_url= 'https://www.therow.com' + product_url
             # Extract product name from product title text
             product_name_element = item.find('h3', class_='ProductItem__Title Heading')
             product_name = product_name_element.text.strip() if product_name_element else ''
@@ -2924,21 +2944,25 @@ class TheRowParser(WebsiteParser):
                 if not product_id:
                     pid_temp = img.get('src', '')
                     product_id=pid_temp.split('/')[-1].split('_')[0]
+            if len(product_id)<10:
+                product_id=self.extract_product_id(product_url)
 
+            image_urls =[x for x in image_urls if x.strip()]
             # Extract price details
             price_container = item.find('div', class_='ProductItem__PriceList Heading')  # Find the price container
             if price_container:
                 price_element = price_container.find('span', class_='ProductItem__Price Price Price--highlight Text--subdued')
                 price = price_element.text.strip() if price_element else ''
-                # Assuming no sale prices on The Row website (can be modified if needed)
-                sale_price = ''
-                original_price = price
-                discount = ''
+                sale_price_element = price_container.find('span', class_='ProductItem__Price Price Price--compareAt Text--subdued')
+                sale_price = sale_price_element.text.strip() if sale_price_element else ''
+                if sale_price:
+                  original_price=sale_price
+                  sale_price=price
+                else:
+                    original_price = price
             else:
-                price = ''
                 sale_price = ''
                 original_price = ''
-                discount = ''
 
             # Check for sold-out indication
             sold_out_label = item.find('span', class_='ProductItem__Label ProductItem__Label--soldOut Heading Text--subdued')
@@ -2947,20 +2971,45 @@ class TheRowParser(WebsiteParser):
             # Colors are not explicitly available in this product information snippet
 
             product_data = [
-                product_id,  # Assuming product ID is not readily available in this structure
+                product_id,
                 product_name,
-                original_price,  # No separate sale price assumed
+                original_price,
                 category,
                 ', '.join(image_urls),
                 product_url,
                 sale_price,
-                original_price,
-                discount,
-                is_sold_out  # Additional field for sold-out status
+                is_sold_out
             ]
             parsed_data.append(product_data)
 
         return parsed_data
+    def extract_product_id(self, product_url):
+        html_content=self.open_link(product_url)
+        pid_text='Style:'
+        soup_pid=BeautifulSoup(html_content, 'html.parser') if html_content else ''
+        if soup_pid:
+            style_id_item = soup_pid.find('li', string=lambda text: pid_text in text if text else False)
+
+            if style_id_item:
+                # Extract the Style ID
+                style_id = style_id_item.text.split(pid_text)[1].strip()
+                print(f"Product ID: {style_id}")
+                return style_id
+            else:
+                main_item = soup_pid.find('div',class_='product-more__content')
+                style_id_item = main_item.find_all('li')
+                if style_id_item:
+                    style_id = style_id_item[-1].text.strip()
+                    if len(style_id.split(pid_text))>1:
+                        style_id=style_id.split(pid_text)[1].strip()
+                        return style_id
+                    print(f"Product ID: {style_id}")
+                    return style_id
+
+                print("Product ID not found.")
+        else:
+            print(f'Your URL is broken: {product_url}')
+
 
 class ManoloBlahnikParser(WebsiteParser):
     def __init__(self, directory):
@@ -3388,7 +3437,7 @@ class LoeweParser(WebsiteParser):
 class SaintLaurentParser(WebsiteParser):
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
-        self.base_url = ("https://www.ysl.com/api/v1/category/{category}?locale=en-us&page={page}&categoryIds={category}&hitsPerPage=15")
+        self.base_url = ("https://www.ysl.com/api/v1/category/{category}?locale={locale}&page={page}&categoryIds={category}&hitsPerPage=15")
         self.data = pd.DataFrame()
 
     def format_url(self, url):
@@ -3399,7 +3448,7 @@ class SaintLaurentParser(WebsiteParser):
         """ Helper function to strip strings safely """
         return value.strip() if isinstance(value, str) else value
 
-    def fetch_data(self, category, base_url):
+    def fetch_data(self, category, base_url,locale):
         session = requests.Session()
         # Setup retry strategy
         retries = Retry(
@@ -3415,14 +3464,14 @@ class SaintLaurentParser(WebsiteParser):
         }
         all_products = []  # Use a list to store product dictionaries
         try:
-            response = session.get(base_url.format(category=category, page=0), headers=headers)
+            response = session.get(base_url.format(category=category, page=0,locale=locale), headers=headers)
             response.raise_for_status()
             json_data = response.json()
 
             total_pages=json_data.get('stats',{}).get('nbPages',0)
             print(total_pages)
             for page in range(total_pages):
-                response = session.get(base_url.format(category=category, page=page), headers=headers)
+                response = session.get(base_url.format(category=category, page=page,locale=locale), headers=headers)
                 response.raise_for_status()
                 json_data = response.json()
                 items = json_data.get('products', [])
@@ -3487,17 +3536,18 @@ class SaintLaurentParser(WebsiteParser):
             print(f"An error occurred: {e}")
             return pd.DataFrame()
 
-    def process_categories(self, categories):
-        for category in categories:
-            category_data = self.fetch_data(category, self.base_url)
-            self.data = pd.concat([self.data, category_data], ignore_index=True)
+    def process_categories(self, categories, locales):
+        for locale in locales:
+            for category in categories:
+                category_data = self.fetch_data(category, self.base_url, locale)
+                self.data = pd.concat([self.data, category_data], ignore_index=True)
+            # Save the complete DataFrame to a CSV file
+            # data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
+            current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+            filename = f'parser-output/YSL_output_{locale}_{current_date}.csv'
+            self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
+            print(f"Complete data saved to 'YSL_output_{locale}_{current_date}.csv'")
 
-        # Save the complete DataFrame to a CSV file
-        # data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
-        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
-        filename = f'parser-output/YSL_output_{current_date}.csv'
-        self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
-        print(f"Complete data saved to 'YSL_output_{current_date}.csv'")
 class TodsParser(WebsiteParser):
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
@@ -3851,3 +3901,4 @@ class LanvinParser(WebsiteParser):
             return string.find(substring)
         else:
             return string.find(substring, self.find_nth_last(string, substring, n - 1) + 1)
+

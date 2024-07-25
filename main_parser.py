@@ -127,7 +127,7 @@ class WebsiteParser:
             # Setup retry strategy
             retries = Retry(
                 total=5,
-                backoff_factor=1,
+                backoff_factor=0.5,
                 status_forcelist=[429, 500, 502, 503, 504],
                 allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
             )
