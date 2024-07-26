@@ -2638,37 +2638,97 @@ class LouboutinParser(WebsiteParser):
 
         column_names = [
             'product_id', 'product_name', 'price', 'category',
-            'image_urls', 'product_url'
+            'image_urls', 'product_url','color', 'material', 'season'
         ]
         parsed_data.append(column_names)
 
-        items = soup.find_all('div', class_='product-item-info')
-        for item in items:
-            url_piece=item.find('a',class_="product-item-link")
-            product_url=url_piece.get('href') if url_piece else ''
-            price=item.find('span', class_='price')
-            price=price.text.strip() if price else ''
-            name=item.find('p', class_='m-0')
-            name=name.text.strip() if name else ''
+        rows=soup.find_all('div', class_='row-product')
+        for row in rows:
+            items = row.find_all('div', class_='product-item-info')
+            for item in items:
+              url_piece=item.find('a',class_="product-item-link")
+              product_url=url_piece.get('href') if url_piece else ''
+              price=item.find('span', class_='price')
+              price=price.text.strip() if price else ''
+              name=item.find('p', class_='m-0')
+              name=name.text.strip() if name else ''
 
-            # Extract image URLs
-            image = item.find('img', class_='photo')
-            image=image.get('src','') if image else ''
+              # Extract image URLs
+              image = item.find('img', class_='photo')
+              image=image.get('src','') if image else ''
 
-            product_id=image.split('-')[-1].split("_1")[0]
+              product_id,color,material,season=self.extract_product_page_info(product_url)
 
 
-            product_data = [
-                product_id,
-                name,
-                price,
-                category,
-                image,
-                product_url
-            ]
-            parsed_data.append(product_data)
+              product_data = [
+                  product_id,
+                  name,
+                  price,
+                  category,
+                  image,
+                  product_url,
+                  color,
+                  material,
+                  season
+              ]
+              parsed_data.append(product_data)
 
         return parsed_data
+    def extract_product_page_info(self, product_url):
+        print(f"Processing URL: {product_url}")
+        html=self.open_link(product_url)
+        pid_text = 'Reference :'
+        color_text='Color :'
+        material_text='Material :'
+        season_text='Collection :'
+        soup_pid=BeautifulSoup(html, 'html.parser') if html else ''
+        if soup_pid:
+            details_item=soup_pid.find('div',class_='additional-attributes-wrapper')
+            p_items = details_item.find_all('p') if details_item else None
+            if not p_items:
+                return '', '', '', ''
+            style_id_item=''
+            color_item=''
+            material_item=''
+            season_item=''
+            for item in p_items:
+              if pid_text in item.text:
+                style_id_item=item.text.strip()
+              if color_text in item.text:
+                color_item=item.text.strip()
+              if material_text in item.text:
+                material_item=item.text.strip()
+              if season_text in item.text:
+                season_item=item.text.strip()
+            # Extract the Style I
+            print(f"This is the item that contains style ID: {style_id_item}")
+            style_id_list=style_id_item.split(pid_text) if style_id_item else []
+            style_id = style_id_item.split(pid_text)[1].strip() if len(style_id_list)>1 else ''
+            print(f"Product ID: {style_id}")
+
+            # Extract the color
+            print(f"This is the item that contains color: {color_item}")
+            color_list=color_item.split(color_text) if color_item else []
+            color = color_item.split(color_text)[1].strip() if len(color_list)>1 else ''
+            print(f"Color: {color}")
+
+            # Extract the material
+            print(f"This is the item that contains material: {material_item}")
+            material_list=material_item.split(material_text) if material_item else []
+            material = material_item.split(material_text)[1].strip() if len(material_list)>1 else ''
+            print(f"Material: {material}")
+
+            # Extract the season
+            print(f"This is the item that contains season: {season_item}")
+            season_list=season_item.split(season_text) if season_item else []
+            season = season_item.split(season_text)[1].strip() if len(season_list)>1 else ''
+            print(f"Season: {season}")
+            return style_id, color, material, season
+
+        else:
+            print(f'Your URL is broken: {product_url}')
+            return '', '', '', ''
+
 
 class PalmAngelsParser(WebsiteParser):
     def __init__(self, directory):
@@ -3847,21 +3907,8 @@ class LanvinParser(WebsiteParser):
 
             # Extract product URL
             product_url = name_element.find('a')['href'] if name_element else ''
-
-            # Extract product ID
-            if 'sunglasses' in product_url:
-                index = self.find_nth_last(product_url[::-1], '-', 4)
-                index = len(product_url) - index
-                product_id = product_url[index:]
-                if 'sunglasses' in product_id:
-                    index = self.find_nth_last(product_url[::-1], '-', 2)
-                    index = len(product_url) - index
-                    product_id = product_url[index:]
-            else:
-                index = self.find_nth_last(product_url[::-1], '-', 4)
-                index = len(product_url) - index
-                product_id = product_url[index:]
-
+            product_url=f"https://us.lanvin.com{product_url}" if product_url else ''
+            product_id=self.extract_product_id(product_url)
 
             # Extract price
             price_element = product.find('p', class_='product-price')
@@ -3887,7 +3934,7 @@ class LanvinParser(WebsiteParser):
                 category,
                 product_id,
                 price,
-                f"https://us.lanvin.com{product_url}" if product_url else '',
+                product_url,
                 '|'.join(image_urls),
                 name,
                 currency
@@ -3895,10 +3942,20 @@ class LanvinParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
+    def extract_product_id(self, product_url):
+        html_content=self.open_link(product_url)
+        soup_pid=BeautifulSoup(html_content, 'html.parser') if html_content else ''
+        if soup_pid:
+            style_id_item = soup_pid.find('span',class_='bodyBase')
+            style_id = style_id_item.text.strip() if style_id_item else ''
+            if style_id:
+                print(f"Found Product ID: {style_id}")
+                return style_id
 
-    def find_nth_last(self, string, substring, n):
-        if n == 1:
-            return string.find(substring)
+            print("Product ID not found.")
+            return style_id
         else:
-            return string.find(substring, self.find_nth_last(string, substring, n - 1) + 1)
+            print(f'Your URL is broken: {product_url}')
+            return ''
+
 

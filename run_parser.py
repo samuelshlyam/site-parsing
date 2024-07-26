@@ -279,9 +279,9 @@ print(main_directory)
 #Jacquemus End
 
 #Louboutin Start
-#louboutinParser = LouboutinParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\louboutin'
-#louboutinParser.parse_directory(directory_path)
+# louboutinParser = LouboutinParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'louboutin')
+# louboutinParser.parse_directory(directory_path)
 #Louboutin End
 
 #Palm Angels Start
@@ -352,10 +352,10 @@ print(main_directory)
 #Loewe End
 
 #Saint Laurent Start
-categories = ['view-all-shoes-women','view-all-rtw-women','view-all-handbags-women','view-all-slg-women','view-all-jewelry-women','view-all-accessories-women','view-all-rtw-men','view-all-shoes-men','view-all-slg-men','view-all-accessories-men','view-all-bags-men','highlights-women-collection','highlights-men-collection',]
-locales=['en-it','en-us']
-SaintLaurentParser=SaintLaurentParser()
-SaintLaurentParser.process_categories(categories,locales)
+# categories = ['view-all-shoes-women','view-all-rtw-women','view-all-handbags-women','view-all-slg-women','view-all-jewelry-women','view-all-accessories-women','view-all-rtw-men','view-all-shoes-men','view-all-slg-men','view-all-accessories-men','view-all-bags-men','highlights-women-collection','highlights-men-collection',]
+# locales=['en-it','en-us']
+# SaintLaurentParser=SaintLaurentParser()
+# SaintLaurentParser.process_categories(categories,locales)
 #Saint Laurent End
 
 #Tods Start
@@ -374,7 +374,7 @@ SaintLaurentParser.process_categories(categories,locales)
 #Herno End
 
 #Lanvin Start
-# lanvinParser = LanvinParser(output_directory_path)
-# directory_path = os.path.join(main_directory, 'lanvin')
-# lanvinParser.parse_directory(directory_path)
+lanvinParser = LanvinParser(output_directory_path)
+directory_path = os.path.join(main_directory, 'lanvin')
+lanvinParser.parse_directory(directory_path)
 #Lanvin End
