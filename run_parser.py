@@ -1,141 +1,126 @@
 import os
-from brand_parser import BottegaVenetaParser, GucciParser, FendiParser, BallyParser, StellaProductParser, Chloe_Parser, \
-    GivenchyProductParser, CanadaGooseProductParser, IsabelMarantParser, MCM_Parser, CultGaiaProductParser, \
-    GoldenGooseProductParser, FendiParser, BalenciagaParser, SaintLaurentParser, AlexanderMcqueenParser, \
-    Dolce_Gabbana_Parser, StoneIslandParser, EtroProductParser, MonclerParser, BalmainProductParser, \
-    VersaceProductParser, FerragamoProductParser, BurberryParser, KenzoParser, VejaProductParser, JimmyChooParser, \
-    BrunelloCucinelliParser, DSquaredParser, CelineParser, LoroPianaParser, MarniParser, PradaParser, TodsParser, \
-    ValentinoParser, JacquemusParser, LouboutinParser, PalmAngelsParser, MooseKnucklesParser, AcneStudiosParser, \
-    TheRowParser, ManoloBlahnikParser, GianvitoRossiParser, MiuMiuParser, BirkenstockParser, AquazzuraParser, \
-    OffWhiteProductParser, TomFordProductParser, LoeweParser, HernoParser, LanvinParser
+from brand_parser import BottegaVenetaParser, GucciProductParser, BallyProductParser, StellaProductParser, ChloeProductParser, \
+    GivenchyProductParser, CanadaGooseProductParser, IsabelMarantProductParser, MCMProductParser, CultGaiaProductParser, \
+    GoldenGooseProductParser, FendiProductParser, BalenciagaProductParser, SaintLaurentProductParser, AlexanderMcqueenParser, \
+    DolceGabbanaProductParser, StoneIslandProductParser, EtroProductParser, MonclerProductParser, BalmainProductParser, \
+    VersaceProductParser, FerragamoProductParser, BurberryProductParser, KenzoProductParser, VejaProductParser, JimmyChooProductParser, \
+    BrunelloCucinelliProductParser, DSquaredProductParser, CelineProductParser, LoroPianaProductParser, MarniProductParser, PradaProductParser, TodsProductParser, \
+    ValentinoProductParser, JacquemusProductParser, LouboutinProductParser, PalmAngelsProductParser, MooseKnucklesProductParser, AcneStudiosProductParser, \
+    TheRowProductParser, ManoloBlahnikProductParser, GianvitoRossiProductParser, MiuMiuProductParser, BirkenstockProductParser, AquazzuraProductParser, \
+    OffWhiteProductParser, TomFordProductParser, LoeweProductParser, HernoProductParser, LanvinProductParser
+
 
 #Folder name for output
 output_directory_path = "parser-output"
-#directory_path = 'brands_html/bottega_veneta'
-##Bottega Veneta Parser METHOD 1##
-
 current_directory= os.getcwd()
 main_directory=os.path.join(current_directory,'internal_html')
 print(main_directory)
 
-##SINGLE FILE RUN##
-#input_file_path = os.path.join(main_directory,'bottega_veneta')
-#category = os.path.splitext(input_file_path)[0]  # Use the filename as the category
-##Uncomment to run##
-#bottega_parser_output = bottega_parser.parse_website(input_file_path, category)
-#bottega_parser.write_to_csv(bottega_parser_output)
 
-##MULTIPLE FILE RUN, PASS DIRECTORY PATH
-##Comment to run single file##
-#bottega_parser = BottegaVenetaParser(output_directory_path)
-#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/bottega_veneta'
-#bottega_parser.parse_directory(directory_path)
+#Bottega Veneta Start
+# BottegaParser = BottegaVenetaParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'bottega_veneta')
+# BottegaParser.parse_directory(directory_path)
+#Bottega Veneta End
 
-
-#GUCCI PRODUCT FETCH METHOD 2##
-
-#gucci_parser = GucciParser()
-
+#Gucci Start
+#GucciParser = GucciProductParser()
 #gucci_categories_womens = ['women-shoes','women-handbags','women-accessories-lifestyle-bags-and-luggage','women-readytowear','women-accessories-wallets','women-accessories','jewelry-watches-watches-women', 'women-accessories-belts','women-accessories-silks-and-scarves','women-accessories-hats-and-gloves']
 #gucci_categories_mens = ['men-bags', 'men-bags-luggage','men-readytowear','men-shoes','men-accessories-wallets','men-accessories-hats-and-gloves','men-accessories-belts','men-eyewear','jewelry-watches-watches-men','men-accessories']
 #combined_gucci_categories = ['men-bags', 'men-bags-luggage','men-readytowear','men-shoes','men-accessories-wallets','men-accessories-hats-and-gloves','men-accessories-belts','men-eyewear','jewelry-watches-watches-men','men-accessories','women-shoes','women-handbags','women-accessories-lifestyle-bags-and-luggage','women-readytowear','women-accessories-wallets','women-accessories','jewelry-watches-watches-women', 'women-accessories-belts','women-accessories-silks-and-scarves','women-accessories-hats-and-gloves']
-##UNCOMMENT TO RUN, COMMENT OTHER PARSERS, to avoid multi run##
-#gucci_parser.process_categories(combined_gucci_categories)
+#GucciParser.process_categories(combined_gucci_categories)
+#Gucci End
 
-
-##START FENDI PARSER##
-#directory_path = 'internal_html/fendi'
-#fendi_parser = FendiParser(output_directory_path)
-#fendi_parser.parse_directory(directory_path)
+# START FENDI PARSER##
+# FendiParser = FendiProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'fendi')
+# FendiParser.parse_directory(directory_path)
 #Fendi END
 
 
 
-###BALLY START
-#bally_parser = BallyParser()
+#BALLY START
+#BallyParser = BallyProductParser()
 #category_list = ['men-sale.json?', 'women-sale.json?', 'men.json?', 'women.json?']
-# bally_parser.process_categories(category_list)
-
+#BallyParser.process_categories(category_list)
 #BALLY END
 
 #STELLA START
-#stella_parser = StellaProductParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\stella_mccartney'
-#stella_parser.parse_directory(directory_path)
+#StellParser = StellaProductParser(output_directory_path)
+#directory_path = os.path.join(main_directory,'stella_mccartney')
+#StellParser.parse_directory(directory_path)
 #stella end
 
-#Off White START
+# Off White START
 # OffWhiteParser = OffWhiteProductParser(output_directory_path)
 # directory_path = os.path.join(main_directory,'off_white')
 # OffWhiteParser.parse_directory(directory_path)
-#Off White end
+# Off White end
 
 #givenchy START
-#givenchy_parser = GivenchyProductParser(output_directory_path)
-##Comment to run single file##
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\givenchy'
-#givenchy_parser.parse_directory(directory_path)
+#GivenchyParser = GivenchyProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'givenchy')
+#GivenchyParser.parse_directory(directory_path)
 #givenchy END
 
 
 #Canada Goose Start
-#canada_goose_parser = CanadaGooseProductParser(output_directory_path)
-#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/canada_goose'
-#canada_goose_parser.parse_directory(directory_path)
+#CanadaGooseParser = CanadaGooseProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'canada_goose')
+#CanadaGooseParser.parse_directory(directory_path)
 #Canada Goose END
 
 #Veja Start
 #VejaParser = VejaProductParser(output_directory_path)
-#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/veja'
+# directory_path = os.path.join(main_directory,'veja')
 #VejaParser.parse_directory(directory_path)
 #Veja End
 
 
 
 #Isabel Marant Start
-#Isabel_Marant_Parser = IsabelMarantParser(output_directory_path)
-##Comment to run single file##
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\isabel_marant'
-#Isabel_Marant_Parser.parse_directory(directory_path)
+#IsabelMarantParser = IsabelMarantProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'isabel_marant')
+#IsabelMarantParser.parse_directory(directory_path)
 #Isabel Marant End
 
 #Chloe Start
-# Chloe_parser=Chloe_Parser(output_directory_path)
+# ChloeParser=ChloeProductParser(output_directory_path)
 # directory_path = os.path.join(main_directory,'chloe')
-# Chloe_parser.parse_directory(directory_path)
+# ChloeParser.parse_directory(directory_path)
 #Chloe End
 
 #MCM start
-#mcm_parser=MCM_Parser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\mcm'
+#MCMParser=MCMProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'mcm')
 #mcm_parser.parse_directory(directory_path)
 #MCM End
 
 # #Cult Gaia Start
-# cult_gaia_parser=CultGaiaProductParser(output_directory_path)
+# CultGaiaParser=CultGaiaProductParser(output_directory_path)
 # directory_path = os.path.join(main_directory,'cult_gaia')
-# cult_gaia_parser.parse_directory(directory_path)
+# CultGaiaParser.parse_directory(directory_path)
 # #Cult Gaia end
 
 #Golden Goose Start
-#Golden_Goose_ProductParser=GoldenGooseProductParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\golden_goose'
-#Golden_Goose_ProductParser.parse_directory(directory_path)
+#GoldenGooseParser=GoldenGooseProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'canada_goose')
+#GoldenGooseParser.parse_directory(directory_path)
 #Golden Goose End
 
 #Balenciaga Start
-#balenciaga_Parser=BalenciagaParser(output_directory_path)
-#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/balenciaga'
-#balenciaga_Parser.parse_directory(directory_path)
+#BalenciagaParser=BalenciagaProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'balenciaga')
+#BalenciagaParser.parse_directory(directory_path)
 #Balenciaga End
 
-
-#YSL Start
-# YSL_Parser=SaintLaurentParser(output_directory_path)
+#Old Version
+# YSL Start
+# SaintLaurentParser=SaintLaurentProductParser(output_directory_path)
 # directory_path = os.path.join(main_directory,'ysl')
-# YSL_Parser.parse_directory(directory_path)
-#YSL End
-
+# SaintLaurentParser.parse_directory(directory_path)
+# YSL End
+#Old Version
 
 
 
@@ -155,187 +140,186 @@ print(main_directory)
 #              'cgid%3Dwomen-accessories', 'cgid%3Dwomen-accessories-sunglasses', 'cgid%3Dmen-apparel',
 #              'cgid%3Dmen-tailoring', 'cgid%3Dmen-bags', 'cgid%3Dmen-shoes', 'cgid%3Dmen-accessories',
 #              'cgid%3Dmen-accessories-sunglasses', 'cgid%3Djewellry-for-him']
-#Dolce_Parser=Dolce_Gabbana_Parser()
-#Dolce_Parser.process_categories(categories,bearer_token)
+#DolceParser=DolceGabbanaProductParser()
+#DolceParser.process_categories(categories,bearer_token)
 #Dolce End
 
 #Stone Island Start
-#StoneParser = StoneIslandParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\stone_island'
-#StoneParser.parse_directory(directory_path)
+#StoneIslandParser = StoneIslandProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'stone_island')
+#StoneIslandParser.parse_directory(directory_path)
 #Stone Island End
 
 
 #Etro Start
 #EtroParser = EtroProductParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\etro'
+# directory_path = os.path.join(main_directory,'etro')
 #EtroParser.parse_directory(directory_path)
 #Etro End
 
 #Balmain Start
 #BalmainParser = BalmainProductParser(output_directory_path)
-#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/balmain'
+# directory_path = os.path.join(main_directory,'balmain')
 #BalmainParser.parse_directory(directory_path)
 #Balmain End
 
 
 #Moncler Start
 # categories = ['men','women','children']
-# #country_code='Sites-MonclerEU-Site/en_IT'
-# country_code = 'Sites-MonclerUS-Site/en_US'
-# Moncler_Parser=MonclerParser()
-# Moncler_Parser.process_categories(categories,country_code)
+# country_codes=['Sites-MonclerEU-Site/en_IT','Sites-MonclerUS-Site/en_US']
+# MonclerParser=MonclerProductParser()
+# MonclerParser.process_categories(categories,country_codes)
 #Moncler End
 
 #Versace Start
 #VersaceParser = VersaceProductParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\versace'
+# directory_path = os.path.join(main_directory,'versace')
 #VersaceParser.parse_directory(directory_path)
 #Versace End
 
 #Ferragamo Start
 #FerragamoParser = FerragamoProductParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\ferragamo'
+# directory_path = os.path.join(main_directory,'ferragamo')
 #FerragamoParser.parse_directory(directory_path)
 #Ferragamo End
 
 
 #Burberry Start
-#burberryParser = BurberryParser(output_directory_path)
-#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/burberry'
-#burberryParser.parse_directory(directory_path)
+#BurberryParser = BurberryProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'burberry')
+#BurberryParser.parse_directory(directory_path)
 #Burberry End
 
 
 #Kenzo Start
-#kenzoParser = KenzoParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\kenzo'
-#kenzoParser.parse_directory(directory_path)
+#KenzoParser = KenzoProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'kenzo')
+#KenzoParser.parse_directory(directory_path)
 #Kenzo End
 
 
 #Jimmy Choo Start
-#jimmyChooParser = JimmyChooParser(output_directory_path)
+#JimmyChooParser = JimmyChooProductParser(output_directory_path)
 #directory_path = os.path.join(main_directory,'jimmy_choo')
-#jimmyChooParser.parse_directory(directory_path)
+#JimmyChooParser.parse_directory(directory_path)
 #JimmyChoo End
 
 
 #Brunello Cucinelli Start
-#brunelloCucinelliParser = BrunelloCucinelliParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\brunello_cucinelli'
-#brunelloCucinelliParser.parse_directory(directory_path)
+#BrunelloCucinelliParser = BrunelloCucinelliProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'brunello_cucinelli')
+#BrunelloCucinelliParser.parse_directory(directory_path)
 #Brunello Cucinelli End
 
 #DSquared2 Start
-#dSquaredParser = DSquaredParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\dsquared2'
-#dSquaredParser.parse_directory(directory_path)
+#DSquaredParser = DSquaredProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'dsquared2')
+#DSquaredParser.parse_directory(directory_path)
 #DSquared2 End
 
 
 #Celine Start
-#celineParser = CelineParser(output_directory_path)
-#directory_path = r'C:\Users\User\Sam\MSRP Parsers\Parsers\site-parsing\internal_html\celine'
-#celineParser.parse_directory(directory_path)
+#CelineParser = CelineProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'celine')
+#CelineParser.parse_directory(directory_path)
 #Celine End
 
 
 #Loro Piana Start
 # categories=['L1_MEN','L1_WOM','L2_MEN_ACCESSORIES','L2_WOM_LG','L2_WOM_ACCESSORIES','L2_SHOES_WOM','L2_WOM_SLG','L2_SHOES_MAN','L2_DIGITALFW24_MAN','L2_DIGITALFW24_WOM','L2_SS23_WOM','L2_SS23_MAN']
-# LoroParser=LoroPianaParser()
-# LoroParser.process_categories(categories)
+# LoroPianaParser=LoroPianaProductParser()
+# LoroPianaParser.process_categories(categories)
 #Loro Piana End
 
 
 #Marni Start
-#marniParser = MarniParser(output_directory_path)
-#directory_path = r'C:\Users\User\Sam\MSRP Parsers\Parsers\site-parsing\internal_html\marni'
-#marniParser.parse_directory(directory_path)
+#MarniParser = MarniProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'marni')
+#MarniParser.parse_directory(directory_path)
 #Marni End
 
 #Prada Start
-#pradaParser = PradaParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\prada'
-#pradaParser.parse_directory(directory_path)
+#PradaParser = PradaProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'prada')
+#PradaParser.parse_directory(directory_path)
 #Prada End
 
 #Tods Start
-#todsParser = TodsParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\tods'
-#todsParser.parse_directory(directory_path)
+#TodsParser = TodsProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'tods')
+#TodsParser.parse_directory(directory_path)
 #Tods End
 
 #Valentino Start
-#valentinoParser = ValentinoParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\valentino'
-#valentinoParser.parse_directory(directory_path)
+#ValentinoParser = ValentinoProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'valentino')
+#ValentinoParser.parse_directory(directory_path)
 #Valentino End
 
 #Jacquemus Start
-#jacquemusParser = JacquemusParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\jacquemus'
-#jacquemusParser.parse_directory(directory_path)
+#JacquemusParser = JacquemusProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'jacquemus')
+#JacquemusParser.parse_directory(directory_path)
 #Jacquemus End
 
 #Louboutin Start
-# louboutinParser = LouboutinParser(output_directory_path)
+# LouboutinParser = LouboutinProductParser(output_directory_path)
 # directory_path = os.path.join(main_directory,'louboutin')
-# louboutinParser.parse_directory(directory_path)
+# LouboutinParser.parse_directory(directory_path)
 #Louboutin End
 
 #Palm Angels Start
-# palmAngelsParser = PalmAngelsParser(output_directory_path)
+# PalmAngelsParser = PalmAngelsProductParser(output_directory_path)
 # directory_path = os.path.join(main_directory,'palm_angels_7-23-24')
-# palmAngelsParser.parse_directory(directory_path)
+# PalmAngelsParser.parse_directory(directory_path)
 #PalmAngels End
 
 #Moose Knuckles Start
-#mooseKnucklesParser = MooseKnucklesParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\moose_knuckles'
-#mooseKnucklesParser.parse_directory(directory_path)
+#MooseKnucklesParser = MooseKnucklesProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'moose_knucles')
+#MooseKnucklesParser.parse_directory(directory_path)
 #Moose Knuckles End
 
 #Acne Studios Start
-# acneStudiosParser = AcneStudiosParser(output_directory_path)
+# AcneStudiosParser = AcneStudiosProductParser(output_directory_path)
 # directory_path = os.path.join(main_directory,'acne_studios')
-# acneStudiosParser.parse_directory(directory_path)
+# AcneStudiosParser.parse_directory(directory_path)
 #Acne Studios End
 
 #The Row Start
-# theRowParser = TheRowParser(output_directory_path)
+# TheRowParser = TheRowProductParser(output_directory_path)
 # directory_path = os.path.join(main_directory, 'the_row')
-# theRowParser.parse_directory(directory_path)
+# TheRowParser.parse_directory(directory_path)
 #The Row End
 
 #Manolo Blahnik Start
-#manoloBlahnikParser = ManoloBlahnikParser(output_directory_path)
-#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/manolo_blahnik'
-#manoloBlahnikParser.parse_directory(directory_path)
+#ManoloBlahnikParser = ManoloBlahnikProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'manolo_blahnik')
+#ManoloBlahnikParser.parse_directory(directory_path)
 #Manolo Blahnik End
 
 #Gianvito Rossi Start
-#gianvitoRossiParser = GianvitoRossiParser(output_directory_path)
-#directory_path = r'/Users/samuelshlyam/PycharmProjects/pythonProject1/site-parsing/internal_html/gianvito_rossi'
-#gianvitoRossiParser.parse_directory(directory_path)
+#GianvitoRossiParser = GianvitoRossiProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'gianvito_rossi')
+#GianvitoRossiParser.parse_directory(directory_path)
 #Gianvito Rossi End
 
 #Miu Miu Start
-#miuMiuParser = MiuMiuParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\miu_miu'
+#miuMiuParser = MiuMiuProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'miu_miu')
 #miuMiuParser.parse_directory(directory_path)
 #Gianvito Rossi End
 
 #Birkenstock Start
-#birkenstockParser = BirkenstockParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\birkenstock'
-#birkenstockParser.parse_directory(directory_path)
+#BirkenstockParser = BirkenstockProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'birkenstock')
+#BirkenstockParser.parse_directory(directory_path)
 #Birkenstock End
 
 #Aquazzura Start
-#aquazzuraParser = AquazzuraParser(output_directory_path)
-#directory_path = r'C:\Users\User\PycharmProjects\pythonProject\site-parsing\internal_html\aquazzura'
-#aquazzuraParser.parse_directory(directory_path)
+#AquazzuraParser = AquazzuraProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'aquazzura')
+#AquazzuraParser.parse_directory(directory_path)
 #Aquazzura End
 
 #Tom Ford Start
@@ -347,34 +331,34 @@ print(main_directory)
 #Loewe Start
 # bearer_token= "eyJ2ZXIiOiIxLjAiLCJqa3UiOiJzbGFzL3Byb2QvYmJwY19wcmQiLCJraWQiOiIzNmFjMzZlNy0wMmMwLTQyMzgtYjVjYS1iYmYyZDk2OGUyZDciLCJ0eXAiOiJqd3QiLCJjbHYiOiJKMi4zLjQiLCJhbGciOiJFUzI1NiJ9.eyJhdXQiOiJHVUlEIiwic2NwIjoic2ZjYy5zaG9wcGVyLW15YWNjb3VudC5iYXNrZXRzIHNmY2Muc2hvcHBlci1kaXNjb3Zlcnktc2VhcmNoIHNmY2Muc2hvcHBlci1teWFjY291bnQucGF5bWVudGluc3RydW1lbnRzIHNmY2Muc2hvcHBlci1jdXN0b21lcnMubG9naW4gc2ZjYy5zaG9wcGVyLWV4cGVyaWVuY2Ugc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5vcmRlcnMgc2ZjYy5zaG9wcGVyLXByb2R1Y3RsaXN0cyBzZmNjLnNob3BwZXItcHJvbW90aW9ucyBzZmNjLnNlc3Npb25fYnJpZGdlIHNmY2Muc2hvcHBlci1teWFjY291bnQucGF5bWVudGluc3RydW1lbnRzLnJ3IHNmY2Muc2hvcHBlci1teWFjY291bnQucHJvZHVjdGxpc3RzIHNmY2Muc2hvcHBlci1jYXRlZ29yaWVzIHNmY2Muc2hvcHBlci1teWFjY291bnQgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5hZGRyZXNzZXMgc2ZjYy5zaG9wcGVyLXByb2R1Y3RzIHNmY2Muc2hvcHBlci1teWFjY291bnQucncgc2ZjYy5zaG9wcGVyLWNvbnRleHQucncgc2ZjYy5zaG9wcGVyLWJhc2tldHMtb3JkZXJzIHNmY2Muc2hvcHBlci1jdXN0b21lcnMucmVnaXN0ZXIgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5hZGRyZXNzZXMucncgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5wcm9kdWN0bGlzdHMucncgc2ZjYy5zaG9wcGVyLWJhc2tldHMtb3JkZXJzLnJ3IHNmY2Muc2hvcHBlci1naWZ0LWNlcnRpZmljYXRlcyBzZmNjLnNob3BwZXItcHJvZHVjdC1zZWFyY2ggc2ZjYy5zaG9wcGVyLXNlbyIsInN1YiI6ImNjLXNsYXM6OmJicGNfcHJkOjpzY2lkOjJiNTYzYTRlLWI1MTAtNDE0My05N2UxLWY0NTQxNTk2M2UyMTo6dXNpZDo1ZGU0Yjg1OC1lZjNiLTRiZDctOWQ1Mi1lMTU4NGM5ZjlkY2YiLCJjdHgiOiJzbGFzIiwiaXNzIjoic2xhcy9wcm9kL2JicGNfcHJkIiwiaXN0IjoxLCJkbnQiOiIwIiwiYXVkIjoiY29tbWVyY2VjbG91ZC9wcm9kL2JicGNfcHJkIiwibmJmIjoxNzIxNDA2ODUzLCJzdHkiOiJVc2VyIiwiaXNiIjoidWlkbzpzbGFzOjp1cG46R3Vlc3Q6OnVpZG46R3Vlc3QgVXNlcjo6Z2NpZDphYnNWWVFiOHFsaWIxaHpub1ZQUU1VOUh2Rjo6c2VzYjpzZXNzaW9uX2JyaWRnZTo6Y2hpZDpMT0VfVVNBIiwiZXhwIjoxNzIxNDA4NjgzLCJpYXQiOjE3MjE0MDY4ODMsImp0aSI6IkMyQzE3MjI2Mjc5NzgwLTY1MzY3MTExMTI1NDU3MjA5NzMzNTkxMiJ9.FvwfBPIE7K25-2zo71BrGOQmZVzvxgb84uqR01JJEhRdTJcZZXteU-R37o-Emlv67JHINOpa9eb2nFz8slgHUw"
 # categories = ['cgid%3Dwomen','cgid%3Dmen','cgid%3Dm_fw_collection','cgid%3Dw_fw_precollection']
-# Loewe_Parser=LoeweParser()
-# Loewe_Parser.process_categories(categories,bearer_token)
+# LoeweParser=LoeweProductParser()
+# LoeweParser.process_categories(categories,bearer_token)
 #Loewe End
 
 #Saint Laurent Start
 # categories = ['view-all-shoes-women','view-all-rtw-women','view-all-handbags-women','view-all-slg-women','view-all-jewelry-women','view-all-accessories-women','view-all-rtw-men','view-all-shoes-men','view-all-slg-men','view-all-accessories-men','view-all-bags-men','highlights-women-collection','highlights-men-collection',]
-# locales=['en-it','en-us']
-# SaintLaurentParser=SaintLaurentParser()
-# SaintLaurentParser.process_categories(categories,locales)
+# country_code=['en-it','en-us']
+# SaintLaurentParser=SaintLaurentProductParser()
+# SaintLaurentParser.process_categories(categories,country_code)
 #Saint Laurent End
 
 #Tods Start
-# TodsParser=TodsParser()
+# TodsParser=TodsProductParser()
 # cookie='ftr_ncd=6; mt.v=2.91441120.1720795186835; __attentive_id=9dd8fdfb2a634a25b33a05bddbaea5a4; _attn_=eyJ1Ijoie1wiY29cIjoxNzIwNzk1MTg3MzU5LFwidW9cIjoxNzIwNzk1MTg3MzU5LFwibWFcIjoyMTkwMCxcImluXCI6ZmFsc2UsXCJ2YWxcIjpcIjlkZDhmZGZiMmE2MzRhMjViMzNhMDViZGRiYWVhNWE0XCJ9In0=; __attentive_cco=1720795187360; OptanonAlertBoxClosed=2024-07-12T14:39:50.226Z; nodeClientToken=TgPITCn5tGqje8P1IHOIdSbrvKA; USER=%7B%22username%22%3A%22anonymous%22%2C%22customerId%22%3A%22anonymous%22%2C%22type%22%3A%22anonymous%22%2C%22accessToken%22%3A%22oXyZLwV-y6eQeBiG130xNZoCpQM%22%7D; nodeSessionId=%22a8b149b3-1990-4cc9-8141-383409795986%22; countryIP=US; AKA_A2=A; _abck=33603576242A74C7496127C28B0E34BE~0~YAAQxMgsFxyITLaQAQAAsdx4vAz7v4KHhurJZlkz46njo3UgqOW0FTcivTzeS4zOIwaVqFY3mrKysCFXEd5hHhnOLdUc807Y73AwEMiujNE3TeCLh6+LPyfBeoTQre39GPsbrvsUUiInpajb1gl0yibi7Noffe6uF78/koZmMOWXOCSyjXx98a7iHPHZzJxMdmPfvFlNNaOmzcg4ubvHfGlZl+ljbpMZjjOKRKmHZsHiJeDqvRrajsJimsPBALa9U1fuJRfDvi2IWDpQMoZKHfN1lsPWokA/k7npRZXZrN4VZ2p+3+yAkd37JjWaMReVjcl9onUCbm/JCXeVSLZq6z5/UyD1FhgCgFEtqO0HEPW9Xg0/S2E89xDeG01xYhA+QvOYPBo3u+27fmWT4669aiQXYNmH1w==~-1~-1~-1; bm_sz=B8F44CA3495E1A73521F76314743EF9F~YAAQxMgsFx+ITLaQAQAAsdx4vBhLG433z000loJxqejKosGvRTFO4/uZadpG5wM7aaDqZiyvNoeubCk2HM9V6tzIdXSkkh7LBaygbZ5efC2FuzKJbfS6vZ54H1PwhWmztzHzEavvEImqhnIPB/LzPsodWyTIaTOriEsDXjX11wtO7Y6WO+dtLiHtvtnRUqlzRsRmS6VFgRIhM8odNnN2tJl5Ril+7ZpjG7X6MZ108n1gFVWp0+1B+Zrs3ecqB6EymP0x7EP7Tl+X+j6URTV3bmN9MYTaGzHR/c4PPNlA4Cx6s+AR6xHTyxB1JkZDfnssFCsOSHoZR9RN4mB6OxWZbKmISWeqANpm1u/mVEQtBbKWFziElAtok6Ojx7i+NRaqfwdmnrPWKis+j5gb7Sg=~4536642~3621174; PIM-SESSION-ID=IAUZPefx620he0If; _cs_mk_ga=0.0739706499717212_1721148957046; _gid=GA1.2.1855863707.1721148957; _ga=GA1.2.1520502800.1720795186; ak_bmsc=A3858ABE0725B00A0AF17AAF79053C7C~000000000000000000000000000000~YAAQxMgsF0CJTLaQAQAATOh4vBiAMseTevUJYssKk+/Hiiffh7Yb/prqOaEQufn7cO6uqUYanYV4iEBhl7Rn7DM9NZWNZD+MSKWaT7QEn83uVL3au+HPR1mnbzLe4n01H4jrhT2i8Ai4JrPNmBQaKGPzhvgRP2sEhrBv5h1h5dY8xWnRj7F69U7O0P9lW1KfKjlc+Tx5ZU7ZoOpLXVZ6eNLZoa4j7gg264NJP6l/jC9DBNsKpvKlcGBKG1BnNVMGAIq0hn8cByMQUzFiqTgCMmo8n562HqgaIC7ZYC9g1nGFR/IyFSaUlUdOJeU+JBcPi98uzRd2U4YNlj8VDtckzmdB1+adD3Ge+BFsLXl22vfd5BQjeriDAwzb+cMMQeSOvuWBncToFqUv6vmEu1Bw4Rh30ADSRnUgg864mjcNYkHLv5dq9sqo3QxoaRzYhA==; OptanonConsent=isGpcEnabled=0&datestamp=Tue+Jul+16+2024+12%3A55%3A58+GMT-0400+(Eastern+Daylight+Time)&version=202405.2.0&browserGpcFlag=0&isIABGlobal=false&hosts=&consentId=073ae49f-e470-48e1-b404-312cac8c5717&interactionCount=1&isAnonUser=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A0%2CC0003%3A0%2CC0004%3A0&intType=undefined&geolocation=%3B&AwaitingReconsent=false; forterToken=ca43b01699004ab88ab9fccb53451566_1721148956606__UDF43-m4_9ck_; QueueITAccepted-SDFrts345E-V3_tods=EventId%3Dtods%26QueueId%3D77e7644b-2e59-4cfa-a8aa-d3e692510e6f%26RedirectType%3Dsafetynet%26IssueTime%3D1721148959%26Hash%3D15e619f44015c99375b3b5d9fe6654de45f808f4d8353e292ff46ee149787465; __attentive_utm_param_medium=cpc; __attentive_utm_param_source=google; __attentive_utm_param_campaign=W_US_Tods_Search_Brand_Pure_Exact_MS; __attentive_ss_referrer=https://www.google.com/; __attentive_dv=1; __attentive_pv=2; RT="z=1&dm=tods.com&si=2d6b53f5-49d7-4666-97b8-76c5eb97df45&ss=lyonnckv&sl=1&tt=3w7&rl=1&ld=3w9&nu=pmxcb4ms&cl=j7a"; _ga_YMQ83SWR7E=GS1.1.1721148957.2.1.1721148979.0.0.0; bm_sv=B1F13FA6025020E76AB4B3D4137F7FD1~YAAQxMgsF4KNTLaQAQAAmD15vBjIqF+J5NX8tq+eNAievVRfZB6Bz/12ZwQ2tHn8pt7jim6s//uSxD4ZJJYrl7rN6SHeVCCsKlNz/TicQQfEWwVeJnG1c9SAzxWPKIC4CyztE3vtDfEYhd4lW8g3cq6yiFsVnqsLXEUC7hvN9X2FYQH1c56pjkkEnKC3uptSwtFGt/VIZJdO373LjA8B/OB86xwEZpdC2X3EkAtz4EN9lOIXb8FAP9nKN9PJZg==~1'
-# categories=TodsParser.fetch_categories(cookie)
+# categories=TodsProductParser.fetch_categories(cookie)
 # print(categories)
 # TodsParser.process_categories(categories,cookie)
 #Tods End
 
 
 #Herno Start
-#hernoParser = HernoParser(output_directory_path)
+#HernoParser = HernoProductParser(output_directory_path)
 #directory_path = os.path.join(main_directory, 'herno')
-#hernoParser.parse_directory(directory_path)
+#HernoParser.parse_directory(directory_path)
 #Herno End
 
 #Lanvin Start
-lanvinParser = LanvinParser(output_directory_path)
-directory_path = os.path.join(main_directory, 'lanvin')
-lanvinParser.parse_directory(directory_path)
+# LanvinParser = LanvinProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory, 'lanvin')
+# LanvinParser.parse_directory(directory_path)
 #Lanvin End

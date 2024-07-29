@@ -97,7 +97,7 @@ class BottegaVenetaParser(WebsiteParser):
         return parsed_data
 
 
-class GucciParser():
+class GucciProductParser():
     ##COMPLETE
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
@@ -199,7 +199,7 @@ class GucciParser():
         filename=os.path.join(output_dir,f"gucci_output_{current_date}.csv")
         self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
         print("Complete data saved to 'output_gucci_5_27_24.csv'")
-class FendiParser(WebsiteParser):
+class FendiProductParser(WebsiteParser):
     ## This class parses the HTML files from the Fendi website.
     ## website: https://www.fendi.com
     def __init__(self, directory):
@@ -605,7 +605,7 @@ class OffWhiteProductParser(WebsiteParser):
         return parsed_data
 
 
-class BallyParser():
+class BallyProductParser():
     ##COMPLETE
     def __init__(self):
         #https://www.bally.com/_next/data/kHhMfjaaFfoBfxbp7icbW/en/category/men-sale.json
@@ -693,7 +693,7 @@ class BallyParser():
         print("Complete data saved")
 
 
-class IsabelMarantParser(WebsiteParser):
+class IsabelMarantProductParser(WebsiteParser):
     ## This class parses the HTML files from the Bottega Veneta website.
     ## website: https://www.givenchy.com/us/en-US
     def __init__(self, directory):
@@ -764,7 +764,7 @@ class IsabelMarantParser(WebsiteParser):
         return parsed_data
 
 
-class Chloe_Parser(WebsiteParser):
+class ChloeProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'chloe'  # Replace spaces with underscores
         self.directory = directory
@@ -848,7 +848,7 @@ class Chloe_Parser(WebsiteParser):
                 print(f'Product ID not found for url: {product_url}')
         else:
             print(f'Your URL is broken: {product_url}')
-class MCM_Parser(WebsiteParser):
+class MCMProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'mcm'  # Replace spaces with underscores
         self.directory = directory
@@ -1005,7 +1005,7 @@ class GoldenGooseProductParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
-class BalenciagaParser(WebsiteParser):
+class BalenciagaProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'balenciaga'  # Replace spaces with underscores
         self.directory = directory
@@ -1084,7 +1084,7 @@ class BalenciagaParser(WebsiteParser):
 #class SaintLaurentParser(WebsiteParser):
     # def __init__(self, directory):
     #     self.brand = 'saint_laurent'  # Replace spaces with underscores
-    #     self.directory = directory
+    #     self.dire ctory = directory
     # def parse_product_blocks(self, soup, category):
     #     product_blocks = soup.find_all('article', class_='c-product')
     #     parsed_data = []
@@ -1259,7 +1259,7 @@ class AlexanderMcqueenParser(WebsiteParser):
 
 
 
-class Dolce_Gabbana_Parser(WebsiteParser):
+class DolceGabbanaProductParser(WebsiteParser):
     def __init__(self):
         self.brand = 'dolce_gabbana'  # Replace spaces with underscores
 
@@ -1328,7 +1328,7 @@ class Dolce_Gabbana_Parser(WebsiteParser):
         print("Complete data saved to 'dolcegabbana_products.csv'")
 
 
-class StoneIslandParser(WebsiteParser):
+class StoneIslandProductParser(WebsiteParser):
 
     def __init__(self, directory):
         self.brand = 'stone_island'  # Replace with brand name
@@ -1557,7 +1557,7 @@ class BalmainProductParser(WebsiteParser):
 
         return parsed_data
 
-class MonclerParser(WebsiteParser):
+class MonclerProductParser(WebsiteParser):
     def __init__(self):
         options = webdriver.ChromeOptions()
         options.add_argument(
@@ -1616,9 +1616,12 @@ class MonclerParser(WebsiteParser):
             attributes[attr['displayName']] = values
         return attributes
 
-    def process_categories(self, categories, cookie):
+    def process_categories(self, categories, country_codes):
         # Fetch products
-        all_data = self.fetch_moncler_products(categories, cookie)
+        all_data=[]
+        for country_code in country_codes:
+            some_data = self.fetch_moncler_products(categories, country_code)
+            all_data.extend(some_data)
         print(all_data.head())
 
         current_date = datetime.datetime.now().strftime("%m_%d_%Y")
@@ -1719,7 +1722,7 @@ class FerragamoProductParser(WebsiteParser):
         return parsed_data
 
 
-class BurberryParser(WebsiteParser):
+class BurberryProductParser(WebsiteParser):
 
     def __init__(self, directory):
         self.brand = "burberry"
@@ -1777,7 +1780,7 @@ class BurberryParser(WebsiteParser):
         return parsed_data
 
 
-class KenzoParser(WebsiteParser):
+class KenzoProductParser(WebsiteParser):
 
     def __init__(self, directory):
         self.brand = "kenzo"
@@ -1896,7 +1899,7 @@ class KenzoParser(WebsiteParser):
         return biggest_image_url
 
 
-class JimmyChooParser(WebsiteParser):
+class JimmyChooProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'jimmy_choo'
         self.directory = directory
@@ -2010,7 +2013,7 @@ class JimmyChooParser(WebsiteParser):
         return parsed_data
 
 
-class BrunelloCucinelliParser(WebsiteParser):
+class BrunelloCucinelliProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'brunello_cucinelli'
         self.directory = directory
@@ -2104,7 +2107,7 @@ class BrunelloCucinelliParser(WebsiteParser):
         return text.strip()
 
 
-class DSquaredParser(WebsiteParser):
+class DSquaredProductParser(WebsiteParser):
 
     def __init__(self, directory):
         self.brand = 'dsquared2'  # Replace with brand name
@@ -2163,7 +2166,7 @@ class DSquaredParser(WebsiteParser):
         return parsed_data
 
 
-class CelineParser(WebsiteParser):
+class CelineProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'celine'
         self.directory = directory
@@ -2232,7 +2235,7 @@ class CelineParser(WebsiteParser):
         return parsed_data
 
 
-# class LoroPianaParser():
+# class LoroPianaProductParser():
 #     ##COMPLETE
 #     def __init__(self):
 #         # Initialize with common base URL and empty DataFrame to accumulate results
@@ -2308,7 +2311,7 @@ class CelineParser(WebsiteParser):
 #         print(f"Complete data saved to 'loro_piana_output_{current_date}.csv'")
 
 
-class MarniParser(WebsiteParser):
+class MarniProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'marni'
         self.directory = directory
@@ -2369,7 +2372,7 @@ class MarniParser(WebsiteParser):
             parsed_data.append(product_data)
 
         return parsed_data
-class PradaParser(WebsiteParser):
+class PradaProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'prada'
         self.directory = directory
@@ -2427,7 +2430,7 @@ class PradaParser(WebsiteParser):
         return parsed_data
 
 
-# class TodsParser(WebsiteParser):
+# class TodsProductParser(WebsiteParser):
 #     def __init__(self, directory):
 #         self.brand = 'tods'
 #         self.directory = directory
@@ -2485,7 +2488,7 @@ class PradaParser(WebsiteParser):
 #
 #         return parsed_data
 
-class ValentinoParser(WebsiteParser):
+class ValentinoProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'valentino'
         self.directory = directory
@@ -2541,7 +2544,7 @@ class ValentinoParser(WebsiteParser):
         return parsed_data
 
 
-class JacquemusParser(WebsiteParser):
+class JacquemusProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'jacquemus'
         self.directory = directory
@@ -2628,7 +2631,7 @@ class JacquemusParser(WebsiteParser):
 
 
 
-class LouboutinParser(WebsiteParser):
+class LouboutinProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'christian_louboutin'
         self.directory = directory
@@ -2730,7 +2733,7 @@ class LouboutinParser(WebsiteParser):
             return '', '', '', ''
 
 
-class PalmAngelsParser(WebsiteParser):
+class PalmAngelsProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'palm_angels_old'  # Assuming 'farfetch' as the brand based on the HTML
         self.directory = directory
@@ -2805,7 +2808,7 @@ class PalmAngelsParser(WebsiteParser):
 
         return parsed_data
 
-class MooseKnucklesParser(WebsiteParser):
+class MooseKnucklesProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'moose_knuckles'  # Assuming 'Moose Knuckles' as the brand
         self.directory = directory
@@ -2877,7 +2880,7 @@ class MooseKnucklesParser(WebsiteParser):
 
         return parsed_data
 
-class AcneStudiosParser(WebsiteParser):
+class AcneStudiosProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'acne_studios'  # Assuming 'acne_studios' as the brand based on the HTML
         self.directory = directory
@@ -2969,7 +2972,7 @@ class AcneStudiosParser(WebsiteParser):
             print(f'Your URL is broken: {product_url}')
 
 
-class TheRowParser(WebsiteParser):
+class TheRowProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'the_row'  # Assuming 'therow' as the brand based on the HTML
         self.directory = directory
@@ -3071,7 +3074,7 @@ class TheRowParser(WebsiteParser):
             print(f'Your URL is broken: {product_url}')
 
 
-class ManoloBlahnikParser(WebsiteParser):
+class ManoloBlahnikProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'manolo_blahnik'
         self.directory = directory
@@ -3137,7 +3140,7 @@ class ManoloBlahnikParser(WebsiteParser):
 
         return parsed_data
 
-class GianvitoRossiParser(WebsiteParser):
+class GianvitoRossiProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'gianvito_rossi'
         self.directory = directory
@@ -3199,7 +3202,7 @@ class GianvitoRossiParser(WebsiteParser):
 
         return parsed_data
 
-class MiuMiuParser(WebsiteParser):
+class MiuMiuProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'miu_miu'
         self.directory = directory
@@ -3249,7 +3252,7 @@ class MiuMiuParser(WebsiteParser):
         return parsed_data
 
 
-class BirkenstockParser(WebsiteParser):
+class BirkenstockProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'birkenstock'
         self.directory = directory
@@ -3313,7 +3316,7 @@ class BirkenstockParser(WebsiteParser):
 
         return parsed_data
 
-class AquazzuraParser(WebsiteParser):
+class AquazzuraProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'aquazzura'
         self.directory = directory
@@ -3374,7 +3377,7 @@ class AquazzuraParser(WebsiteParser):
         return parsed_data
 
 
-class LoeweParser(WebsiteParser):
+class LoeweProductParser(WebsiteParser):
     ##COMPLETEZ
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
@@ -3494,7 +3497,7 @@ class LoeweParser(WebsiteParser):
         self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
         print(f"Complete data saved to 'loewe_output_{current_date}.csv'")
 
-class SaintLaurentParser(WebsiteParser):
+class SaintLaurentProductParser(WebsiteParser):
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
         self.base_url = ("https://www.ysl.com/api/v1/category/{category}?locale={locale}&page={page}&categoryIds={category}&hitsPerPage=15")
@@ -3608,7 +3611,7 @@ class SaintLaurentParser(WebsiteParser):
             self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
             print(f"Complete data saved to 'YSL_output_{locale}_{current_date}.csv'")
 
-class TodsParser(WebsiteParser):
+class TodsProductParser(WebsiteParser):
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
         self.base_url = ("https://www.tods.com/rest/v2/tods-us/products/search?query=:rank-asc:category:{category}&fields=NAV&currentPage=0&pageSize=1000&key=undefined&lang=en&access_token=TgPITCn5tGqje8P1IHOIdSbrvKA&Cookie={cookie}")
@@ -3696,7 +3699,7 @@ class TodsParser(WebsiteParser):
         filename = f'parser-output/tods_output_{current_date}.csv'
         self.data.to_csv(filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
         print(f"Complete data saved to 'tods_output_{current_date}.csv'")
-class LoroPianaParser():
+class LoroPianaProductParser():
     ##COMPLETE
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
@@ -3800,7 +3803,7 @@ class LoroPianaParser():
         self.data.to_csv(filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
         print("Complete data saved to 'output_loro_piana_5_27_24.csv'")
 
-class HernoParser(WebsiteParser):
+class HernoProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'herno'
         self.directory = directory
@@ -3884,7 +3887,7 @@ class HernoParser(WebsiteParser):
 
         return parsed_data
 
-class LanvinParser(WebsiteParser):
+class LanvinProductParser(WebsiteParser):
     def __init__(self, directory):
         self.brand = 'lanvin'
         self.directory = directory
