@@ -24,11 +24,10 @@ print(main_directory)
 #Bottega Veneta End
 
 #Gucci Start
-#GucciParser = GucciProductParser()
-#gucci_categories_womens = ['women-shoes','women-handbags','women-accessories-lifestyle-bags-and-luggage','women-readytowear','women-accessories-wallets','women-accessories','jewelry-watches-watches-women', 'women-accessories-belts','women-accessories-silks-and-scarves','women-accessories-hats-and-gloves']
-#gucci_categories_mens = ['men-bags', 'men-bags-luggage','men-readytowear','men-shoes','men-accessories-wallets','men-accessories-hats-and-gloves','men-accessories-belts','men-eyewear','jewelry-watches-watches-men','men-accessories']
-#combined_gucci_categories = ['men-bags', 'men-bags-luggage','men-readytowear','men-shoes','men-accessories-wallets','men-accessories-hats-and-gloves','men-accessories-belts','men-eyewear','jewelry-watches-watches-men','men-accessories','women-shoes','women-handbags','women-accessories-lifestyle-bags-and-luggage','women-readytowear','women-accessories-wallets','women-accessories','jewelry-watches-watches-women', 'women-accessories-belts','women-accessories-silks-and-scarves','women-accessories-hats-and-gloves']
-#GucciParser.process_categories(combined_gucci_categories)
+    # GucciParser = GucciProductParser()
+    # combined_gucci_categories = ['men-bags', 'men-bags-luggage','men-readytowear','men-shoes','men-accessories-wallets','men-accessories-hats-and-gloves','men-accessories-belts','men-eyewear','jewelry-watches-watches-men','men-accessories','women-shoes','women-handbags','women-accessories-lifestyle-bags-and-luggage','women-readytowear','women-accessories-wallets','women-accessories','jewelry-watches-watches-women', 'women-accessories-belts','women-accessories-silks-and-scarves','women-accessories-hats-and-gloves']
+    # locales=['it/it','us/en']
+    # GucciParser.process_categories(combined_gucci_categories,locales,output_directory_path)
 #Gucci End
 
 # START FENDI PARSER##
@@ -40,9 +39,9 @@ print(main_directory)
 
 
 #BALLY START
-#BallyParser = BallyProductParser()
-#category_list = ['men-sale.json?', 'women-sale.json?', 'men.json?', 'women.json?']
-#BallyParser.process_categories(category_list)
+# BallyParser = BallyProductParser()
+# category_list = ['men-sale.json', 'women-sale.json', 'men.json', 'women.json']
+# BallyParser.process_categories(category_list)
 #BALLY END
 
 #STELLA START
@@ -127,21 +126,24 @@ print(main_directory)
 #Alexander Mcqueen Start
 # women_categories = ['w-ready-to-wear','W-All-Shoes' ,'W-All-Bags','W-All-Accessories','w-jewellery' ]  # Assuming you have a list of categories
 # men_categories = ['M-All-Ready-to-Wear','M-Shoes','M-All-Accessories', 'm-jewellery','M-Bags']
-# women_base_url = "https://www.alexandermcqueen.com/api/v1/category/women?locale=en-us&categoryIds={clothing_category}&page={page}"
-# men_base_url = "https://www.alexandermcqueen.com/api/v1/category/men?locale=en-us&categoryIds={clothing_category}&page={page}"
+# women_base_url = "https://www.alexandermcqueen.com/api/v1/category/women?locale={locale}&categoryIds={clothing_category}&page={page}&hitsPerPage=30"
+# men_base_url = "https://www.alexandermcqueen.com/api/v1/category/men?locale={locale}&categoryIds={clothing_category}&page={page}&hitsPerPage=30"
 # directory_path = '/content/drive/MyDrive/msrp_archive_raw/alexander_mcqueen/2024-07-08_12-45-00/M/'
+# locales=['en-it','en-us',]
 # AlexandarMcqueenParser=AlexanderMcqueenParser(men_base_url)
-# AlexandarMcqueenParser.process_categories(men_categories,directory_path)
+# AlexandarMcqueenParser.process_categories(men_categories,output_directory_path,locales)
 #Alexander Mcqueen End
 
 #Dolce Start
-#bearer_token= "eyJ2ZXIiOiIxLjAiLCJqa3UiOiJzbGFzL3Byb2QvYmtkYl9wcmQiLCJraWQiOiI4ZTA2MGIwZi0yYjZlLTQ5NWQtOGY4Ny04NDUxOWE3NmRhOWEiLCJ0eXAiOiJqd3QiLCJjbHYiOiJKMi4zLjQiLCJhbGciOiJFUzI1NiJ9.eyJhdXQiOiJHVUlEIiwic2NwIjoic2ZjYy5zaG9wcGVyLW15YWNjb3VudC5iYXNrZXRzIHNmY2Muc2hvcHBlci1kaXNjb3Zlcnktc2VhcmNoIHNmY2Muc2hvcHBlci1teWFjY291bnQucGF5bWVudGluc3RydW1lbnRzIHNmY2Muc2hvcHBlci1jdXN0b21lcnMubG9naW4gc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5vcmRlcnMgc2ZjYy5zaG9wcGVyLXByb2R1Y3RsaXN0cyBzZmNjLnNob3BwZXItcHJvbW90aW9ucyBzZmNjLnNob3BwZXIuc3RvcmVzIHNmY2Mub3JkZXJzLnJ3IHNmY2Muc2Vzc2lvbl9icmlkZ2Ugc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5wYXltZW50aW5zdHJ1bWVudHMucncgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5wcm9kdWN0bGlzdHMgc2ZjYy5zaG9wcGVyLWNhdGVnb3JpZXMgc2ZjYy5zaG9wcGVyLW15YWNjb3VudCBzZmNjLnNob3BwZXItbXlhY2NvdW50LmFkZHJlc3NlcyBzZmNjLnNob3BwZXItcHJvZHVjdHMgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5ydyBzZmNjLnNob3BwZXItY29udGV4dC5ydyBzZmNjLnNob3BwZXItYmFza2V0cy1vcmRlcnMgc2ZjYy5zaG9wcGVyLWN1c3RvbWVycy5yZWdpc3RlciBzZmNjLnNob3BwZXItbXlhY2NvdW50LmFkZHJlc3Nlcy5ydyBzZmNjLnNob3BwZXItbXlhY2NvdW50LnByb2R1Y3RsaXN0cy5ydyBzZmNjLnNob3BwZXItcHJvZHVjdCBzZmNjLnNob3BwZXItYmFza2V0cy1vcmRlcnMucncgc2ZjYy5zaG9wcGVyLWdpZnQtY2VydGlmaWNhdGVzIHNmY2Muc2hvcHBlci1wcm9kdWN0LXNlYXJjaCIsInN1YiI6ImNjLXNsYXM6OmJrZGJfcHJkOjpzY2lkOjAxYzNhMjlmLTMzNmMtNDlkNS04ZWJlLWMxMzNmZjk4Mjk0NTo6dXNpZDo3NzM1MDMyNi1mNjMxLTQxZjItOWE4MC01MzQ3MjBkNDVlMTEiLCJjdHgiOiJzbGFzIiwiaXNzIjoic2xhcy9wcm9kL2JrZGJfcHJkIiwiaXN0IjoxLCJkbnQiOiIwIiwiYXVkIjoiY29tbWVyY2VjbG91ZC9wcm9kL2JrZGJfcHJkIiwibmJmIjoxNzE3MDIxOTA5LCJzdHkiOiJVc2VyIiwiaXNiIjoidWlkbzpzbGFzOjp1cG46R3Vlc3Q6OnVpZG46R3Vlc3QgVXNlcjo6Z2NpZDpiY2xYQVhscmFYa0h3UnhId1hrcVlZa3V3Vzo6Y2hpZDogIiwiZXhwIjoxNzE3MDIzNzM5LCJpYXQiOjE3MTcwMjE5MzksImp0aSI6IkMyQzc3NTc1MzE4MjAtMTYwMDU0NTkwNzE4MTUwNDA4MzQ1MzE2NDgifQ.cAcmEZb_x-YVfEpSn-MrIcO1UjtaL9wdG9QudX7RpdZHoGQxSNq-OVqKgyJpu3f7wPw1tT4EYN_k_AsBv_GsLg"
-#categories = ['cgid%3Dwomen-bags', 'cgid%3Dwomen-apparel', 'cgid%3Djewellry-for-her', 'cgid%3Dwomen-shoes',
-#              'cgid%3Dwomen-accessories', 'cgid%3Dwomen-accessories-sunglasses', 'cgid%3Dmen-apparel',
-#              'cgid%3Dmen-tailoring', 'cgid%3Dmen-bags', 'cgid%3Dmen-shoes', 'cgid%3Dmen-accessories',
-#              'cgid%3Dmen-accessories-sunglasses', 'cgid%3Djewellry-for-him']
-#DolceParser=DolceGabbanaProductParser()
-#DolceParser.process_categories(categories,bearer_token)
+# bearer_token= "eyJ2ZXIiOiIxLjAiLCJqa3UiOiJzbGFzL3Byb2QvYmtkYl9wcmQiLCJraWQiOiI4NzNlMTc0ZC03YzU5LTQ5NWMtYTZlNi02MzY3MDhiMDViMjUiLCJ0eXAiOiJqd3QiLCJjbHYiOiJKMi4zLjQiLCJhbGciOiJFUzI1NiJ9.eyJhdXQiOiJHVUlEIiwic2NwIjoic2ZjYy5zaG9wcGVyLW15YWNjb3VudC5iYXNrZXRzIHNmY2Muc2hvcHBlci1kaXNjb3Zlcnktc2VhcmNoIHNmY2Muc2hvcHBlci1teWFjY291bnQucGF5bWVudGluc3RydW1lbnRzIHNmY2Muc2hvcHBlci1jdXN0b21lcnMubG9naW4gc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5vcmRlcnMgc2ZjYy5zaG9wcGVyLXByb2R1Y3RsaXN0cyBzZmNjLnNob3BwZXItcHJvbW90aW9ucyBzZmNjLnNob3BwZXIuc3RvcmVzIHNmY2Mub3JkZXJzLnJ3IHNmY2Muc2Vzc2lvbl9icmlkZ2Ugc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5wYXltZW50aW5zdHJ1bWVudHMucncgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5wcm9kdWN0bGlzdHMgc2ZjYy5zaG9wcGVyLWNhdGVnb3JpZXMgc2ZjYy5zaG9wcGVyLW15YWNjb3VudCBzZmNjLnNob3BwZXItbXlhY2NvdW50LmFkZHJlc3NlcyBzZmNjLnNob3BwZXItcHJvZHVjdHMgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5ydyBzZmNjLnNob3BwZXItY29udGV4dC5ydyBzZmNjLnNob3BwZXItYmFza2V0cy1vcmRlcnMgc2ZjYy5zaG9wcGVyLWN1c3RvbWVycy5yZWdpc3RlciBzZmNjLnNob3BwZXItbXlhY2NvdW50LmFkZHJlc3Nlcy5ydyBzZmNjLnNob3BwZXItbXlhY2NvdW50LnByb2R1Y3RsaXN0cy5ydyBzZmNjLnNob3BwZXItcHJvZHVjdCBzZmNjLnNob3BwZXItYmFza2V0cy1vcmRlcnMucncgc2ZjYy5zaG9wcGVyLWdpZnQtY2VydGlmaWNhdGVzIHNmY2Muc2hvcHBlci1wcm9kdWN0LXNlYXJjaCIsInN1YiI6ImNjLXNsYXM6OmJrZGJfcHJkOjpzY2lkOjAxYzNhMjlmLTMzNmMtNDlkNS04ZWJlLWMxMzNmZjk4Mjk0NTo6dXNpZDo5OTQzNTAwZi1lMmQyLTQyODYtOGYzOC0zM2MwZWU3OTEyYWIiLCJjdHgiOiJzbGFzIiwiaXNzIjoic2xhcy9wcm9kL2JrZGJfcHJkIiwiaXN0IjoxLCJkbnQiOiIwIiwiYXVkIjoiY29tbWVyY2VjbG91ZC9wcm9kL2JrZGJfcHJkIiwibmJmIjoxNzIyMzU5NDIxLCJzdHkiOiJVc2VyIiwiaXNiIjoidWlkbzpzbGFzOjp1cG46R3Vlc3Q6OnVpZG46R3Vlc3QgVXNlcjo6Z2NpZDphYm1ySVlrWHNVa2V3UnhyaElrR1lZa0hFMDo6Y2hpZDogIiwiZXhwIjoxNzIyMzYxMjUxLCJpYXQiOjE3MjIzNTk0NTEsImp0aSI6IkMyQzc3NTc1MzE4MjAtMTYwMDU0NTkwNzEyMDcxNDAyMzk1OTA3MjAifQ.gJoNprHxkb6_fRJHLscagyAq6YCSRC0J1OmN0MXNnH7N9yfG0-nBcQZQo5KF4JY5L-EXPU9rcczBnKd74J_6pw"
+# # categories = ['cgid%3Dwomen-bags', 'cgid%3Dwomen-apparel', 'cgid%3Djewellry-for-her', 'cgid%3Dwomen-shoes',
+# #              'cgid%3Dwomen-accessories', 'cgid%3Dwomen-accessories-sunglasses', 'cgid%3Dmen-apparel',
+# #              'cgid%3Dmen-tailoring', 'cgid%3Dmen-bags', 'cgid%3Dmen-shoes', 'cgid%3Dmen-accessories',
+# #              'cgid%3Dmen-accessories-sunglasses', 'cgid%3Djewellry-for-him']
+# categories=['']
+# info_dicts=[{'site_id':'dolcegabbana_us','locale':'en','limit':200},{'site_id':'dolcegabbana','locale':'it','limit':200}]
+# DolceParser=DolceGabbanaProductParser()
+# DolceParser.process_categories(categories,bearer_token,info_dicts)
 #Dolce End
 
 #Stone Island Start
@@ -228,7 +230,8 @@ print(main_directory)
 #Loro Piana Start
 # categories=['L1_MEN','L1_WOM','L2_MEN_ACCESSORIES','L2_WOM_LG','L2_WOM_ACCESSORIES','L2_SHOES_WOM','L2_WOM_SLG','L2_SHOES_MAN','L2_DIGITALFW24_MAN','L2_DIGITALFW24_WOM','L2_SS23_WOM','L2_SS23_MAN']
 # LoroPianaParser=LoroPianaProductParser()
-# LoroPianaParser.process_categories(categories)
+# country_codes=[{'country_code':'it', 'locale':'it'},{'country_code':'en', 'locale':'us'}]
+# LoroPianaParser.process_categories(categories, country_codes)
 #Loro Piana End
 
 
@@ -329,10 +332,11 @@ print(main_directory)
 #Tom Ford End
 
 #Loewe Start
-# bearer_token= "eyJ2ZXIiOiIxLjAiLCJqa3UiOiJzbGFzL3Byb2QvYmJwY19wcmQiLCJraWQiOiIzNmFjMzZlNy0wMmMwLTQyMzgtYjVjYS1iYmYyZDk2OGUyZDciLCJ0eXAiOiJqd3QiLCJjbHYiOiJKMi4zLjQiLCJhbGciOiJFUzI1NiJ9.eyJhdXQiOiJHVUlEIiwic2NwIjoic2ZjYy5zaG9wcGVyLW15YWNjb3VudC5iYXNrZXRzIHNmY2Muc2hvcHBlci1kaXNjb3Zlcnktc2VhcmNoIHNmY2Muc2hvcHBlci1teWFjY291bnQucGF5bWVudGluc3RydW1lbnRzIHNmY2Muc2hvcHBlci1jdXN0b21lcnMubG9naW4gc2ZjYy5zaG9wcGVyLWV4cGVyaWVuY2Ugc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5vcmRlcnMgc2ZjYy5zaG9wcGVyLXByb2R1Y3RsaXN0cyBzZmNjLnNob3BwZXItcHJvbW90aW9ucyBzZmNjLnNlc3Npb25fYnJpZGdlIHNmY2Muc2hvcHBlci1teWFjY291bnQucGF5bWVudGluc3RydW1lbnRzLnJ3IHNmY2Muc2hvcHBlci1teWFjY291bnQucHJvZHVjdGxpc3RzIHNmY2Muc2hvcHBlci1jYXRlZ29yaWVzIHNmY2Muc2hvcHBlci1teWFjY291bnQgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5hZGRyZXNzZXMgc2ZjYy5zaG9wcGVyLXByb2R1Y3RzIHNmY2Muc2hvcHBlci1teWFjY291bnQucncgc2ZjYy5zaG9wcGVyLWNvbnRleHQucncgc2ZjYy5zaG9wcGVyLWJhc2tldHMtb3JkZXJzIHNmY2Muc2hvcHBlci1jdXN0b21lcnMucmVnaXN0ZXIgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5hZGRyZXNzZXMucncgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5wcm9kdWN0bGlzdHMucncgc2ZjYy5zaG9wcGVyLWJhc2tldHMtb3JkZXJzLnJ3IHNmY2Muc2hvcHBlci1naWZ0LWNlcnRpZmljYXRlcyBzZmNjLnNob3BwZXItcHJvZHVjdC1zZWFyY2ggc2ZjYy5zaG9wcGVyLXNlbyIsInN1YiI6ImNjLXNsYXM6OmJicGNfcHJkOjpzY2lkOjJiNTYzYTRlLWI1MTAtNDE0My05N2UxLWY0NTQxNTk2M2UyMTo6dXNpZDo1ZGU0Yjg1OC1lZjNiLTRiZDctOWQ1Mi1lMTU4NGM5ZjlkY2YiLCJjdHgiOiJzbGFzIiwiaXNzIjoic2xhcy9wcm9kL2JicGNfcHJkIiwiaXN0IjoxLCJkbnQiOiIwIiwiYXVkIjoiY29tbWVyY2VjbG91ZC9wcm9kL2JicGNfcHJkIiwibmJmIjoxNzIxNDA2ODUzLCJzdHkiOiJVc2VyIiwiaXNiIjoidWlkbzpzbGFzOjp1cG46R3Vlc3Q6OnVpZG46R3Vlc3QgVXNlcjo6Z2NpZDphYnNWWVFiOHFsaWIxaHpub1ZQUU1VOUh2Rjo6c2VzYjpzZXNzaW9uX2JyaWRnZTo6Y2hpZDpMT0VfVVNBIiwiZXhwIjoxNzIxNDA4NjgzLCJpYXQiOjE3MjE0MDY4ODMsImp0aSI6IkMyQzE3MjI2Mjc5NzgwLTY1MzY3MTExMTI1NDU3MjA5NzMzNTkxMiJ9.FvwfBPIE7K25-2zo71BrGOQmZVzvxgb84uqR01JJEhRdTJcZZXteU-R37o-Emlv67JHINOpa9eb2nFz8slgHUw"
+# bearer_token= "eyJ2ZXIiOiIxLjAiLCJqa3UiOiJzbGFzL3Byb2QvYmJwY19wcmQiLCJraWQiOiIwMjVjNzdjZS04MGYxLTRjNTEtOTU0NC1lMWFiODMyMTMzNjYiLCJ0eXAiOiJqd3QiLCJjbHYiOiJKMi4zLjQiLCJhbGciOiJFUzI1NiJ9.eyJhdXQiOiJHVUlEIiwic2NwIjoic2ZjYy5zaG9wcGVyLW15YWNjb3VudC5iYXNrZXRzIHNmY2Muc2hvcHBlci1kaXNjb3Zlcnktc2VhcmNoIHNmY2Muc2hvcHBlci1teWFjY291bnQucGF5bWVudGluc3RydW1lbnRzIHNmY2Muc2hvcHBlci1jdXN0b21lcnMubG9naW4gc2ZjYy5zaG9wcGVyLWV4cGVyaWVuY2Ugc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5vcmRlcnMgc2ZjYy5zaG9wcGVyLXByb2R1Y3RsaXN0cyBzZmNjLnNob3BwZXItcHJvbW90aW9ucyBzZmNjLnNlc3Npb25fYnJpZGdlIHNmY2Muc2hvcHBlci1teWFjY291bnQucGF5bWVudGluc3RydW1lbnRzLnJ3IHNmY2Muc2hvcHBlci1teWFjY291bnQucHJvZHVjdGxpc3RzIHNmY2Muc2hvcHBlci1jYXRlZ29yaWVzIHNmY2Muc2hvcHBlci1teWFjY291bnQgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5hZGRyZXNzZXMgc2ZjYy5zaG9wcGVyLXByb2R1Y3RzIHNmY2Muc2hvcHBlci1teWFjY291bnQucncgc2ZjYy5zaG9wcGVyLWNvbnRleHQucncgc2ZjYy5zaG9wcGVyLWJhc2tldHMtb3JkZXJzIHNmY2Muc2hvcHBlci1jdXN0b21lcnMucmVnaXN0ZXIgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5hZGRyZXNzZXMucncgc2ZjYy5zaG9wcGVyLW15YWNjb3VudC5wcm9kdWN0bGlzdHMucncgc2ZjYy5zaG9wcGVyLWJhc2tldHMtb3JkZXJzLnJ3IHNmY2Muc2hvcHBlci1naWZ0LWNlcnRpZmljYXRlcyBzZmNjLnNob3BwZXItcHJvZHVjdC1zZWFyY2ggc2ZjYy5zaG9wcGVyLXNlbyIsInN1YiI6ImNjLXNsYXM6OmJicGNfcHJkOjpzY2lkOjJiNTYzYTRlLWI1MTAtNDE0My05N2UxLWY0NTQxNTk2M2UyMTo6dXNpZDowMWM0NmQyZC1hMDRlLTRjMGMtOTA2ZS02MjM1ZWM3ZjBjYzUiLCJjdHgiOiJzbGFzIiwiaXNzIjoic2xhcy9wcm9kL2JicGNfcHJkIiwiaXN0IjoxLCJkbnQiOiIwIiwiYXVkIjoiY29tbWVyY2VjbG91ZC9wcm9kL2JicGNfcHJkIiwibmJmIjoxNzIyMzUyOTU1LCJzdHkiOiJVc2VyIiwiaXNiIjoidWlkbzpzbGFzOjp1cG46R3Vlc3Q6OnVpZG46R3Vlc3QgVXNlcjo6Z2NpZDpjZWtjZEhsY3hJa0tvUndyYVl4cVlZd1hiSDo6Y2hpZDpMT0VfVVNBIiwiZXhwIjoxNzIyMzU0Nzg1LCJpYXQiOjE3MjIzNTI5ODUsImp0aSI6IkMyQzE3MjI2Mjc5NzgwLTY1MzY3MTExMTEyMDA3NzU1OTI4NzgzMjYifQ.sBMJZo5btNewqwBTAPCzx4Hh8UTZ374q2rL5fuCLhA5uz0FUIB4gAQsI-CSHoFNgRKn8Ah88oE6UY9pse7VffA"
 # categories = ['cgid%3Dwomen','cgid%3Dmen','cgid%3Dm_fw_collection','cgid%3Dw_fw_precollection']
+# country_dicts=[{'country_code':'IT','locale':'en','limit':200,'site_id':'LOE_EUR'},{'country_code':'USA','locale':'en-US','limit':200,'site_id':'LOE_USA'}]
 # LoeweParser=LoeweProductParser()
-# LoeweParser.process_categories(categories,bearer_token)
+# LoeweParser.process_categories(categories,bearer_token,country_dicts)
 #Loewe End
 
 #Saint Laurent Start
