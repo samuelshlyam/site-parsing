@@ -63,7 +63,7 @@ class WebsiteParser:
         with open(file_path, 'w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file, delimiter=',')
             writer.writerows(csv_data)
-        print(f"Data saved to '{file_path}'")
+        self.logger.info(f"Data saved to '{file_path}'")
         return file_path
 
 #Legacy, only direct path to directory with html files
@@ -106,12 +106,12 @@ class WebsiteParser:
         space_name = 'iconluxurygroup-s3'  # Your space name
 
         spaces_client.upload_file(file_src, space_name, save_as, ExtraArgs={'ACL': 'public-read'})
-        print(f"File uploaded successfully to {space_name}/{save_as}")
+        self.logger.info(f"File uploaded successfully to {space_name}/{save_as}")
         # Generate and return the public URL if the file is public
         if is_public:
             # upload_url = f"{str(os.getenv('SPACES_ENDPOINT'))}/{space_name}/{save_as}"
             upload_url = f"https://iconluxurygroup-s3.s3.us-east-2.amazonaws.com/{save_as}"
-            print(f"Public URL: {upload_url}")
+            self.logger.info(f"Public URL: {upload_url}")
             return upload_url
 
 
@@ -143,7 +143,7 @@ class WebsiteParser:
         file_name=self.write_to_csv(all_data)
         #return to API which updates SQL
         self.upload_url=self.upload_file_to_space(file_name,file_name)
-        self.count=len(all_data)
+        self.count=len(all_data)-1
         self.log_url=self.upload_file_to_space(self.log_file_name,self.log_file_name)
         self.send_output()
     def send_output(self):
@@ -1254,7 +1254,7 @@ class BalmainProductParser(WebsiteParser):
                     product_data.get('item_category2', ''),
                     product_data.get('item_category3', ''),
                     ", ".join(images),
-                    'us.balmain.com' + str(product_url)
+                    str(product_url)
                 ]
 
                 parsed_data.append(product_data_list)
@@ -1718,10 +1718,7 @@ class BrunelloCucinelliProductParser(WebsiteParser):
         return parsed_data
 
     def clean_text(self,text):
-        # Remove excessive whitespace and unwanted price or other numeric values
-        text = re.sub(r'\$\d+,*\d*\.*\d*', '', text)  # Remove price
-        text = re.sub(r'[\r\n]+', ' ', text)  # Replace newlines and multiple returns with a single space
-        text = re.sub(r'\s{2,}', ' ', text)  # Replace multiple spaces with a single space
+        text = text.split('\$')[0].split('€')[0]
         return text.strip()
 class DSquaredProductParser(WebsiteParser):
     def __init__(self):

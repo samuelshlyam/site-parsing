@@ -5,6 +5,7 @@ import uvicorn
 from sqlalchemy import create_engine,text
 from fastapi import FastAPI, BackgroundTasks
 from dotenv import load_dotenv
+
 load_dotenv()
 pwd_value = str(os.environ.get('MSSQLS_PWD'))
 pwd_str =f"Pwd={pwd_value};"
@@ -44,6 +45,7 @@ def update_sql_job(job_id, resultUrl, logUrl, count):
         connection.commit()
         connection.close()
 def run_single_parser(job_id):
+
     df=fetch_job_details(job_id)
     brand_id = str(df.iloc[0, 0])
     source_url = df.iloc[0, 1]
@@ -64,11 +66,26 @@ def submit_job_post(job_id,brand_id,url):
     response = requests.post(f"{os.environ.get('AGENT_BASE_URL')}/run_parser", params=params, headers=headers)
     return response.status_code
 def fetch_job_details(job_id):
-    sql_query = f"Select BrandId, ResultUrl from utb_BrandScanJobs where ID = {job_id}"
+    update_job_status(job_id)
+    sql_query = (f"Select BrandId, ResultUrl from utb_BrandScanJobs where ID = {job_id}")
     print(sql_query)
     df = pd.read_sql_query(sql_query, con=engine)
     print(df)
     engine.dispose()
     return df
+def update_job_status(job_id):
+    sql = (f"Update utb_BrandScanJobs\n"
+           f"Set ParsingStart = getdate()\n"
+           f"Where ID = {job_id}")
+    if len(sql) > 0:
+        ip = requests.get('https://api.ipify.org').content.decode('utf8')
+        print('My public IP address is: {}'.format(ip))
+
+        connection = engine.connect()
+        sql = text(sql)
+        print(sql)
+        connection.execute(sql)
+        connection.commit()
+        connection.close()
 if __name__ == "__main__":
     uvicorn.run("main:app", port=8003, log_level="info")
