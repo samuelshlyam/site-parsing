@@ -7,7 +7,6 @@ import time
 import logging
 import uuid
 import uvicorn
-# from brand_parser_new import *
 import boto3
 from bs4 import BeautifulSoup
 import csv
@@ -22,6 +21,10 @@ app=FastAPI()
 load_dotenv()
 class WebsiteParser:
     def __init__(self):
+        self.output_filename = None
+        self.upload_url = None
+        self.count = 0
+        self.log_url = None
         self.session = requests.Session()
         self.code = str(uuid.uuid4())
         self.setup_logging()
@@ -46,14 +49,6 @@ class WebsiteParser:
 
         return output
 
-    def write_to_tsv(self, file_path, tsv_data):
-        with open(file_path, 'w', newline='', encoding='utf-8') as file:
-            writer = csv.writer(file, delimiter='\t')
-            writer.writerows(tsv_data)
-    # def write_to_csv(self, file_path, csv_data):
-    #     with open(file_path, 'w', newline='', encoding='utf-8') as file:
-    #         writer = csv.writer(file, delimiter=',')
-    #         writer.writerows(csv_data)
     def write_to_csv(self, csv_data):
         current_date = datetime.datetime.now().strftime("%d_%m_%Y")
 
@@ -66,41 +61,6 @@ class WebsiteParser:
         self.logger.info(f"Data saved to '{file_path}'")
         return file_path
 
-#Legacy, only direct path to directory with html files
-    # def parse_directory(self, directory_path):
-    #     all_data = []
-    #     header_added = False
-    #     total_files = len([f for f in os.listdir(directory_path) if f.endswith('.txt') or f.endswith('.html')])
-    #     processed_files = 0
-
-    #     print(f"Found {total_files} HTML files in the directory.")
-    #     print("Processing files...")
-
-    #     for filename in os.listdir(directory_path):
-    #         if filename.endswith('.txt') or filename.endswith('.html'):
-    #             file_path = os.path.join(directory_path, filename)
-    #             category = os.path.splitext(filename)[0]  # Use the filename as the category
-
-    #             tsv_output = self.parse_website(file_path,category)
-
-    #             if not header_added:
-    #                 tsv_output[0].append('filename')  # Add the new column name for filename
-    #                 all_data.append(tsv_output[0])  # Add the header row only once
-    #                 header_added = True
-
-    #             # Add the filename as a new column to the parsed data
-    #             for row in tsv_output[1:]:
-    #                 row.append(filename)
-    #                 all_data.append(row)
-
-    #             processed_files += 1
-    #             progress = (processed_files / total_files) * 100
-    #             print(f"Progress: {progress:.2f}% ({processed_files}/{total_files} files processed)")
-
-    #     print("Writing data to CSV file...")
-    #     self.write_to_csv(all_data)
-
-    #     return all_data
     def upload_file_to_space(self,file_src, save_as, is_public=True):
         spaces_client = self.get_s3_client()
         space_name = 'iconluxurygroup-s3'  # Your space name
@@ -142,11 +102,13 @@ class WebsiteParser:
         all_data=self.convert_to_tsv(all_data)
         file_name=self.write_to_csv(all_data)
         #return to API which updates SQL
+        self.output_filename=file_name
         self.upload_url=self.upload_file_to_space(file_name,file_name)
         self.count=len(all_data)-1
         self.log_url=self.upload_file_to_space(self.log_file_name,self.log_file_name)
         self.send_output()
     def send_output(self):
+        logging.shutdown()
         headers = {
             'accept': 'application/json',
             'content-type': 'application/x-www-form-urlencoded',
@@ -158,7 +120,8 @@ class WebsiteParser:
             'logUrl': f"{self.log_url}",
             'count': self.count
         }
-
+        os.remove(self.output_filename)
+        os.remove(self.log_file_name)
         requests.post(f"{os.getenv('MANAGER_ENDPOINT')}/job_complete", params=params, headers=headers)
     @staticmethod
     def open_link(url):
@@ -180,21 +143,6 @@ class WebsiteParser:
         except requests.exceptions.RequestException as e:
             print(f"An error occurred: {e}")
             return None
-
-    def update_complete(self):
-        headers = {
-            'accept': 'application/json',
-            'content-type': 'application/x-www-form-urlencoded',
-        }
-
-        params = {
-            'job_id': f"{self.job_id}",
-            'resultUrl': f"{self.upload_url}",
-            'logUrl': f"{self.log_url}",
-            'count': self.count
-        }
-
-        requests.post(f"{os.getenv('MANAGER_ENDPOINT')}/job_complete", params=params, headers=headers)
 
 
 class BottegaVenetaParser(WebsiteParser):

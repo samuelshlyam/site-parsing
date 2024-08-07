@@ -29,11 +29,13 @@ async def brand_batch_endpoint(job_id: str, resultUrl:str,logUrl:str,count:int,b
 
 
 def update_sql_job(job_id, resultUrl, logUrl, count):
-    sql = (f"Update utb_BrandScanJobs Set ParsingResultUrl = '{resultUrl}',\n"
-           f"ParsingLogURL = '{logUrl}',\n"
-           f"ParsingCount =  {count},\n"
-           f" ParsingEnd = getdate()\n"
-           f" Where ID = {job_id}")
+    sql = (
+            f"Update utb_BrandScanJobs Set ParsingResultUrl = '{resultUrl}',\n"
+            f"ParsingLogURL = '{logUrl}',\n"
+            f"ParsingCount =  {count},\n"
+            f" ParsingEnd = getdate()\n"
+            f" Where ID = {job_id}"
+           )
     if len(sql) > 0:
         ip = requests.get('https://api.ipify.org').content.decode('utf8')
         print('My public IP address is: {}'.format(ip))
