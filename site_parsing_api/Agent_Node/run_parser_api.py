@@ -1,3 +1,5 @@
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import logging
 import os
 import time
@@ -181,7 +183,16 @@ def run_parser(job_id,brand_id):
         country_dicts=[{'country_code':'IT','locale':'en','limit':200,'site_id':'LOE_EUR'},{'country_code':'USA','locale':'en-US','limit':200,'site_id':'LOE_USA'}]
         LoeweParser=LoeweProductParser()
         LoeweParser.process_categories(categories,country_dicts)
-    print("Donejbadklj ")
+    if int(brand_id)==157:
+        # categories = ['cgid%3Dwomen-bags', 'cgid%3Dwomen-apparel', 'cgid%3Djewellry-for-her', 'cgid%3Dwomen-shoes',
+        #              'cgid%3Dwomen-accessories', 'cgid%3Dwomen-accessories-sunglasses', 'cgid%3Dmen-apparel',
+        #              'cgid%3Dmen-tailoring', 'cgid%3Dmen-bags', 'cgid%3Dmen-shoes', 'cgid%3Dmen-accessories',
+        #              'cgid%3Dmen-accessories-sunglasses', 'cgid%3Djewellry-for-him']
+        categories=['']
+        info_dicts=[{'site_id':'dolcegabbana_us','locale':'en','limit':200},{'site_id':'dolcegabbana','locale':'it','limit':200}]
+        DolceParser=DolceGabbanaProductParser()
+        DolceParser.process_categories(categories,info_dicts)
+    print("Done")
 class GucciProductParser(WebsiteParser):
     ##COMPLETE
     def __init__(self):
@@ -683,78 +694,116 @@ class SaintLaurentProductParser(WebsiteParser):
         self.count = len(self.data) - 1
         self.send_output()
 
-# class DolceGabbanaProductParser():
-#     def __init__(self):
-#         self.brand = 'dolce_gabbana'  # Replace spaces with underscores
-#
-#     def fetch_products(self,category, bearer_token,info_dict):
-#         base_url = "https://www.dolcegabbana.com/mobify/proxy/api/search/shopper-search/v1/organizations/f_ecom_bkdb_prd/product-search?locale={locale}&siteId={site_id}&refine=c_availableForCustomerGroupA%3DEveryone&limit={limit}&offset={offset}&refine={category}"
-#         url = base_url.replace("CATEGORYGOESHERE", category)
-#         headers = {
-#             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-#             'Authorization': f'Bearer {bearer_token}'
-#         }
-#         all_products = []
-#         offset = 0
-#
-#         while True:
-#             locale=info_dict['locale']
-#             site_id=info_dict['site_id']
-#             limit = info_dict['limit']
-#             formatted_url = url.format(offset=offset,locale=locale,site_id=site_id,limit=limit,category=category)
-#             response = requests.get(formatted_url, headers=headers)
-#             if response.status_code != 200:
-#                 self.logger.info(f"Failed to fetch data: {response.status_code} - {response.text}")
-#                 break
-#             data = response.json()
-#             products = data.get('hits', [])
-#             if not products:
-#                 print("No more products to fetch.")
-#                 break
-#
-#             for product in products:
-#                 # Properly handle and format the images
-#                 images = product.get('image', {})  # Ensure to get the image dictionary correctly
-#                 images_formatted = f"{images.get('link', '')} ({images.get('alt', '')})" if images else "No image"
-#
-#                 product_info = {
-#                     'category': category,
-#                     'productId': product.get('productId', ''),
-#                     'productName': product.get('productName', ''),
-#                     'price': product.get('price', 0),
-#                     'pricePerUnit': product.get('pricePerUnit', 0),
-#                     'currency': product.get('currency', ''),
-#                     'hitType': product.get('hitType', ''),
-#                     'productType_variationGroup': product['productType'].get('variationGroup', False),
-#                     'orderable': product.get('orderable', False),
-#                     'representedProduct_id': product['representedProduct'].get('id', ''),
-#                     'representedProduct_ids': ' | '.join([rp['id'] for rp in product.get('representedProducts', [])]),
-#                     'images': images_formatted,  # Use formatted image details here
-#                     'c_url': "https://www.dolcegabbana.com" + product.get('c_url', '')
-#                 }
-#                 all_products.append(product_info)
-#
-#             print(f"Fetched {len(products)} products from offset {offset} and URL {formatted_url}")
-#             offset += limit
-#             if offset >= data['total']:
-#                 break
-#
-#         return pd.DataFrame(all_products)
-#     def process_categories(self, categories,bearer_token,info_dicts):
-#         all_data = pd.DataFrame()
-#         for info_dict in info_dicts:
-#             self.data=pd.DataFrame()
-#             locale=info_dict['locale']
-#             for category in categories:
-#                 print(f"Fetching products for category: {category}")
-#                 category_data = self.fetch_products(category, bearer_token,info_dict)
-#                 all_data = pd.concat([all_data, category_data], ignore_index=True)
-#                 print(f"Completed fetching for category: {category}")
-#             current_date = datetime.datetime.now().strftime("%m_%d_%Y")
-#             filename = f'parser-output/dolce_output_{locale}_{current_date}.csv'
-#             all_data.to_csv(filename, index=False)
-#             print("Complete data saved to 'dolcegabbana_products.csv'")
-#         # Save the complete DataFrame to a CSV file
+class DolceGabbanaProductParser(WebsiteParser):
+    def __init__(self):
+        self.brand = 'dolce_gabbana'  # Replace spaces with underscores
+        options = Options()
+        options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
+        options.add_argument("--start-maximized")
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-setuid-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument("--headless=new")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--disable-gpu")
+        # Set up the Chrome driver
+        service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=service, options=options)
+        super().__init__()
+    def get_bearer_token(self):
+        self.driver.get("https://www.dolcegabbana.com/en-us/fashion/women/bags/view-all")
+        for i in range(2):
+            load_more_button = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR,
+                                            'button.Button__btn--_SznX.CategoryPaginationLoadMore__category-pagination__load-more--SOwaX.Button__btn--secondary--Tpjc0'))
+            )
+            self.driver.execute_script("arguments[0].scrollIntoView(true);", load_more_button)
+            self.driver.execute_script("arguments[0].click();", load_more_button)
+            time.sleep(1)
+
+        # Get performance logs
+        logs = self.driver.get_log("performance")
+        # Search for Bearer token in logs
+        for entry in logs:
+            if "Bearer" in str(entry.get("message", {})):
+                token = json.loads(entry.get("message", {})).get("message", {}).get("params", {}).get('request',{}).get("headers",{}).get("Authorization")
+                if token and token.startswith("Bearer "):
+                    token = token.split(" ")[-1]
+                    self.logger.info(f"Bearer token found: {token}")
+                    return token
+
+    def fetch_products(self,category,info_dict):
+        base_url = "https://www.dolcegabbana.com/mobify/proxy/api/search/shopper-search/v1/organizations/f_ecom_bkdb_prd/product-search?locale={locale}&siteId={site_id}&refine=c_availableForCustomerGroupA%3DEveryone&limit={limit}&offset={offset}&refine={category}"
+        url = base_url.replace("CATEGORYGOESHERE", category)
+        bearer_token=self.get_bearer_token()
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+            'Authorization': f'Bearer {bearer_token}'
+        }
+        all_products = []
+        offset = 0
+
+        while True:
+            locale=info_dict['locale']
+            site_id=info_dict['site_id']
+            limit = info_dict['limit']
+            formatted_url = url.format(offset=offset,locale=locale,site_id=site_id,limit=limit,category=category)
+            response = requests.get(formatted_url, headers=headers)
+            if response.status_code != 200:
+                self.logger.info(f"Failed to fetch data: {response.status_code} - {response.text}")
+                break
+            data = response.json()
+            products = data.get('hits', [])
+            if not products:
+                print("No more products to fetch.")
+                break
+
+            for product in products:
+                # Properly handle and format the images
+                images = product.get('image', {})  # Ensure to get the image dictionary correctly
+                images_formatted = f"{images.get('link', '')} ({images.get('alt', '')})" if images else "No image"
+
+                product_info = {
+                    'category': category,
+                    'productId': product.get('productId', ''),
+                    'productName': product.get('productName', ''),
+                    'price': product.get('price', 0),
+                    'pricePerUnit': product.get('pricePerUnit', 0),
+                    'currency': product.get('currency', ''),
+                    'hitType': product.get('hitType', ''),
+                    'productType_variationGroup': product['productType'].get('variationGroup', False),
+                    'orderable': product.get('orderable', False),
+                    'representedProduct_id': product['representedProduct'].get('id', ''),
+                    'representedProduct_ids': ' | '.join([rp['id'] for rp in product.get('representedProducts', [])]),
+                    'images': images_formatted,  # Use formatted image details here
+                    'c_url': "https://www.dolcegabbana.com" + product.get('c_url', '')
+                }
+                all_products.append(product_info)
+
+            print(f"Fetched {len(products)} products from offset {offset} and URL {formatted_url}")
+            offset += limit
+            if offset >= data['total']:
+                break
+
+        return pd.DataFrame(all_products)
+    def process_categories(self, categories,info_dicts):
+        all_data = pd.DataFrame()
+        for info_dict in info_dicts:
+            self.data=pd.DataFrame()
+            locale=info_dict['locale']
+            for category in categories:
+                print(f"Fetching products for category: {category}")
+                category_data = self.fetch_products(category,info_dict)
+                all_data = pd.concat([all_data, category_data], ignore_index=True)
+                print(f"Completed fetching for category: {category}")
+        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+        self.output_filename = f"{self.brand}_output_{current_date}_{self.code}.csv"
+        self.data.to_csv(self.output_filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
+        self.upload_url = self.upload_file_to_space(self.output_filename, self.output_filename)
+        self.logger.info(f"Complete data saved to {self.output_filename}")
+        self.count = len(self.data) - 1
+        self.send_output()
+        # Save the complete DataFrame to a CSV file
 
 
 class LoeweProductParser(WebsiteParser):
@@ -794,7 +843,7 @@ class LoeweProductParser(WebsiteParser):
                 token = json.loads(entry.get("message", {})).get("message", {}).get("params", {}).get('request',{}).get("headers",{}).get("Authorization")
                 if token and token.startswith("Bearer "):
                     token = token.split(" ")[-1]
-                    self.logger.info("Bearer token found:", token)
+                    self.logger.info(f"Bearer token found: {token}")
                     return token
 
 
