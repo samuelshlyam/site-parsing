@@ -2917,6 +2917,72 @@ class LanvinProductParser(WebsiteParser):
             return ''
 
 
+class BallyProductParser(WebsiteParser):
+    def __init__(self):
+        self.brand = 'bally'
+        super().__init__()
+
+    def parse_product_blocks(self, soup,category):
+        parsed_data = []
+
+        column_names = [
+            'category','brand', 'product_id', 'price',
+            'product_url', 'image_urls', 'name', 'currency'
+        ]
+        parsed_data.append(column_names)
+        product_blocks = soup.find_all('div', class_='relative')
+
+        for product in product_blocks:
+            # Extract product name
+            name_element = product.find('h2')
+            name = name_element.find('a').get_text(strip=True) if name_element else ''
+
+            # Extract product URL
+            product_url = name_element.find('a')['href'] if name_element else ''
+
+            # Extract product ID
+            product_id = self.extract_product_id(product_url)
+
+            # Extract price
+            price_element = product.find('span', class_='text-inherit')
+            price = price_element.get_text(strip=True) if price_element else ''
+
+            # Extract currency
+            if '$' in price:
+                currency = 'USD'
+            elif '€' in price:
+                currency='EURO'
+            else:
+                currency=''
+
+            # Clean up price
+            price = re.sub(r'[^\d.]', '', price)
+
+            # Extract image URLs
+            image_element = product.find('img', alt=name)
+            image_urls = [image_element['src']] if image_element else []
+            if not product_id:
+                continue
+            product_data = [
+                category,
+                self.brand,
+                product_id,
+                price,
+                product_url,
+                '|'.join(image_urls),
+                name,
+                currency
+            ]
+            parsed_data.append(product_data)
+
+        return parsed_data
+
+    def extract_product_id(self, product_url):
+        product_id = ''
+        if product_url:
+            product_id = product_url.split('-')[-1].replace('/','')
+        return product_id
+
 
 
 def run_parser(job_id,brand_id,source_url):
@@ -3061,6 +3127,10 @@ def run_parser(job_id,brand_id,source_url):
         LanvinParser = LanvinProductParser()
         LanvinParser.job_id = job_id
         LanvinParser.parse_website(source_url)
+    if brand_id=='67':
+        BallyParser = BallyProductParser()
+        BallyParser.job_id = job_id
+        BallyParser.parse_website(source_url)
     #NOT YET LOADED
     if brand_id == '???':
         LouboutinParser = LouboutinProductParser()

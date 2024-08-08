@@ -62,7 +62,7 @@ def submit_job_post(job_id,brand_id,url):
     params = {
         'job_id': f"{job_id}",
         'brand_id':f"{brand_id}",
-        'scan_url':f"{url}",
+        'scan_url':f"{url}" ,
     }
 
     response = requests.post(f"{os.environ.get('AGENT_BASE_URL')}/run_parser", params=params, headers=headers)
