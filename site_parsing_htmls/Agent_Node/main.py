@@ -1,4 +1,5 @@
 import re
+import traceback
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail,Personalization,To,Cc
 from urllib.parse import urljoin, urlunparse, urlparse
@@ -3160,12 +3161,13 @@ def run_parser(job_id,brand_id,source_url):
             CultGaiaParser=CultGaiaProductParser()
             CultGaiaParser.job_id = job_id
             CultGaiaParser.parse_website(source_url)
-    except Exception as e:
-        send_email(str(e))
-        print(e)    
+    except Exception:
+        exception_f = traceback.format_exc()
+        send_email(str(exception_f))
+        print(exception_f)    
         
 
-def send_email(message_text,to_emails='notifications@popovtech.com', subject="Error - Parsing Step"):
+def send_email(message_text,to_emails='nik@iconluxurygroup.com', subject="Error - Parsing Step"):
     message_with_breaks = message_text.replace("\n", "<br>")
 
     html_content = f"""
