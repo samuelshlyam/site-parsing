@@ -1,4 +1,6 @@
 import re
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail,Personalization,To,Cc
 from urllib.parse import urljoin, urlunparse, urlparse
 from selenium import webdriver
 import json
@@ -2987,177 +2989,214 @@ class BallyProductParser(WebsiteParser):
 
 
 def run_parser(job_id,brand_id,source_url):
-    print(job_id,brand_id,source_url)
-    if brand_id == '93':
-        BottegaParser = BottegaVenetaParser()
-        BottegaParser.job_id=job_id
-        BottegaParser.parse_website(source_url)
-    if brand_id == '201':
-        FendiParser = FendiProductParser()
-        FendiParser.job_id = job_id
-        FendiParser.parse_website(source_url)
-    if brand_id == '498':
-        StellaParser = StellaProductParser()
-        StellaParser.job_id = job_id
-        StellaParser.parse_website(source_url)
-    if brand_id == '227':
-        GivenchyParser = GivenchyProductParser()
-        GivenchyParser.job_id = job_id
-        GivenchyParser.parse_website(source_url)
-    if brand_id == '110':
-        CanadaGooseParser = CanadaGooseProductParser()
-        CanadaGooseParser.job_id = job_id
-        CanadaGooseParser.parse_website(source_url)
-    if brand_id == '542':
-        VejaParser = VejaProductParser()
-        VejaParser.job_id = job_id
-        VejaParser.parse_website(source_url)
-    if brand_id == '252':
-        IsabelMarantParser = IsabelMarantProductParser()
-        IsabelMarantParser.job_id = job_id
-        IsabelMarantParser.parse_website(source_url)
-    if brand_id == '125':
-        ChloeParser=ChloeProductParser()
-        ChloeParser.job_id = job_id
-        ChloeParser.parse_website(source_url)
-    if brand_id == '343':
-        MCMParser=MCMProductParser()
-        MCMParser.job_id = job_id
-        MCMParser.parse_website(source_url)
-    if brand_id == '228 ':
-        GoldenGooseParser=GoldenGooseProductParser()
-        GoldenGooseParser.job_id = job_id
-        GoldenGooseParser.parse_website(source_url)
-    if brand_id == '66':
-        BalenciagaParser=BalenciagaProductParser()
-        BalenciagaParser.job_id = job_id
-        BalenciagaParser.parse_website(source_url)
-    if brand_id == '500':
-        StoneIslandParser = StoneIslandProductParser()
-        StoneIslandParser.job_id = job_id
-        StoneIslandParser.parse_website(source_url)
-    if brand_id == '187':
-        EtroParser = EtroProductParser()
-        EtroParser.job_id = job_id
-        EtroParser.parse_website(source_url)
-    if brand_id == '68':
-        BalmainParser = BalmainProductParser()
-        BalmainParser.job_id = job_id
-        BalmainParser.parse_website(source_url)
-    if brand_id == '544':
-        VersaceParser = VersaceProductParser()
-        VersaceParser.job_id = job_id
-        VersaceParser.parse_website(source_url)
-    if brand_id == '481':
-        FerragamoParser = FerragamoProductParser()
-        FerragamoParser.job_id = job_id
-        FerragamoParser.parse_website(source_url)
-    if brand_id == '101':
-        BurberryParser = BurberryProductParser()
-        BurberryParser.job_id = job_id
-        BurberryParser.parse_website(source_url)
-    if brand_id == '275':
-        KenzoParser = KenzoProductParser()
-        KenzoParser.job_id = job_id
-        KenzoParser.parse_website(source_url)
-    if brand_id == '266':
-        JimmyChooParser = JimmyChooProductParser()
-        JimmyChooParser.job_id = job_id
-        JimmyChooParser.parse_website(source_url)
-    if brand_id == '601':
-        BrunelloCucinelliParser = BrunelloCucinelliProductParser()
-        BrunelloCucinelliParser.job_id = job_id
-        BrunelloCucinelliParser.parse_website(source_url)
-    if brand_id == '165':
-        DSquaredParser = DSquaredProductParser()
-        DSquaredParser.job_id = job_id
-        DSquaredParser.parse_website(source_url)
-    if brand_id == '118':
-        CelineParser = CelineProductParser()
-        CelineParser.job_id = job_id
-        CelineParser.parse_website(source_url)
-    if brand_id == '336':
-        MarniParser = MarniProductParser()
-        MarniParser.job_id = job_id
-        MarniParser.parse_website(source_url)
-    if brand_id == '439':
-        PradaParser = PradaProductParser()
-        PradaParser.job_id = job_id
-        PradaParser.parse_website(source_url)
-    if brand_id == '536':
-        ValentinoParser = ValentinoProductParser()
-        ValentinoParser.job_id = job_id
-        ValentinoParser.parse_website(source_url)
-    if brand_id == '263':
-        JacquemusParser = JacquemusProductParser()
-        JacquemusParser.job_id = job_id
-        JacquemusParser.parse_website(source_url)
-    if brand_id == '7':
-        AcneStudiosParser = AcneStudiosProductParser()
-        AcneStudiosParser.job_id = job_id
-        AcneStudiosParser.parse_website(source_url)
-    if brand_id == '512':
-        TheRowParser = TheRowProductParser()
-        TheRowParser.job_id = job_id
-        TheRowParser.parse_website(source_url)
-    if brand_id == '327':
-        ManoloBlahnikParser = ManoloBlahnikProductParser()
-        ManoloBlahnikParser.job_id = job_id
-        ManoloBlahnikParser.parse_website(source_url)
-    if brand_id == '223':
-        GianvitoRossiParser = GianvitoRossiProductParser()
-        GianvitoRossiParser.job_id = job_id
-        GianvitoRossiParser.parse_website(source_url)
-    if brand_id == '358':
-        miuMiuParser = MiuMiuProductParser()
-        miuMiuParser.job_id = job_id
-        miuMiuParser.parse_website(source_url)
-    if brand_id == '46':
-        AquazzuraParser = AquazzuraProductParser()
-        AquazzuraParser.job_id = job_id
-        AquazzuraParser.parse_website(source_url)
-    if brand_id == '523':
-        TomFordParser = TomFordProductParser()
-        TomFordParser.job_id = job_id
-        TomFordParser.parse_website(source_url)
-    if brand_id == '604':
-        HernoParser = HernoProductParser()
-        HernoParser.job_id = job_id
-        HernoParser.parse_website(source_url)
-    if brand_id == '286':
-        LanvinParser = LanvinProductParser()
-        LanvinParser.job_id = job_id
-        LanvinParser.parse_website(source_url)
-    if brand_id=='67':
-        BallyParser = BallyProductParser()
-        BallyParser.job_id = job_id
-        BallyParser.parse_website(source_url)
-    #NOT YET LOADED
-    if brand_id == '???':
-        LouboutinParser = LouboutinProductParser()
-        LouboutinParser.job_id = job_id
-        LouboutinParser.parse_website(source_url)
-    if brand_id == '???':
-        PalmAngelsParser = PalmAngelsProductParser()
-        PalmAngelsParser.job_id = job_id
-        PalmAngelsParser.parse_website(source_url)
-    if brand_id == '???':
-        MooseKnucklesParser = MooseKnucklesProductParser()
-        MooseKnucklesParser.job_id = job_id
-        MooseKnucklesParser.parse_website(source_url)
-    if brand_id == '???':
-        BirkenstockParser = BirkenstockProductParser()
-        BirkenstockParser.job_id = job_id
-        BirkenstockParser.parse_website(source_url)
-    if brand_id == '??? ':
-        OffWhiteParser = OffWhiteProductParser()
-        OffWhiteParser.job_id = job_id
-        OffWhiteParser.parse_website(source_url)
-    if brand_id == '???':
-        CultGaiaParser=CultGaiaProductParser()
-        CultGaiaParser.job_id = job_id
-        CultGaiaParser.parse_website(source_url)
+    try:
+        print(job_id,brand_id,source_url)
+        if brand_id == '93':
+            BottegaParser = BottegaVenetaParser()
+            BottegaParser.job_id=job_id
+            BottegaParser.parse_website(source_url)
+        if brand_id == '201':
+            FendiParser = FendiProductParser()
+            FendiParser.job_id = job_id
+            FendiParser.parse_website(source_url)
+        if brand_id == '498':
+            StellaParser = StellaProductParser()
+            StellaParser.job_id = job_id
+            StellaParser.parse_website(source_url)
+        if brand_id == '227':
+            GivenchyParser = GivenchyProductParser()
+            GivenchyParser.job_id = job_id
+            GivenchyParser.parse_website(source_url)
+        if brand_id == '110':
+            CanadaGooseParser = CanadaGooseProductParser()
+            CanadaGooseParser.job_id = job_id
+            CanadaGooseParser.parse_website(source_url)
+        if brand_id == '542':
+            VejaParser = VejaProductParser()
+            VejaParser.job_id = job_id
+            VejaParser.parse_website(source_url)
+        if brand_id == '252':
+            IsabelMarantParser = IsabelMarantProductParser()
+            IsabelMarantParser.job_id = job_id
+            IsabelMarantParser.parse_website(source_url)
+        if brand_id == '125':
+            ChloeParser=ChloeProductParser()
+            ChloeParser.job_id = job_id
+            ChloeParser.parse_website(source_url)
+        if brand_id == '343':
+            MCMParser=MCMProductParser()
+            MCMParser.job_id = job_id
+            MCMParser.parse_website(source_url)
+        if brand_id == '228 ':
+            GoldenGooseParser=GoldenGooseProductParser()
+            GoldenGooseParser.job_id = job_id
+            GoldenGooseParser.parse_website(source_url)
+        if brand_id == '66':
+            BalenciagaParser=BalenciagaProductParser()
+            BalenciagaParser.job_id = job_id
+            BalenciagaParser.parse_website(source_url)
+        if brand_id == '500':
+            StoneIslandParser = StoneIslandProductParser()
+            StoneIslandParser.job_id = job_id
+            StoneIslandParser.parse_website(source_url)
+        if brand_id == '187':
+            EtroParser = EtroProductParser()
+            EtroParser.job_id = job_id
+            EtroParser.parse_website(source_url)
+        if brand_id == '68':
+            BalmainParser = BalmainProductParser()
+            BalmainParser.job_id = job_id
+            BalmainParser.parse_website(source_url)
+        if brand_id == '544':
+            VersaceParser = VersaceProductParser()
+            VersaceParser.job_id = job_id
+            VersaceParser.parse_website(source_url)
+        if brand_id == '481':
+            FerragamoParser = FerragamoProductParser()
+            FerragamoParser.job_id = job_id
+            FerragamoParser.parse_website(source_url)
+        if brand_id == '101':
+            BurberryParser = BurberryProductParser()
+            BurberryParser.job_id = job_id
+            BurberryParser.parse_website(source_url)
+        if brand_id == '275':
+            KenzoParser = KenzoProductParser()
+            KenzoParser.job_id = job_id
+            KenzoParser.parse_website(source_url)
+        if brand_id == '266':
+            JimmyChooParser = JimmyChooProductParser()
+            JimmyChooParser.job_id = job_id
+            JimmyChooParser.parse_website(source_url)
+        if brand_id == '601':
+            BrunelloCucinelliParser = BrunelloCucinelliProductParser()
+            BrunelloCucinelliParser.job_id = job_id
+            BrunelloCucinelliParser.parse_website(source_url)
+        if brand_id == '165':
+            DSquaredParser = DSquaredProductParser()
+            DSquaredParser.job_id = job_id
+            DSquaredParser.parse_website(source_url)
+        if brand_id == '118':
+            CelineParser = CelineProductParser()
+            CelineParser.job_id = job_id
+            CelineParser.parse_website(source_url)
+        if brand_id == '336':
+            MarniParser = MarniProductParser()
+            MarniParser.job_id = job_id
+            MarniParser.parse_website(source_url)
+        if brand_id == '439':
+            PradaParser = PradaProductParser()
+            PradaParser.job_id = job_id
+            PradaParser.parse_website(source_url)
+        if brand_id == '536':
+            ValentinoParser = ValentinoProductParser()
+            ValentinoParser.job_id = job_id
+            ValentinoParser.parse_website(source_url)
+        if brand_id == '263':
+            JacquemusParser = JacquemusProductParser()
+            JacquemusParser.job_id = job_id
+            JacquemusParser.parse_website(source_url)
+        if brand_id == '7':
+            AcneStudiosParser = AcneStudiosProductParser()
+            AcneStudiosParser.job_id = job_id
+            AcneStudiosParser.parse_website(source_url)
+        if brand_id == '512':
+            TheRowParser = TheRowProductParser()
+            TheRowParser.job_id = job_id
+            TheRowParser.parse_website(source_url)
+        if brand_id == '327':
+            ManoloBlahnikParser = ManoloBlahnikProductParser()
+            ManoloBlahnikParser.job_id = job_id
+            ManoloBlahnikParser.parse_website(source_url)
+        if brand_id == '223':
+            GianvitoRossiParser = GianvitoRossiProductParser()
+            GianvitoRossiParser.job_id = job_id
+            GianvitoRossiParser.parse_website(source_url)
+        if brand_id == '358':
+            miuMiuParser = MiuMiuProductParser()
+            miuMiuParser.job_id = job_id
+            miuMiuParser.parse_website(source_url)
+        if brand_id == '46':
+            AquazzuraParser = AquazzuraProductParser()
+            AquazzuraParser.job_id = job_id
+            AquazzuraParser.parse_website(source_url)
+        if brand_id == '523':
+            TomFordParser = TomFordProductParser()
+            TomFordParser.job_id = job_id
+            TomFordParser.parse_website(source_url)
+        if brand_id == '604':
+            HernoParser = HernoProductParser()
+            HernoParser.job_id = job_id
+            HernoParser.parse_website(source_url)
+        if brand_id == '286':
+            LanvinParser = LanvinProductParser()
+            LanvinParser.job_id = job_id
+            LanvinParser.parse_website(source_url)
+        if brand_id=='67':
+            BallyParser = BallyProductParser()
+            BallyParser.job_id = job_id
+            BallyParser.parse_website(source_url)
+        #NOT YET LOADED
+        if brand_id == '???':
+            LouboutinParser = LouboutinProductParser()
+            LouboutinParser.job_id = job_id
+            LouboutinParser.parse_website(source_url)
+        if brand_id == '???':
+            PalmAngelsParser = PalmAngelsProductParser()
+            PalmAngelsParser.job_id = job_id
+            PalmAngelsParser.parse_website(source_url)
+        if brand_id == '???':
+            MooseKnucklesParser = MooseKnucklesProductParser()
+            MooseKnucklesParser.job_id = job_id
+            MooseKnucklesParser.parse_website(source_url)
+        if brand_id == '???':
+            BirkenstockParser = BirkenstockProductParser()
+            BirkenstockParser.job_id = job_id
+            BirkenstockParser.parse_website(source_url)
+        if brand_id == '??? ':
+            OffWhiteParser = OffWhiteProductParser()
+            OffWhiteParser.job_id = job_id
+            OffWhiteParser.parse_website(source_url)
+        if brand_id == '???':
+            CultGaiaParser=CultGaiaProductParser()
+            CultGaiaParser.job_id = job_id
+            CultGaiaParser.parse_website(source_url)
+    except Exception as e:
+        send_email(str(e))
+        print(e)    
+        
 
+def send_email(message_text,to_emails='notifications@popovtech.com', subject="Error - Parsing Step"):
+    message_with_breaks = message_text.replace("\n", "<br>")
+
+    html_content = f"""
+<html>
+<body>
+<div class="container">
+    <!-- Use the modified message with <br> for line breaks -->
+    <p>Message details:<br>{message_with_breaks}</p>
+</div>
+</body>
+</html>
+"""
+    message = Mail(
+        from_email='distrotool@iconluxurygroup.com',
+        subject=subject,
+        html_content=html_content
+    )
+    
+    cc_recipient = 'notifications@popovtech.com'
+    personalization = Personalization()
+    personalization.add_cc(Cc(cc_recipient))
+    personalization.add_to(To(to_emails))
+    message.add_personalization(personalization)
+    try:
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(e)
 
 @app.post("/run_parser")
 async def brand_batch_endpoint(job_id:str, brand_id: str, scan_url:str, background_tasks: BackgroundTasks):
@@ -3165,4 +3204,4 @@ async def brand_batch_endpoint(job_id:str, brand_id: str, scan_url:str, backgrou
 
     return {"message": "Notification sent in the background"}
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=8080,host='0.0.0.0' log_level="info")
+    uvicorn.run("main:app", port=8080,host='0.0.0.0', log_level="info")
