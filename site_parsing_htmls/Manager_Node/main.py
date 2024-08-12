@@ -90,4 +90,4 @@ def update_job_status(job_id):
         connection.commit()
         connection.close()
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=8003, log_level="info")
+    uvicorn.run("main:app", port=8080, host="0.0.0.0",log_level="info")
