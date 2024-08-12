@@ -16,9 +16,10 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from fastapi import FastAPI, BackgroundTasks
-from dotenv import load_dotenv
+
+
 app=FastAPI()
-load_dotenv()
+
 class WebsiteParser:
     def __init__(self):
         self.output_filename = None
