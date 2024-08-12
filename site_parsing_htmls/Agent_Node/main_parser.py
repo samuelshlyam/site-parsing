@@ -1333,7 +1333,7 @@ class BurberryProductParser(WebsiteParser):
 
             discount_price = ""  # empty for now and can be added later if found
 
-            image_url = product.select_one('.red    esigned-product-card__picture img, .product-card-v2-carousel-container__media__picture img')
+            image_url = product.select_one('.redesigned-product-card__picture img, .product-card-v2-carousel-container__media__picture img')
             image_url=image_url['src'] if image_url else ""
 
             tags = product.select_one('.product-card-labels__flag, .product-card-v2-carousel-labels__label')

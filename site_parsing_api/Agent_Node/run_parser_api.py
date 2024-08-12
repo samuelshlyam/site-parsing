@@ -1066,7 +1066,3 @@ class LoeweProductParser(WebsiteParser):
 
 if __name__ == "__main__":
     uvicorn.run("run_parser_api:app", port=8008, log_level="info")
-
-#ISSUES
-# Burberry - Count
-# Ferragamo - Infinite button click
