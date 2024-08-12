@@ -4,9 +4,7 @@ import requests
 import uvicorn
 from sqlalchemy import create_engine,text
 from fastapi import FastAPI, BackgroundTasks
-from dotenv import load_dotenv
 
-load_dotenv()
 pwd_value = str(os.environ.get('MSSQLS_PWD'))
 pwd_str =f"Pwd={pwd_value};"
 global conn
