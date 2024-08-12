@@ -206,7 +206,6 @@ class GucciProductParser(WebsiteParser):
         self.driver = webdriver.Chrome(options=options)
         self.brand = 'gucci'
         super().__init__()
-        super().process_website()
     def format_url(self,url):
         """ Helper function to format URLs correctly """
         return f"https:{url}" if url else ''
@@ -307,6 +306,7 @@ class LoroPianaProductParser(WebsiteParser):
         self.base_url = "https://{locale}.loropiana.com/{country_code}/c/{category}/results?page={page}"
         self.data = pd.DataFrame()
         self.brand = 'loro_piana'
+        super().__init__()
 
     def format_url(self,url):
         """ Helper function to format URLs correctly """
@@ -416,6 +416,7 @@ class AlexanderMcqueenParser(WebsiteParser):
         self.brand = 'alexander_mcqueen'  # Replace spaces with underscores
         self.base_url = ''
         self.data=pd.DataFrame
+        super().__init__()
     def format_url(self,url):
         """ Helper function to format URLs correctly """
         return url if url.startswith('http') else 'https:' + url
@@ -511,6 +512,7 @@ class MonclerProductParser(WebsiteParser):
         self.base_url="https://www.moncler.com/on/demandware.store/{country_code}/SearchApi-Search?cgid={category}&sz=2000&start=0"
         self.country=''
         self.brand = 'moncler'
+        super().__init__()
     def fetch_moncler_products(self,categories,country_code):
         all_products=[]
         for category in categories:
@@ -1064,3 +1066,7 @@ class LoeweProductParser(WebsiteParser):
 
 if __name__ == "__main__":
     uvicorn.run("run_parser_api:app", port=8008, log_level="info")
+
+#ISSUES
+# Burberry - Count
+# Ferragamo - Infinite button click

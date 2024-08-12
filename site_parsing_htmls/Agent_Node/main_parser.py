@@ -1333,8 +1333,8 @@ class BurberryProductParser(WebsiteParser):
 
             discount_price = ""  # empty for now and can be added later if found
 
-            image_url = product.select_one(
-                '.redesigned-product-card__picture img, .product-card-v2-carousel-container__media__picture img')['src']
+            image_url = product.select_one('.red    esigned-product-card__picture img, .product-card-v2-carousel-container__media__picture img')
+            image_url=image_url['src'] if image_url else ""
 
             tags = product.select_one('.product-card-labels__flag, .product-card-v2-carousel-labels__label')
             tags = tags.get_text(strip=True) if tags else ""
@@ -3164,4 +3164,4 @@ async def brand_batch_endpoint(job_id:str, brand_id: str, scan_url:str, backgrou
 
     return {"message": "Notification sent in the background"}
 if __name__ == "__main__":
-    uvicorn.run("main_parser:app", port=8004, log_level="info")
+    uvicorn.run("main_parser:app", port=8102, log_level="info")
