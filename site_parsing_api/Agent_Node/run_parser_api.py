@@ -151,12 +151,12 @@ def run_parser(job_id,brand_id):
         SaintLaurentParser=SaintLaurentProductParser()
         SaintLaurentParser.job_id=job_id
         SaintLaurentParser.process_categories(categories,country_code)
-    if int(brand_id)==229:
+    elif int(brand_id)==229:
         GucciParser = GucciProductParser()
         combined_gucci_categories = ['men-bags', 'men-bags-luggage','men-readytowear','men-shoes','men-accessories-wallets','men-accessories-hats-and-gloves','men-accessories-belts','men-eyewear','jewelry-watches-watches-men','men-accessories','women-shoes','women-handbags','women-accessories-lifestyle-bags-and-luggage','women-readytowear','women-accessories-wallets','women-accessories','jewelry-watches-watches-women', 'women-accessories-belts','women-accessories-silks-and-scarves','women-accessories-hats-and-gloves']
         locales=['it/it','us/en']
         GucciParser.process_categories(combined_gucci_categories,locales)
-    if int(brand_id)==26:
+    elif int(brand_id)==26:
         women_categories = ['w-ready-to-wear','W-All-Shoes' ,'W-All-Bags','W-All-Accessories','w-jewellery' ]  # Assuming you have a list of categories
         men_categories = ['M-All-Ready-to-Wear','M-Shoes','M-All-Accessories', 'm-jewellery','M-Bags']
         women_base_url = "https://www.alexandermcqueen.com/api/v1/category/women?locale={locale}&categoryIds={clothing_category}&page={page}&hitsPerPage=30"
@@ -166,24 +166,24 @@ def run_parser(job_id,brand_id):
         AlexandarMcqueenParser=AlexanderMcqueenParser()
         AlexandarMcqueenParser.job_id = job_id
         AlexandarMcqueenParser.process_categories(category_dicts,locales)
-    if int(brand_id)==363:
+    elif int(brand_id)==363:
         categories = ['men','women','children']
         country_codes=['Sites-MonclerEU-Site/en_IT','Sites-MonclerUS-Site/en_US']
         MonclerParser=MonclerProductParser()
         MonclerParser.job_id = job_id
         MonclerParser.process_categories(categories,country_codes)
-    if int(brand_id)==314:
+    elif int(brand_id)==314:
         categories=['L1_MEN','L1_WOM','L2_MEN_ACCESSORIES','L2_WOM_LG','L2_WOM_ACCESSORIES','L2_SHOES_WOM','L2_WOM_SLG','L2_SHOES_MAN','L2_DIGITALFW24_MAN','L2_DIGITALFW24_WOM','L2_SS23_WOM','L2_SS23_MAN']
         LoroPianaParser=LoroPianaProductParser()
         LoroPianaParser.job_id = job_id
         country_codes=[{'country_code':'it', 'locale':'it'},{'country_code':'en', 'locale':'us'}]
         LoroPianaParser.process_categories(categories, country_codes)
-    if int(brand_id)==310:
+    elif int(brand_id)==310:
         categories = ['cgid%3Dwomen','cgid%3Dmen','cgid%3Dm_fw_collection','cgid%3Dw_fw_precollection']
         country_dicts=[{'country_code':'IT','locale':'en','limit':200,'site_id':'LOE_EUR'},{'country_code':'USA','locale':'en-US','limit':200,'site_id':'LOE_USA'}]
         LoeweParser=LoeweProductParser()
         LoeweParser.process_categories(categories,country_dicts)
-    if int(brand_id)==157:
+    elif int(brand_id)==157:
         # categories = ['cgid%3Dwomen-bags', 'cgid%3Dwomen-apparel', 'cgid%3Djewellry-for-her', 'cgid%3Dwomen-shoes',
         #              'cgid%3Dwomen-accessories', 'cgid%3Dwomen-accessories-sunglasses', 'cgid%3Dmen-apparel',
         #              'cgid%3Dmen-tailoring', 'cgid%3Dmen-bags', 'cgid%3Dmen-shoes', 'cgid%3Dmen-accessories',
@@ -192,6 +192,8 @@ def run_parser(job_id,brand_id):
         info_dicts=[{'site_id':'dolcegabbana_us','locale':'en','limit':200},{'site_id':'dolcegabbana','locale':'it','limit':200}]
         DolceParser=DolceGabbanaProductParser()
         DolceParser.process_categories(categories,info_dicts)
+    elif int(brand_id) ==500:
+        pass
     print("Done")
 class GucciProductParser(WebsiteParser):
     ##COMPLETE

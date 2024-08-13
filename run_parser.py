@@ -148,9 +148,9 @@ print(main_directory)
 #Dolce End
 
 #Stone Island Start
-#StoneIslandParser = StoneIslandProductParser(output_directory_path)
-# directory_path = os.path.join(main_directory,'stone_island')
-#StoneIslandParser.parse_directory(directory_path)
+# StoneIslandParser = StoneIslandProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'stone_island_new')
+# StoneIslandParser.parse_directory(directory_path)
 #Stone Island End
 
 
@@ -215,9 +215,9 @@ print(main_directory)
 #Brunello Cucinelli End
 
 #DSquared2 Start
-#DSquaredParser = DSquaredProductParser(output_directory_path)
-# directory_path = os.path.join(main_directory,'dsquared2')
-#DSquaredParser.parse_directory(directory_path)
+DSquaredParser = DSquaredProductParser(output_directory_path)
+directory_path = os.path.join(main_directory,'dsquared_new')
+DSquaredParser.parse_directory(directory_path)
 #DSquared2 End
 
 

@@ -1679,7 +1679,11 @@ class DSquaredProductParser(WebsiteParser):
     def parse_product_blocks(self, soup, category):
         parsed_data = []
         container_prods = soup.find('div', {'id': 'productgrid'})
-        articulos = container_prods.find_all('section')
+        if not container_prods:
+            container_prods=soup.find('div', class_="b-carousel-body")
+        articulos = container_prods.find_all('section') if container_prods else []
+
+
 
         ##SELECT ALL BLOCKS FIRST
 
@@ -3136,11 +3140,12 @@ def run_parser(job_id,brand_id,source_url):
             BallyParser = BallyProductParser()
             BallyParser.job_id = job_id
             BallyParser.parse_website(source_url)
-        #NOT YET LOADED
-        if brand_id == '???':
+        if brand_id == '127':
             LouboutinParser = LouboutinProductParser()
             LouboutinParser.job_id = job_id
             LouboutinParser.parse_website(source_url)
+
+        # NOT YET LOADED
         if brand_id == '???':
             PalmAngelsParser = PalmAngelsProductParser()
             PalmAngelsParser.job_id = job_id
