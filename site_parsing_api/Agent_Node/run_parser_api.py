@@ -43,16 +43,34 @@ class WebsiteParser:
             output.append([str(item) for item in row])
 
         return output
+
     def setup_logging(self):
         current_date = datetime.datetime.now().strftime("%d_%m_%Y")
         self.log_file_name = f'{self.brand}_{self.code}_{current_date}.log'
-        logging.basicConfig(
-            level=logging.DEBUG,
-            format="%(asctime)s [%(levelname)s] %(message)s",
-            handlers=[
-                logging.FileHandler(self.log_file_name),
-                logging.StreamHandler()
-            ])
+        # Initially get a unique logger using a UUID, brand ID, and job ID
+        logger_name = f"Brand ID: {self.brand}, Job ID: {self.job_id}, UUID: {self.code}"
+        self.logger = logging.getLogger(logger_name)
+
+        # Set formatter
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+        # Create handler for logs that go to the file on the debug level
+        log_file_handler = logging.handlers.RotatingFileHandler(self.log_file_name)
+        log_file_handler.setFormatter(formatter)
+        log_file_handler.setLevel(logging.DEBUG)
+
+        # Create handler for logs that go to the console on the info level
+        log_console_handler = logging.StreamHandler()
+        log_console_handler.setFormatter(formatter)
+        log_console_handler.setLevel(logging.INFO)
+
+        self.logger.addHandler(log_file_handler)
+        self.logger.addHandler(log_console_handler)
+
+        # Initial test that the logger is instantiated and working properly
+        self.logger.info("This is what info messages will look like")
+        self.logger.error("This is what error messages will look like")
+        self.logger.critical("This is what a critical error message looks like")
 
         self.logger = logging.getLogger(__name__)
         self.logger.info("This is a log message from the Agent script")
