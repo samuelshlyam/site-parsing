@@ -23,10 +23,112 @@ import pandas as pd
 import datetime
 load_dotenv()
 app = FastAPI()
+SETTINGS_URL="https://raw.githubusercontent.com/samuelshlyam/API_Parser_Settings/main/settings.json"
 @app.post("/run_parser")
 async def brand_batch_endpoint(job_id:str, brand_id: str, background_tasks: BackgroundTasks):
     background_tasks.add_task(run_parser,job_id, brand_id)
+def fetch_settings():
+    try:
+        response = requests.get(os.getenv('SETTINGS_URL'))
+        response.raise_for_status()  # Raises an HTTPError for bad responses
+        print(f"This is the settings file\n{response.json()}")
+        return response.json()
+    except requests.RequestException as e:
+        return None
+
+def run_parser(job_id,brand_id):
+    print(brand_id)
+    settings=fetch_settings()
+    print(settings.get('478'))
+    if int(brand_id)==478:
+        brand_settings=settings.get('478')
+        categories=brand_settings.get("Categories")
+        locales=brand_settings.get("Locales")
+        base_url=brand_settings.get("Base_URL")
+        SaintLaurentParser=SaintLaurentProductParser()
+        SaintLaurentParser.base_url=base_url
+        SaintLaurentParser.job_id=job_id
+        SaintLaurentParser.process_categories(categories,locales)
+    if int(brand_id)==229:
+        brand_settings = settings.get('229')
+        categories = brand_settings.get("Categories")
+        locales = brand_settings.get("Locales")
+        base_url = brand_settings.get("Base_URL")
+        GucciParser = GucciProductParser()
+        GucciProductParser.base_url = base_url
+        GucciProductParser.job_id = job_id
+        GucciParser.process_categories(categories,locales)
+    if int(brand_id)==26:
+        brand_settings = settings.get('26')
+        categories = brand_settings.get("Categories")
+        locales = brand_settings.get("Locales")
+        base_url = brand_settings.get("Base_URL")
+        AlexandarMcqueenParser=AlexanderMcqueenParser()
+        AlexandarMcqueenParser.base_url = base_url
+        AlexandarMcqueenParser.job_id = job_id
+        AlexandarMcqueenParser.process_categories(categories,locales)
+    if int(brand_id)==363:
+        brand_settings = settings.get('363')
+        categories = brand_settings.get("Categories")
+        locales = brand_settings.get("Locales")
+        base_url = brand_settings.get("Base_URL")
+        MonclerParser=MonclerProductParser()
+        MonclerParser.base_url = base_url
+        MonclerParser.job_id = job_id
+        MonclerParser.process_categories(categories,locales)
+    if int(brand_id)==314:
+        brand_settings = settings.get('314')
+        categories = brand_settings.get("Categories")
+        locales = brand_settings.get("Locales")
+        base_url = brand_settings.get("Base_URL")
+        LoroPianaParser=LoroPianaProductParser()
+        LoroPianaParser.base_url = base_url
+        LoroPianaParser.job_id = job_id
+        LoroPianaParser.process_categories(categories, locales)
+    if int(brand_id)==310:
+        brand_settings = settings.get('310')
+        categories = brand_settings.get("Categories")
+        locales = brand_settings.get("Locales")
+        base_url = brand_settings.get("Base_URL")
+        LoeweParser=LoeweProductParser()
+        LoeweParser.base_url = base_url
+        LoeweParser.job_id = job_id
+        LoeweParser.process_categories(categories,locales)
+    if int(brand_id)==157:
+        brand_settings = settings.get('157')
+        categories = brand_settings.get("Categories")
+        locales = brand_settings.get("Locales")
+        base_url = brand_settings.get("Base_URL")
+        DolceParser=DolceGabbanaProductParser()
+        DolceParser.base_url = base_url
+        DolceParser.job_id = job_id
+        DolceParser.process_categories(categories,locales)
+    if int(brand_id)==500:
+        brand_settings = settings.get('500')
+        categories = brand_settings.get("Categories")
+        locales = brand_settings.get("Locales")
+        base_url = brand_settings.get("Base_URL")
+        StoneIslandParser = StoneIslandProductParser()
+        StoneIslandParser.base_url = base_url
+        StoneIslandParser.job_id = job_id
+        StoneIslandParser.process_categories(categories, locales)
+    print("Done")
+#Categories in case necessary for Dolce
+# categories = ['cgid%3Dwomen-bags', 'cgid%3Dwomen-apparel', 'cgid%3Djewellry-for-her', 'cgid%3Dwomen-shoes',
+        #              'cgid%3Dwomen-accessories', 'cgid%3Dwomen-accessories-sunglasses', 'cgid%3Dmen-apparel',
+        #              'cgid%3Dmen-tailoring', 'cgid%3Dmen-bags', 'cgid%3Dmen-shoes', 'cgid%3Dmen-accessories',
+        #              'cgid%3Dmen-accessories-sunglasses', 'cgid%3Djewellry-for-him']
 class WebsiteParser:
+    def format_url(self, url):
+        """ Helper function to format URLs correctly """
+        if url:
+            return url if url.startswith('http') else 'https:' + url
+        else:
+            return ""
+
+    def safe_strip(self, value):
+        """ Helper function to strip strings safely """
+        return value.strip() if isinstance(value, str) else value
     def __init__(self):
         self.session = requests.Session()
         self.code = str(uuid.uuid4())
@@ -161,56 +263,7 @@ class WebsiteParser:
 
 
 
-def run_parser(job_id,brand_id):
-    print(brand_id)
-    if int(brand_id)==478:
-        categories = ['view-all-shoes-women','view-all-rtw-women','view-all-handbags-women','view-all-slg-women','view-all-jewelry-women','view-all-accessories-women','view-all-rtw-men','view-all-shoes-men','view-all-slg-men','view-all-accessories-men','view-all-bags-men','highlights-women-collection','highlights-men-collection',]
-        country_code=['en-it','en-us']
-        SaintLaurentParser=SaintLaurentProductParser()
-        SaintLaurentParser.job_id=job_id
-        SaintLaurentParser.process_categories(categories,country_code)
-    if int(brand_id)==229:
-        GucciParser = GucciProductParser()
-        combined_gucci_categories = ['men-bags', 'men-bags-luggage','men-readytowear','men-shoes','men-accessories-wallets','men-accessories-hats-and-gloves','men-accessories-belts','men-eyewear','jewelry-watches-watches-men','men-accessories','women-shoes','women-handbags','women-accessories-lifestyle-bags-and-luggage','women-readytowear','women-accessories-wallets','women-accessories','jewelry-watches-watches-women', 'women-accessories-belts','women-accessories-silks-and-scarves','women-accessories-hats-and-gloves']
-        locales=['it/it','us/en']
-        GucciParser.process_categories(combined_gucci_categories,locales)
-    if int(brand_id)==26:
-        women_categories = ['w-ready-to-wear','W-All-Shoes' ,'W-All-Bags','W-All-Accessories','w-jewellery' ]  # Assuming you have a list of categories
-        men_categories = ['M-All-Ready-to-Wear','M-Shoes','M-All-Accessories', 'm-jewellery','M-Bags']
-        women_base_url = "https://www.alexandermcqueen.com/api/v1/category/women?locale={locale}&categoryIds={clothing_category}&page={page}&hitsPerPage=30"
-        men_base_url = "https://www.alexandermcqueen.com/api/v1/category/men?locale={locale}&categoryIds={clothing_category}&page={page}&hitsPerPage=30"
-        category_dicts=[{'category_list':women_categories, 'base_url':women_base_url},{'category_list':men_categories,'base_url':men_base_url}]
-        locales=['en-it','en-us',]
-        AlexandarMcqueenParser=AlexanderMcqueenParser()
-        AlexandarMcqueenParser.job_id = job_id
-        AlexandarMcqueenParser.process_categories(category_dicts,locales)
-    if int(brand_id)==363:
-        categories = ['men','women','children']
-        country_codes=['Sites-MonclerEU-Site/en_IT','Sites-MonclerUS-Site/en_US']
-        MonclerParser=MonclerProductParser()
-        MonclerParser.job_id = job_id
-        MonclerParser.process_categories(categories,country_codes)
-    if int(brand_id)==314:
-        categories=['L1_MEN','L1_WOM','L2_MEN_ACCESSORIES','L2_WOM_LG','L2_WOM_ACCESSORIES','L2_SHOES_WOM','L2_WOM_SLG','L2_SHOES_MAN','L2_DIGITALFW24_MAN','L2_DIGITALFW24_WOM','L2_SS23_WOM','L2_SS23_MAN']
-        LoroPianaParser=LoroPianaProductParser()
-        LoroPianaParser.job_id = job_id
-        country_codes=[{'country_code':'it', 'locale':'it'},{'country_code':'en', 'locale':'us'}]
-        LoroPianaParser.process_categories(categories, country_codes)
-    if int(brand_id)==310:
-        categories = ['cgid%3Dwomen','cgid%3Dmen','cgid%3Dm_fw_collection','cgid%3Dw_fw_precollection']
-        country_dicts=[{'country_code':'IT','locale':'en','limit':200,'site_id':'LOE_EUR'},{'country_code':'USA','locale':'en-US','limit':200,'site_id':'LOE_USA'}]
-        LoeweParser=LoeweProductParser()
-        LoeweParser.process_categories(categories,country_dicts)
-    if int(brand_id)==157:
-        # categories = ['cgid%3Dwomen-bags', 'cgid%3Dwomen-apparel', 'cgid%3Djewellry-for-her', 'cgid%3Dwomen-shoes',
-        #              'cgid%3Dwomen-accessories', 'cgid%3Dwomen-accessories-sunglasses', 'cgid%3Dmen-apparel',
-        #              'cgid%3Dmen-tailoring', 'cgid%3Dmen-bags', 'cgid%3Dmen-shoes', 'cgid%3Dmen-accessories',
-        #              'cgid%3Dmen-accessories-sunglasses', 'cgid%3Djewellry-for-him']
-        categories=['']
-        info_dicts=[{'site_id':'dolcegabbana_us','locale':'en','limit':200},{'site_id':'dolcegabbana','locale':'it','limit':200}]
-        DolceParser=DolceGabbanaProductParser()
-        DolceParser.process_categories(categories,info_dicts)
-    print("Done")
+
 class GucciProductParser(WebsiteParser):
     ##COMPLETE
     def __init__(self):
@@ -224,13 +277,8 @@ class GucciProductParser(WebsiteParser):
         self.driver = webdriver.Chrome(options=options)
         self.brand = 'gucci'
         super().__init__()
-    def format_url(self,url):
-        """ Helper function to format URLs correctly """
-        return f"https:{url}" if url else ''
+        super().process_website()
 
-    def safe_strip(self,value):
-        """ Helper function to strip strings safely """
-        return value.strip() if isinstance(value, str) else value
     def fetch_data(self,category, base_url,locale):
 
         all_products = []  # Use a list to store product dictionaries
@@ -324,15 +372,6 @@ class LoroPianaProductParser(WebsiteParser):
         self.base_url = "https://{locale}.loropiana.com/{country_code}/c/{category}/results?page={page}"
         self.data = pd.DataFrame()
         self.brand = 'loro_piana'
-        super().__init__()
-
-    def format_url(self,url):
-        """ Helper function to format URLs correctly """
-        return f"https:{url}" if url else ''
-
-    def safe_strip(self,value):
-        """ Helper function to strip strings safely """
-        return value.strip() if isinstance(value, str) else value
     def fetch_data(self,category, base_url,country_code, locale):
         session = requests.Session()
         # Setup retry strategy
@@ -434,10 +473,7 @@ class AlexanderMcqueenParser(WebsiteParser):
         self.brand = 'alexander_mcqueen'  # Replace spaces with underscores
         self.base_url = ''
         self.data=pd.DataFrame
-        super().__init__()
-    def format_url(self,url):
-        """ Helper function to format URLs correctly """
-        return url if url.startswith('http') else 'https:' + url
+
     def fetch_data(self,category, base_url,locale):
         session = requests.Session()
         retries = requests.adapters.Retry(
@@ -530,7 +566,6 @@ class MonclerProductParser(WebsiteParser):
         self.base_url="https://www.moncler.com/on/demandware.store/{country_code}/SearchApi-Search?cgid={category}&sz=2000&start=0"
         self.country=''
         self.brand = 'moncler'
-        super().__init__()
     def fetch_moncler_products(self,categories,country_code):
         all_products=[]
         for category in categories:
@@ -602,14 +637,6 @@ class SaintLaurentProductParser(WebsiteParser):
         self.data = pd.DataFrame()
         self.brand='saint_laurent'
         super().__init__()
-
-    def format_url(self, url):
-        """ Helper function to format URLs correctly """
-        return f"https:{url}" if url else ''
-
-    def safe_strip(self, value):
-        """ Helper function to strip strings safely """
-        return value.strip() if isinstance(value, str) else value
 
     def fetch_data(self, category, base_url,locale):
         session = requests.Session()
@@ -717,8 +744,11 @@ class SaintLaurentProductParser(WebsiteParser):
 class DolceGabbanaProductParser(WebsiteParser):
     def __init__(self):
         self.brand = 'dolce_gabbana'  # Replace spaces with underscores
+        self.base_url=""
         options = Options()
         options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
+        options.add_argument(
+            "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36")
         options.add_argument("--start-maximized")
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-setuid-sandbox')
@@ -753,7 +783,7 @@ class DolceGabbanaProductParser(WebsiteParser):
                     return token
 
     def fetch_products(self,category,info_dict):
-        base_url = "https://www.dolcegabbana.com/mobify/proxy/api/search/shopper-search/v1/organizations/f_ecom_bkdb_prd/product-search?locale={locale}&siteId={site_id}&refine=c_availableForCustomerGroupA%3DEveryone&limit={limit}&offset={offset}&refine={category}"
+        base_url = self.base_url
         url = base_url.replace("CATEGORYGOESHERE", category)
         bearer_token=self.get_bearer_token()
         headers = {
@@ -810,12 +840,17 @@ class DolceGabbanaProductParser(WebsiteParser):
         all_data = pd.DataFrame()
         for info_dict in info_dicts:
             self.data=pd.DataFrame()
-            locale=info_dict['locale']
-            for category in categories:
-                print(f"Fetching products for category: {category}")
-                category_data = self.fetch_products(category,info_dict)
+            if categories:
+                for category in categories:
+                    print(f"Fetching products for category: {category}")
+                    category_data = self.fetch_products(category,info_dict)
+                    all_data = pd.concat([all_data, category_data], ignore_index=True)
+                    print(f"Completed fetching for category: {category}")
+            else:
+                print(f"Fetching products for all of Dolce")
+                category_data = self.fetch_products("", info_dict)
                 all_data = pd.concat([all_data, category_data], ignore_index=True)
-                print(f"Completed fetching for category: {category}")
+                print(f"Completed fetching for all of Dolce")
         current_date = datetime.datetime.now().strftime("%m_%d_%Y")
         self.output_filename = f"{self.brand}_output_{current_date}_{self.code}.csv"
         self.data.to_csv(self.output_filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
@@ -834,6 +869,7 @@ class LoeweProductParser(WebsiteParser):
         self.data = pd.DataFrame()
         self.brand='Loewe'
         options = Options()
+        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36")
         options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
         options.add_argument("--start-maximized")
         options.add_argument('--no-sandbox')
@@ -867,14 +903,6 @@ class LoeweProductParser(WebsiteParser):
                     return token
 
 
-    def format_url(self, url):
-        """ Helper function to format URLs correctly """
-        return f"https:{url}" if url else ''
-
-    def safe_strip(self, value):
-        """ Helper function to strip strings safely """
-        return value.strip() if isinstance(value, str) else value
-
     def fetch_data(self, category, base_url,country_dict):
         bearer_token = self.get_bearer_token()
         session = requests.Session()
@@ -888,7 +916,7 @@ class LoeweProductParser(WebsiteParser):
         session.mount("https://", HTTPAdapter(max_retries=retries))
 
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.3',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36',
             'Authorization': f'Bearer {bearer_token}'
                 }
         all_products = []  # Use a list to store product dictionaries
@@ -990,7 +1018,159 @@ class LoeweProductParser(WebsiteParser):
         self.logger.info(f"Complete data saved to {self.output_filename}")
         self.count = len(self.data) - 1
         self.send_output()
+class StoneIslandProductParser(WebsiteParser):
+    def __init__(self):
+        # Initialize with common base URL and empty DataFrame to accumulate results
+        self.base_url = ""
+        self.data = pd.DataFrame()
+        self.brand='stone_island'
+        super().__init__()
 
+    def extract_data(self, json_data):
+        if isinstance(json_data, str):
+            json_data = json.loads(json_data)
+
+        def flatten_dict(d, parent_key='', sep='_'):
+            items = []
+            for k, v in d.items():
+                new_key = f"{parent_key}{sep}{k}" if parent_key else k
+                if isinstance(v, dict):
+                    items.extend(flatten_dict(v, new_key, sep=sep).items())
+                elif isinstance(v, list):
+                    if all(isinstance(item, dict) for item in v):
+                        items.append((new_key, json.dumps(v)))
+                    else:
+                        items.append((new_key, ','.join(map(str, v))))
+                else:
+                    items.append((new_key, v))
+            return dict(items)
+
+        flattened_data = flatten_dict(json_data)
+
+        # Extract specific nested structures
+        if 'variationAttributes' in json_data:
+            for attr in json_data['variationAttributes']:
+                attr_id = attr.get('attributeId', '')
+                flattened_data[f'variationAttribute_{attr_id}_values'] = ','.join([
+                    value.get('displayValue', '') for value in attr.get('values', [])
+                ])
+
+        if 'imgs' in json_data and 'urls' in json_data['imgs']:
+            flattened_data['image_urls'] = ','.join(json_data['imgs']['urls'])
+
+        if 'analyticsAttributes' in json_data:
+            for key, value in json_data['analyticsAttributes'].items():
+                flattened_data[f'analytics_{key}'] = value
+
+        return flattened_data
+    def fetch_data(self,category,locale_dict):
+        session = requests.Session()
+        # Setup retry strategy
+        retries = Retry(
+            total=5,
+            backoff_factor=1,
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
+        )
+        session.mount("https://", HTTPAdapter(max_retries=retries))
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36',
+        }
+        all_products = []  # Use a list to store product dictionaries
+        locale=locale_dict.get('locale','')
+        size = locale_dict.get('size','')
+        start = locale_dict.get('start','')
+        try:
+            current_url = self.base_url.format(category=category, size=size, start=start, locale=locale)
+            response = session.get(current_url, headers=headers)
+            response.raise_for_status()
+            json_data = response.json()
+            if isinstance(json_data, str):
+                json_data = json.loads(json_data)
+            products=json_data.get('data',{}).get('products',[])
+
+            for product in products:
+                product_info = {
+                    'category': category,
+                    'type': self.safe_strip(product.get('type', '')),
+                    'masterId': self.safe_strip(product.get('masterId', '')),
+                    'uuid': self.safe_strip(product.get('uuid', '')),
+                    'id': self.safe_strip(product.get('id', '')),
+                    'productName': self.safe_strip(product.get('productName', '')),
+                    'shortDescription': self.safe_strip(product.get('shortDescription', '')),
+                    'productUrl': self.safe_strip(product.get('productUrl', '')),
+                    'route': self.safe_strip(product.get('route', '')),
+                    'originalModelName': self.safe_strip(product.get('originalModelName', '')),
+                    'isComingSoon': str(product.get('isComingSoon', False)).lower(),
+                    'price_sales_value': self.safe_strip(product.get('price', {}).get('sales', {}).get('value', '')),
+                    'price_sales_currency': self.safe_strip(
+                        product.get('price', {}).get('sales', {}).get('currency', '')),
+                    'price_sales_formatted': self.safe_strip(
+                        product.get('price', {}).get('sales', {}).get('formatted', '')),
+                    'image_urls': ','.join(product.get('imgs', {}).get('urls', [])),
+                    'image_alt': self.safe_strip(product.get('imgs', {}).get('alt', '')),
+                    'analytics_item_name': self.safe_strip(product.get('analyticsAttributes', {}).get('item_name', '')),
+                    'analytics_item_category': self.safe_strip(
+                        product.get('analyticsAttributes', {}).get('item_category', '')),
+                    'analytics_item_category2': self.safe_strip(
+                        product.get('analyticsAttributes', {}).get('item_category2', '')),
+                    'analytics_item_category3': self.safe_strip(
+                        product.get('analyticsAttributes', {}).get('item_category3', '')),
+                    'analytics_item_category4': self.safe_strip(
+                        product.get('analyticsAttributes', {}).get('item_category4', '')),
+                    'analytics_item_category5': self.safe_strip(
+                        product.get('analyticsAttributes', {}).get('item_category5', '')),
+                    'analytics_item_variant': self.safe_strip(
+                        product.get('analyticsAttributes', {}).get('item_variant', '')),
+                    'analytics_item_MFC': self.safe_strip(product.get('analyticsAttributes', {}).get('item_MFC', '')),
+                    'availability_lowStock': str(product.get('availability', {}).get('lowStock', False)).lower(),
+                    'available': str(product.get('available', False)).lower(),
+                    'earlyaccess_private': str(product.get('earlyaccess', {}).get('private', False)).lower(),
+                    'imageBackground': self.safe_strip(product.get('imageBackground', '')),
+                    'assetOverride_plp': self.safe_strip(product.get('assetOverride', {}).get('plp', '')),
+                    'assetOverride_plpeditorial': self.safe_strip(
+                        product.get('assetOverride', {}).get('plpeditorial', '')),
+                    'assetOverride_icongallery': self.safe_strip(
+                        product.get('assetOverride', {}).get('icongallery', '')),
+                    'seoName': self.safe_strip(product.get('seoName', '')),
+                }
+
+                # Handle variationAttributes
+                for attr in product.get('variationAttributes', []):
+                    attr_id = attr.get('attributeId', '')
+                    product_info[f'variationAttribute_{attr_id}_displayName'] = self.safe_strip(
+                        attr.get('displayName', ''))
+                    product_info[f'variationAttribute_{attr_id}_displayValue'] = self.safe_strip(
+                        attr.get('displayValue', ''))
+                    product_info[f'variationAttribute_{attr_id}_swatchable'] = str(
+                        attr.get('swatchable', False)).lower()
+                    product_info[f'variationAttribute_{attr_id}_values'] = ','.join(
+                        [self.safe_strip(value.get('displayValue', '')) for value in attr.get('values', [])])
+
+                # Add locale information
+                product_info.update(locale_dict)
+
+                all_products.append(product_info)
+
+            return pd.DataFrame()
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return pd.DataFrame()
+
+    def process_categories(self, categories, locale_dicts):
+        for locale_dict in locale_dicts:
+            self.data = pd.DataFrame()
+            for category in categories:
+                category_data = self.fetch_data(category, locale_dict)
+                self.data = pd.concat([self.data, category_data], ignore_index=True)
+        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+        self.output_filename = f"{self.brand}_output_{current_date}_{self.code}.csv"
+        self.data.to_csv(self.output_filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
+        self.upload_url = self.upload_file_to_space(self.output_filename, self.output_filename)
+        self.logger.info(f"Complete data saved to {self.output_filename}")
+        self.count = len(self.data) - 1
+        self.send_output()
 
 # class TodsProductParser():
 #     def __init__(self):
