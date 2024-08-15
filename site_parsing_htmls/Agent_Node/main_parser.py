@@ -3150,19 +3150,19 @@ def run_parser(job_id,brand_id,source_url):
         BallyParser = BallyProductParser()
         BallyParser.job_id = job_id
         BallyParser.parse_website(source_url)
-    #NOT YET LOADED
-    if brand_id == '???':
+    if brand_id == '317':
         LouboutinParser = LouboutinProductParser()
         LouboutinParser.job_id = job_id
         LouboutinParser.parse_website(source_url)
+    if brand_id == '374':
+        MooseKnucklesParser = MooseKnucklesProductParser()
+        MooseKnucklesParser.job_id = job_id
+        MooseKnucklesParser.parse_website(source_url)
+    # NOT YET LOADED
     if brand_id == '???':
         PalmAngelsParser = PalmAngelsProductParser()
         PalmAngelsParser.job_id = job_id
         PalmAngelsParser.parse_website(source_url)
-    if brand_id == '???':
-        MooseKnucklesParser = MooseKnucklesProductParser()
-        MooseKnucklesParser.job_id = job_id
-        MooseKnucklesParser.parse_website(source_url)
     if brand_id == '???':
         BirkenstockParser = BirkenstockProductParser()
         BirkenstockParser.job_id = job_id
