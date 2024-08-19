@@ -1,6 +1,9 @@
+import sys
+
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import logging
+import logging.handlers
 import os
 import time
 import uuid
@@ -173,7 +176,7 @@ class WebsiteParser:
         self.log_file_name = f'{self.brand}_{self.code}_{current_date}.log'
 
         # Initially get a unique logger using a UUID, brand ID, and job ID
-        logger_name = f"Brand ID: {self.brand_id}, Job ID: {self.job_id}, UUID: {self.code}"
+        logger_name = f"Brand ID: {self.brand}, Job ID: {self.job_id}, UUID: {self.code}"
         self.logger = logging.getLogger(logger_name)
         self.logger.setLevel(logging.DEBUG)  # Set logger to DEBUG to capture all messages
         self.logger.propagate = False  # Prevent propagation to root logger
@@ -182,7 +185,7 @@ class WebsiteParser:
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
         # Create handler for logs that go to the file on the debug level
-        self.log_file_handler = logging.handlers.RotatingFileHandler(self.logging_file_path)
+        self.log_file_handler = logging.handlers.RotatingFileHandler(self.log_file_name)
         self.log_file_handler.setFormatter(formatter)
         self.log_file_handler.setLevel(logging.DEBUG)
 
@@ -1185,6 +1188,7 @@ class ChloeProductParser(WebsiteParser):
 
         self.logger.info(f"This is the size: {size}, locale: {locale}")
         try:
+            locale_TF = True if "US" in locale else False
             current_url = self.base_url.format(category=category, size=size,locale=locale)
             self.logger.info(f"This is the current url: {current_url}")
             self.driver.get(current_url)
@@ -1192,12 +1196,12 @@ class ChloeProductParser(WebsiteParser):
                 EC.presence_of_element_located((By.TAG_NAME, "body")))  # Wait for the page to load
             product_html=self.driver.execute_script("return document.documentElement.outerHTML;")
             soup=BeautifulSoup(product_html, 'html.parser')
-            product_info = self.get_product_info(soup,category)
+            product_info = self.get_product_info(soup,category,locale_TF)
             return pd.DataFrame(product_info)
         except Exception as e:
             print(f"An error occurred: {e}")
             return pd.DataFrame()
-    def extract_product_id(self,product_url):
+    def extract_product_id(self,product_url,locale_TF):
         self.logger.info(f"Currently getting the product ID for {product_url}")
         self.driver.get(product_url)
         try:
@@ -1206,7 +1210,11 @@ class ChloeProductParser(WebsiteParser):
         except:
             self.logger.info(f"Couldn't find a body tag for product url: {product_url}")
         html=self.driver.page_source
-        pid_text=': '
+        if locale_TF:
+            pid_text='Item code: '
+        else:
+            pid_text='Codice articolo: '
+        self.logger.info(f"This is the pid text that is being looked for: {pid_text}")
         soup_pid=BeautifulSoup(html, 'html.parser') if html else ''
         if soup_pid:
             main_item = soup_pid.find('div', class_='itemdescription')
@@ -1214,13 +1222,13 @@ class ChloeProductParser(WebsiteParser):
                 # Extract the Style ID
                 style_id_text=main_item.text
                 self.logger.info(f"Product ID text on page: {style_id_text}")
-                style_id = style_id_text.split(pid_text)[1].strip()
+                style_id = style_id_text.split(pid_text)[-1].strip()
                 self.logger.info(f"Product ID: {style_id}")
                 return style_id
             else:
                 self.logger.info(f'Product ID not found for url: {product_url}')
                 return ""
-    def get_product_info(self,soup,category):
+    def get_product_info(self,soup,category,locale_TF):
         self.logger.info(f"Starting to get the product data from category:{category}")
         parsed_data = []
         articlesChloe = soup.find_all('article', {'class': 'item'})
@@ -1237,8 +1245,7 @@ class ChloeProductParser(WebsiteParser):
             a_url = articleChloe.find('a')
             if a_url:
                 a_url = a_url['href']
-
-            product_id = self.extract_product_id(a_url)
+            product_id = self.extract_product_id(a_url,locale_TF)
 
             product_info = json.loads(data_pinfo)
 
