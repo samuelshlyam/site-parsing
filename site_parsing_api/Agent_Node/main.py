@@ -44,7 +44,7 @@ def fetch_settings():
 
 
 def run_parser(job_id,brand_id):
-    print(brand_id)
+    print(f"This is the currently running brand_id:{brand_id}, job_id{job_id}")
     settings=fetch_settings()
     print(f"This is the currently relevant setting{settings.get(brand_id)}")
     if int(brand_id)==478:
@@ -52,90 +52,80 @@ def run_parser(job_id,brand_id):
         categories=brand_settings.get("Categories")
         locales=brand_settings.get("Locales")
         base_url=brand_settings.get("Base_URL")
-        SaintLaurentParser=SaintLaurentProductParser()
-        SaintLaurentParser.base_url=base_url
-        SaintLaurentParser.job_id=job_id
+        print(f"These are the parameters being used for this parser:\nBase URL:{base_url}\nCategories:{categories}\nLocales:{locales}")
+        SaintLaurentParser=SaintLaurentProductParser(job_id,base_url)
         SaintLaurentParser.process_categories(categories,locales)
     if int(brand_id)==229:
         brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
-        GucciParser = GucciProductParser()
-        GucciProductParser.base_url = base_url
-        GucciProductParser.job_id = job_id
+        print(f"These are the parameters being used for this parser:\nBase URL:{base_url}\nCategories:{categories}\nLocales:{locales}")
+        GucciParser = GucciProductParser(job_id,base_url)
         GucciParser.process_categories(categories,locales)
     if int(brand_id)==26:
         brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
-        AlexandarMcqueenParser=AlexanderMcqueenParser()
-        AlexandarMcqueenParser.base_url = base_url
-        AlexandarMcqueenParser.job_id = job_id
+        print(f"These are the parameters being used for this parser:\nBase URL:{base_url}\nCategories:{categories}\nLocales:{locales}")
+        AlexandarMcqueenParser=AlexanderMcqueenParser(job_id,base_url)
         AlexandarMcqueenParser.process_categories(categories,locales)
     if int(brand_id)==363:
         brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
-        MonclerParser=MonclerProductParser()
-        MonclerParser.base_url = base_url
-        MonclerParser.job_id = job_id
+        print(f"These are the parameters being used for this parser:\nBase URL:{base_url}\nCategories:{categories}\nLocales:{locales}")
+        MonclerParser=MonclerProductParser(job_id,base_url)
         MonclerParser.process_categories(categories,locales)
     if int(brand_id)==314:
         brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
-        LoroPianaParser=LoroPianaProductParser()
-        LoroPianaParser.base_url = base_url
-        LoroPianaParser.job_id = job_id
+        print(f"These are the parameters being used for this parser:\nBase URL:{base_url}\nCategories:{categories}\nLocales:{locales}")
+        LoroPianaParser=LoroPianaProductParser(job_id,base_url)
         LoroPianaParser.process_categories(categories, locales)
     if int(brand_id)==310:
         brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
-        LoeweParser=LoeweProductParser()
-        LoeweParser.base_url = base_url
-        LoeweParser.job_id = job_id
+        print(f"These are the parameters being used for this parser:\nBase URL:{base_url}\nCategories:{categories}\nLocales:{locales}")
+        LoeweParser=LoeweProductParser(job_id,base_url)
         LoeweParser.process_categories(categories,locales)
     if int(brand_id)==157:
         brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
-        DolceParser=DolceGabbanaProductParser()
-        DolceParser.base_url = base_url
-        DolceParser.job_id = job_id
+        print(f"These are the parameters being used for this parser:\nBase URL:{base_url}\nCategories:{categories}\nLocales:{locales}")
+        DolceParser=DolceGabbanaProductParser(job_id,base_url)
         DolceParser.process_categories(categories,locales)
     if int(brand_id)==500:
         brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
-        StoneIslandParser = StoneIslandProductParser()
-        StoneIslandParser.base_url = base_url
-        StoneIslandParser.job_id = job_id
+        print(f"These are the parameters being used for this parser:\nBase URL:{base_url}\nCategories:{categories}\nLocales:{locales}")
+        StoneIslandParser = StoneIslandProductParser(job_id,base_url)
         StoneIslandParser.process_categories(categories, locales)
     if int(brand_id)==125:
         brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
-        ChloeParser = ChloeProductParser()
-        ChloeParser.base_url = base_url
-        ChloeParser.job_id = job_id
+        print(f"These are the parameters being used for this parser:\nBase URL:{base_url}\nCategories:{categories}\nLocales:{locales}")
+        ChloeParser = ChloeProductParser(job_id,base_url)
         ChloeParser.process_categories(categories, locales)
     if int(brand_id)==110:
         brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
-        CanadaGooseParser = CanadaGooseProductParser()
-        CanadaGooseParser.base_url = base_url
-        CanadaGooseParser.job_id = job_id
+        print(f"These are the parameters being used for this parser:\nBase URL:{base_url}\nCategories:{categories}\nLocales:{locales}")
+        CanadaGooseParser = CanadaGooseProductParser(job_id,base_url)
         CanadaGooseParser.process_categories(categories, locales)
     print("Done")
 #Categories in case necessary for Dolce
@@ -157,7 +147,6 @@ class WebsiteParser:
     def __init__(self):
         self.session = requests.Session()
         self.code = str(uuid.uuid4())
-        self.job_id=''
         self.setup_logging()
         self.count=0
         self.upload_url=''
@@ -176,7 +165,7 @@ class WebsiteParser:
         self.log_file_name = f'{self.brand}_{self.code}_{current_date}.log'
 
         # Initially get a unique logger using a UUID, brand ID, and job ID
-        logger_name = f"Brand ID: {self.brand}, Job ID: {self.job_id}, UUID: {self.code}"
+        logger_name = f"Brand Name: {self.brand}, Job ID: {self.job_id}, UUID: {self.code}"
         self.logger = logging.getLogger(logger_name)
         self.logger.setLevel(logging.DEBUG)  # Set logger to DEBUG to capture all messages
         self.logger.propagate = False  # Prevent propagation to root logger
@@ -225,7 +214,7 @@ class WebsiteParser:
         return file_path
 
     def send_output(self):
-        print("I got in here")
+        self.logger.info(f"Starting send output")
         self.log_url = self.upload_file_to_space(self.log_file_name, self.log_file_name)
         logging.shutdown()
         headers = {
@@ -241,6 +230,7 @@ class WebsiteParser:
         }
         os.remove(self.output_filename)
         os.remove(self.log_file_name)
+        self.logger.info(f"Finishing send output:\nParams:{params}")
         requests.post(f"{os.getenv('MANAGER_ENDPOINT')}/job_complete", params=params, headers=headers)
     @staticmethod
     def open_link(url):
@@ -255,12 +245,12 @@ class WebsiteParser:
             )
             session.mount("https://", HTTPAdapter(max_retries=retries))
             headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"}
-            print(url)
+            self.logger.info(f"This is the url that is being opened{url}")
             response = session.get(url,headers=headers,allow_redirects=True)
             response.raise_for_status()  # Raises an HTTPError for bad responses
             return response.text
         except requests.exceptions.RequestException as e:
-            print(f"An error occurred: {e}")
+            self.logger.info(f"An error occurred when trying to open url: {url}\n{e}")
             return None
 
     def upload_file_to_space(self, file_src, save_as, is_public=True):
@@ -293,19 +283,16 @@ class WebsiteParser:
 
 class GucciProductParser(WebsiteParser):
     ##COMPLETE
-    def __init__(self):
+    def __init__(self,job_id,base_url):
         # Initialize with common base URL and empty DataFrame to accumulate results
-        self.base_url = ""
         self.data = pd.DataFrame()
         options = webdriver.ChromeOptions()
         options.add_argument("--headless=new")
         options.add_argument(
             "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+        self.job_id=job_id
+        self.base_url=base_url
         self.driver = webdriver.Chrome(options=options)
-        self.brand = 'gucci'
-        super().__init__()
-        super().process_website()
-
     def fetch_data(self,category, base_url,locale):
 
         all_products = []  # Use a list to store product dictionaries
@@ -313,12 +300,12 @@ class GucciProductParser(WebsiteParser):
             current_url=base_url.format(category=category, page=0,locale=locale)
             self.driver.get(current_url)
             page_source = self.driver.page_source
-            self.logger.info(page_source[:10000])
+            print(page_source[:10000])
             soup=BeautifulSoup(page_source,'html.parser')
             json_temp=soup.find('pre').text if soup.find('pre') else ''
             json_data=json.loads(json_temp) if json_temp else {}
             total_pages = json_data.get('numberOfPages', 1)
-            self.logger.info(f"Category: {category}, Total Pages: {total_pages}")
+            print(f"Category: {category}, Total Pages: {total_pages}")
 
             for page in range(total_pages):
                 current_url = base_url.format(category=category, page=page, locale=locale)
@@ -329,7 +316,7 @@ class GucciProductParser(WebsiteParser):
                 json_data = json.loads(json_temp) if json_temp else {}
                 items = json_data.get('products', {}).get('items', [])
                 if not items:
-                    self.logger.info(f"No items found on Page: {page + 1}/{total_pages} URL: {current_url}")
+                    print(f"No items found on Page: {page + 1}/{total_pages} URL: {current_url}")
                     continue
 
                 for product in items:
@@ -371,34 +358,38 @@ class GucciProductParser(WebsiteParser):
                         'showOutOfStockLabel': str(product.get('showOutOfStockLabel', False)).lower(),
                     }
                     all_products.append(product_info)
-                self.logger.info(f"Processed {len(items)} products on Page: {page + 1}/{total_pages} for Category: {category} URL: {current_url}")
+                print(f"Processed {len(items)} products on Page: {page + 1}/{total_pages} for Category: {category} URL: {current_url}")
             return pd.DataFrame(all_products)
         except requests.exceptions.RequestException as e:
-            self.logger.info(f"An error occurred: {e}")
+            print(f"An error occurred: {e}")
             return pd.DataFrame()
-    def process_categories(self, categories,locales):
+
+
+    def process_categories(self, categories,locales, output_dir):
         for locale in locales:
             self.data=pd.DataFrame()
             for category in categories:
                 category_data = self.fetch_data(category, self.base_url,locale)
                 self.data = pd.concat([self.data, category_data], ignore_index=True)
-        # Save the complete DataFrame to a CSV file
-        #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
+            # Save the complete DataFrame to a CSV file
+            #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
         current_date = datetime.datetime.now().strftime("%m_%d_%Y")
-        self.output_filename=f"{self.brand}_output_{current_date}_{self.code}.csv"
-        self.data.to_csv(self.output_filename,sep=',', index=False, quoting=csv.QUOTE_ALL)
-        self.upload_url=self.upload_file_to_space(self.output_filename,self.output_filename)
+        self.output_filename = f"{self.brand}_output_{current_date}_{self.code}.csv"
+        self.data.to_csv(self.output_filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
+        self.upload_url=self.upload_file_to_space(self.output_filename, self.output_filename)
         self.logger.info(f"Complete data saved to {self.output_filename}")
         self.count = len(self.data) - 1
-        self.driver.close()
         self.send_output()
+        self.driver.close()
 class LoroPianaProductParser(WebsiteParser):
     ##COMPLETE
-    def __init__(self):
+    def __init__(self,job_id):
         # Initialize with common base URL and empty DataFrame to accumulate results
         self.base_url = ""
+        self.job_id=job_id
         self.data = pd.DataFrame()
         self.brand = 'loro_piana'
+        super().__init__()
     def fetch_data(self,category, base_url,country_code, locale):
         session = requests.Session()
         # Setup retry strategy
@@ -496,11 +487,12 @@ class LoroPianaProductParser(WebsiteParser):
         # Save the complete DataFrame to a CSV file
         #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
 class AlexanderMcqueenParser(WebsiteParser):
-    def __init__(self):
+    def __init__(self,job_id):
         self.brand = 'alexander_mcqueen'  # Replace spaces with underscores
         self.base_url = ''
         self.data=pd.DataFrame
-
+        self.job_id=job_id
+        super().__init__()
     def fetch_data(self,category, base_url,locale):
         session = requests.Session()
         retries = requests.adapters.Retry(
@@ -585,14 +577,25 @@ class AlexanderMcqueenParser(WebsiteParser):
         self.send_output()
 
 class MonclerProductParser(WebsiteParser):
-    def __init__(self):
-        options = webdriver.ChromeOptions()
+    def __init__(self,job_id):
+        options = Options()
         options.add_argument(
-            "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
-        self.driver = webdriver.Chrome(options=options)
+            "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36")
+        options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
+        options.add_argument("--start-maximized")
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-setuid-sandbox')
+        options.add_argument("--headless=new")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--disable-gpu")
+        # Set up the Chrome driver
+        service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=service, options=options)
         self.base_url=""
         self.country=''
         self.brand = 'moncler'
+        self.job_id=job_id
+        super().__init__()
     def fetch_moncler_products(self,categories,country_code):
         all_products=[]
         for category in categories:
@@ -658,11 +661,12 @@ class MonclerProductParser(WebsiteParser):
         self.count=len(all_data)-1
         self.send_output()
 class SaintLaurentProductParser(WebsiteParser):
-    def __init__(self):
+    def __init__(self,job_id):
         # Initialize with common base URL and empty DataFrame to accumulate results
         self.base_url = ("")
         self.data = pd.DataFrame()
         self.brand='saint_laurent'
+        self.job_id=job_id
         super().__init__()
 
     def fetch_data(self, category, base_url,locale):
@@ -769,7 +773,7 @@ class SaintLaurentProductParser(WebsiteParser):
         self.send_output()
 
 class DolceGabbanaProductParser(WebsiteParser):
-    def __init__(self):
+    def __init__(self,job_id):
         self.brand = 'dolce_gabbana'  # Replace spaces with underscores
         self.base_url=""
         options = Options()
@@ -779,13 +783,13 @@ class DolceGabbanaProductParser(WebsiteParser):
         options.add_argument("--start-maximized")
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-setuid-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
         options.add_argument("--headless=new")
         options.add_argument("--disable-extensions")
         options.add_argument("--disable-gpu")
         # Set up the Chrome driver
         service = Service(ChromeDriverManager().install())
         self.driver = webdriver.Chrome(service=service, options=options)
+        self.job_id=job_id
         super().__init__()
     def get_bearer_token(self):
         self.driver.get("")
@@ -832,7 +836,7 @@ class DolceGabbanaProductParser(WebsiteParser):
             data = response.json()
             products = data.get('hits', [])
             if not products:
-                print("No more products to fetch.")
+                self.logger.info("No more products to fetch.")
                 break
 
             for product in products:
@@ -857,7 +861,7 @@ class DolceGabbanaProductParser(WebsiteParser):
                 }
                 all_products.append(product_info)
 
-            print(f"Fetched {len(products)} products from offset {offset} and URL {formatted_url}")
+            self.logger.info(f"Fetched {len(products)} products from offset {offset} and URL {formatted_url}")
             offset += limit
             if offset >= data['total']:
                 break
@@ -869,15 +873,15 @@ class DolceGabbanaProductParser(WebsiteParser):
             self.data=pd.DataFrame()
             if categories:
                 for category in categories:
-                    print(f"Fetching products for category: {category}")
+                    self.logger.info(f"Fetching products for category: {category}")
                     category_data = self.fetch_products(category,info_dict)
                     all_data = pd.concat([all_data, category_data], ignore_index=True)
-                    print(f"Completed fetching for category: {category}")
+                    self.logger.info(f"Completed fetching for category: {category}")
             else:
-                print(f"Fetching products for all of Dolce")
+                self.logger.info(f"Fetching products for all of Dolce")
                 category_data = self.fetch_products("", info_dict)
                 all_data = pd.concat([all_data, category_data], ignore_index=True)
-                print(f"Completed fetching for all of Dolce")
+                self.logger.info(f"Completed fetching for all of Dolce")
         current_date = datetime.datetime.now().strftime("%m_%d_%Y")
         self.output_filename = f"{self.brand}_output_{current_date}_{self.code}.csv"
         self.data.to_csv(self.output_filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
@@ -890,9 +894,10 @@ class DolceGabbanaProductParser(WebsiteParser):
 
 class LoeweProductParser(WebsiteParser):
     ##COMPLETEZ
-    def __init__(self):
+    def __init__(self,job_id):
         # Initialize with common base URL and empty DataFrame to accumulate results
         self.base_url = ""
+        self.job_id=job_id
         self.data = pd.DataFrame()
         self.brand='Loewe'
         options = Options()
@@ -969,7 +974,7 @@ class LoeweProductParser(WebsiteParser):
                 json_data = response.json()
                 items = json_data.get('hits', [])
                 if not items:
-                    print(f"No items found on offset: {offset}")
+                    self.logger.info(f"No items found on offset: {offset}")
                     continue
 
                 for product in items:
@@ -1025,11 +1030,11 @@ class LoeweProductParser(WebsiteParser):
                         'c_productDetailUrlComplete': product.get('c_productDetailUrlComplete', '')
                     }
                     all_products.append(product_info)
-                print(f"Processed {len(items)} products on offset: {offset} for Category: {category} url: {current_url}")
+                self.logger.info(f"Processed {len(items)} products on offset: {offset} for Category: {category} url: {current_url}")
                 offset+=limit
             return pd.DataFrame(all_products)
         except requests.exceptions.RequestException as e:
-            print(f"An error occurred: {e}")
+            self.logger.info(f"An error occurred: {e}")
             return pd.DataFrame()
 
     def process_categories(self, categories,country_dicts):
@@ -1046,11 +1051,12 @@ class LoeweProductParser(WebsiteParser):
         self.count = len(self.data) - 1
         self.send_output()
 class StoneIslandProductParser(WebsiteParser):
-    def __init__(self):
+    def __init__(self,job_id):
         # Initialize with common base URL and empty DataFrame to accumulate results
         self.base_url = ""
         self.data = pd.DataFrame()
         self.brand='stone_island'
+        self.job_id=job_id
         super().__init__()
 
     def fetch_data(self,category,locale_dict):
@@ -1143,9 +1149,9 @@ class StoneIslandProductParser(WebsiteParser):
 
                 all_products.append(product_info)
 
-            return pd.DataFrame()
+            return pd.DataFrame(all_products)
         except Exception as e:
-            print(f"An error occurred: {e}")
+            self.logger.info(f"An error occurred: {e}")
             return pd.DataFrame()
 
     def process_categories(self, categories, locale_dicts):
@@ -1162,10 +1168,11 @@ class StoneIslandProductParser(WebsiteParser):
         self.count = len(self.data) - 1
         self.send_output()
 class ChloeProductParser(WebsiteParser):
-    def __init__(self):
+    def __init__(self,job_id):
         # Initialize with common base URL and empty DataFrame to accumulate results
         self.base_url = ""
         self.data = pd.DataFrame()
+        self.job_id=job_id
         self.brand='chloe'
         options = Options()
         options.add_argument(
@@ -1174,7 +1181,6 @@ class ChloeProductParser(WebsiteParser):
         options.add_argument("--start-maximized")
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-setuid-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
         options.add_argument("--headless=new")
         options.add_argument("--disable-extensions")
         options.add_argument("--disable-gpu")
@@ -1199,7 +1205,7 @@ class ChloeProductParser(WebsiteParser):
             product_info = self.get_product_info(soup,category,locale_TF)
             return pd.DataFrame(product_info)
         except Exception as e:
-            print(f"An error occurred: {e}")
+            self.logger.info(f"An error occurred: {e}")
             return pd.DataFrame()
     def extract_product_id(self,product_url,locale_TF):
         self.logger.info(f"Currently getting the product ID for {product_url}")
@@ -1299,10 +1305,11 @@ class ChloeProductParser(WebsiteParser):
 class CanadaGooseProductParser:
     pass
 # class TodsProductParser():
-#     def __init__(self):
+#     def __init__(self,job_id):
 #         # Initialize with common base URL and empty DataFrame to accumulate results
 #         self.base_url = ("https://www.tods.com/rest/v2/tods-us/products/search?query=:rank-asc:category:{category}&fields=NAV&currentPage=0&pageSize=1000&key=undefined&lang=en&access_token=TgPITCn5tGqje8P1IHOIdSbrvKA")
 #         self.data = pd.DataFrame()
+#         self.job_id=job_id
 #
 #     def format_url(self, url):
 #         """ Helper function to format URLs correctly """
@@ -1389,4 +1396,4 @@ class CanadaGooseProductParser:
 #         print(f"Complete data saved to 'tods_output_{current_date}.csv'")
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=8000, host="0.0.0.0" , log_level="info")
+    uvicorn.run("main:app", port=8080, host="0.0.0.0" , log_level="info")
