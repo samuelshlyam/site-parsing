@@ -1,6 +1,9 @@
+import sys
+
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import logging
+import logging.handlers
 import os
 import time
 import uuid
@@ -11,6 +14,10 @@ import boto3
 import requests
 import uvicorn
 from bs4 import BeautifulSoup
+<<<<<<< HEAD
+=======
+from dotenv import load_dotenv
+>>>>>>> dev
 from fastapi import FastAPI, BackgroundTasks
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -20,9 +27,15 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 import pandas as pd
 import datetime
+<<<<<<< HEAD
 # load_dotenv()
 app = FastAPI()
 
+=======
+load_dotenv()
+app = FastAPI()
+SETTINGS_URL="https://raw.githubusercontent.com/samuelshlyam/API_Parser_Settings/main/settings.json"
+>>>>>>> dev
 @app.post("/run_parser")
 async def brand_batch_endpoint(job_id:str, brand_id: str, background_tasks: BackgroundTasks):
     background_tasks.add_task(run_parser,job_id, brand_id)
@@ -35,12 +48,16 @@ def fetch_settings():
     except requests.RequestException as e:
         return None
 
+
+
+
+
 def run_parser(job_id,brand_id):
     print(brand_id)
     settings=fetch_settings()
-    print(settings.get('478'))
+    print(f"This is the currently relevant setting{settings.get(brand_id)}")
     if int(brand_id)==478:
-        brand_settings=settings.get('478')
+        brand_settings=settings.get(brand_id)
         categories=brand_settings.get("Categories")
         locales=brand_settings.get("Locales")
         base_url=brand_settings.get("Base_URL")
@@ -49,7 +66,7 @@ def run_parser(job_id,brand_id):
         SaintLaurentParser.job_id=job_id
         SaintLaurentParser.process_categories(categories,locales)
     if int(brand_id)==229:
-        brand_settings = settings.get('229')
+        brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
@@ -58,7 +75,7 @@ def run_parser(job_id,brand_id):
         GucciProductParser.job_id = job_id
         GucciParser.process_categories(categories,locales)
     if int(brand_id)==26:
-        brand_settings = settings.get('26')
+        brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
@@ -67,7 +84,7 @@ def run_parser(job_id,brand_id):
         AlexandarMcqueenParser.job_id = job_id
         AlexandarMcqueenParser.process_categories(categories,locales)
     if int(brand_id)==363:
-        brand_settings = settings.get('363')
+        brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
@@ -76,7 +93,7 @@ def run_parser(job_id,brand_id):
         MonclerParser.job_id = job_id
         MonclerParser.process_categories(categories,locales)
     if int(brand_id)==314:
-        brand_settings = settings.get('314')
+        brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
@@ -85,7 +102,7 @@ def run_parser(job_id,brand_id):
         LoroPianaParser.job_id = job_id
         LoroPianaParser.process_categories(categories, locales)
     if int(brand_id)==310:
-        brand_settings = settings.get('310')
+        brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
@@ -94,7 +111,7 @@ def run_parser(job_id,brand_id):
         LoeweParser.job_id = job_id
         LoeweParser.process_categories(categories,locales)
     if int(brand_id)==157:
-        brand_settings = settings.get('157')
+        brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
@@ -103,7 +120,7 @@ def run_parser(job_id,brand_id):
         DolceParser.job_id = job_id
         DolceParser.process_categories(categories,locales)
     if int(brand_id)==500:
-        brand_settings = settings.get('500')
+        brand_settings = settings.get(brand_id)
         categories = brand_settings.get("Categories")
         locales = brand_settings.get("Locales")
         base_url = brand_settings.get("Base_URL")
@@ -111,6 +128,24 @@ def run_parser(job_id,brand_id):
         StoneIslandParser.base_url = base_url
         StoneIslandParser.job_id = job_id
         StoneIslandParser.process_categories(categories, locales)
+    if int(brand_id)==125:
+        brand_settings = settings.get(brand_id)
+        categories = brand_settings.get("Categories")
+        locales = brand_settings.get("Locales")
+        base_url = brand_settings.get("Base_URL")
+        ChloeParser = ChloeProductParser()
+        ChloeParser.base_url = base_url
+        ChloeParser.job_id = job_id
+        ChloeParser.process_categories(categories, locales)
+    if int(brand_id)==110:
+        brand_settings = settings.get(brand_id)
+        categories = brand_settings.get("Categories")
+        locales = brand_settings.get("Locales")
+        base_url = brand_settings.get("Base_URL")
+        CanadaGooseParser = CanadaGooseProductParser()
+        CanadaGooseParser.base_url = base_url
+        CanadaGooseParser.job_id = job_id
+        CanadaGooseParser.process_categories(categories, locales)
     print("Done")
 #Categories in case necessary for Dolce
 # categories = ['cgid%3Dwomen-bags', 'cgid%3Dwomen-apparel', 'cgid%3Djewellry-for-her', 'cgid%3Dwomen-shoes',
@@ -148,33 +183,35 @@ class WebsiteParser:
     def setup_logging(self):
         current_date = datetime.datetime.now().strftime("%d_%m_%Y")
         self.log_file_name = f'{self.brand}_{self.code}_{current_date}.log'
+
         # Initially get a unique logger using a UUID, brand ID, and job ID
         logger_name = f"Brand ID: {self.brand}, Job ID: {self.job_id}, UUID: {self.code}"
         self.logger = logging.getLogger(logger_name)
+        self.logger.setLevel(logging.DEBUG)  # Set logger to DEBUG to capture all messages
+        self.logger.propagate = False  # Prevent propagation to root logger
 
         # Set formatter
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
         # Create handler for logs that go to the file on the debug level
-        log_file_handler = logging.handlers.RotatingFileHandler(self.log_file_name)
-        log_file_handler.setFormatter(formatter)
-        log_file_handler.setLevel(logging.DEBUG)
+        self.log_file_handler = logging.handlers.RotatingFileHandler(self.log_file_name)
+        self.log_file_handler.setFormatter(formatter)
+        self.log_file_handler.setLevel(logging.DEBUG)
 
         # Create handler for logs that go to the console on the info level
-        log_console_handler = logging.StreamHandler()
-        log_console_handler.setFormatter(formatter)
-        log_console_handler.setLevel(logging.INFO)
+        self.log_console_handler = logging.StreamHandler(sys.stdout)
+        self.log_console_handler.setFormatter(formatter)
+        self.log_console_handler.setLevel(logging.INFO)
 
-        self.logger.addHandler(log_file_handler)
-        self.logger.addHandler(log_console_handler)
+        self.logger.addHandler(self.log_file_handler)
+        self.logger.addHandler(self.log_console_handler)
 
         # Initial test that the logger is instantiated and working properly
-        self.logger.info("This is what info messages will look like")
-        self.logger.error("This is what error messages will look like")
-        self.logger.critical("This is what a critical error message looks like")
-
-        self.logger = logging.getLogger(__name__)
-        self.logger.info("This is a log message from the Agent script")
+        self.logger.debug("This is a debug message (should appear in file only)")
+        self.logger.info("This is an info message (should appear in both file and console)")
+        self.logger.warning("This is a warning message (should appear in both file and console)")
+        self.logger.error("This is an error message (should appear in both file and console)")
+        self.logger.critical("This is a critical message (should appear in both file and console)")
 
     def write_to_tsv(self, file_path, tsv_data):
         with open(file_path, 'w', newline='', encoding='utf-8') as file:
@@ -267,7 +304,11 @@ class GucciProductParser(WebsiteParser):
     ##COMPLETE
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
+<<<<<<< HEAD
         self.base_url = ""
+=======
+        self.base_url = "https://www.gucci.com/{locale}/c/productgrid?categoryCode={category}&show=Page&page={page}"
+>>>>>>> dev
         self.data = pd.DataFrame()
         options = webdriver.ChromeOptions()
         options.add_argument("--headless=new")
@@ -368,7 +409,11 @@ class LoroPianaProductParser(WebsiteParser):
     ##COMPLETE
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
+<<<<<<< HEAD
         self.base_url = ""
+=======
+        self.base_url = "https://{locale}.loropiana.com/{country_code}/c/{category}/results?page={page}"
+>>>>>>> dev
         self.data = pd.DataFrame()
         self.brand = 'loro_piana'
     def fetch_data(self,category, base_url,country_code, locale):
@@ -562,7 +607,11 @@ class MonclerProductParser(WebsiteParser):
         options.add_argument(
             "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
         self.driver = webdriver.Chrome(options=options)
+<<<<<<< HEAD
         self.base_url=""
+=======
+        self.base_url="https://www.moncler.com/on/demandware.store/{country_code}/SearchApi-Search?cgid={category}&sz=2000&start=0"
+>>>>>>> dev
         self.country=''
         self.brand = 'moncler'
     def fetch_moncler_products(self,categories,country_code):
@@ -632,7 +681,11 @@ class MonclerProductParser(WebsiteParser):
 class SaintLaurentProductParser(WebsiteParser):
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
+<<<<<<< HEAD
         self.base_url = ("")
+=======
+        self.base_url = ("https://www.ysl.com/api/v1/category/{category}?locale={locale}&page={page}&categoryIds={category}&hitsPerPage=15")
+>>>>>>> dev
         self.data = pd.DataFrame()
         self.brand='saint_laurent'
         super().__init__()
@@ -864,7 +917,11 @@ class LoeweProductParser(WebsiteParser):
     ##COMPLETEZ
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
+<<<<<<< HEAD
         self.base_url = ""
+=======
+        self.base_url = "https://www.loewe.com/mobify/proxy/api/search/shopper-search/v1/organizations/f_ecom_bbpc_prd/product-search?siteId={site_id}&refine={category}&locale={locale}&offset={offset}&limit={limit}&c_countryCode={country_code}"
+>>>>>>> dev
         self.data = pd.DataFrame()
         self.brand='Loewe'
         options = Options()
@@ -1025,43 +1082,6 @@ class StoneIslandProductParser(WebsiteParser):
         self.brand='stone_island'
         super().__init__()
 
-    def extract_data(self, json_data):
-        if isinstance(json_data, str):
-            json_data = json.loads(json_data)
-
-        def flatten_dict(d, parent_key='', sep='_'):
-            items = []
-            for k, v in d.items():
-                new_key = f"{parent_key}{sep}{k}" if parent_key else k
-                if isinstance(v, dict):
-                    items.extend(flatten_dict(v, new_key, sep=sep).items())
-                elif isinstance(v, list):
-                    if all(isinstance(item, dict) for item in v):
-                        items.append((new_key, json.dumps(v)))
-                    else:
-                        items.append((new_key, ','.join(map(str, v))))
-                else:
-                    items.append((new_key, v))
-            return dict(items)
-
-        flattened_data = flatten_dict(json_data)
-
-        # Extract specific nested structures
-        if 'variationAttributes' in json_data:
-            for attr in json_data['variationAttributes']:
-                attr_id = attr.get('attributeId', '')
-                flattened_data[f'variationAttribute_{attr_id}_values'] = ','.join([
-                    value.get('displayValue', '') for value in attr.get('values', [])
-                ])
-
-        if 'imgs' in json_data and 'urls' in json_data['imgs']:
-            flattened_data['image_urls'] = ','.join(json_data['imgs']['urls'])
-
-        if 'analyticsAttributes' in json_data:
-            for key, value in json_data['analyticsAttributes'].items():
-                flattened_data[f'analytics_{key}'] = value
-
-        return flattened_data
     def fetch_data(self,category,locale_dict):
         session = requests.Session()
         # Setup retry strategy
@@ -1170,7 +1190,143 @@ class StoneIslandProductParser(WebsiteParser):
         self.logger.info(f"Complete data saved to {self.output_filename}")
         self.count = len(self.data) - 1
         self.send_output()
+class ChloeProductParser(WebsiteParser):
+    def __init__(self):
+        # Initialize with common base URL and empty DataFrame to accumulate results
+        self.base_url = ""
+        self.data = pd.DataFrame()
+        self.brand='chloe'
+        options = Options()
+        options.add_argument(
+            "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36")
+        options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
+        options.add_argument("--start-maximized")
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-setuid-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument("--headless=new")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--disable-gpu")
+        # Set up the Chrome driver
+        service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=service, options=options)
+        super().__init__()
+    def fetch_data(self,category,locale_dict):
+        locale=locale_dict.get("locale","")
+        size=locale_dict.get("size","")
 
+        self.logger.info(f"This is the size: {size}, locale: {locale}")
+        try:
+            locale_TF = True if "US" in locale else False
+            current_url = self.base_url.format(category=category, size=size,locale=locale)
+            self.logger.info(f"This is the current url: {current_url}")
+            self.driver.get(current_url)
+            WebDriverWait(self.driver, 60).until(
+                EC.presence_of_element_located((By.TAG_NAME, "body")))  # Wait for the page to load
+            product_html=self.driver.execute_script("return document.documentElement.outerHTML;")
+            soup=BeautifulSoup(product_html, 'html.parser')
+            product_info = self.get_product_info(soup,category,locale_TF)
+            return pd.DataFrame(product_info)
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return pd.DataFrame()
+    def extract_product_id(self,product_url,locale_TF):
+        self.logger.info(f"Currently getting the product ID for {product_url}")
+        self.driver.get(product_url)
+        try:
+            WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located((By.TAG_NAME, "body")))  # Wait for the page to load
+        except:
+            self.logger.info(f"Couldn't find a body tag for product url: {product_url}")
+        html=self.driver.page_source
+        if locale_TF:
+            pid_text='Item code: '
+        else:
+            pid_text='Codice articolo: '
+        self.logger.info(f"This is the pid text that is being looked for: {pid_text}")
+        soup_pid=BeautifulSoup(html, 'html.parser') if html else ''
+        if soup_pid:
+            main_item = soup_pid.find('div', class_='itemdescription')
+            if main_item:
+                # Extract the Style ID
+                style_id_text=main_item.text
+                self.logger.info(f"Product ID text on page: {style_id_text}")
+                style_id = style_id_text.split(pid_text)[-1].strip()
+                self.logger.info(f"Product ID: {style_id}")
+                return style_id
+            else:
+                self.logger.info(f'Product ID not found for url: {product_url}')
+                return ""
+    def get_product_info(self,soup,category,locale_TF):
+        self.logger.info(f"Starting to get the product data from category:{category}")
+        parsed_data = []
+        articlesChloe = soup.find_all('article', {'class': 'item'})
+
+        for articleChloe in articlesChloe:
+
+            product_data = {}
+            imgSource = articleChloe.find('img')
+            if imgSource:
+                imgSource = imgSource['src']
+
+            data_pinfo = articleChloe['data-ytos-track-product-data']
+
+            a_url = articleChloe.find('a')
+            if a_url:
+                a_url = a_url['href']
+            product_id = self.extract_product_id(a_url,locale_TF)
+
+            product_info = json.loads(data_pinfo)
+
+            product_data['Product_ID']=product_id
+            product_data['Cod10']=product_info.get('product_cod10','')
+            product_data['Title']=product_info.get('product_title','')
+            product_data['Price']=product_info.get('product_price','')
+            product_data['position']=product_info.get('product_position','')
+            product_data['category']=product_info.get('product_category','')
+            product_data['macro_category']=product_info.get('product_macro_category','')
+            product_data['micro_category']=product_info.get('product_micro_category','')
+
+            product_data['macro_category_id']=product_info.get('product_macro_category_id','')
+            product_data['micro_category_id']=product_info.get('product_micro_category_id','')
+            product_data['color']=product_info.get('product_color','')
+            product_data['color_id']=product_info.get('product_color_id','')
+            product_data['product_price']=product_info.get('product_price','')
+            product_data['discountedPrice']=product_info.get('product_discountedPrice','')
+
+            product_data['price_tf']=product_info.get('product_price_tf','')
+            product_data['discountedPrice_tf']=product_info.get('product_discountedPrice_tf','')
+            product_data['quantity']=product_info.get('product_quantity','')
+            product_data['coupon']=product_info.get('product_coupon','')
+            product_data['is_in_stock']=product_info.get('product_is_in_stock','')
+            product_data['list']=product_info.get('list','')
+
+            product_data['url']=a_url
+
+            product_data['img_src']=imgSource
+            product_data['img_src']=category
+            self.logger.info(f"This is the currently found product data {product_data}")
+            parsed_data.append(product_data)
+        return parsed_data
+    def process_categories(self, categories, locale_dicts):
+        for locale_dict in locale_dicts:
+            self.logger.info(f"Currently working on locale: {locale_dict}")
+            self.data = pd.DataFrame()
+            for category in categories:
+                self.logger.info(f"Currently working on category: {category}")
+                category_data = self.fetch_data(category, locale_dict)
+                self.data = pd.concat([self.data, category_data], ignore_index=True)
+        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+        self.output_filename = f"{self.brand}_output_{current_date}_{self.code}.csv"
+        self.data.to_csv(self.output_filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
+        self.upload_url = self.upload_file_to_space(self.output_filename, self.output_filename)
+        self.logger.info(f"Complete data saved to {self.output_filename}")
+        self.count = len(self.data) - 1
+        self.send_output()
+
+
+class CanadaGooseProductParser:
+    pass
 # class TodsProductParser():
 #     def __init__(self):
 #         # Initialize with common base URL and empty DataFrame to accumulate results
@@ -1262,4 +1418,8 @@ class StoneIslandProductParser(WebsiteParser):
 #         print(f"Complete data saved to 'tods_output_{current_date}.csv'")
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     uvicorn.run("main:app", port=8000, host="0.0.0.0" , log_level="info")
+=======
+    uvicorn.run("run_parser_api:app", port=8008, log_level="info")
+>>>>>>> dev

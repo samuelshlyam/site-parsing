@@ -94,4 +94,8 @@ def fetch_job_details(job_id):
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     uvicorn.run("main:app", port=8000, host="0.0.0.0" , log_level="info")
+=======
+    uvicorn.run("api:app", port=8010, log_level="info")
+>>>>>>> dev
