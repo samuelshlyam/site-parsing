@@ -41,10 +41,10 @@ RUN chromedriver --version
 COPY main.py .
 
 ENV REGION=us-east-2
-ENV AWS_ACCESS_KEY_ID=AKIAZQ3DSIQ5BGLY355N
+ENV AWS_ACCESS_KEY_ID=
 ENV MANAGER_ENDPOINT="https://manager-brand-parse-api-icon-7.popovtech.com"
-ENV AWS_SECRET_ACCESS_KEY=uB1D2M4/dXz4Z6as1Bpan941b3azRM9N770n1L6Q
-ENV SENDGRID_API_KEY=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
+ENV AWS_SECRET_ACCESS_KEY=
+ENV SENDGRID_API_KEY=
 ENV SETTINGS_URL="https://raw.githubusercontent.com/samuelshlyam/API_Parser_Settings/main/settings.json"
 
 EXPOSE 8080
