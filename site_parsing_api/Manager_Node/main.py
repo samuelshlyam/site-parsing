@@ -1,20 +1,14 @@
 import os
 import requests
 import uvicorn
-from bs4 import BeautifulSoup
-from dotenv import load_dotenv
 from fastapi import FastAPI, BackgroundTasks
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-import csv
-import json
 from requests.adapters import HTTPAdapter
 from sqlalchemy import create_engine,text
 from urllib3.util.retry import Retry
-import pandas as pd
 import datetime
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 pwd_value = str(os.environ.get('MSSQLS_PWD'))
 pwd_str =f"Pwd={pwd_value};"
 global conn
@@ -94,8 +88,4 @@ def fetch_job_details(job_id):
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     uvicorn.run("main:app", port=8000, host="0.0.0.0" , log_level="info")
-=======
-    uvicorn.run("api:app", port=8010, log_level="info")
->>>>>>> dev

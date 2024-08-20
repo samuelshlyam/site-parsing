@@ -14,10 +14,7 @@ import boto3
 import requests
 import uvicorn
 from bs4 import BeautifulSoup
-<<<<<<< HEAD
-=======
-from dotenv import load_dotenv
->>>>>>> dev
+# from dotenv import load_dotenv
 from fastapi import FastAPI, BackgroundTasks
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -27,15 +24,9 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 import pandas as pd
 import datetime
-<<<<<<< HEAD
 # load_dotenv()
 app = FastAPI()
-
-=======
-load_dotenv()
-app = FastAPI()
-SETTINGS_URL="https://raw.githubusercontent.com/samuelshlyam/API_Parser_Settings/main/settings.json"
->>>>>>> dev
+# SETTINGS_URL="https://raw.githubusercontent.com/samuelshlyam/API_Parser_Settings/main/settings.json"
 @app.post("/run_parser")
 async def brand_batch_endpoint(job_id:str, brand_id: str, background_tasks: BackgroundTasks):
     background_tasks.add_task(run_parser,job_id, brand_id)
@@ -304,11 +295,7 @@ class GucciProductParser(WebsiteParser):
     ##COMPLETE
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
-<<<<<<< HEAD
         self.base_url = ""
-=======
-        self.base_url = "https://www.gucci.com/{locale}/c/productgrid?categoryCode={category}&show=Page&page={page}"
->>>>>>> dev
         self.data = pd.DataFrame()
         options = webdriver.ChromeOptions()
         options.add_argument("--headless=new")
@@ -409,11 +396,7 @@ class LoroPianaProductParser(WebsiteParser):
     ##COMPLETE
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
-<<<<<<< HEAD
         self.base_url = ""
-=======
-        self.base_url = "https://{locale}.loropiana.com/{country_code}/c/{category}/results?page={page}"
->>>>>>> dev
         self.data = pd.DataFrame()
         self.brand = 'loro_piana'
     def fetch_data(self,category, base_url,country_code, locale):
@@ -607,11 +590,7 @@ class MonclerProductParser(WebsiteParser):
         options.add_argument(
             "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
         self.driver = webdriver.Chrome(options=options)
-<<<<<<< HEAD
         self.base_url=""
-=======
-        self.base_url="https://www.moncler.com/on/demandware.store/{country_code}/SearchApi-Search?cgid={category}&sz=2000&start=0"
->>>>>>> dev
         self.country=''
         self.brand = 'moncler'
     def fetch_moncler_products(self,categories,country_code):
@@ -681,11 +660,7 @@ class MonclerProductParser(WebsiteParser):
 class SaintLaurentProductParser(WebsiteParser):
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
-<<<<<<< HEAD
         self.base_url = ("")
-=======
-        self.base_url = ("https://www.ysl.com/api/v1/category/{category}?locale={locale}&page={page}&categoryIds={category}&hitsPerPage=15")
->>>>>>> dev
         self.data = pd.DataFrame()
         self.brand='saint_laurent'
         super().__init__()
@@ -813,7 +788,7 @@ class DolceGabbanaProductParser(WebsiteParser):
         self.driver = webdriver.Chrome(service=service, options=options)
         super().__init__()
     def get_bearer_token(self):
-        self.driver.get("https://www.dolcegabbana.com/en-us/fashion/women/bags/view-all")
+        self.driver.get("")
         for i in range(2):
             load_more_button = WebDriverWait(self.driver, 10).until(
                 EC.element_to_be_clickable((By.CSS_SELECTOR,
@@ -917,11 +892,7 @@ class LoeweProductParser(WebsiteParser):
     ##COMPLETEZ
     def __init__(self):
         # Initialize with common base URL and empty DataFrame to accumulate results
-<<<<<<< HEAD
         self.base_url = ""
-=======
-        self.base_url = "https://www.loewe.com/mobify/proxy/api/search/shopper-search/v1/organizations/f_ecom_bbpc_prd/product-search?siteId={site_id}&refine={category}&locale={locale}&offset={offset}&limit={limit}&c_countryCode={country_code}"
->>>>>>> dev
         self.data = pd.DataFrame()
         self.brand='Loewe'
         options = Options()
@@ -1418,8 +1389,4 @@ class CanadaGooseProductParser:
 #         print(f"Complete data saved to 'tods_output_{current_date}.csv'")
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     uvicorn.run("main:app", port=8000, host="0.0.0.0" , log_level="info")
-=======
-    uvicorn.run("run_parser_api:app", port=8008, log_level="info")
->>>>>>> dev
