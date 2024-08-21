@@ -245,7 +245,7 @@ class WebsiteParser:
             )
             session.mount("https://", HTTPAdapter(max_retries=retries))
             headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"}
-            self.logger.info(f"This is the url that is being opened{url}")
+            self.logger.info(f"This is the url that is being opened {url}")
             response = session.get(url,headers=headers,allow_redirects=True)
             response.raise_for_status()  # Raises an HTTPError for bad responses
             return response.text
@@ -290,36 +290,46 @@ class GucciProductParser(WebsiteParser):
         options.add_argument("--headless=new")
         options.add_argument(
             "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+        options.add_argument("--start-maximized")
+        options.add_argument("--incognito")
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-setuid-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument("--headless=new")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--disable-gpu")
+        self.driver = webdriver.Chrome(options=options)
+        self.brand="gucci"
         self.job_id=job_id
         self.base_url=base_url
-        self.driver = webdriver.Chrome(options=options)
+        super().__init__()
     def fetch_data(self,category, base_url,locale):
-
         all_products = []  # Use a list to store product dictionaries
         try:
             current_url=base_url.format(category=category, page=0,locale=locale)
             self.driver.get(current_url)
-            page_source = self.driver.page_source
-            print(page_source[:10000])
+            page_source=self.driver.execute_script("return document.documentElement.outerHTML;")
+            self.logger.info(page_source[:10000])
             soup=BeautifulSoup(page_source,'html.parser')
             json_temp=soup.find('pre').text if soup.find('pre') else ''
             json_data=json.loads(json_temp) if json_temp else {}
             total_pages = json_data.get('numberOfPages', 1)
-            print(f"Category: {category}, Total Pages: {total_pages}")
+            self.logger.info(f"Category: {category}, Total Pages: {total_pages}")
 
             for page in range(total_pages):
                 current_url = base_url.format(category=category, page=page, locale=locale)
                 self.driver.get(current_url)
-                page_source = self.driver.page_source
-                soup = BeautifulSoup(page_source, 'html.parser')
-                json_temp = soup.find('pre').text if soup.find('pre') else ''
-                json_data = json.loads(json_temp) if json_temp else {}
+                page_source=self.driver.execute_script("return document.documentElement.outerHTML;")
+                soup=BeautifulSoup(page_source,'html.parser')
+                json_temp=soup.find('pre').text if soup.find('pre') else ''
+                json_data=json.loads(json_temp) if json_temp else {}
                 items = json_data.get('products', {}).get('items', [])
                 if not items:
-                    print(f"No items found on Page: {page + 1}/{total_pages} URL: {current_url}")
+                    self.logger.info(f"No items found on Page: {page + 1}/{total_pages} URL: {current_url}")
                     continue
 
                 for product in items:
+                    self.logger.info(f"This is the product json that is currently being parsed\n{product}")
                     product_info = {
                         'category': category,
                         'productCode': self.safe_strip(product.get('productCode', '')),
@@ -357,15 +367,17 @@ class GucciProductParser(WebsiteParser):
                         'showAvailableInStoreOnlyLabel': str(product.get('showAvailableInStoreOnlyLabel', False)).lower(),
                         'showOutOfStockLabel': str(product.get('showOutOfStockLabel', False)).lower(),
                     }
+                    self.logger.info(f"This is the info that it got for this product\n{product_info}")
                     all_products.append(product_info)
-                print(f"Processed {len(items)} products on Page: {page + 1}/{total_pages} for Category: {category} URL: {current_url}")
+                self.logger.info(f"Processed {len(items)} products on Page: {page + 1}/{total_pages} for Category: {category} URL: {current_url}")
+            self.logger.info(f"This is the list of product info that it got for this category\n{all_products}")
             return pd.DataFrame(all_products)
         except requests.exceptions.RequestException as e:
-            print(f"An error occurred: {e}")
+            self.logger.info(f"An error occurred: {e}")
             return pd.DataFrame()
 
 
-    def process_categories(self, categories,locales, output_dir):
+    def process_categories(self, categories,locales):
         for locale in locales:
             self.data=pd.DataFrame()
             for category in categories:
@@ -380,12 +392,11 @@ class GucciProductParser(WebsiteParser):
         self.logger.info(f"Complete data saved to {self.output_filename}")
         self.count = len(self.data) - 1
         self.send_output()
-        self.driver.close()
 class LoroPianaProductParser(WebsiteParser):
     ##COMPLETE
-    def __init__(self,job_id):
+    def __init__(self,job_id,base_url):
         # Initialize with common base URL and empty DataFrame to accumulate results
-        self.base_url = ""
+        self.base_url = base_url
         self.job_id=job_id
         self.data = pd.DataFrame()
         self.brand = 'loro_piana'
@@ -405,6 +416,7 @@ class LoroPianaProductParser(WebsiteParser):
         all_products = []  # Use a list to store product dictionaries
         try:
             current_url=base_url.format(category=category, country_code=country_code, locale=locale, page=0)
+            self.logger.info(f"This is the current_url {current_url}")
             response = session.get(current_url, headers=headers)
             response.raise_for_status()
             json_data = response.json()
@@ -414,6 +426,7 @@ class LoroPianaProductParser(WebsiteParser):
             for page in range(total_pages):
                 current_url = base_url.format(category=category, country_code=country_code, locale=locale, page=page)
                 response = session.get(current_url, headers=headers)
+                self.logger.info(f"This is the current_url {current_url}")
                 response.raise_for_status()
                 json_data = response.json()
                 items = json_data.get('results', {})
@@ -422,6 +435,7 @@ class LoroPianaProductParser(WebsiteParser):
                     continue
 
                 for data in items:
+                    self.logger.info(f"This the json for the currently parsed product\n{data}")
                     product_info = {
                         'code': self.safe_strip(data.get('code', '')),
                         'solrIsFeatured': str(data.get('solrIsFeatured', False)).lower(),
@@ -461,9 +475,10 @@ class LoroPianaProductParser(WebsiteParser):
                         'forceMrf': str(data.get('forceMrf', False)).lower(),
                         'normalProductEshopValid': str(data.get('normalProductEshopValid', False)).lower(),
                     }
+                    self.logger.info(f"This the data found for the current product\n{product_info}")
                     all_products.append(product_info)
                 self.logger.info(f"Processed {len(items)} products on Page: {page+1}/{total_pages} for Category: {category} URL: {current_url}")
-
+            self.logger.info(f"This is all of the data for this category {all_products}")
             return pd.DataFrame(all_products)
         except requests.exceptions.RequestException as e:
             self.logger.info(f"An error occurred: {e}")
@@ -487,9 +502,9 @@ class LoroPianaProductParser(WebsiteParser):
         # Save the complete DataFrame to a CSV file
         #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
 class AlexanderMcqueenParser(WebsiteParser):
-    def __init__(self,job_id):
+    def __init__(self,job_id,base_url):
         self.brand = 'alexander_mcqueen'  # Replace spaces with underscores
-        self.base_url = ''
+        self.base_url = base_url
         self.data=pd.DataFrame
         self.job_id=job_id
         super().__init__()
@@ -506,6 +521,7 @@ class AlexanderMcqueenParser(WebsiteParser):
         all_products = []
         try:
             current_url=base_url.format(clothing_category=category,locale=locale, page=0)
+            self.logger.info(f"This is the current_url {current_url}")
             response = session.get(current_url, headers=headers)
             response.raise_for_status()
             json_data = response.json()
@@ -515,6 +531,7 @@ class AlexanderMcqueenParser(WebsiteParser):
             for page in range(total_pages):
                 self.logger.info(page)
                 current_url=base_url.format(clothing_category=category,locale=locale, page=page)
+                self.logger.info(f"This is the current_url {current_url}")
                 response = session.get(current_url, headers=headers)
                 response.raise_for_status()
                 json_data = response.json()
@@ -522,8 +539,8 @@ class AlexanderMcqueenParser(WebsiteParser):
                 if not products:
                     self.logger.info(f"No items found on Page: {page + 1}/{total_pages} URL: {current_url}")
                     continue
-                self.logger.info(f"Last product ID on this page: \n{products[-1].get('id', '')}")
                 for product in products:
+                    self.logger.info(f"This the json for the currently parsed product\n{product}")
                     images = product.get('images', [])
                     product_info = {
                         'category': category,
@@ -551,9 +568,10 @@ class AlexanderMcqueenParser(WebsiteParser):
                         'price_salePrice': product.get('price', {}).get('salePrice', ''),
                         'price_finalPrice': product.get('price', {}).get('finalPrice', '')
                     }
-
+                    self.logger.info(f"This the data found for the current product\n{product_info}")
                     all_products.append(product_info)
                 self.logger.info(f"Processed {len(products)} products on Page: {page + 1}/{total_pages} for Category: {category} URL: {current_url}")
+            self.logger.info(f"This is all of the data for this category {all_products}")
             return pd.DataFrame(all_products)
         except requests.exceptions.RequestException as e:
             self.logger.info(f"An error occurred: {e}")
@@ -577,7 +595,7 @@ class AlexanderMcqueenParser(WebsiteParser):
         self.send_output()
 
 class MonclerProductParser(WebsiteParser):
-    def __init__(self,job_id):
+    def __init__(self,job_id,base_url):
         options = Options()
         options.add_argument(
             "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36")
@@ -591,7 +609,7 @@ class MonclerProductParser(WebsiteParser):
         # Set up the Chrome driver
         service = Service(ChromeDriverManager().install())
         self.driver = webdriver.Chrome(service=service, options=options)
-        self.base_url=""
+        self.base_url=base_url
         self.country=''
         self.brand = 'moncler'
         self.job_id=job_id
@@ -602,6 +620,7 @@ class MonclerProductParser(WebsiteParser):
             offset = 0
             while True:
                 formatted_url = self.base_url.format(category=category,country_code=country_code)
+                self.logger.info(f"This is the current url: {current_url}")
                 self.driver.get(formatted_url)
                 self.country=country_code.split('/')[-1]
                 response = self.driver.find_element(By.TAG_NAME, "body").text
@@ -613,6 +632,7 @@ class MonclerProductParser(WebsiteParser):
                     break
 
                 for product in products:
+                    self.logger.info(f"This is the current product: {product}")
                     product_info = {
                         'id': product.get('id', ''),
                         'productName': product.get('productName', ''),
@@ -625,6 +645,7 @@ class MonclerProductParser(WebsiteParser):
                         'productCharacteristics': product.get('productCharacteristics', ''),
                         'variationAttributes': self.parse_variation_attributes(product.get('variationAttributes', []))
                     }
+                    self.logger.info(f"This is the product info: {product_info}\nthat was gotten for this product data {product}")
                     all_products.append(product_info)
 
                 # Update offset to next page
@@ -633,7 +654,7 @@ class MonclerProductParser(WebsiteParser):
                 total_count = data['data']['count']
                 if offset >= total_count:
                     break
-
+        self.logger.info(f"This is all of the data for this category {all_products}")
         return pd.DataFrame(all_products)
 
     def parse_variation_attributes(self, variation_attributes):
@@ -661,9 +682,9 @@ class MonclerProductParser(WebsiteParser):
         self.count=len(all_data)-1
         self.send_output()
 class SaintLaurentProductParser(WebsiteParser):
-    def __init__(self,job_id):
+    def __init__(self,job_id,base_url):
         # Initialize with common base URL and empty DataFrame to accumulate results
-        self.base_url = ("")
+        self.base_url = base_url
         self.data = pd.DataFrame()
         self.brand='saint_laurent'
         self.job_id=job_id
@@ -685,14 +706,18 @@ class SaintLaurentProductParser(WebsiteParser):
         }
         all_products = []  # Use a list to store product dictionaries
         try:
-            response = session.get(base_url.format(category=category, page=0,locale=locale), headers=headers)
+            current_url=self.base_url.format(category=category, page=0,locale=locale)
+            self.logger.info(f"This is the current url:{current_url}")
+            response = session.get(current_url, headers=headers)
             response.raise_for_status()
             json_data = response.json()
 
             total_pages=json_data.get('stats',{}).get('nbPages',0)
-            self.logger.info(total_pages)
+            self.logger.info(f"This is the total # of pages: {total_pages}")
             for page in range(total_pages):
-                response = session.get(base_url.format(category=category, page=page,locale=locale), headers=headers)
+                current_url=self.base_url.format(category=category, page=page,locale=locale)
+                self.logger.info(f"This is the current url: {current_url}")
+                response = session.get(current_url, headers=headers)
                 response.raise_for_status()
                 json_data = response.json()
                 items = json_data.get('products', [])
@@ -703,6 +728,7 @@ class SaintLaurentProductParser(WebsiteParser):
 
                 for product,hit in zip(items,hits):
                     price_dict=product.get('price', 0)
+                    self.logger.info(f"These are the json that will be parsed\nProduct:\n{product}\nHit:\n{hit}")
                     product_info = {
                         'category':product.get('categories',{}).get('productCategory',''),
                         'product_url':product.get('url',''),
@@ -750,8 +776,10 @@ class SaintLaurentProductParser(WebsiteParser):
                         'has_empl_sale':price_dict.get('hasEmployeeSalePromotion',''),
                         'isPriceOnDemand': price_dict.get('isPriceOnDemand', '')
                     }
+                    self.logger.info(f"This is the product data: \n{product_info}\nFor product:\n{product}\nHit:\n{hit}")
                     all_products.append(product_info)
                 self.logger.info(f"Processed {len(items)} products on page: {page} for Category: {category}")
+            self.logger.info(f"This is all of the data for this category {all_products}")
             return pd.DataFrame(all_products)
         except requests.exceptions.RequestException as e:
             self.logger.info(f"An error occurred: {e}")
@@ -773,9 +801,9 @@ class SaintLaurentProductParser(WebsiteParser):
         self.send_output()
 
 class DolceGabbanaProductParser(WebsiteParser):
-    def __init__(self,job_id):
+    def __init__(self,job_id,base_url):
         self.brand = 'dolce_gabbana'  # Replace spaces with underscores
-        self.base_url=""
+        self.base_url=base_url
         options = Options()
         options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
         options.add_argument(
@@ -792,7 +820,7 @@ class DolceGabbanaProductParser(WebsiteParser):
         self.job_id=job_id
         super().__init__()
     def get_bearer_token(self):
-        self.driver.get("")
+        self.driver.get("https://www.dolcegabbana.com/en-us/fashion/women/bags/handbags/")
         for i in range(2):
             load_more_button = WebDriverWait(self.driver, 10).until(
                 EC.element_to_be_clickable((By.CSS_SELECTOR,
@@ -815,7 +843,6 @@ class DolceGabbanaProductParser(WebsiteParser):
 
     def fetch_products(self,category,info_dict):
         base_url = self.base_url
-        url = base_url.replace("CATEGORYGOESHERE", category)
         bearer_token=self.get_bearer_token()
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
@@ -828,7 +855,8 @@ class DolceGabbanaProductParser(WebsiteParser):
             locale=info_dict['locale']
             site_id=info_dict['site_id']
             limit = info_dict['limit']
-            formatted_url = url.format(offset=offset,locale=locale,site_id=site_id,limit=limit,category=category)
+            formatted_url = base_url.format(offset=offset,locale=locale,site_id=site_id,limit=limit,category=category)
+            self.logger.info(f"This is the current url: {formatted_url}")
             response = requests.get(formatted_url, headers=headers)
             if response.status_code != 200:
                 self.logger.info(f"Failed to fetch data: {response.status_code} - {response.text}")
@@ -840,6 +868,7 @@ class DolceGabbanaProductParser(WebsiteParser):
                 break
 
             for product in products:
+                self.logger.info(f"These are the json that will be parsed\nProduct:\n{product}")
                 # Properly handle and format the images
                 images = product.get('image', {})  # Ensure to get the image dictionary correctly
                 images_formatted = f"{images.get('link', '')} ({images.get('alt', '')})" if images else "No image"
@@ -859,6 +888,7 @@ class DolceGabbanaProductParser(WebsiteParser):
                     'images': images_formatted,  # Use formatted image details here
                     'c_url': "https://www.dolcegabbana.com" + product.get('c_url', '')
                 }
+                self.logger.info(f"This is the product data:\n")
                 all_products.append(product_info)
 
             self.logger.info(f"Fetched {len(products)} products from offset {offset} and URL {formatted_url}")
@@ -894,9 +924,9 @@ class DolceGabbanaProductParser(WebsiteParser):
 
 class LoeweProductParser(WebsiteParser):
     ##COMPLETEZ
-    def __init__(self,job_id):
+    def __init__(self,job_id,base_url):
         # Initialize with common base URL and empty DataFrame to accumulate results
-        self.base_url = ""
+        self.base_url = base_url
         self.job_id=job_id
         self.data = pd.DataFrame()
         self.brand='Loewe'
@@ -1051,9 +1081,9 @@ class LoeweProductParser(WebsiteParser):
         self.count = len(self.data) - 1
         self.send_output()
 class StoneIslandProductParser(WebsiteParser):
-    def __init__(self,job_id):
+    def __init__(self,job_id,base_url):
         # Initialize with common base URL and empty DataFrame to accumulate results
-        self.base_url = ""
+        self.base_url = base_url
         self.data = pd.DataFrame()
         self.brand='stone_island'
         self.job_id=job_id
@@ -1168,9 +1198,9 @@ class StoneIslandProductParser(WebsiteParser):
         self.count = len(self.data) - 1
         self.send_output()
 class ChloeProductParser(WebsiteParser):
-    def __init__(self,job_id):
+    def __init__(self,job_id,base_url):
         # Initialize with common base URL and empty DataFrame to accumulate results
-        self.base_url = ""
+        self.base_url = base_url
         self.data = pd.DataFrame()
         self.job_id=job_id
         self.brand='chloe'

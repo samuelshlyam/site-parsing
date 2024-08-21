@@ -4,9 +4,7 @@ import requests
 import uvicorn
 from sqlalchemy import create_engine,text
 from fastapi import FastAPI, BackgroundTasks
-from dotenv import load_dotenv
 
-load_dotenv()
 pwd_value = str(os.environ.get('MSSQLS_PWD'))
 pwd_str =f"Pwd={pwd_value};"
 global conn
@@ -90,4 +88,4 @@ def update_job_status(job_id):
         connection.commit()
         connection.close()
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=8003, log_level="info")
+    uvicorn.run("main:app", port=8080, host="0.0.0.0", log_level="info")

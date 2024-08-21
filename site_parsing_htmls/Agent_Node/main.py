@@ -17,9 +17,9 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from fastapi import FastAPI, BackgroundTasks
-from dotenv import load_dotenv
+
 app=FastAPI()
-load_dotenv()
+
 class WebsiteParser:
     def __init__(self):
         self.output_filename = None
@@ -3183,4 +3183,4 @@ async def brand_batch_endpoint(job_id:str, brand_id: str, scan_url:str, backgrou
 
     return {"message": "Notification sent in the background"}
 if __name__ == "__main__":
-    uvicorn.run("main_parser:app", port=8102, log_level="info")
+    uvicorn.run("main:app", port=8080, host="0.0.0.0", log_level="info")
