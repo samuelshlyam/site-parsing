@@ -1,4 +1,6 @@
 import os
+
+import pandas as pd
 import requests
 import uvicorn
 from fastapi import FastAPI, BackgroundTasks
@@ -43,12 +45,22 @@ def update_sql_job(job_id, resultUrl, logUrl, count):
         connection.execute(sql)
         connection.commit()
         connection.close()
+def fetch_endpoint(endpoint_id):
+    sql_query = (f"Select EndPointValue from utb_SettingsEndpoints Where ID = {endpoint_id}")
+    print(sql_query)
+    df = pd.read_sql_query(sql_query, con=engine)
+    engine.dispose()
+    endpoint_url = df['EndPointValue'].iloc[0]
+    return endpoint_url
+
 def run_single_api(job_id):
 
     df=fetch_job_details(job_id)
     brand_id = str(df.iloc[0, 0])
-    response_status = submit_job_post(job_id, brand_id)
-def submit_job_post(job_id,brand_id):
+    send_in_endpoint=fetch_endpoint(6)
+    send_out_endpoint=fetch_endpoint(10)
+    response_status = submit_job_post(job_id, brand_id,send_in_endpoint,send_out_endpoint)
+def submit_job_post(job_id,brand_id,send_in_endpoint,send_out_endpoint):
 
     headers = {
         'accept': 'application/json',
@@ -57,10 +69,11 @@ def submit_job_post(job_id,brand_id):
 
     params = {
         'job_id': f"{job_id}",
-        'brand_id':f"{brand_id}"
+        'brand_id':f"{brand_id}",
+        'send_out_endpoint':f"{send_out_endpoint}"
     }
 
-    response = requests.post(f"{os.environ.get('AGENT_BASE_URL')}/run_parser", params=params, headers=headers)
+    response = requests.post(f"{send_in_endpoint}/run_parser", params=params, headers=headers)
     return response.status_code
 def update_job_status(job_id):
     sql = (f"Update utb_BrandScanJobs\n"

@@ -28,7 +28,9 @@ import datetime
 app = FastAPI()
 # SETTINGS_URL="https://raw.githubusercontent.com/samuelshlyam/API_Parser_Settings/main/settings.json"
 @app.post("/run_parser")
-async def brand_batch_endpoint(job_id:str, brand_id: str, background_tasks: BackgroundTasks):
+async def brand_batch_endpoint(job_id:str, brand_id: str,send_out_endpoint_local:str, background_tasks: BackgroundTasks):
+    global send_out_endpoint
+    send_out_endpoint=send_out_endpoint_local
     background_tasks.add_task(run_parser,job_id, brand_id)
 def fetch_settings():
     try:
@@ -231,7 +233,7 @@ class WebsiteParser:
         os.remove(self.output_filename)
         os.remove(self.log_file_name)
         self.logger.info(f"Finishing send output:\nParams:{params}")
-        requests.post(f"{os.getenv('MANAGER_ENDPOINT')}/job_complete", params=params, headers=headers)
+        requests.post(f"{send_out_endpoint}/job_complete", params=params, headers=headers)
     @staticmethod
     def open_link(url):
         try:

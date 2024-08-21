@@ -19,7 +19,6 @@ from urllib3.util.retry import Retry
 from fastapi import FastAPI, BackgroundTasks
 
 app=FastAPI()
-
 class WebsiteParser:
     def __init__(self):
         self.output_filename = None
@@ -141,7 +140,7 @@ class WebsiteParser:
         }
         os.remove(self.output_filename)
         os.remove(self.log_file_name)
-        requests.post(f"{os.getenv('MANAGER_ENDPOINT')}/job_complete", params=params, headers=headers)
+        requests.post(f"{send_back_endpoint}/job_complete", params=params, headers=headers)
     @staticmethod
     def open_link(url):
         try:
@@ -3178,7 +3177,9 @@ def run_parser(job_id,brand_id,source_url):
 
 
 @app.post("/run_parser")
-async def brand_batch_endpoint(job_id:str, brand_id: str, scan_url:str, background_tasks: BackgroundTasks):
+async def brand_batch_endpoint(job_id:str, brand_id: str, scan_url:str,send_out_endpoint_local:str, background_tasks: BackgroundTasks):
+    global send_out_endpoint
+    send_out_endpoint=send_out_endpoint_local
     background_tasks.add_task(run_parser,job_id, brand_id, scan_url)
 
     return {"message": "Notification sent in the background"}
