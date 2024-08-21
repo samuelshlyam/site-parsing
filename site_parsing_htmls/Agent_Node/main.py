@@ -140,7 +140,7 @@ class WebsiteParser:
         }
         os.remove(self.output_filename)
         os.remove(self.log_file_name)
-        requests.post(f"{send_back_endpoint}/job_complete", params=params, headers=headers)
+        requests.post(f"{send_out_endpoint}/job_complete", params=params, headers=headers)
     @staticmethod
     def open_link(url):
         try:

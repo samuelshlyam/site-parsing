@@ -70,7 +70,7 @@ def submit_job_post(job_id,brand_id,send_in_endpoint,send_out_endpoint):
     params = {
         'job_id': f"{job_id}",
         'brand_id':f"{brand_id}",
-        'send_out_endpoint':f"{send_out_endpoint}"
+        'send_out_endpoint_local':f"{send_out_endpoint}"
     }
 
     response = requests.post(f"{send_in_endpoint}/run_parser", params=params, headers=headers)
@@ -101,4 +101,4 @@ def fetch_job_details(job_id):
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=8000, host="0.0.0.0" , log_level="info")
+    uvicorn.run("main:app", port=8080, host="0.0.0.0" , log_level="info")
