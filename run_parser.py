@@ -1,14 +1,20 @@
 import os
-from brand_parser import BottegaVenetaParser, GucciProductParser, BallyProductParser, StellaProductParser, ChloeProductParser, \
+from brand_parser import BottegaVenetaParser, GucciProductParser, BallyProductParser, StellaProductParser, \
+    ChloeProductParser, \
     GivenchyProductParser, CanadaGooseProductParser, IsabelMarantProductParser, MCMProductParser, CultGaiaProductParser, \
-    GoldenGooseProductParser, FendiProductParser, BalenciagaProductParser, SaintLaurentProductParser, AlexanderMcqueenParser, \
+    GoldenGooseProductParser, FendiProductParser, BalenciagaProductParser, SaintLaurentProductParser, \
+    AlexanderMcqueenParser, \
     DolceGabbanaProductParser, StoneIslandProductParser, EtroProductParser, MonclerProductParser, BalmainProductParser, \
-    VersaceProductParser, FerragamoProductParser, BurberryProductParser, KenzoProductParser, VejaProductParser, JimmyChooProductParser, \
-    BrunelloCucinelliProductParser, DSquaredProductParser, CelineProductParser, LoroPianaProductParser, MarniProductParser, PradaProductParser, TodsProductParser, \
-    ValentinoProductParser, JacquemusProductParser, LouboutinProductParser, PalmAngelsProductParser, MooseKnucklesProductParser, AcneStudiosProductParser, \
-    TheRowProductParser, ManoloBlahnikProductParser, GianvitoRossiProductParser, MiuMiuProductParser, BirkenstockProductParser, AquazzuraProductParser, \
-    OffWhiteProductParser, TomFordProductParser, LoeweProductParser, HernoProductParser, LanvinProductParser
-
+    VersaceProductParser, FerragamoProductParser, BurberryProductParser, KenzoProductParser, VejaProductParser, \
+    JimmyChooProductParser, \
+    BrunelloCucinelliProductParser, DSquaredProductParser, CelineProductParser, LoroPianaProductParser, \
+    MarniProductParser, PradaProductParser, TodsProductParser, \
+    ValentinoProductParser, JacquemusProductParser, LouboutinProductParser, PalmAngelsProductParser, \
+    MooseKnucklesProductParser, AcneStudiosProductParser, \
+    TheRowProductParser, ManoloBlahnikProductParser, GianvitoRossiProductParser, MiuMiuProductParser, \
+    BirkenstockProductParser, AquazzuraProductParser, \
+    OffWhiteProductParser, TomFordProductParser, LoeweProductParser, HernoProductParser, LanvinProductParser, \
+    StoneIslandProductParserAPI
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -108,9 +114,9 @@ print(main_directory)
 #Golden Goose End
 
 #Balenciaga Start
-#BalenciagaParser=BalenciagaProductParser(output_directory_path)
-# directory_path = os.path.join(main_directory,'balenciaga')
-#BalenciagaParser.parse_directory(directory_path)
+BalenciagaParser=BalenciagaProductParser(output_directory_path)
+directory_path = os.path.join(main_directory,'balenciaga_new')
+BalenciagaParser.parse_directory(directory_path)
 #Balenciaga End
 
 #Old Version
@@ -152,7 +158,14 @@ print(main_directory)
 # directory_path = os.path.join(main_directory,'stone_island_new')
 # StoneIslandParser.parse_directory(directory_path)
 #Stone Island End
-
+#
+# base_url="https://www.stoneisland.com/on/demandware.store/{locale}/SearchApi-Search?cgid={category}&sz={size}&start={start}"
+# job_id=1
+# categories=["main-viewall"]
+# locales=[{"locale":"Sites-StoneEU-Site/it_IT","size":100,"start":0},{"locale":"Sites-StoneNA-Site/en_US","size":100,"start":0}]
+#
+# StoneIslandParser = StoneIslandProductParserAPI(job_id,base_url)
+# StoneIslandParser.process_categories(categories, locales)
 
 #Etro Start
 #EtroParser = EtroProductParser(output_directory_path)
@@ -215,9 +228,9 @@ print(main_directory)
 #Brunello Cucinelli End
 
 #DSquared2 Start
-DSquaredParser = DSquaredProductParser(output_directory_path)
-directory_path = os.path.join(main_directory,'dsquared_new')
-DSquaredParser.parse_directory(directory_path)
+# DSquaredParser = DSquaredProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'dsquared_new')
+# DSquaredParser.parse_directory(directory_path)
 #DSquared2 End
 
 

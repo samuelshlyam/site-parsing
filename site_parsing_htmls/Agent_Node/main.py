@@ -968,7 +968,10 @@ class BalenciagaProductParser(WebsiteParser):
             images=list(set(images))
             images=[image for image in images if image != '' and "/on/demandware.static/" not in image]
             # Extract product URL
-            product_url = block.find('a', class_='c-product__focus')['href']
+            product_url = ""
+            product_url_component = block.find('a', class_='c-product__focus')
+            if product_url_component:
+                product_url = product_url_component['href']
 
             # Append the extracted information to the product_data list
             product_data.append(data_pid)

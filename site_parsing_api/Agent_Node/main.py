@@ -502,6 +502,114 @@ class LoroPianaProductParser(WebsiteParser):
         self.count = len(self.data) - 1
         self.send_output()
         # Save the complete DataFrame to a CSV file
+        #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)class LoroPianaProductParser(WebsiteParser):
+    ##COMPLETE
+    def __init__(self,job_id,base_url):
+        # Initialize with common base URL and empty DataFrame to accumulate results
+        self.base_url = base_url
+        self.job_id=job_id
+        self.data = pd.DataFrame()
+        self.brand = 'loro_piana'
+        super().__init__()
+    def fetch_data(self,category, base_url,country_code, locale):
+        session = requests.Session()
+        # Setup retry strategy
+        retries = Retry(
+            total=5,
+            backoff_factor=1,
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=["HEAD", "GET", "OPTIONS"]  # Updated to use allowed_methods instead of method_whitelist
+        )
+        session.mount("https://", HTTPAdapter(max_retries=retries))
+
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'}
+        all_products = []  # Use a list to store product dictionaries
+        try:
+            current_url=base_url.format(category=category, country_code=country_code, locale=locale, page=0)
+            self.logger.info(f"This is the current_url {current_url}")
+            response = session.get(current_url, headers=headers)
+            response.raise_for_status()
+            json_data = response.json()
+            total_pages = json_data.get('pagination', {}).get("numberOfPages",0)
+            self.logger.info(f"Category: {category}, Total Pages: {total_pages}")
+
+            for page in range(total_pages):
+                current_url = base_url.format(category=category, country_code=country_code, locale=locale, page=page)
+                response = session.get(current_url, headers=headers)
+                self.logger.info(f"This is the current_url {current_url}")
+                response.raise_for_status()
+                json_data = response.json()
+                items = json_data.get('results', {})
+                if not items:
+                    self.logger.info(f"No items found on Page: {page+1}/{total_pages}")
+                    continue
+
+                for data in items:
+                    self.logger.info(f"This the json for the currently parsed product\n{data}")
+                    product_info = {
+                        'code': self.safe_strip(data.get('code', '')),
+                        'solrIsFeatured': str(data.get('solrIsFeatured', False)).lower(),
+                        'invertedImages': str(data.get('invertedImages', False)).lower(),
+                        'genderFluid': str(data.get('genderFluid', False)).lower(),
+                        'isAvailable': str(data.get('isAvailable', False)).lower(),
+                        'variantsNr': data.get('variantsNr', ''),
+                        'price_currencyIso': self.safe_strip(data.get('price', {}).get('currencyIso', '')),
+                        'price_value': data.get('price', {}).get('value', ''),
+                        'price_priceType': self.safe_strip(data.get('price', {}).get('priceType', '')),
+                        'price_formattedValue': self.safe_strip(data.get('price', {}).get('formattedValue', '')),
+                        'price_minQuantity': data.get('price', {}).get('minQuantity', None),
+                        'price_maxQuantity': data.get('price', {}).get('maxQuantity', None),
+                        'primaryImage': data.get('images', [])[0].get('url', '') if data.get('images') else '',
+                        'alternateGalleryImages': " | ".join(
+                            [img.get('url', '') for img in data.get('images', [])[1:]]),
+                        'configurable': str(data.get('configurable', False)).lower(),
+                        'name': self.safe_strip(data.get('name', '')),
+                        'eshopMaterialCode': self.safe_strip(data.get('eshopMaterialCode', '')),
+                        'gtmInfo': self.safe_strip(data.get('gtmInfo', '')),
+                        'alternativeUrl': self.safe_strip(data.get('alternativeUrl', '')),
+                        'relativeUrl': self.safe_strip(data.get('relativeUrl', '')),
+                        'url': self.safe_strip(data.get('url', '')),
+                        'colors': self.safe_strip(data.get('colors', '')),
+                        'variantSizes': self.safe_strip(data.get('variantSizes', '')),
+                        'allColorVariants': data.get('allColorVariants', []),
+                        'productsInLook': self.safe_strip(data.get('productsInLook', '')),
+                        'configurableMto': str(data.get('configurableMto', False)).lower(),
+                        'configurableScarves': str(data.get('configurableScarves', False)).lower(),
+                        'doubleGender': self.safe_strip(data.get('doubleGender', '')),
+                        'preorderable': str(data.get('preorderable', False)).lower(),
+                        'backorderable': self.safe_strip(data.get('backorderable', '')),
+                        'flPreviewProduct': str(data.get('flPreviewProduct', False)).lower(),
+                        'digitalUrl': self.safe_strip(data.get('digitalUrl', '')),
+                        'description': self.safe_strip(data.get('description', '')),
+                        'eshopValid': str(data.get('eshopValid', False)).lower(),
+                        'forceMrf': str(data.get('forceMrf', False)).lower(),
+                        'normalProductEshopValid': str(data.get('normalProductEshopValid', False)).lower(),
+                    }
+                    self.logger.info(f"This the data found for the current product\n{product_info}")
+                    all_products.append(product_info)
+                self.logger.info(f"Processed {len(items)} products on Page: {page+1}/{total_pages} for Category: {category} URL: {current_url}")
+            self.logger.info(f"This is all of the product data for:\nCategory:{category}\n{all_products}")
+            return pd.DataFrame(all_products)
+        except requests.exceptions.RequestException as e:
+            self.logger.info(f"An error occurred: {e}")
+            return pd.DataFrame()
+
+
+    def process_categories(self, categories, country_dicts):
+        for country_dict in country_dicts:
+            locale=country_dict['locale']
+            country_code=country_dict['country_code']
+            for category in categories:
+                category_data = self.fetch_data(category, self.base_url, country_code, locale)
+                self.data = pd.concat([self.data, category_data], ignore_index=True)
+        current_date = datetime.datetime.now().strftime("%m_%d_%Y")
+        self.output_filename = f"{self.brand}_output_{current_date}_{self.code}.csv"
+        self.data.to_csv(self.output_filename, sep=',', index=False, quoting=csv.QUOTE_ALL)
+        self.upload_url=self.upload_file_to_space(self.output_filename, self.output_filename)
+        self.logger.info(f"Complete data saved to {self.output_filename}")
+        self.count = len(self.data) - 1
+        self.send_output()
+        # Save the complete DataFrame to a CSV file
         #data.to_csv('gucci_products_complete.tsv', sep='\t', index=False, quoting=csv.QUOTE_ALL)
 class AlexanderMcqueenParser(WebsiteParser):
     def __init__(self,job_id,base_url):
@@ -1123,72 +1231,81 @@ class StoneIslandProductParser(WebsiteParser):
             json_data = response.json()
             if isinstance(json_data, str):
                 json_data = json.loads(json_data)
-            products=json_data.get('data',{}).get('products',[])
+            num_products=json_data.get('data',{}).get("count","")
+            while start <= num_products:
+                current_url = self.base_url.format(category=category, size=size, start=start, locale=locale)
+                self.logger.info(f"This is the current url: {current_url}")
+                response = session.get(current_url, headers=headers)
+                response.raise_for_status()
+                json_data = response.json()
+                if isinstance(json_data, str):
+                    json_data = json.loads(json_data)
+                products=json_data.get('data',{}).get('products',[])
+                start+=size
+                for product in products:
+                    self.logger.info(f"Current product json: {product}")
+                    product_info = {
+                        'category': category,
+                        'type': self.safe_strip(product.get('type', '')),
+                        'masterId': self.safe_strip(product.get('masterId', '')),
+                        'uuid': self.safe_strip(product.get('uuid', '')),
+                        'id': self.safe_strip(product.get('id', '')),
+                        'productName': self.safe_strip(product.get('productName', '')),
+                        'shortDescription': self.safe_strip(product.get('shortDescription', '')),
+                        'productUrl': self.safe_strip(product.get('productUrl', '')),
+                        'route': self.safe_strip(product.get('route', '')),
+                        'originalModelName': self.safe_strip(product.get('originalModelName', '')),
+                        'isComingSoon': str(product.get('isComingSoon', False)).lower(),
+                        'price_sales_value': self.safe_strip(product.get('price', {}).get('sales', {}).get('value', '')),
+                        'price_sales_currency': self.safe_strip(
+                            product.get('price', {}).get('sales', {}).get('currency', '')),
+                        'price_sales_formatted': self.safe_strip(
+                            product.get('price', {}).get('sales', {}).get('formatted', '')),
+                        'image_urls': ','.join(product.get('imgs', {}).get('urls', [])),
+                        'image_alt': self.safe_strip(product.get('imgs', {}).get('alt', '')),
+                        'analytics_item_name': self.safe_strip(product.get('analyticsAttributes', {}).get('item_name', '')),
+                        'analytics_item_category': self.safe_strip(
+                            product.get('analyticsAttributes', {}).get('item_category', '')),
+                        'analytics_item_category2': self.safe_strip(
+                            product.get('analyticsAttributes', {}).get('item_category2', '')),
+                        'analytics_item_category3': self.safe_strip(
+                            product.get('analyticsAttributes', {}).get('item_category3', '')),
+                        'analytics_item_category4': self.safe_strip(
+                            product.get('analyticsAttributes', {}).get('item_category4', '')),
+                        'analytics_item_category5': self.safe_strip(
+                            product.get('analyticsAttributes', {}).get('item_category5', '')),
+                        'analytics_item_variant': self.safe_strip(
+                            product.get('analyticsAttributes', {}).get('item_variant', '')),
+                        'analytics_item_MFC': self.safe_strip(product.get('analyticsAttributes', {}).get('item_MFC', '')),
+                        'availability_lowStock': str(product.get('availability', {}).get('lowStock', False)).lower(),
+                        'available': str(product.get('available', False)).lower(),
+                        'earlyaccess_private': str(product.get('earlyaccess', {}).get('private', False)).lower(),
+                        'imageBackground': self.safe_strip(product.get('imageBackground', '')),
+                        'assetOverride_plp': self.safe_strip(product.get('assetOverride', {}).get('plp', '')),
+                        'assetOverride_plpeditorial': self.safe_strip(
+                            product.get('assetOverride', {}).get('plpeditorial', '')),
+                        'assetOverride_icongallery': self.safe_strip(
+                            product.get('assetOverride', {}).get('icongallery', '')),
+                        'seoName': self.safe_strip(product.get('seoName', '')),
+                    }
 
-            for product in products:
-                self.logger.info(f"Current product json: {product}")
-                product_info = {
-                    'category': category,
-                    'type': self.safe_strip(product.get('type', '')),
-                    'masterId': self.safe_strip(product.get('masterId', '')),
-                    'uuid': self.safe_strip(product.get('uuid', '')),
-                    'id': self.safe_strip(product.get('id', '')),
-                    'productName': self.safe_strip(product.get('productName', '')),
-                    'shortDescription': self.safe_strip(product.get('shortDescription', '')),
-                    'productUrl': self.safe_strip(product.get('productUrl', '')),
-                    'route': self.safe_strip(product.get('route', '')),
-                    'originalModelName': self.safe_strip(product.get('originalModelName', '')),
-                    'isComingSoon': str(product.get('isComingSoon', False)).lower(),
-                    'price_sales_value': self.safe_strip(product.get('price', {}).get('sales', {}).get('value', '')),
-                    'price_sales_currency': self.safe_strip(
-                        product.get('price', {}).get('sales', {}).get('currency', '')),
-                    'price_sales_formatted': self.safe_strip(
-                        product.get('price', {}).get('sales', {}).get('formatted', '')),
-                    'image_urls': ','.join(product.get('imgs', {}).get('urls', [])),
-                    'image_alt': self.safe_strip(product.get('imgs', {}).get('alt', '')),
-                    'analytics_item_name': self.safe_strip(product.get('analyticsAttributes', {}).get('item_name', '')),
-                    'analytics_item_category': self.safe_strip(
-                        product.get('analyticsAttributes', {}).get('item_category', '')),
-                    'analytics_item_category2': self.safe_strip(
-                        product.get('analyticsAttributes', {}).get('item_category2', '')),
-                    'analytics_item_category3': self.safe_strip(
-                        product.get('analyticsAttributes', {}).get('item_category3', '')),
-                    'analytics_item_category4': self.safe_strip(
-                        product.get('analyticsAttributes', {}).get('item_category4', '')),
-                    'analytics_item_category5': self.safe_strip(
-                        product.get('analyticsAttributes', {}).get('item_category5', '')),
-                    'analytics_item_variant': self.safe_strip(
-                        product.get('analyticsAttributes', {}).get('item_variant', '')),
-                    'analytics_item_MFC': self.safe_strip(product.get('analyticsAttributes', {}).get('item_MFC', '')),
-                    'availability_lowStock': str(product.get('availability', {}).get('lowStock', False)).lower(),
-                    'available': str(product.get('available', False)).lower(),
-                    'earlyaccess_private': str(product.get('earlyaccess', {}).get('private', False)).lower(),
-                    'imageBackground': self.safe_strip(product.get('imageBackground', '')),
-                    'assetOverride_plp': self.safe_strip(product.get('assetOverride', {}).get('plp', '')),
-                    'assetOverride_plpeditorial': self.safe_strip(
-                        product.get('assetOverride', {}).get('plpeditorial', '')),
-                    'assetOverride_icongallery': self.safe_strip(
-                        product.get('assetOverride', {}).get('icongallery', '')),
-                    'seoName': self.safe_strip(product.get('seoName', '')),
-                }
+                    # Handle variationAttributes
+                    for attr in product.get('variationAttributes', []):
+                        attr_id = attr.get('attributeId', '')
+                        product_info[f'variationAttribute_{attr_id}_displayName'] = self.safe_strip(
+                            attr.get('displayName', ''))
+                        product_info[f'variationAttribute_{attr_id}_displayValue'] = self.safe_strip(
+                            attr.get('displayValue', ''))
+                        product_info[f'variationAttribute_{attr_id}_swatchable'] = str(
+                            attr.get('swatchable', False)).lower()
+                        product_info[f'variationAttribute_{attr_id}_values'] = ','.join(
+                            [self.safe_strip(value.get('displayValue', '')) for value in attr.get('values', [])])
 
-                # Handle variationAttributes
-                for attr in product.get('variationAttributes', []):
-                    attr_id = attr.get('attributeId', '')
-                    product_info[f'variationAttribute_{attr_id}_displayName'] = self.safe_strip(
-                        attr.get('displayName', ''))
-                    product_info[f'variationAttribute_{attr_id}_displayValue'] = self.safe_strip(
-                        attr.get('displayValue', ''))
-                    product_info[f'variationAttribute_{attr_id}_swatchable'] = str(
-                        attr.get('swatchable', False)).lower()
-                    product_info[f'variationAttribute_{attr_id}_values'] = ','.join(
-                        [self.safe_strip(value.get('displayValue', '')) for value in attr.get('values', [])])
-
-                # Add locale information
-                product_info.update(locale_dict)
-                self.logger.info(f"This is the current product info:\n{product_info}")
-                all_products.append(product_info)
-            self.logger.info(f"This is all of the product data for:\nCategory:{category}\n{all_products}")
+                    # Add locale information
+                    product_info.update(locale_dict)
+                    self.logger.info(f"This is the current product info:\n{product_info}")
+                    all_products.append(product_info)
+                self.logger.info(f"This is all of the product data for:\nCategory:{category}\n{all_products}")
             return pd.DataFrame(all_products)
         except Exception as e:
             self.logger.info(f"An error occurred: {e}")
