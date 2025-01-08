@@ -2928,51 +2928,46 @@ class MooseKnucklesProductParser(WebsiteParser):
         ]
         parsed_data.append(column_names)
 
-        items = soup.find_all('div', class_='ProductTile_productitem-block__2sZ1u')  # Target product blocks
+        items = soup.find_all('li', class_='ais-InfiniteHits-item')  # Target product blocks
 
         for item in items:
-            # Extract product URL from product title link
-            product_title = item.find('a', class_='ProductTile_productimg-link__MpSEW')
-            product_url = product_title.get('href', '') if product_title else ''
+            product_link = item.find('a', class_='productimg-link')
+            product_url = product_link.get('href', '') if product_link else ''
 
-            # Extract product name directly from the title text with proper class selection
-            product_name_element = item.find('span', class_='ProductTile_productname-link__3X5yR')
+            product_name_element = item.find('span', title=True)
             product_name = product_name_element.text.strip() if product_name_element else ''
 
-            # Rest of the code remains the same for extracting image, colors, and prices
-
-            # Extract image URL from product image
-            image_container = item.find('div', class_='ProductTile_productimage-block__3Djn2')
-            image_element = image_container.find('img', class_='ProductTile_product-img__2vdMI')
+            image_element = item.find('img', class_='product-img')
             image_url = image_element.get('src', '') if image_element else ''
 
-            # Extract colors (assuming color information is in the swatches)
+
             colors = []
-            color_list = item.find('ul', class_='color_id OptionColorTiles_optionColorTiles__2WXHX')
-            if color_list:
-                color_items = color_list.find_all('li')
-                for color_item in color_items:
-                    color_info = color_item.find('span', class_='relative')
-                    color_text = color_info.text.strip() if color_info else ''
-                    colors.append(color_text)
+            color_divs = item.find_all('div', class_='hit-color')
+            for color_div in color_divs:
+                color_img = color_div.find('img')
+                color_text = color_img.get('alt', '').strip() if color_img else ''
+                colors.append(color_text)
 
-            # Extract price directly from the price container
-            price_container = item.find('div', class_='product-price configurableproduct')
-            price = price_container.text.strip() if price_container else ''
 
-            # Assuming no sale price or discount information available
+            price_container = item.find('div', class_='product-price')
+            price_span = price_container.find('span') if price_container else None
+            price_text = price_span.text.strip() if price_span else ''
+
             try:
-                sale_price = price.split("$")[2]
+                sale_price = price_text.split("$")[2]
             except:
-                sale_price=''
-            original_price = price.split("$")[1] if price.split("$")[1] else ''
-            price=original_price
-            product_id=product_url.split("-")[-1]
+                sale_price = ''
+
+            original_price = price_text.split("$")[1] if len(price_text.split("$")) > 1 else ''
+            price = original_price  # Overwrite price to original_price
+
+            product_id = product_url.split("-")[-1]
             if not product_id.startswith("m"):
+                # Fallback if the last part doesn’t start with 'm'
                 product_id = product_url.split("-")[-2]
 
             product_data = [
-                product_id,  # Assuming product ID is not available
+                product_id,
                 product_name,
                 price,
                 category,
