@@ -292,9 +292,9 @@ print(main_directory)
 #PalmAngels End
 
 #Moose Knuckles Start
-MooseKnucklesParser = MooseKnucklesProductParser(output_directory_path)
-directory_path = os.path.join(main_directory,'moose_knuckles_new')
-MooseKnucklesParser.parse_directory(directory_path)
+# MooseKnucklesParser = MooseKnucklesProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'moose_knuckles_new')
+# MooseKnucklesParser.parse_directory(directory_path)
 #Moose Knuckles End
 
 #Acne Studios Start
