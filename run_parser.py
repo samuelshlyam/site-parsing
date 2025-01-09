@@ -108,9 +108,9 @@ print(main_directory)
 # #Cult Gaia end
 
 #Golden Goose Start
-#GoldenGooseParser=GoldenGooseProductParser(output_directory_path)
-# directory_path = os.path.join(main_directory,'canada_goose')
-#GoldenGooseParser.parse_directory(directory_path)
+# GoldenGooseParser=GoldenGooseProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'golden_goose_new')
+# GoldenGooseParser.parse_directory(directory_path)
 #Golden Goose End
 
 #Balenciaga Start
@@ -292,9 +292,9 @@ print(main_directory)
 #PalmAngels End
 
 #Moose Knuckles Start
-#MooseKnucklesParser = MooseKnucklesProductParser(output_directory_path)
-# directory_path = os.path.join(main_directory,'moose_knucles')
-#MooseKnucklesParser.parse_directory(directory_path)
+# MooseKnucklesParser = MooseKnucklesProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'moose_knuckles_new')
+# MooseKnucklesParser.parse_directory(directory_path)
 #Moose Knuckles End
 
 #Acne Studios Start
@@ -370,9 +370,9 @@ print(main_directory)
 
 
 #Herno Start
-#HernoParser = HernoProductParser(output_directory_path)
-#directory_path = os.path.join(main_directory, 'herno')
-#HernoParser.parse_directory(directory_path)
+# HernoParser = HernoProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory, 'herno')
+# HernoParser.parse_directory(directory_path)
 #Herno End
 
 #Lanvin Start
