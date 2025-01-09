@@ -14,7 +14,7 @@ from brand_parser import BottegaVenetaParser, GucciProductParser, BallyProductPa
     TheRowProductParser, ManoloBlahnikProductParser, GianvitoRossiProductParser, MiuMiuProductParser, \
     BirkenstockProductParser, AquazzuraProductParser, \
     OffWhiteProductParser, TomFordProductParser, LoeweProductParser, HernoProductParser, LanvinProductParser, \
-    StoneIslandProductParserAPI
+    StoneIslandProductParserAPI, ChloeProductParserAPI
 
 #Folder name for output
 output_directory_path = "parser-output"
@@ -114,9 +114,9 @@ print(main_directory)
 #Golden Goose End
 
 #Balenciaga Start
-BalenciagaParser=BalenciagaProductParser(output_directory_path)
-directory_path = os.path.join(main_directory,'balenciaga_new')
-BalenciagaParser.parse_directory(directory_path)
+# BalenciagaParser=BalenciagaProductParser(output_directory_path)
+# directory_path = os.path.join(main_directory,'balenciaga_new')
+# BalenciagaParser.parse_directory(directory_path)
 #Balenciaga End
 
 #Old Version
@@ -380,3 +380,12 @@ BalenciagaParser.parse_directory(directory_path)
 # directory_path = os.path.join(main_directory, 'lanvin')
 # LanvinParser.parse_directory(directory_path)
 #Lanvin End
+
+
+#Chloe API Test
+job_id=5
+base_url="https://www.chloe.com/Search/RenderProductsAsync?department={category}&productsPerPage={size}&siteCode={locale}"
+categories=["llrtw", "shs", "llbgs","ccssslg","ccssrs","chlsnglssssll", "frgrncs","llchldrnswr","chlwntr24","chlfll24","gftfrhr","chlwntr24","sgntr","chlbrcltbg"]
+locales=[{"locale":"CHLOE_US","size":5000},{"locale":"CHLOE_IT","size":5000}]
+ChloeParser = ChloeProductParserAPI(job_id,base_url)
+ChloeParser.process_categories(categories, locales)
